@@ -13,7 +13,12 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     	var selections 	= grid.getSelections();
     	var sel  		= selections.pop();
     	console.log(sel.get('name'));
-    	me.getView().down('#asMenu').show();  	 
+    	me.getView().down('#asMenu').show();
+    	
+    	var w = Ext.widget('frmVoucherAdd',{});
+        w.show();      
+    	
+    	  	 
     }
 
 });

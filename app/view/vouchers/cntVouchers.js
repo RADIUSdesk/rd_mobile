@@ -4,10 +4,13 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
     mixins	: [ "RdMobile.mixin.FloatingActionButton"],
     controller  : 'vcVouchers',
     requires	: [
-        'RdMobile.view.vouchers.vcVouchers'
+        'RdMobile.view.vouchers.vcVouchers',
+        'RdMobile.view.vouchers.frmVoucherAdd'
     ],
    	fab		: function() {
-		Ext.Msg.alert("FAB", "FAB clicked");
+		//Ext.Msg.alert("FAB", "FAB clicked");
+		var w = Ext.widget('frmVoucherAdd',{});
+        w.show();   
 	},
 	initialize: function (){
         const me = this;

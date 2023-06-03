@@ -8,6 +8,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
         'RdMobile.view.components.cmpBasic',
         'RdMobile.view.vouchers.gridVouchers',
         'RdMobile.view.vouchers.cntVouchers',
+        'RdMobile.view.mainRadius.cntMainRadius',
         'RdMobile.model.mVoucher'
 
     ],
@@ -69,6 +70,11 @@ Ext.define('RdMobile.view.main.pnlMain', {
 					],
                 },
                 {
+                	title	: 'RADIUS',
+                	xtype	: 'cntMainRadius',
+                	//layout	: 'fit'               
+                },
+                /*{
                     title	: 'RADIUS',
                 	xtype	: 'cntVouchers',
                 	layout	: 'fit',
@@ -99,7 +105,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
                     }],                   
                     scrollable : true,
                     itemId	: 'radius'
-                },
+                },*/
                 
                 {
                     title	: 'NETWORKS',
