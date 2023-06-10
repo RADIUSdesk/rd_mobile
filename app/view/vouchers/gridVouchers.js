@@ -1,6 +1,7 @@
 Ext.define('RdMobile.view.vouchers.gridVouchers', {
     extend  : 'Ext.grid.Grid',
     xtype   : 'gridVouchers',
+    emptyText: 'Create Some Vouchers',
     config  : {
         compdata: undefined,
     },
@@ -28,7 +29,7 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
             model: 'RdMobile.model.mVoucher', //FIXME MODEL 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/vouchers/index.json?token=fe707fcd-6316-4c26-b14c-03ae7fc49065&sel_language=4_4&cloud_id=24',
+                url         : '/cake4/rd_cake/vouchers/index.json',
                 pageSize: 50,
     			remoteSort: true,
                 batchActions: true,
@@ -55,7 +56,7 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         }));
         
         me.setColumns( [{
-                text: 'Department (Yrs)',
+                text: 'Vouchers',
                 xtype: 'templatecolumn',
                 
                 tpl: new Ext.XTemplate(

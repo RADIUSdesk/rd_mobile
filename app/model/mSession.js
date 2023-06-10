@@ -1,3 +1,4 @@
+//https://www.freecodecamp.org/news/javascript-es6-promises-for-beginners-resolve-reject-and-chaining-explained/
 Ext.define('RdMobile.model.mSession', {
     extend: 'Ext.data.Model',
     fields: [
@@ -16,7 +17,6 @@ Ext.define('RdMobile.model.mSession', {
                          // Use the provided "resolve" method to deliver the result.
                         var obj = Ext.decode(response.responseText);
                         if(obj.success){
-
                             resolve(obj);
                         }else{
 

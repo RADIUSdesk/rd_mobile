@@ -60,8 +60,7 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
       	}
     }, 
     
-    onLogin: function(session) {
-    	
+    onLogin: function(session) {    	
         this.initiateSession(session);
     },
     onLogout: function(){
@@ -91,6 +90,12 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
             Ext.Ajax.setExtraParams({'token': session.token});
         }
         this.saveSession(session);
+    
+    	var extra_p 	 = Ext.Ajax.getExtraParams();
+    	if(session.user.cloud_id){
+    		extra_p.cloud_id = session.user.cloud_id;
+    		Ext.Ajax.setExtraParams(extra_p);	
+    	}        
         this.showMain();
     },   
           

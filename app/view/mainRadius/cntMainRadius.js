@@ -30,34 +30,7 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         },
         {
             xtype	: 'cntVouchers',
-        	layout	: 'fit',
-            items   : [
-                {
-		            xtype : 'toolbar',
-		            docked: 'top',
-		            items: [
-					    { ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBackVouchers'  },
-					    {
-						    xtype: 'label',
-						    html: '|'
-					    },
-					    { ui: 'confirm', iconCls: 'x-fa fa-redo' },
-					    { ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down' },
-					    { ui: 'normal',  iconCls: 'x-fa fa-filter' },
-					    {
-                xtype: 'spacer'
-            },
-					    {
-						    xtype: 'label',
-						    html: 'My label!<br><span>koos</span><br><span style="font-size: xx-small;">Jan</span>'
-					    }
-				    ]
-		        },
-                {
-                	xtype: 'gridVouchers'               
-                }
-            ],                   
-            scrollable : true,
+        	layout	: 'fit'
         },
         {
             html: "Permanent Users"
