@@ -1,19 +1,19 @@
-Ext.define('RdMobile.view.vouchers.frmVoucherAdd', {
+Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmVoucherAdd',
+    xtype   : 'frmVoucherEdit',
     floated	: true,
     modal	: true,
     centered: true,
     closable: true,
     fullscreen : true,
     padding	: 6,
-    title	: 'Add Voucher',
+    title	: 'Edit Voucher',
+    controller  : 'vcVoucherEdit',
     requires	: [
-    	'RdMobile.view.components.cmbRealm',
-        'RdMobile.view.components.cmbProfile',
-        'RdMobile.view.vouchers.vcVoucherAdd',
+        'RdMobile.view.vouchers.vcVoucherEdit',
+        'RdMobile.view.components.cmbRealm',
+        'RdMobile.view.components.cmbProfile'
     ],
-    controller  : 'vcVoucherAdd',
     buttons: {
         submit: {
             handler: 'onSubmit'
@@ -56,30 +56,6 @@ Ext.define('RdMobile.view.vouchers.frmVoucherAdd', {
 		    },
 		    errorTarget: 'under'
     	},
-    	{
-            xtype	: 'numberfield',
-            label	: 'How Many?',
-            minValue: 1,
-            maxValue: 5000,
-            name    : 'quantity',
-			value	: 1,
-			required: true,
-			errorTip: {
-		        anchor: true,
-		        align: 'l-r?'
-		    },
-		    errorTarget: 'under',
-		    itemId      : 'quantity'
-        },
-        {
-            xtype	: 'textfield',
-            label	: 'Batch Name',
-            name	: 'batch',
-            required: true,
-            itemId  : 'batch',
-            hidden	: true,
-            disabled: true
-        },
         {
 			xtype	: 'label',
 			html	: 'Activate & Expire',

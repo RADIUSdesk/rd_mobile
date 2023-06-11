@@ -1,13 +1,12 @@
 Ext.define('RdMobile.view.vouchers.cntVouchers', {
     extend  : 'Ext.Container',
     xtype   : 'cntVouchers',
-    mixins	: [ "RdMobile.mixin.FloatingActionButton"],
     controller  : 'vcVouchers',
     requires	: [
         'RdMobile.view.vouchers.vcVouchers',
-        'RdMobile.view.vouchers.frmVoucherAdd'
+        'RdMobile.view.vouchers.frmVoucherAdd',
+        'RdMobile.view.vouchers.frmVoucherEdit'
     ],
-	fab		: 'btnFabTap',	
 	items   : [
         {
 		        xtype : 'toolbar',
@@ -32,7 +31,7 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
         },
         {
         	xtype: 'gridVouchers'               
-        }
+        }      
     ],                   
     scrollable : true,
 	initialize: function (){
@@ -44,26 +43,33 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 		 title: 'MENU',
 			 items: [
 				 {
-					 text		: 'Cloud',
-					 iconCls	: 'x-fa fa-cloud',
+					 text		: 'Delete',
+					 iconCls	: 'x-fa fa-trash',
 					 textAlign  : 'left',
-					 itemId		: 'btnCloud'
+					 itemId		: 'btnDelete'
 				 }, 
 				 {
-					 text		: 'Password',
-					 iconCls	: 'x-fa fa-lock',
+					 text		: 'Edit',
+					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
-					 itemId		: 'btnPassword'
-				 }, 
-				 {
-					 text		: 'Logout',
-					 iconCls	: 'x-fa fa-power-off',
-					 textAlign  : 'left',
-					 itemId		: 'btnLogout'
+					 itemId		: 'btnEdit'
 				 }
 			 ]
 	 	});
 	 	
 	 	me.add(menu);
+	 	
+	 	var fab = Ext.create({
+			xtype: "button",
+			ui: 'round',
+			floated: true,
+			iconCls: "x-fa fa-plus",
+			right: 20,
+			bottom: 140,
+			border: false,
+			itemId	: 'btnAdd'
+		});
+	 	
+	 	me.add(fab);
   	}
 });
