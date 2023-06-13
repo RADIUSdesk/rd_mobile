@@ -7,8 +7,9 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
     closable: true,
     fullscreen : true,
     padding	: 6,
-    title	: 'Edit Voucher',
+    title		: 'Edit Voucher',
     controller  : 'vcVoucherEdit',
+    standardSubmit : false,
     requires	: [
         'RdMobile.view.vouchers.vcVoucherEdit',
         'RdMobile.view.components.cmbRealm',
@@ -32,9 +33,8 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
 			}		
 		},
 		{
-            itemId  : 'single_field',
             xtype   : 'textfield',
-            name    : 'single_field',
+            name    : 'id',
             hidden  : true,
             value   : true
         },
@@ -71,7 +71,6 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
             xtype	: 'checkboxfield',
             label	: 'Activate Upon First Login',
             name    : 'activate_on_login',
-          	value  	: 'activate_on_login',
           	itemId  : 'activate_on_login',
           	labelWidth : 200,
             checked	: false
@@ -131,7 +130,6 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
             xtype	: 'checkboxfield',
             label	: 'Never Expire',
             name  	: 'never_expire',
-           	value  	: 'never_expire',
             itemId  : 'never_expire',
           	labelWidth : 200,
             checked	: true

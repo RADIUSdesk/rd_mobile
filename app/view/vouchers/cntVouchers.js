@@ -5,7 +5,10 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
     requires	: [
         'RdMobile.view.vouchers.vcVouchers',
         'RdMobile.view.vouchers.frmVoucherAdd',
-        'RdMobile.view.vouchers.frmVoucherEdit'
+        'RdMobile.view.vouchers.frmVoucherEdit',
+        'RdMobile.view.vouchers.frmVoucherPdf',
+        'RdMobile.view.vouchers.frmVoucherEmail',
+        'RdMobile.view.radiusClient.frmRadiusClient'
     ],
 	items   : [
         {
@@ -42,7 +45,7 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 		 centered: false,
 		 title: 'MENU',
 			 items: [
-				 {
+				{
 					 text		: 'Delete',
 					 iconCls	: 'x-fa fa-trash',
 					 textAlign  : 'left',
@@ -53,7 +56,49 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
 					 itemId		: 'btnEdit'
-				 }
+				 },
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				{
+					 text		: 'PDF Export',
+					 iconCls	: 'x-fa fa-file-pdf',
+					 textAlign  : 'left',
+					 itemId		: 'btnPdf'
+				 },
+				 {
+					 text		: 'e-mail Voucher',
+					 iconCls	: 'x-fa fa-envelope',
+					 textAlign  : 'left',
+					 itemId		: 'btnEmail'
+				 },
+				 {
+					 text		: 'Test RADIUS',
+					 iconCls	: 'x-fa fa-circle-notch',
+					 textAlign  : 'left',
+					 itemId		: 'btnRadius'
+				 },
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				 {
+					 text		: 'Graphs',
+					 iconCls	: 'x-fa fa-chart-bar',
+					 textAlign  : 'left',
+					 itemId		: 'btnGraphs'
+				 },
+				 {
+					 text		: 'Activity',
+					 iconCls	: 'x-fa fa-running',
+					 textAlign  : 'left',
+					 itemId		: 'btnActivity'
+				 }				     
 			 ]
 	 	});
 	 	

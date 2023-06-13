@@ -183,12 +183,14 @@ Ext.define('RdMobile.view.vouchers.frmVoucherAdd', {
 		{
             xtype	: 'textfield',
             label	: 'Extra Name',
-            name	: 'extra_name'
+            name	: 'extra_name',
+            value	: ''
         },
         {
             xtype	: 'textfield',
             label	: 'Extra Value',
-            name	: 'extra_value'
+            name	: 'extra_value',
+            value	: ''
         }
     ]
 });
