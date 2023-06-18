@@ -5,7 +5,9 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     config: {
         urlDelete           : '/cake4/rd_cake/vouchers/delete.json',
         urlViewBasic        : '/cake4/rd_cake/vouchers/view-basic-info.json',
-        urlEditBasic        : '/cake4/rd_cake/vouchers/edit_basic_info.json'
+        urlEditBasic        : '/cake4/rd_cake/vouchers/edit_basic_info.json',
+        containedIn			: 'cntMainRadius',
+        sortDesc			: true			
     },
     control: {
     	'cntVouchers' : {
@@ -15,8 +17,20 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
         'gridVouchers': {
             select: 'onGridChildTap'
         },
+      	'#btnBack' : {
+      		tap		: 'back'
+      	},
       	'#btnReload' : {
       		tap		: 'reload'
+      	},
+      	'#btnSort' : {
+      		tap		: 'sort'
+      	},
+      	'#btnFilter' : {
+      		tap		: 'filter'
+      	},
+      	'#txtFilterValue' : {
+      		change	: 'txtFilterValueChange'
       	},
       	'#btnAdd' : {
       		tap	: 'add'
@@ -47,9 +61,50 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     	console.log("Hide");
     	me.getView().down('#btnAdd').hide();
     },
+    back : function(btn){
+        var me = this;
+        btn.up(me.getContainedIn()).setActiveItem(0);
+    },
     reload	: function(btn){
     	var me = this;
     	me.getView().down('gridVouchers').getStore().reload();  
+    },
+    sort	: function(btn){
+    	var me 		= this;
+    	var store 	= me.getView().down('gridVouchers').getStore();
+    	me.setSortDesc(!me.getSortDesc());
+    	if(me.getSortDesc()){
+    		btn.setIconCls('x-fa fa-sort-alpha-down'); 
+    		store.sort([{
+				property : 'name',
+				direction: 'ASC'
+			}]);
+    	}else{
+    		btn.setIconCls('x-fa fa-sort-alpha-up');
+    		store.sort([{
+				property : 'name',
+				direction: 'DESC'
+			}]); 
+    	}
+    },
+    filter	: function(tbn){
+    	var me  = this;
+    	console.log("Filter Button Tapped");
+    	me.getView().down('#asFilter').show();
+    },
+    txtFilterValueChange : function(txt,new_value){
+    	var me 		= this;
+    	var store 	= me.getView().down('gridVouchers').getStore();
+    	var btn		= me.getView().down('#btnFilter');
+    	var cmb		= me.getView().down('#cmbFilterOn'); 
+    	if(new_value == ''){
+    		console.log("Clear Filter Pappie");
+    		store.clearFilter();
+    		btn.setBadgeText('');
+    	}else{
+    		store.filter([{'property':cmb.getValue(),'value':new_value,'operator':'like'}]);
+    		btn.setBadgeText('+');
+    	}
     },
     delete  : function(btn){
     	var me = this;

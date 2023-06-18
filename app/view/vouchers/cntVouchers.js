@@ -15,7 +15,7 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 		        xtype : 'toolbar',
 		        docked: 'top',
 		        items: [
-					{ ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBackVouchers'  },
+					{ ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBack'  },
 					{
 						xtype: 'label',
 						html: '|'
@@ -38,7 +38,52 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
     ],                   
     scrollable : true,
 	initialize: function (){
-        const me = this;
+        const me 	= this;
+        
+        var filter 	= Ext.create({
+		 xtype	: 'actionsheet',
+		 itemId	: 'asFilter',
+		 centered: false,
+		 title: 'FILTER',
+			 items: [
+				{
+					xtype	: 'combobox',
+					label	: 'Filter On',
+					queryMode: 'local',
+					displayField: 'name',
+					valueField: 'id',
+					value	: 'name',
+					itemId	: 'cmbFilterOn',
+					store: [
+						{
+							id	: 'name',
+							name: 'Name'
+						}, 
+						{
+							id	: 'batch',
+							name: 'Batch'
+						}, 
+						{
+							id	: 'profile',
+							name: 'Profile'
+						},
+						{
+							id	: 'realm',
+							name: 'Realm'						
+						}
+					]
+				},
+				{
+				    xtype	: 'textfield',
+				    label	: 'Filter Value',
+				    name	: 'filter_value',
+				    itemId  : 'txtFilterValue'
+				}					     
+			 ]
+	 	});
+	 	
+	 	me.add(filter);
+                   
         var menu = Ext.create({
 		 xtype	: 'actionsheet',
 		 itemId	: 'asMenu',

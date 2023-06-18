@@ -32,15 +32,15 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
             proxy: {
                 type        :'ajax',
                 url         : '/cake4/rd_cake/vouchers/index.json',
-                pageSize: 50,
-    			remoteSort: true,
+                pageSize	: 50,
+    			remoteSort	: true,
                 batchActions: true,
                 format      : 'json',
                 reader: {
-			        type: 'json',
-			        rootProperty: 'items',
-			        messageProperty: 'message',
-			        totalProperty: 'totalCount' //Required for dynamic paging
+			        type			: 'json',
+			        rootProperty	: 'items',
+			        messageProperty	: 'message',
+			        totalProperty	: 'totalCount' //Required for dynamic paging
 			    }
             },
             listeners: {
@@ -54,7 +54,9 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
 		            console.log('Error encountered');
 		        },
                 scope: this
-            }
+            },
+            remoteFilter: true,
+            remoteSort: true
         }));
         
         me.setColumns( [{

@@ -14,21 +14,16 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
         '#btnPermanentUsers' :  {
             tap : 'onBtnPermanentUsersTap'
         },
-        '#btnBackVouchers' : {
-            tap : 'onBtnBackTap'
-        },
         '#btnBackPermanentUsers' : {
             tap : 'onBtnBackTap'
         }
     },
     onBtnVouchersTap : function(btn){
     	var me = this;
-    	console.log("Vouchers Tapped");
         me.getView().setActiveItem(1);
     },
     onBtnPermanentUsersTap : function(btn){
     	var me = this;
-    	console.log("Permanent Users Tapped");
         me.getView().setActiveItem(2);
     },
     onBtnBackTap : function(btn){
@@ -48,8 +43,7 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
     	if((col == 1)&&(row == 0)){    	
     		me.getView().setActiveItem(2);
     	}  
-    	
-    	
+    	  	
     	if(col == 0){
     		console.log(r.get('col_0_name'));
     	}
