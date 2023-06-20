@@ -27,8 +27,12 @@ Ext.define('RdMobile.view.main.pnlMain', {
                     xtype: 'spacer'
                 },			    
 			    {
-					xtype: 'label',
-					html: 'RADIUSdesk'
+					xtype	: 'label',
+					itemId	: 'lblMain',
+					html	: 'RADIUSdesk',
+					style	: {
+		   				'color'			: '#0677c7'
+					}	
 				},
 				{
                     xtype: 'spacer'

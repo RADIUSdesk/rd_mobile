@@ -26,12 +26,17 @@ Ext.define('RdMobile.view.mainRadius.gridMainRadiusUsers', {
 		        {
 		        	'id'  			: 0,
 		            'col_0_name'	: 'Permanent Users',
+		            'col_0_fa'		: 'user',
 		            "col_1_name"	: "Vouchers",
+		            'col_1_fa'		: 'ticket-alt'
+		            
 		        },
 		        {
 		        	'id'  			: 1,
 		            'col_0_name'	: 'BYOD',
+		            'col_0_fa'		: 'tablet-alt',
 		            "col_1_name"	: "Activity Monitor",
+		            'col_1_fa'		: 'running'
 		        }, 
             ]
         }));
@@ -41,8 +46,9 @@ Ext.define('RdMobile.view.mainRadius.gridMainRadiusUsers', {
                 text: 'Col1',
                 xtype: 'templatecolumn',                
                 tpl : new Ext.XTemplate(
-                    '<div class="card" style="border-radius: 10px;border: 1px solid #33cc33;padding: 5px; margin: 0px;">',
-                    '<h3>{col_0_name}</h3>',
+                    '<div style="border-radius: 5px;border: 1px solid #7c7d80;padding-top: 10px; margin: 2px;text-align: center; color:#0677c7">',
+                    '<i class="fa fa-{col_0_fa} fa-2x"></i>',
+                    '<div style="margin-top: 0.25em;padding: 2px; margin: 2px;">{col_0_name}</div>',
                     '</div>',
                 ),
                 cell: {
@@ -54,8 +60,9 @@ Ext.define('RdMobile.view.mainRadius.gridMainRadiusUsers', {
                 text: 'Col2',
                 xtype: 'templatecolumn',                
                 tpl : new Ext.XTemplate(
-                    '<div class="card" style="border-radius: 10px;border: 1px solid #33cc33;padding: 5px; margin: 0px;">',
-                    '<h3>{col_1_name}</h3>',
+                    '<div style="border-radius: 5px;border: 1px solid #7c7d80;padding-top: 10px; margin: 2px;text-align: center; color:#0677c7">',
+                    '<i class="fa fa-{col_1_fa} fa-2x"></i>',
+                    '<div style="margin-top: 0.25em;padding: 2px; margin: 2px;">{col_1_name}</div>',
                     '</div>',
                 ),
                 cell: {

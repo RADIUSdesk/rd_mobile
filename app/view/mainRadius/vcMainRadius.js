@@ -18,12 +18,15 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
     	
     	if((col == 0)&&(row == 0)){    	
     		me.getView().setActiveItem(1);
+    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> Permanent Users');
     	}
     	if((col == 1)&&(row == 0)){    	
     		me.getView().setActiveItem(2);
+    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-ticket-alt fa-1x"></i> Vouchers');
     	}   	
     	if((col == 0)&&(row == 1)){ 
     		me.getView().setActiveItem(3);
+    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-tablet-alt fa-1x"></i> BYOD');
     	}
     },
      onGridComponentsChildTap : function(a,b,c){
