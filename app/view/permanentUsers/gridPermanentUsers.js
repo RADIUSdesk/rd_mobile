@@ -1,4 +1,4 @@
-Ext.define('RdMobile.view.permanentUser.gridPermanentUsers', {
+Ext.define('RdMobile.view.permanentUsers.gridPermanentUsers', {
     extend  : 'Ext.grid.Grid',
     xtype   : 'gridPermanentUsers',
     emptyText: 'Create Some Permanent Users',
@@ -32,8 +32,7 @@ Ext.define('RdMobile.view.permanentUser.gridPermanentUsers', {
             proxy: {
                 type        :'ajax',
                 url         : '/cake4/rd_cake/permanent-users/index.json',
-                pageSize: 50,
-    			remoteSort: true,
+                pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
                 reader: {
@@ -54,7 +53,9 @@ Ext.define('RdMobile.view.permanentUser.gridPermanentUsers', {
 		            console.log('Error encountered');
 		        },
                 scope: this
-            }
+            },
+            remoteFilter: true,
+            remoteSort: true
         }));
         
         me.setColumns( [{

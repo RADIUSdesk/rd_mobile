@@ -11,7 +11,8 @@ Ext.define('RdMobile.view.radiusClient.frmRadiusClient', {
     standardSubmit : false,
     requires	: [
     	'RdMobile.view.radiusClient.vcRadiusClient',
-    	'RdMobile.view.components.cmbVoucher'
+    	'RdMobile.view.components.cmbVoucher',
+    	'RdMobile.view.components.cmbPermanentUser'
     ],
     buttons: {
         submit: {
@@ -22,14 +23,44 @@ Ext.define('RdMobile.view.radiusClient.frmRadiusClient', {
         const me = this;
         
         var cmb_voucher = {
-				xtype	: 'cmbVoucher'
-			};
+			xtype	: 'cmbVoucher',
+			hidden	: true,
+			disabled: true
+		};
+			
+		var cmb_user = {
+			xtype	: 'cmbPermanentUser',
+			hidden	: true,
+			disabled: true
+		};
+			
+		var cmb_device = {
+			xtype	: 'cmbDevice',
+			hidden	: true,
+			disabled: true
+		};
         
         if(me.user_type == 'voucher'){
         	cmb_voucher = {
         		xtype 		 : 'cmbVoucher',
         		voucher_name : me.voucher_name,
         		voucher_id	 : me.voucher_id	
+        	}
+        }
+        
+       	if(me.user_type == 'permanent'){
+        	cmb_user = {
+        		xtype 		: 'cmbPermanentUser',
+        		user_name 	: me.user_name,
+        		user_id	 	: me.user_id	
+        	}
+        }
+        
+        if(me.user_type == 'device'){
+        	cmb_device = {
+        		xtype 		: 'cmbDevice',
+        		device_name : me.device_name,
+        		device_id	: me.device_id	
         	}
         }
                 
@@ -48,6 +79,7 @@ Ext.define('RdMobile.view.radiusClient.frmRadiusClient', {
 			{
 				xtype	: 'combobox',
 				label	: 'User Type',
+				itemId	: 'cmbUserType',
 				queryMode: 'local',
 				displayField: 'name',
 				valueField: 'id',
@@ -60,6 +92,8 @@ Ext.define('RdMobile.view.radiusClient.frmRadiusClient', {
 				]
 			},
 			cmb_voucher,
+			cmb_user,
+			cmb_device,
 			{
 				xtype	: 'label',
 				html	: 'Reply',

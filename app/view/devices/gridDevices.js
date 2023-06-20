@@ -1,7 +1,7 @@
-Ext.define('RdMobile.view.vouchers.gridVouchers', {
+Ext.define('RdMobile.view.devices.gridDevices', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridVouchers',
-    emptyText: 'Create Some Vouchers',
+    xtype   : 'gridDevices',
+    emptyText: 'No Devices Found',
     config  : {
         compdata: undefined,
     },
@@ -28,18 +28,18 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
-            model: 'RdMobile.model.mVoucher', //FIXME MODEL 
+            model: 'RdMobile.model.mDevice', //FIXME MODEL 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/vouchers/index.json',
+                url         : '/cake4/rd_cake/devices/index.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
                 reader: {
-			        type			: 'json',
-			        rootProperty	: 'items',
-			        messageProperty	: 'message',
-			        totalProperty	: 'totalCount' //Required for dynamic paging
+			        type: 'json',
+			        rootProperty: 'items',
+			        messageProperty: 'message',
+			        totalProperty: 'totalCount' //Required for dynamic paging
 			    }
             },
             listeners: {
@@ -59,7 +59,7 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         }));
         
         me.setColumns( [{
-                text: 'Vouchers',
+                text: 'Devices',
                 xtype: 'templatecolumn',
                 
                 tpl: new Ext.XTemplate(

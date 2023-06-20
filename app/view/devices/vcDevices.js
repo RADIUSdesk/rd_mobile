@@ -1,21 +1,21 @@
-Ext.define('RdMobile.view.vouchers.vcVouchers', {
+Ext.define('RdMobile.view.devices.vcDevices', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcVouchers',
+    alias   : 'controller.vcDevices',
     sel		: null,
     config: {
-        urlDelete           : '/cake4/rd_cake/vouchers/delete.json',
+        urlDelete           : '/cake4/rd_cake/devices/delete.json',
         containedIn			: 'cntMainRadius',
-        sortDesc			: true			
+        sortDesc			: true	
     },
     control: {
-    	'cntVouchers' : {
+    	'cntDevices' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-        'gridVouchers': {
+        'gridDevices': {
             select: 'onGridChildTap'
         },
-      	'#btnBack' : {
+        '#btnBack' : {
       		tap		: 'back'
       	},
       	'#btnReload' : {
@@ -26,6 +26,12 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
       	},
       	'#btnFilter' : {
       		tap		: 'filter'
+      	},
+      	'#cmbFilterOn' : {
+      		change	: 'onCmbFilterOnChange'
+      	},
+      	'cmbPermanentUser' : {
+      		change	: 'onCmbFilterOwnerChange'
       	},
       	'#txtFilterValue' : {
       		change	: 'txtFilterValueChange'
@@ -39,11 +45,8 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
       	'#btnEdit' : {
       		tap	: 'edit'
       	},
-      	'#btnPdf' : {
-      		tap	: 'pdf'
-      	}, 
-      	'#btnEmail' : {
-      		tap	: 'email'
+      	'#btnEnable' : {
+      		tap	: 'enableDisable'
       	},
       	'#btnRadius' : {
       		tap	: 'radius'
@@ -51,7 +54,6 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     },
     show	: function(){
     	var me = this;
-    	console.log("Show");
     	me.getView().down('#btnAdd').show();
     },
     hide	: function(){
@@ -65,34 +67,58 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     },
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridVouchers').getStore().reload();  
+    	me.getView().down('gridDevices').getStore().reload();  
     },
     sort	: function(btn){
     	var me 		= this;
-    	var store 	= me.getView().down('gridVouchers').getStore();
+    	var store 	= me.getView().down('gridDevices').getStore();
     	me.setSortDesc(!me.getSortDesc());
     	if(me.getSortDesc()){
     		btn.setIconCls('x-fa fa-sort-alpha-down'); 
     		store.sort([{
-				property : 'name',
+				property : 'username',
 				direction: 'ASC'
 			}]);
     	}else{
     		btn.setIconCls('x-fa fa-sort-alpha-up');
     		store.sort([{
-				property : 'name',
+				property : 'username',
 				direction: 'DESC'
 			}]); 
     	}
     },
     filter	: function(tbn){
     	var me  = this;
-    	console.log("Filter Button Tapped");
     	me.getView().down('#asFilter').show();
+    },
+    onCmbFilterOnChange  : function(c,new_value){
+    	var me 		= this;
+    	var store 	= me.getView().down('gridDevices').getStore();
+    	var btn		= me.getView().down('#btnFilter');
+    	var txt 	= me.getView().down('#txtFilterValue');  
+    	var cmb 	= me.getView().down('cmbPermanentUser');	
+    	if(new_value == 'owner'){
+            cmb.setHidden(false);      
+    		txt.setHidden(true);
+    	}else{
+    		store.clearFilter();
+    		btn.setBadgeText(''); 
+    		txt.setValue('');
+    		cmb.setHidden(true);      
+    		txt.setHidden(false);  	
+    	}
+    },
+    onCmbFilterOwnerChange  : function(c,new_value){
+    	var me 		= this;
+    	var store 	= me.getView().down('gridDevices').getStore();
+    	var btn		= me.getView().down('#btnFilter');
+    	var cmb 	= me.getView().down('cmbPermanentUser');  	
+    	store.filter([{'property':'permanent_user_id','value':new_value,'operator':'=='}]);
+    	btn.setBadgeText('+');
     },
     txtFilterValueChange : function(txt,new_value){
     	var me 		= this;
-    	var store 	= me.getView().down('gridVouchers').getStore();
+    	var store 	= me.getView().down('gridDevices').getStore();
     	var btn		= me.getView().down('#btnFilter');
     	var cmb		= me.getView().down('#cmbFilterOn'); 
     	if(new_value == ''){
@@ -127,13 +153,18 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     edit  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmVoucherEdit',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id')});
+    	var w = Ext.widget('frmDeviceEdit',{grid:me.getView().down('gridDevices'), device_id: me.sel.get('id')});
+        w.show();
+    },
+    enableDisable  : function(btn){
+    	var me = this;	
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmDeviceEnableDisable',{grid:me.getView().down('gridDevices'), device_id: me.sel.get('id'),device_name : me.sel.get('name')});
         w.show();
     },
     add : function(){
     	var me = this;
-    	console.log(me.getView());
-    	var w = Ext.widget('frmVoucherAdd',{grid:me.getView().down('gridVouchers')});
+    	var w = Ext.widget('frmDeviceAdd',{grid:me.getView().down('gridDevices')});
         w.show(); 
     },
     onGridChildTap : function(a,sel){
@@ -141,22 +172,10 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
     },
-    pdf	: function(){
-    	var me = this;
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmVoucherPdf',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id')});
-    	w.show(); 
-    },
-    email	: function(){
-    	var me = this;
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmVoucherEmail',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id'),voucher_name : me.sel.get('name')});
-    	w.show(); 
-    },
     radius	: function(){
     	var me = this;
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id'),voucher_name : me.sel.get('name'), user_type : 'voucher' });
+    	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridDevices'), device_id: me.sel.get('id'),device_name : me.sel.get('name'), user_type : 'device' });
     	w.show();    	
     }
 });

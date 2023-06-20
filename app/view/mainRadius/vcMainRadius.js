@@ -7,28 +7,7 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
         },
         'gridMainRadiusComponents': {
             cellselection: 'onGridComponentsChildTap'
-        },
-        '#btnVouchers': {
-            tap : 'onBtnVouchersTap'
-        },
-        '#btnPermanentUsers' :  {
-            tap : 'onBtnPermanentUsersTap'
-        },
-        '#btnBackPermanentUsers' : {
-            tap : 'onBtnBackTap'
         }
-    },
-    onBtnVouchersTap : function(btn){
-    	var me = this;
-        me.getView().setActiveItem(1);
-    },
-    onBtnPermanentUsersTap : function(btn){
-    	var me = this;
-        me.getView().setActiveItem(2);
-    },
-    onBtnBackTap : function(btn){
-        var me = this;
-        me.getView().setActiveItem(0);
     },
     onGridUsersChildTap : function(a,b,c){
     	var me = this;
@@ -42,14 +21,9 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
     	}
     	if((col == 1)&&(row == 0)){    	
     		me.getView().setActiveItem(2);
-    	}  
-    	  	
-    	if(col == 0){
-    		console.log(r.get('col_0_name'));
-    	}
-    	
-    	if(col == 1){
-    		console.log(r.get('col_1_name'));
+    	}   	
+    	if((col == 0)&&(row == 1)){ 
+    		me.getView().setActiveItem(3);
     	}
     },
      onGridComponentsChildTap : function(a,b,c){

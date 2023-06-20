@@ -49,19 +49,6 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         			height	: 200
         		}
         	]
-           /* xtype   : 'container',
-            items   : [
-                {
-                    xtype       : 'button',
-                    text        : 'Vouchers',
-                    itemId      : 'btnVouchers'
-                },
-                {
-                    xtype       : 'button',
-                    text        : 'Permanent Users',
-                    itemId      : 'btnPermanentUsers'
-                },
-            ]*/
         },     
         {
             xtype	: 'cntPermanentUsers',
@@ -72,7 +59,8 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         	layout	: 'fit'
         },
         {
-            html: "Top Ups"
+            xtype	: 'cntDevices',
+        	layout	: 'fit'
         }
     ]
 });

@@ -22,11 +22,9 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEmail', {
         const me = this;
         var items = [
 			{
-		        itemId  : 'single_field',
+
 		        xtype   : 'textfield',
-		        name    : 'single_field',
 		        hidden  : true,
-		        itemId  : 'voucher_id',
 		        name    : 'id',
 		        value	: me.voucher_id
 		    },

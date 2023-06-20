@@ -1,17 +1,17 @@
-Ext.define('RdMobile.view.components.cmbVoucher', {
+Ext.define('RdMobile.view.components.cmbPermanentUser', {
     extend          : 'Ext.field.ComboBox',
-    alias           : 'widget.cmbVoucher',
-    label		    : 'Voucher',
+    alias           : 'widget.cmbPermanentUser',
+    label		    : 'Permanent User',
     forceSelection  : true, //?
     valueField      : 'id',
-    displayField    : 'name',
+    displayField    : 'username',
     typeAhead       : true,
     allowBlank      : false,//?
     queryMode       : 'remote',//?
     mode            : 'remote',//?
-    name            : 'voucher_id',
+    name            : 'user_id',
     pageSize        : 1, // The value of the number is ignore -- it is essentially coerced to a boolean, and if true, the paging toolbar is displayed. ??
-    required		: true,
+	required		: true,
     errorTip		: {
         anchor	: true,
         align	: 'l-r?'
@@ -20,19 +20,19 @@ Ext.define('RdMobile.view.components.cmbVoucher', {
     initialize      : function() {    
         var me= this;
         var s = Ext.create('Ext.data.Store', {
-            model       : 'RdMobile.model.mVoucher',
+            model       : 'RdMobile.model.mPermanentUser',
             buffered    : false,
             remoteSort  : true,
             proxy       : {
                 type    : 'ajax',
                 format  : 'json',
                 batchActions: true, 
-                url     : '/cake4/rd_cake/vouchers/index.json',
+                url     : '/cake4/rd_cake/permanent-users/index.json',
                 reader  : {
-                    type: 'json',
-                    rootProperty: 'items',
-                    messageProperty: 'message',
-                    totalProperty: 'totalCount' //Required for dynamic paging
+                    type			: 'json',
+                    rootProperty	: 'items',
+                    messageProperty	: 'message',
+                    totalProperty	: 'totalCount' //Required for dynamic paging
                 },
                 simpleSortMode: true //This will only sort on one column (sort) and a direction(dir) value ASC or DESC
             },
@@ -40,10 +40,10 @@ Ext.define('RdMobile.view.components.cmbVoucher', {
         });
         me.setStore(s);
         
-        if(me.voucher_id){      
-        	var rec     = Ext.create('RdMobile.model.mVoucher', {name: me.voucher_name, id: me.voucher_id});
+        if(me.user_id){      
+        	var rec     = Ext.create('RdMobile.model.mPermanentUser', {username: me.user_name, id: me.user_id});
         	me.getStore().loadData([rec],false);
-        	me.setValue(me.voucher_id);
+        	me.setValue(me.user_id);
         }
         
         this.callParent(arguments);

@@ -30,7 +30,7 @@ Ext.define('RdMobile.view.mainRadius.gridMainRadiusUsers', {
 		        },
 		        {
 		        	'id'  			: 1,
-		            'col_0_name'	: 'TopUps',
+		            'col_0_name'	: 'BYOD',
 		            "col_1_name"	: "Activity Monitor",
 		        }, 
             ]

@@ -76,7 +76,6 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 				{
 				    xtype	: 'textfield',
 				    label	: 'Filter Value',
-				    name	: 'filter_value',
 				    itemId  : 'txtFilterValue'
 				}					     
 			 ]

@@ -4,9 +4,13 @@ Ext.define('RdMobile.view.radiusClient.vcRadiusClient', {
     config: {
         urlRequest:         '/cake4/rd_cake/free-radius/test_radius.json'
     },  
+    control: {
+    	'#cmbUserType' : {
+    		change	: 'cmbChange'
+    	}
+   }, 
     onSubmit : function(btn){   
     	var me 		= this; 
-    	console.log("Radius Test Submit Tapped");
     	if(btn.up('formpanel').validate()){ 
     		btn.up('formpanel').setMasked(true);   	
     		btn.up('formpanel').submit({
@@ -16,13 +20,44 @@ Ext.define('RdMobile.view.radiusClient.vcRadiusClient', {
                 success: function(form, action,b,c) {
 		            btn.up('formpanel').setMasked(false);
 		            btn.up('formpanel').down('#cntReply').setData(action.data);
-		            console.log(action.data); 
 		        },
 		        failure: function(form,action){
 		            me.getPnlRadiusReply().setMasked(false);
-		            console.log(action); 
 		        }
             });     	   	
     	}    	
+    },
+    cmbChange	: function(cmb,newValue){
+    	var me 			= this;
+    	var cmbVoucher  = me.getView().down('cmbVoucher');
+    	var cmbUser		= me.getView().down('cmbPermanentUser');
+    	var cmbDevice	= me.getView().down('cmbDevice');
+    	   	
+    	if(newValue == 'voucher'){ 	
+    		cmbVoucher.setHidden(false);
+    		cmbVoucher.setDisabled(false);
+    		cmbUser.setHidden(true);
+    		cmbUser.setDisabled(true);
+    		cmbDevice.setHidden(true);
+    		cmbDevice.setDisabled(true);    	    	
+    	}
+    	
+    	if(newValue == 'permanent'){
+    		cmbVoucher.setHidden(true);
+    		cmbVoucher.setDisabled(true);
+    		cmbUser.setHidden(false);
+    		cmbUser.setDisabled(false);
+    		cmbDevice.setHidden(true);
+    		cmbDevice.setDisabled(true);   	
+    	}
+    	
+    	if(newValue == 'device'){
+    		cmbVoucher.setHidden(true);
+    		cmbVoucher.setDisabled(true);
+    		cmbUser.setHidden(true);
+    		cmbUser.setDisabled(true);
+    		cmbDevice.setHidden(false);
+    		cmbDevice.setDisabled(false); 	
+    	}
     }
 });

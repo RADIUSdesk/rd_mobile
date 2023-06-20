@@ -1,15 +1,15 @@
-Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
+Ext.define('RdMobile.view.devices.cntDevices', {
     extend  : 'Ext.Container',
-    xtype   : 'cntPermanentUsers',
-    controller  : 'vcPermanentUsers',
+    xtype   : 'cntDevices',
+    controller  : 'vcDevices',
     requires	: [
-        'RdMobile.view.permanentUsers.vcPermanentUsers',
+        'RdMobile.view.devices.vcDevices',
+        'RdMobile.view.devices.gridDevices',
         'RdMobile.view.radiusClient.frmRadiusClient',
-        'RdMobile.view.permanentUsers.frmPermanentUserAdd',
-        'RdMobile.view.permanentUsers.frmPermanentUserEditBasic',
-        'RdMobile.view.permanentUsers.frmPermanentUserEditPersonal',
-        'RdMobile.view.permanentUsers.frmEnableDisable',
-        'RdMobile.view.password.frmPassword'
+        'RdMobile.view.components.cmbPermanentUser',
+        'RdMobile.view.devices.frmDeviceAdd',
+        'RdMobile.view.devices.frmDeviceEdit',
+        'RdMobile.view.devices.frmDeviceEnableDisable',
     ],
 	items   : [
         {
@@ -34,7 +34,7 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 		    ]
         },
         {
-        	xtype: 'gridPermanentUsers'               
+        	xtype: 'gridDevices'               
         }      
     ],                   
     scrollable : true,
@@ -53,12 +53,16 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 					queryMode: 'local',
 					displayField: 'name',
 					valueField: 'id',
-					value	: 'username',
+					value	: 'name',
 					itemId	: 'cmbFilterOn',
 					store: [
 						{
-							id	: 'username',
-							name: 'Username'
+							id	: 'owner',
+							name: 'Owner'
+						}, 
+						{
+							id	: 'name',
+							name: 'MAC Address'
 						}, 
 						{
 							id	: 'profile',
@@ -74,6 +78,10 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 				    xtype	: 'textfield',
 				    label	: 'Filter Value',
 				    itemId  : 'txtFilterValue'
+				},
+				{
+					xtype	: 'cmbPermanentUser',
+					hidden	: true
 				}					     
 			 ]
 	 	});
@@ -93,29 +101,17 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 					 itemId		: 'btnDelete'
 				 }, 
 				 {
-					 text		: 'Edit Basic Info',
+					 text		: 'Edit',
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditBasic'
-				 },
-				 {
-					 text		: 'Edit Personal Info',
-					 iconCls	: 'x-fa fa-pen',
-					 textAlign  : 'left',
-					 itemId		: 'btnEditPersonal'
-				 },
+					 itemId		: 'btnEdit'
+				 },			
 				 {
 					xtype	: 'label',
 					style	: {
 		   				'border-bottom' : '1px solid #667078'
 					}		
 				},
-				{
-					 text		: 'Change Password',
-					 iconCls	: 'x-fa fa-lock',
-					 textAlign  : 'left',
-					 itemId		: 'btnPassword'
-				 },
 				 {
 					 text		: 'Enable / Disable',
 					 iconCls	: 'x-fa fa-toggle-on',
