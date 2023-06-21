@@ -52,6 +52,9 @@ Ext.define('RdMobile.view.devices.gridDevices', {
 		            var jsonData = response.responseJson;
 		            console.log('Error encountered');
 		        },
+		        metachange : function(store,meta,options) {
+                	this.up('cntDevices').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">DEVICES</div></div>');
+                },
                 scope: this
             },
             remoteFilter: true,
@@ -63,9 +66,11 @@ Ext.define('RdMobile.view.devices.gridDevices', {
                 xtype: 'templatecolumn',
                 
                 tpl: new Ext.XTemplate(
-                    '<div class="card" style="border-radius: 10px;border: 1px solid #33cc33;padding: 5px; margin: 0px;">',
-                 //   '<div><button type="button" class="btn"><span class="btnSpan">Button</span></button></div>',
-                    '<h3>{name}</h3>',
+                	'<div style="border-radius: 5px;border: 1px solid #a3aeb8;padding: 5px; margin: 5px;text-align: center; color:#0677c7">',
+                    '<div style="font-size: large;">{description}</div>',
+                    '<div style="color:#3e3f40;">',
+                    '{name}',
+                    '</div>',
                     '</div>',
                 ),
                 cell: {

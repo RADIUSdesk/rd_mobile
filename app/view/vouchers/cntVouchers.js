@@ -27,8 +27,8 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 		    xtype: 'spacer'
 		},
 			    {
-				    xtype: 'label',
-				    html: 'My label!<br><span>koos</span><br><span style="font-size: xx-small;">Jan</span>'
+				    xtype	: 'label',
+				    itemId	: 'lblMeta'
 			    }
 		    ]
         },

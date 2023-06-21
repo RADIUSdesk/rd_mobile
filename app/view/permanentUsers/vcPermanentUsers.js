@@ -5,6 +5,7 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
     config: {
         urlDelete           : '/cake4/rd_cake/permanent-users/delete.json',
         containedIn			: 'cntMainRadius',
+        appTitle			: 'RADIUSdesk',
         sortDesc			: true	
     },
     control: {
@@ -65,6 +66,7 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
     back : function(btn){
         var me = this;
         btn.up(me.getContainedIn()).setActiveItem(0);
+        me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
     },
     reload	: function(btn){
     	var me = this;

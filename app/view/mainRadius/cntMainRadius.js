@@ -49,17 +49,40 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         			height	: 200
         		}
         	]
-        },     
+        }, 
+        //-- Permanent Users --(1)    
         {
             xtype	: 'cntPermanentUsers',
             layout	: 'fit'
          },
+         //-- Vouchers --(2)
          {
             xtype	: 'cntVouchers',
         	layout	: 'fit'
         },
+        //-- BYOD --(3)
         {
             xtype	: 'cntDevices',
+        	layout	: 'fit'
+        },
+        //-- Activity Viewer --(4)
+        {
+        	layout	: 'fit',
+        	html	: 'Activity Viewer'
+        },
+        //-- RADIUS Clients --(5)
+        {
+        	layout	: 'fit',
+        	html	: 'RADIUS Clients'
+        },
+        //-- NAS --(6)
+        {
+        	layout	: 'fit',
+        	html	: 'NAS'
+        },
+        //-- Profiles --(7)
+        {
+        	xtype	: 'cntProfiles',
         	layout	: 'fit'
         }
     ]

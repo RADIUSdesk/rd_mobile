@@ -1,7 +1,7 @@
-Ext.define('RdMobile.view.vouchers.gridVouchers', {
+Ext.define('RdMobile.view.profiles.gridProfiles', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridVouchers',
-    emptyText: 'Create Some Vouchers',
+    xtype   : 'gridProfiles',
+    emptyText: 'No Profiles Available',
     config  : {
         compdata: undefined,
     },
@@ -28,18 +28,18 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
-            model: 'RdMobile.model.mVoucher', //FIXME MODEL 
+            model: 'RdMobile.model.mProfile', //FIXME MODEL 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/vouchers/index.json',
+                url         : '/cake4/rd_cake/profiles/index.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
                 reader: {
-			        type			: 'json',
-			        rootProperty	: 'items',
-			        messageProperty	: 'message',
-			        totalProperty	: 'totalCount' //Required for dynamic paging
+			        type: 'json',
+			        rootProperty: 'items',
+			        messageProperty: 'message',
+			        totalProperty: 'totalCount' //Required for dynamic paging
 			    }
             },
             listeners: {
@@ -53,7 +53,7 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntVouchers').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">VOUCHERS</div></div>');
+                	this.up('cntProfiles').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">PROFILES</div></div>');
                 },
                 scope: this
             },
@@ -62,7 +62,7 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         }));
         
         me.setColumns( [{
-                text: 'Vouchers',
+                text: 'Profiles',
                 xtype: 'templatecolumn',
                 
                 tpl: new Ext.XTemplate(
@@ -77,7 +77,6 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
                 flex: 1
             }]);
         me.getStore().reload()		
-		this.callParent();
-		//console.log(this._record)      
+		this.callParent();     
     }
  });

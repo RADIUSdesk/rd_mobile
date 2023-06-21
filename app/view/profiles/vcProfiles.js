@@ -1,22 +1,22 @@
-Ext.define('RdMobile.view.vouchers.vcVouchers', {
+Ext.define('RdMobile.view.profiles.vcProfiles', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcVouchers',
+    alias   : 'controller.vcProfiles',
     sel		: null,
     config: {
-        urlDelete           : '/cake4/rd_cake/vouchers/delete.json',
+        urlDelete           : '/cake4/rd_cake/profiles/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
-        sortDesc			: true			
+        sortDesc			: true	
     },
     control: {
-    	'cntVouchers' : {
+    	'cntProfiles' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-        'gridVouchers': {
+        'gridProfiles': {
             select: 'onGridChildTap'
         },
-      	'#btnBack' : {
+        '#btnBack' : {
       		tap		: 'back'
       	},
       	'#btnReload' : {
@@ -37,18 +37,12 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
       	'#btnDelete' : {
       		tap	: 'delete'
       	},
-      	'#btnEdit' : {
-      		tap	: 'edit'
+      	'#btnEditBasic' : {
+      		//tap	: 'editBasic'
       	},
-      	'#btnPdf' : {
-      		tap	: 'pdf'
-      	}, 
-      	'#btnEmail' : {
-      		tap	: 'email'
-      	},
-      	'#btnRadius' : {
-      		tap	: 'radius'
-      	},        	
+      	'#btnEditPersonal' : {
+      		//tap	: 'editPersonal'
+      	}   	
     },
     show	: function(){
     	var me = this;
@@ -67,11 +61,11 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     },
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridVouchers').getStore().reload();  
+    	me.getView().down('gridProfiles').getStore().reload();  
     },
     sort	: function(btn){
     	var me 		= this;
-    	var store 	= me.getView().down('gridVouchers').getStore();
+    	var store 	= me.getView().down('gridProfiles').getStore();
     	me.setSortDesc(!me.getSortDesc());
     	if(me.getSortDesc()){
     		btn.setIconCls('x-fa fa-sort-alpha-down'); 
@@ -94,7 +88,7 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     },
     txtFilterValueChange : function(txt,new_value){
     	var me 		= this;
-    	var store 	= me.getView().down('gridVouchers').getStore();
+    	var store 	= me.getView().down('gridProfiles').getStore();
     	var btn		= me.getView().down('#btnFilter');
     	var cmb		= me.getView().down('#cmbFilterOn'); 
     	if(new_value == ''){
@@ -126,39 +120,27 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     	});   	
     	me.getView().down('#asMenu').hide();
     },
-    edit  : function(btn){
+    editBasic  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmVoucherEdit',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id')});
+    	var w = Ext.widget('frmPermanentUserEditBasic',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id')});
+        w.show();
+    },
+    editPersonal  : function(btn){
+    	var me = this;	
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmPermanentUserEditPersonal',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id')});
         w.show();
     },
     add : function(){
     	var me = this;
     	console.log(me.getView());
-    	var w = Ext.widget('frmVoucherAdd',{grid:me.getView().down('gridVouchers')});
+    	var w = Ext.widget('frmPermanentUserAdd',{grid:me.getView().down('gridPermanentUsers')});
         w.show(); 
     },
     onGridChildTap : function(a,sel){
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
-    },
-    pdf	: function(){
-    	var me = this;
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmVoucherPdf',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id')});
-    	w.show(); 
-    },
-    email	: function(){
-    	var me = this;
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmVoucherEmail',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id'),voucher_name : me.sel.get('name')});
-    	w.show(); 
-    },
-    radius	: function(){
-    	var me = this;
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id'),voucher_name : me.sel.get('name'), user_type : 'voucher' });
-    	w.show();    	
     }
 });

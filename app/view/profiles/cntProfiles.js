@@ -1,15 +1,9 @@
-Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
+Ext.define('RdMobile.view.profiles.cntProfiles', {
     extend  : 'Ext.Container',
-    xtype   : 'cntPermanentUsers',
-    controller  : 'vcPermanentUsers',
+    xtype   : 'cntProfiles',
+    controller  : 'vcProfiles',
     requires	: [
-        'RdMobile.view.permanentUsers.vcPermanentUsers',
-        'RdMobile.view.radiusClient.frmRadiusClient',
-        'RdMobile.view.permanentUsers.frmPermanentUserAdd',
-        'RdMobile.view.permanentUsers.frmPermanentUserEditBasic',
-        'RdMobile.view.permanentUsers.frmPermanentUserEditPersonal',
-        'RdMobile.view.permanentUsers.frmEnableDisable',
-        'RdMobile.view.password.frmPassword'
+        'RdMobile.view.profiles.vcProfiles'
     ],
 	items   : [
         {
@@ -24,6 +18,7 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 					{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
 					{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
 					{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
+					{ ui: 'normal',  iconCls: 'x-fa fa-puzzle-piece', itemId : 'btnProfileComponents' },
 					{
 		    xtype: 'spacer'
 		},
@@ -34,7 +29,7 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 		    ]
         },
         {
-        	xtype: 'gridPermanentUsers'               
+        	xtype: 'gridProfiles'               
         }      
     ],                   
     scrollable : true,
@@ -53,20 +48,12 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 					queryMode: 'local',
 					displayField: 'name',
 					valueField: 'id',
-					value	: 'username',
+					value	: 'name',
 					itemId	: 'cmbFilterOn',
 					store: [
 						{
-							id	: 'username',
-							name: 'Username'
-						}, 
-						{
-							id	: 'profile',
-							name: 'Profile'
-						},
-						{
-							id	: 'realm',
-							name: 'Realm'						
+							id	: 'name',
+							name: 'name'
 						}
 					]
 				},
@@ -103,49 +90,7 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
 					 itemId		: 'btnEditPersonal'
-				 },
-				 {
-					xtype	: 'label',
-					style	: {
-		   				'border-bottom' : '1px solid #667078'
-					}		
-				},
-				{
-					 text		: 'Change Password',
-					 iconCls	: 'x-fa fa-lock',
-					 textAlign  : 'left',
-					 itemId		: 'btnPassword'
-				 },
-				 {
-					 text		: 'Enable / Disable',
-					 iconCls	: 'x-fa fa-toggle-on',
-					 textAlign  : 'left',
-					 itemId		: 'btnEnable'
-				 },
-				 {
-					 text		: 'Test RADIUS',
-					 iconCls	: 'x-fa fa-circle-notch',
-					 textAlign  : 'left',
-					 itemId		: 'btnRadius'
-				 },
-				 {
-					xtype	: 'label',
-					style	: {
-		   				'border-bottom' : '1px solid #667078'
-					}		
-				},
-				 {
-					 text		: 'Graphs',
-					 iconCls	: 'x-fa fa-chart-bar',
-					 textAlign  : 'left',
-					 itemId		: 'btnGraphs'
-				 },
-				 {
-					 text		: 'Activity',
-					 iconCls	: 'x-fa fa-running',
-					 textAlign  : 'left',
-					 itemId		: 'btnActivity'
-				 }				     
+				 }
 			 ]
 	 	});
 	 	

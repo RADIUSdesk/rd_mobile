@@ -52,6 +52,9 @@ Ext.define('RdMobile.view.permanentUsers.gridPermanentUsers', {
 		            var jsonData = response.responseJson;
 		            console.log('Error encountered');
 		        },
+		        metachange : function(store,meta,options) {
+                	this.up('cntPermanentUsers').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">USERS</div></div>');
+                },
                 scope: this
             },
             remoteFilter: true,

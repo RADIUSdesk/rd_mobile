@@ -5,6 +5,7 @@ Ext.define('RdMobile.view.devices.vcDevices', {
     config: {
         urlDelete           : '/cake4/rd_cake/devices/delete.json',
         containedIn			: 'cntMainRadius',
+        appTitle			: 'RADIUSdesk',
         sortDesc			: true	
     },
     control: {
@@ -64,6 +65,7 @@ Ext.define('RdMobile.view.devices.vcDevices', {
     back : function(btn){
         var me = this;
         btn.up(me.getContainedIn()).setActiveItem(0);
+        me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
     },
     reload	: function(btn){
     	var me = this;
@@ -76,13 +78,13 @@ Ext.define('RdMobile.view.devices.vcDevices', {
     	if(me.getSortDesc()){
     		btn.setIconCls('x-fa fa-sort-alpha-down'); 
     		store.sort([{
-				property : 'username',
+				property : 'description',
 				direction: 'ASC'
 			}]);
     	}else{
     		btn.setIconCls('x-fa fa-sort-alpha-up');
     		store.sort([{
-				property : 'username',
+				property : 'description',
 				direction: 'DESC'
 			}]); 
     	}
