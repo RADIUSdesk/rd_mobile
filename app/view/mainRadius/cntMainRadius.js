@@ -84,6 +84,12 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         {
         	xtype	: 'cntProfiles',
         	layout	: 'fit'
-        }
+        },
+        //-- ProfileComponents --(8)
+        {
+        	xtype	: 'cntProfileComponents',
+        	layout	: 'fit'
+        },
+        
     ]
 });

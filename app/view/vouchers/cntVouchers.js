@@ -12,25 +12,25 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
     ],
 	items   : [
         {
-		        xtype : 'toolbar',
-		        docked: 'top',
-		        items: [
-					{ ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBack'  },
-					{
-						xtype: 'label',
-						html: '|'
-					},
-					{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
-					{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
-					{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
-					{
-		    xtype: 'spacer'
-		},
-			    {
-				    xtype	: 'label',
-				    itemId	: 'lblMeta'
-			    }
-		    ]
+	        xtype : 'toolbar',
+	        docked: 'top',
+	        items: [
+				{ ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBack'  },
+				{
+					xtype: 'label',
+					html: '|'
+				},
+				{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
+				{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
+				{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
+				{
+					xtype: 'spacer'
+				},
+				{
+					xtype	: 'label',
+					itemId	: 'lblMeta'
+				}
+			]
         },
         {
         	xtype: 'gridVouchers'               

@@ -3,3 +3,57 @@
  *  styling should be located the view's corresponding scss file.
  */
 $enable-font-awesome: dynamic(true);
+
+/* WIP Schedules */
+.plain-wrap .main{
+    margin:5px;
+    padding:5px;
+    background: #7d7e80;
+    cursor: move;
+    font-size:25px;
+    color:#142952;
+    text-align:left;
+}
+
+.plain-wrap .main:hover{
+    background: #c4cbd7;
+}
+
+.plain-wrap.x-item-selected .main {
+    background: #e1c8d4;
+}
+
+.plain-wrap .sub{	
+    margin:5px;
+    padding:5px;
+    background:#dde2eb;
+    cursor: move;
+    text-align:left;
+}
+
+.plain-wrap .sub:hover{
+    background: #f2f3f5;
+}
+
+.plain-wrap.x-item-selected .sub {
+    background: #e1c8d4;
+}
+
+.plain-wrap .sub-check{	
+    margin:5px;
+    padding:5px;
+    background:#c6ebc7;
+    cursor: move;
+    text-align:left;
+}
+
+.plain-wrap .sub-check:hover{
+    background: #ecf8ec;
+}
+
+.plain-wrap.x-item-selected .sub-check {
+    background: #e1c8d4;
+}
+
+
+/* END WIP Schedules */

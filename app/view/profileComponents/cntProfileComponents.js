@@ -1,37 +1,36 @@
-Ext.define('RdMobile.view.profiles.cntProfiles', {
+Ext.define('RdMobile.view.profileComponents.cntProfiles', {
     extend  : 'Ext.Container',
-    xtype   : 'cntProfiles',
-    controller  : 'vcProfiles',
+    xtype   : 'cntProfileComponents',
+    controller  : 'vcProfileComponents',
     requires	: [
-        'RdMobile.view.profiles.vcProfiles',
-        'RdMobile.view.profiles.frmProfileAdd'
+        'RdMobile.view.profileComponents.vcProfileComponents',
+    //    'RdMobile.view.profileComponents.frmProfileComponentAdd'
     ],
 	items   : [
         {
-		        xtype : 'toolbar',
-		        docked: 'top',
-		        items: [
-					{ ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBack'  },
-					{
-						xtype: 'label',
-						html: '|'
-					},
-					{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
-					{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
-					{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
-					{ ui: 'normal',  iconCls: 'x-fa fa-puzzle-piece', itemId : 'btnProfileComponents' },
-					{
-		    xtype: 'spacer'
-		},
-			    {
-				    xtype	: 'label',
-				    itemId	: 'lblMeta'
-			    }
-		    ]
+	        xtype : 'toolbar',
+	        docked: 'top',
+	        items: [
+				{ ui: 'normal', iconCls: 'x-fa fa-arrow-left', itemId : 'btnBack'  },
+				{
+					xtype: 'label',
+					html: '|'
+				},
+				{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
+				{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
+				{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
+				{
+					xtype: 'spacer'
+				},
+				{
+					xtype	: 'label',
+					itemId	: 'lblMeta'
+				}
+	    	]
         },
         {
-        	xtype: 'gridProfiles'               
-        }      
+        	xtype	: 'dvProfileComponents'
+        }   
     ],                   
     scrollable : true,
 	initialize: function (){
@@ -81,33 +80,27 @@ Ext.define('RdMobile.view.profiles.cntProfiles', {
 					 itemId		: 'btnDelete'
 				 }, 
 				 {
-					 text		: 'Edit Basic Info',
+					 text		: 'Edit',
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditBasic'
-				 },
-				 {
-					 text		: 'Edit Personal Info',
-					 iconCls	: 'x-fa fa-pen',
-					 textAlign  : 'left',
-					 itemId		: 'btnEditPersonal'
+					 itemId		: 'btnEdit'
 				 }
 			 ]
 	 	});
 	 	
-	 	me.add(menu);
-	 	
+	 	me.add(menu);	
+	 	 	
 	 	var fab = Ext.create({
 			xtype: "button",
 			ui: 'round',
 			floated: true,
 			iconCls: "x-fa fa-plus",
 			right: 20,
-			bottom: 140,
+			bottom: 100,
 			border: false,
 			itemId	: 'btnAdd'
-		});
-	 	
+		}); 
+			
 	 	me.add(fab);
   	}
 });

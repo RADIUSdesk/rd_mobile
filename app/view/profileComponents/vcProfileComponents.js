@@ -1,20 +1,20 @@
-Ext.define('RdMobile.view.profiles.vcProfiles', {
+Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcProfiles',
+    alias   : 'controller.vcProfileComponents',
     sel		: null,
     config: {
-        urlDelete           : '/cake4/rd_cake/profiles/delete.json',
+        urlDelete           : '/cake4/rd_cake/profile-components/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
         sortDesc			: true	
     },
     control: {
-    	'cntProfiles' : {
+    	'cntProfileComponents' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-        'gridProfiles': {
-            select: 'onGridChildTap'
+        'dvProfileComponents': {
+            select: 'onDvChildTap'
         },
         '#btnBack' : {
       		tap		: 'back'
@@ -30,9 +30,6 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
       	},
       	'#txtFilterValue' : {
       		change	: 'txtFilterValueChange'
-      	},
-      	'#btnProfileComponents' : {
-      		tap		: 'profileComponents'
       	},
       	'#btnAdd' : {
       		tap	: 'add'
@@ -60,20 +57,15 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     back : function(btn){
         var me = this;
         btn.up(me.getContainedIn()).setActiveItem(0);
-        me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> PROFILES');
     },
-    profileComponents :function(btn){
-    	var me = this;
-        btn.up(me.getContainedIn()).setActiveItem(8);
-        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-puzzle-piece fa-1x"></i> PROFILE COMP'); 
-    },    
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridProfiles').getStore().reload();  
+    	me.getView().down('dvProfileComponents').getStore().reload();  
     },
     sort	: function(btn){
     	var me 		= this;
-    	var store 	= me.getView().down('gridProfiles').getStore();
+    	var store 	= me.getView().down('dvProfileComponents').getStore();
     	me.setSortDesc(!me.getSortDesc());
     	if(me.getSortDesc()){
     		btn.setIconCls('x-fa fa-sort-alpha-down'); 
@@ -96,7 +88,7 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     },
     txtFilterValueChange : function(txt,new_value){
     	var me 		= this;
-    	var store 	= me.getView().down('gridProfiles').getStore();
+    	var store 	= me.getView().down('dvProfileComponents').getStore();
     	var btn		= me.getView().down('#btnFilter');
     	var cmb		= me.getView().down('#cmbFilterOn'); 
     	if(new_value == ''){
@@ -128,18 +120,6 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     	});   	
     	me.getView().down('#asMenu').hide();
     },
-    editBasic  : function(btn){
-    	var me = this;	
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmPermanentUserEditBasic',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id')});
-        w.show();
-    },
-    editPersonal  : function(btn){
-    	var me = this;	
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmPermanentUserEditPersonal',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id')});
-        w.show();
-    },
     add : function(){
     	var me 		= this;   	
     	var dd      = Ext.getApplication().getDashboardData();
@@ -147,10 +127,10 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
         if(dd.isRootUser){
             root = true   
         }  	
-    	var w = Ext.widget('frmProfileAdd',{grid:me.getView().down('gridProfiles'),root:root});
+    	var w = Ext.widget('frmProfileComponentAdd',{dv:me.getView().down('dvProfileComponents'),root:root});
         w.show(); 
     },
-    onGridChildTap : function(a,sel){
+    onDvChildTap : function(a,sel){
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 

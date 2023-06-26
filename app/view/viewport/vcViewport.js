@@ -95,7 +95,11 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
     	if(session.user.cloud_id){
     		extra_p.cloud_id = session.user.cloud_id;
     		Ext.Ajax.setExtraParams(extra_p);	
-    	}        
+    	}
+    	
+    	//Set the dashboard data
+    	Ext.getApplication().setDashboardData(session);
+    	        
         this.showMain();
     },   
           

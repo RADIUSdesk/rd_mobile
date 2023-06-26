@@ -7,6 +7,8 @@ Ext.define('RdMobile.Application', {
     extend: 'Ext.app.Application',
 
     name: 'RdMobile',
+    
+    dashboardData : null,  //Data on how the dashboard will look like which will be returned after login
 
     quickTips: false,
     platformConfig: {
@@ -36,5 +38,17 @@ Ext.define('RdMobile.Application', {
                 }
             }
         );
+    },
+    
+    setDashboardData: function(data){
+        var me          = this;
+        me.dashboardData  = data;
+    },
+
+    getDashboardData: function(){
+        var me          = this;
+        return me.dashboardData;
     }
+    
+    
 });
