@@ -21,9 +21,9 @@ Ext.define('RdMobile.view.profileComponents.dvProfileComponents', {
                 	'</tpl>',
                 	
                 	'<tpl if="type==\'check\'">',
-                		'<div class="sub-check">', //FIXME Create a class for check in CSS
+                		'<div class="sub-check">',
                 			'<div style="font-size:10px;color:#acacad;text-align:center;padding:2px;">CHECK</div>',
-		            		'<div style="font-size:18px;color:#016316;padding:2px;">{attribute} <span style="color:#161617;">{op}</span> <span style="color:#0539f5;">{value}</span></div>',
+		            		'<div style="font-size:1.2em;color:#2642ab;padding:2px;">{attribute} <span style="color:#161617;">{op}</span> <span style="color:#016316;">{value}</span></div>',
 		            		'<tpl if="comment!==\'\'">',
 		            			'<div style="font-size:12px;color:#747475;text-align:left;padding:5px;"><i>{comment}</i></div>',
 		            		'</tpl>',
@@ -31,9 +31,9 @@ Ext.define('RdMobile.view.profileComponents.dvProfileComponents', {
                 	'</tpl>',
                 	
                 	'<tpl if="type==\'reply\'">',
-                		'<div class="sub">',
+                		'<div class="sub-reply">',
                 			'<div style="font-size:10px;color:#acacad;text-align:center;padding:2px;">REPLY</div>',
-		            		'<div style="font-size:18px;color:#016316;padding:2px;">{attribute} <span style="color:#161617;">{op}</span> <span style="color:#0539f5;">{value}</span></div>', 
+		            		'<div style="font-size:1.2em;color:#2642ab;padding:2px;">{attribute} <span style="color:#161617;">{op}</span> <span style="color:#016316;">{value}</span></div>', 
 		            		'<tpl if="comment!==\'\'">',
 		            			'<div style="font-size:12px;color:#747475;text-align:left;padding:5px;"><i>{comment}</i></div>',
 		            		'</tpl>',
@@ -64,18 +64,22 @@ Ext.define('RdMobile.view.profileComponents.dvProfileComponents', {
                 }
             },
             listeners: {
-                load: function(store, records, successful) {
+            	load: function(store, records, successful) {
                     if(!successful){
-                        Ext.ux.Toaster.msg(
-                            'Error encountered',
-                            store.getProxy().getReader().rawData.message.message,
-                            Ext.ux.Constants.clsWarn,
-                            Ext.ux.Constants.msgWarn
-                        );
+                        console.log('Error encountered');
                     } 
                 },
+                exception: function(proxy, response, options) {
+		            var jsonData = response.responseJson;
+		            console.log('Error encountered');
+		        },
+		        metachange : function(store,meta,options) {
+                	this.up('cntProfileComponents').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">COMPONENTS</div></div>');
+                },
                 scope: this
-            }
+            },
+            remoteFilter: true,
+            remoteSort: true
         }));
        // me.setItemTpl('<div>{name} is {age} years old</div>');
         me.getStore().reload()		

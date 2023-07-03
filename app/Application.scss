@@ -6,13 +6,13 @@ $enable-font-awesome: dynamic(true);
 
 /* WIP Schedules */
 .plain-wrap .main{
-    margin:5px;
-    padding:5px;
-    background: #7d7e80;
-    cursor: move;
-    font-size:25px;
-    color:#142952;
-    text-align:left;
+    margin      : 5px;
+    padding     : 5px;
+    cursor      : move;
+    font-size 	: 1.5em;
+	color		: #027534;
+    text-align  : left;
+    border-bottom : 5px solid #667078;
 }
 
 .plain-wrap .main:hover{
@@ -23,28 +23,32 @@ $enable-font-awesome: dynamic(true);
     background: #e1c8d4;
 }
 
-.plain-wrap .sub{	
-    margin:5px;
-    padding:5px;
-    background:#dde2eb;
-    cursor: move;
-    text-align:left;
+.plain-wrap .sub-reply{	
+    cursor      : move;
+    border-radius: 5px;
+    border      : 1px solid #3aacf2;
+    padding     : 5px; 
+    margin      : 5px;
+    text-align  : center; 
+    color       : #0677c7;
 }
 
-.plain-wrap .sub:hover{
+.plain-wrap .sub-reply:hover{
     background: #f2f3f5;
 }
 
-.plain-wrap.x-item-selected .sub {
+.plain-wrap.x-item-selected .sub-reply {
     background: #e1c8d4;
 }
 
 .plain-wrap .sub-check{	
-    margin:5px;
-    padding:5px;
-    background:#c6ebc7;
-    cursor: move;
-    text-align:left;
+    cursor      : move;
+    border-radius: 5px;
+    border      : 1px solid #2fde5d;
+    padding     : 5px; 
+    margin      : 5px;
+    text-align  : center; 
+    color       : #0677c7;
 }
 
 .plain-wrap .sub-check:hover{

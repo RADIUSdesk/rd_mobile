@@ -2,11 +2,21 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcProfileComponents',
     sel		: null,
+    init    : function() { 
+    	var me = this;   
+    	var dd = Ext.getApplication().getDashboardData();
+    	//Set root to use later in the app in order to set 'for_system' (root)
+        me.root    = false;
+        if(dd.isRootUser){
+            me.root = true;   
+        }
+    },
     config: {
-        urlDelete           : '/cake4/rd_cake/profile-components/delete.json',
-        containedIn			: 'cntMainRadius',
-        appTitle			: 'RADIUSdesk',
-        sortDesc			: true	
+        urlDelete       : '/cake4/rd_cake/profile-components/delete.json',
+        urlDeleteEntry  : '/cake4/rd_cake/profile-components/delete-comp.json',
+        containedIn		: 'cntMainRadius',
+        appTitle		: 'RADIUSdesk',
+        sortDesc		: true	
     },
     control: {
     	'cntProfileComponents' : {
@@ -37,11 +47,8 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
       	'#btnDelete' : {
       		tap	: 'delete'
       	},
-      	'#btnEditBasic' : {
-      		//tap	: 'editBasic'
-      	},
-      	'#btnEditPersonal' : {
-      		//tap	: 'editPersonal'
+      	'#btnEdit' : {
+      		tap	: 'edit'
       	}   	
     },
     show	: function(){
@@ -99,15 +106,70 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
     		btn.setBadgeText('+');
     	}
     },
-    delete  : function(btn){
-    	var me = this;
-    	Ext.Msg.confirm("Confirmation", "Are you sure you want to do that?", function(buttonId){    	
-    		if(buttonId == 'yes'){
-    			Ext.Ajax.request({
-				    url: me.getUrlDelete(),
-				    method: 'POST',          
-				    jsonData: [{'id': me.sel.get('id')}],
-				    success: function(batch,options){
+    delete : function(button) {
+        var me   = this;
+    	var sr   =  me.sel;
+    	
+    	if(!me.rightsCheck(sr)){
+    		return;
+    	}
+    		
+	    if(sr.get('type') == 'profile_component'){ 	    		    
+	    	me.delProfileComponent();
+	    }
+	    
+	    if((sr.get('type') == 'check')||(sr.get('type') == 'reply')){		    
+	        me.delProfileComponentEntry();            
+	    }                 
+    },           
+    add : function(){
+    	var me 	= this;   	 	
+    	var w 	= Ext.widget('frmProfileComponentAdd',{dv:me.getView().down('dvProfileComponents'),root: me.root});
+        w.show(); 
+    },
+    edit: function(button) {
+        var me   = this;
+        var sr   =  me.sel;
+	    if(!me.rightsCheck(sr)){
+    		return;
+    	}
+	    
+	    if(sr.get('type') == 'profile_component'){
+			var w 	= Ext.widget('frmProfileComponentEdit',{dv:me.getView().down('dvProfileComponents'),root: me.root,r: sr});
+        	w.show(); 
+	  	}
+	  	
+	  	if((sr.get('type') == 'check')||(sr.get('type') == 'reply')){		  			  	
+            var w 	= Ext.widget('frmProfileComponentEntryEdit',{dv:me.getView().down('dvProfileComponents'),record: sr});
+        	w.show();   
+	  	}   
+    },
+    onDvChildTap : function(a,sr){
+    	var me 	= this;
+   		me.sel 	= sr;
+   		var dv  = me.getView().down('dvProfileComponents');
+   		if(sr.get('type') == 'add'){
+   			if(!me.rightsCheck(sr)){
+	    		return;
+	    	}  
+   			var w 	= Ext.widget('frmProfileComponentEntryAdd',{dv:dv,'profile_component_id' : sr.get('profile_component_id'),'profile_component_name' : sr.get('profile_component_name')});
+        	w.show();		
+   		}else{
+    		me.getView().down('#asMenu').show();
+    	}	    	  	 
+    },    
+    delProfileComponent:   function(){
+        var me      = this;     
+        Ext.Msg.confirm("Confirmation", 'This will DELETE the Profile Component and ALL its Profile Component Entries' , function(val){
+            if(val== 'yes'){
+                var list  	= [];
+                var id 		= me.sel.get('profile_component_id');
+                Ext.Array.push(list,{'id' : id});
+                Ext.Ajax.request({
+                    url		: me.getUrlDelete(),
+                    method	: 'POST',          
+                    jsonData: list,
+                    success	: function(batch,options){
 				        me.reload(); //Reload from server
 				        me.getView().down('#asMenu').hide();
 				    },                                    
@@ -115,24 +177,40 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
 				        me.reload(); //Reload from server
 				        me.getView().down('#asMenu').hide();
 				    }
-				});		
-    		}    	
-    	});   	
-    	me.getView().down('#asMenu').hide();
+                });
+            }
+        });
     },
-    add : function(){
-    	var me 		= this;   	
-    	var dd      = Ext.getApplication().getDashboardData();
-        var root    = false;
-        if(dd.isRootUser){
-            root = true   
-        }  	
-    	var w = Ext.widget('frmProfileComponentAdd',{dv:me.getView().down('dvProfileComponents'),root:root});
-        w.show(); 
-    },
-    onDvChildTap : function(a,sel){
-    	var me 	= this;
-   		me.sel = sel;
-    	me.getView().down('#asMenu').show();	    	  	 
-    }
+    delProfileComponentEntry:   function(){
+        var me      = this;     
+        //Find out if there was something selected
+        Ext.Msg.confirm("Confirmation", 'This will DELETE the selected Profile Component Entry' , function(val){
+            if(val== 'yes'){
+                var list    = [];
+                var id 		= me.sel.getId();
+                Ext.Array.push(list,{'id' : id});
+                Ext.Ajax.request({
+                    url		: me.getUrlDeleteEntry(),
+                    method	: 'POST',          
+                    jsonData: list,
+                    success: function(batch,options){
+                        me.reload(); //Reload from server
+				        me.getView().down('#asMenu').hide();
+                    },                                    
+                    failure: function(batch,options){
+                        me.reload(); //Reload from server
+				        me.getView().down('#asMenu').hide();
+                    }
+                });
+            }
+        });
+    },    
+    rightsCheck: function(record){
+    	var me = this;
+    	if(record.get('for_system') && (!me.root)){
+    		Ext.toast('No Rights For This Action');
+			return false; //has no rights
+		}
+    	return true; //has rights    
+    }   
 });

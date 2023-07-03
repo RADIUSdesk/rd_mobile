@@ -4,7 +4,10 @@ Ext.define('RdMobile.view.profileComponents.cntProfiles', {
     controller  : 'vcProfileComponents',
     requires	: [
         'RdMobile.view.profileComponents.vcProfileComponents',
-    //    'RdMobile.view.profileComponents.frmProfileComponentAdd'
+        'RdMobile.view.profileComponents.frmProfileComponentAdd',
+        'RdMobile.view.profileComponents.frmProfileComponentEdit',
+        'RdMobile.view.profileComponents.frmProfileComponentEntryAdd',
+     //   'RdMobile.view.profileComponents.frmProfileComponentEntryEdit'
     ],
 	items   : [
         {
@@ -53,7 +56,7 @@ Ext.define('RdMobile.view.profileComponents.cntProfiles', {
 					store: [
 						{
 							id	: 'name',
-							name: 'name'
+							name: 'Name'
 						}
 					]
 				},
