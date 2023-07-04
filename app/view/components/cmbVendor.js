@@ -7,10 +7,8 @@ Ext.define('RdMobile.view.components.cmbVendor', {
     displayField    : 'name',
     typeAhead       : true,
     allowBlank      : false,//?
-    queryMode       : 'remote',//?
-    mode            : 'remote',//?
+    mode            : 'local',//?
     name            : 'vendor',
-    pageSize        : 1, // The value of the number is ignore -- it is essentially coerced to a boolean, and if true, the paging toolbar is displayed. ??
 	required		: true,
     errorTip		: {
         anchor	: true,

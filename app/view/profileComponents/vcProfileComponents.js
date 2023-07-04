@@ -133,6 +133,7 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
 	    if(!me.rightsCheck(sr)){
     		return;
     	}
+    	me.getView().down('#asMenu').hide();
 	    
 	    if(sr.get('type') == 'profile_component'){
 			var w 	= Ext.widget('frmProfileComponentEdit',{dv:me.getView().down('dvProfileComponents'),root: me.root,r: sr});
@@ -140,7 +141,7 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
 	  	}
 	  	
 	  	if((sr.get('type') == 'check')||(sr.get('type') == 'reply')){		  			  	
-            var w 	= Ext.widget('frmProfileComponentEntryEdit',{dv:me.getView().down('dvProfileComponents'),record: sr});
+            var w 	= Ext.widget('frmProfileComponentEntryEdit',{dv:me.getView().down('dvProfileComponents'),r: sr});
         	w.show();   
 	  	}   
     },

@@ -7,7 +7,7 @@ Ext.define('RdMobile.view.profileComponents.cntProfiles', {
         'RdMobile.view.profileComponents.frmProfileComponentAdd',
         'RdMobile.view.profileComponents.frmProfileComponentEdit',
         'RdMobile.view.profileComponents.frmProfileComponentEntryAdd',
-     //   'RdMobile.view.profileComponents.frmProfileComponentEntryEdit'
+        'RdMobile.view.profileComponents.frmProfileComponentEntryEdit'
     ],
 	items   : [
         {

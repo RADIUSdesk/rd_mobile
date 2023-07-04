@@ -10,5 +10,5 @@ Ext.define('RdMobile.store.sAttributes', {
                 rootProperty: 'items'
             }
     },
-    autoLoad: true
+    autoLoad: false
 });

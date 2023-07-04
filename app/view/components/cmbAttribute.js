@@ -5,12 +5,10 @@ Ext.define('RdMobile.view.components.cmbAttribute', {
     forceSelection  : true, //?
     valueField      : 'id',
     displayField    : 'name',
-    typeAhead       : true,
-    allowBlank      : false,//?
-    queryMode       : 'remote',//?
-    mode            : 'remote',//?
+    typeAhead		: true,
+    allowBlank		: false,
+    mode			: 'local',
     name            : 'attribute',
-    pageSize        : 1, // The value of the number is ignore -- it is essentially coerced to a boolean, and if true, the paging toolbar is displayed. ??
 	required		: true,
     errorTip		: {
         anchor	: true,
