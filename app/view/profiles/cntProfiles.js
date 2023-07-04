@@ -4,7 +4,8 @@ Ext.define('RdMobile.view.profiles.cntProfiles', {
     controller  : 'vcProfiles',
     requires	: [
         'RdMobile.view.profiles.vcProfiles',
-        'RdMobile.view.profiles.frmProfileAdd'
+        'RdMobile.view.profiles.frmProfileAdd',
+        'RdMobile.view.profiles.frmProfileEditSimple'
     ],
 	items   : [
         {
@@ -81,16 +82,22 @@ Ext.define('RdMobile.view.profiles.cntProfiles', {
 					 itemId		: 'btnDelete'
 				 }, 
 				 {
-					 text		: 'Edit Basic Info',
+					 text		: 'Simple Edit',
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditBasic'
+					 itemId		: 'btnEditSimple'
 				 },
 				 {
-					 text		: 'Edit Personal Info',
-					 iconCls	: 'x-fa fa-pen',
+					 text		: 'FUP Edit',
+					 iconCls	: 'x-fa fa-handshake',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditPersonal'
+					 itemId		: 'btnEditFup'
+				 },
+				 {
+					 text		: 'Advanced Edit',
+					 iconCls	: 'x-fa fa-cogs',
+					 textAlign  : 'left',
+					 itemId		: 'btnEditAdv'
 				 }
 			 ]
 	 	});

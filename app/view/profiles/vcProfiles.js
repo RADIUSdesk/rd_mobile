@@ -40,11 +40,14 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
       	'#btnDelete' : {
       		tap	: 'delete'
       	},
-      	'#btnEditBasic' : {
-      		//tap	: 'editBasic'
+      	'#btnEditSimple' : {
+      		tap	: 'editSimple'
       	},
-      	'#btnEditPersonal' : {
-      		//tap	: 'editPersonal'
+      	'#btnEditFup' : {
+      		tap	: 'editFup'
+      	},
+      	'#btnEditAdv' : {
+      		tap	: 'editAdv'
       	}   	
     },
     show	: function(){
@@ -128,16 +131,22 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     	});   	
     	me.getView().down('#asMenu').hide();
     },
-    editBasic  : function(btn){
+    editSimple  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmPermanentUserEditBasic',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id')});
+    	var w = Ext.widget('frmProfileEditSimple',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id')});
         w.show();
     },
-    editPersonal  : function(btn){
+    editFup  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmPermanentUserEditPersonal',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id')});
+    	var w = Ext.widget('frmProfileEditFup',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id')});
+        w.show();
+    },
+    editAdv  : function(btn){
+    	var me = this;	
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmPermanentUserEditAdv',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id')});
         w.show();
     },
     add : function(){
