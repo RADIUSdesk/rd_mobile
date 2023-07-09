@@ -1,16 +1,16 @@
-Ext.define('RdMobile.view.profiles.cntDataLimit', {
+Ext.define('RdMobile.view.profiles.cntTimeLimit', {
     extend      : 'Ext.Container',
-    alias       : 'widget.cntDataLimit',
+    alias       : 'widget.cntTimeLimit',
     requires    : [
-        'RdMobile.view.profiles.vcDataLimit',
-        'RdMobile.view.components.rdSliderData'
+        'RdMobile.view.profiles.vcTimeLimit',
+        'RdMobile.view.components.rdSliderTime'
     ],
-    controller  : 'vcDataLimit',
+    controller  : 'vcTimeLimit',
     layout      : 'vbox',
     margin		: '0 0 30 0',
     padding		: 5,
     style: {
-    	'border': '1px solid #027534'
+    	'border': '1px solid #005691'
 	},
     initialize: function () {
         var me      = this;
@@ -26,20 +26,20 @@ Ext.define('RdMobile.view.profiles.cntDataLimit', {
 						xtype		: 'checkboxfield',
 						checked		: false,
 						padding		: '0 15 0 5',
-						name        : 'data_limit_enabled',
-						itemId      : 'data_limit_enabled',
-						checked		: true,
+						name        : 'time_limit_enabled',
+			    		itemId      : 'time_limit_enabled',
+			    		checked		: true,
 						listeners   : {
 							change  : 'sldrToggleChange'
 						}
 					},        
 					{
 						xtype	: 'label',
-						html	: '<i class="fas fa-database"></i> DATA LIMIT',
+						html	: '<i class="fas fa-clock"></i> TIME LIMIT',
 						margin	: 0,
 						style	: {
 			   				'font-size' 	: '1.5em',
-			   				'color'			: '#027534'
+			   				'color'			: '#005691'
 						},
 						flex	: 1			
 					}							
@@ -50,54 +50,56 @@ Ext.define('RdMobile.view.profiles.cntDataLimit', {
 			    itemId      : 'cntDetail',
 			    margin		: '10 0 0 0',
 			    style		: {
-    				background: '#f0fcf2'
+    				background: '#f0f6fc'
 				},
 			    items       : [
                     {
-			            xtype       : 'rdSliderData',
-			            sliderName  : 'data',
-			            minValue    : 1,
-                        maxValue    : 999
+			            xtype       : 'rdSliderTime',
+			            sliderName  : 'time',
+			            fieldLabel  : "Amount",
+                        minValue    : 1,
+                        maxValue    : 120
 			        },
 			        {
 						xtype		: 'radiogroup',
 						label		: 'Reset',
+						itemId      : 'rgrpTimeReset',
 						vertical	: false,
 						items       : [
                             {
                                 label  	: 'Daily',
-                                name    : 'data_reset',
+                                name    : 'time_reset',
                                 value 	: 'daily',
                                 checked	: true
                             }, 
                             {
                                 label  : 'Weekly',
-                                name   : 'data_reset',
+                                name   : 'time_reset',
                                 value: 'weekly'
                             },
                             {
                                 label  	: 'Monthly',
-                                name  	: 'data_reset',
+                                name  	: 'time_reset',
                                 value	: 'monthly',
                             },
                             {
                                 label  	: 'Never',
-                                name    : 'data_reset',
+                                name    : 'time_reset',
                                 value	: 'never'
                             },
                             {
                                 label 	: 'Top-Up',
-                                name    : 'data_reset',
+                                name    : 'time_reset',
                                 value: 'top_up'
                             }
                         ],
                         listeners   : {
-					        change  : 'rgrpDataResetChange'
+					        change  : 'rgrpTimeResetChange'
 				        }
 					},
 					{
                         xtype   : 'label',
-                        itemId  : 'pnlDataTopUp',
+                        itemId  : 'pnlTimeTopUp',
                         hidden  : true,
                         margin	: 0,
 						style   : 'background: #fff1b3',
@@ -107,19 +109,19 @@ Ext.define('RdMobile.view.profiles.cntDataLimit', {
 					{
 						xtype		: 'radiogroup',
 						label		: 'Type',
-						itemId      : 'rgrpDataCap',
+						itemId      : 'rgrpTimeCap',
 						vertical	: false,
 						items       : [
                             {
                                 boxLabel  : 'Hard',
-                                name      : 'data_cap',
+                                name      : 'time_cap',
                                 inputValue: 'hard',
                                 margin    : '0 15 0 0',
                                 checked   : true
                             }, 
                             {
                                 boxLabel  : 'Soft',
-                                name      : 'data_cap',
+                                name      : 'time_cap',
                                 inputValue: 'soft',
                                 margin    : '0 0 0 15'
                             }
@@ -128,8 +130,8 @@ Ext.define('RdMobile.view.profiles.cntDataLimit', {
                     {
 						xtype		: 'checkboxfield',
 						label		: 'Apply Limit Per Device (For Click-To-Connect)',
-						name        : 'data_limit_mac',
-						itemId		: 'chkDataMac',
+						name        : 'time_limit_mac',
+						itemId		: 'chkTimeMac',
 					  	labelWidth 	: 300,
 						checked		: false         
 					}

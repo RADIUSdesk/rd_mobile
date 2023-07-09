@@ -1,9 +1,9 @@
-Ext.define('RdMobile.view.profiles.vcProfileEditSimple', {
+Ext.define('RdMobile.view.profiles.vcProfileEditFup', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcProfileEditSimple',
+    alias   : 'controller.vcProfileEditFup',
      config : {
-        urlViewProfile   : '/cake4/rd_cake/profiles/simple_view.json',
-        urlEditProfile   : '/cake4/rd_cake/profiles/simple_edit.json'
+        urlViewProfile   : '/cake4/rd_cake/profiles/fup-view.json',
+        urlEditProfile   : '/cake4/rd_cake/profiles/fup-edit.json'
     },
     init: function() {
         var me = this;

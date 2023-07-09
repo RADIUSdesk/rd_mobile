@@ -5,7 +5,8 @@ Ext.define('RdMobile.view.profiles.cntProfiles', {
     requires	: [
         'RdMobile.view.profiles.vcProfiles',
         'RdMobile.view.profiles.frmProfileAdd',
-        'RdMobile.view.profiles.frmProfileEditSimple'
+        'RdMobile.view.profiles.frmProfileEditSimple',
+        'RdMobile.view.profiles.frmProfileEditFup'
     ],
 	items   : [
         {

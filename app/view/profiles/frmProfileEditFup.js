@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.profiles.frmProfileEditSimple', {
+Ext.define('RdMobile.view.profiles.frmProfileEditFup', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmProfileEditSimple',
+    xtype   : 'frmProfileEditFup',
     floated	: true,
     modal	: true,
     centered: true,
@@ -9,14 +9,7 @@ Ext.define('RdMobile.view.profiles.frmProfileEditSimple', {
     padding	: 5,
     margin	: 0,
     root 	: false,
-    iconCls : 'x-fa fa-pencil-alt',
-    requires	: [
-        'RdMobile.view.profiles.vcProfileEditSimple',
-        'RdMobile.view.profiles.cntDataLimit',
-        'RdMobile.view.profiles.cntTimeLimit',
-        'RdMobile.view.profiles.cntSpeedLimit'
-    ],
-    controller  : 'vcProfileEditSimple',
+    iconCls : 'x-fa fa-handshake',
     buttons: {
         submit: {
             handler: 'onSubmit'
@@ -25,6 +18,11 @@ Ext.define('RdMobile.view.profiles.frmProfileEditSimple', {
     listeners       : {
         show : 'loadProfileContent' //Trigger a load of the settings (This is only on the initial load)
     },
+    requires: [
+    	'RdMobile.view.profiles.vcProfileEditFup',
+    	'RdMobile.view.profiles.cntPppoe'
+    ],
+    controller  : 'vcProfileEditFup',  
     initialize: function () {
         const me 		= this;      
         var hide_system = true;
@@ -34,8 +32,7 @@ Ext.define('RdMobile.view.profiles.frmProfileEditSimple', {
         
         me.setTitle(me.profile_name);
               
-        var items = [
-        
+        var items = [      
         	{
 		        xtype   : 'textfield',
 		        name    : 'id',
@@ -63,14 +60,15 @@ Ext.define('RdMobile.view.profiles.frmProfileEditSimple', {
 				errorTarget: 'under'
 		    },
 		    {
-                xtype       : 'cntDataLimit'
-            },
+                itemId      : 'cntPppoe',
+                ui          : 'panel-blue',
+                xtype       : 'cntPppoe'
+            },/*
             {
-                xtype       : 'cntTimeLimit'
-            },
-            {
-                xtype       : 'cntSpeedLimit'
-            }
+                itemId      : 'pnlFupComponents',
+                ui          : 'panel-green',
+                xtype       : 'pnlFupComponents'
+            }*/
 		];		
 		me.setItems(items);        
  	}

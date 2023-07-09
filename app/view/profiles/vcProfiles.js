@@ -2,6 +2,15 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcProfiles',
     sel		: null,
+    init    : function() { 
+    	var me = this;   
+    	var dd = Ext.getApplication().getDashboardData();
+    	//Set root to use later in the app in order to set 'for_system' (root)
+        me.root    = false;
+        if(dd.isRootUser){
+            me.root = true;   
+        }
+    },
     config: {
         urlDelete           : '/cake4/rd_cake/profiles/delete.json',
         containedIn			: 'cntMainRadius',
@@ -134,13 +143,13 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     editSimple  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmProfileEditSimple',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id')});
+    	var w = Ext.widget('frmProfileEditSimple',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id'),profile_name : me.sel.get('name'),root:me.root});
         w.show();
     },
     editFup  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmProfileEditFup',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id')});
+    	var w = Ext.widget('frmProfileEditFup',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id'),profile_name : me.sel.get('name'),root:me.root});
         w.show();
     },
     editAdv  : function(btn){
@@ -152,11 +161,7 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     add : function(){
     	var me 		= this;   	
     	var dd      = Ext.getApplication().getDashboardData();
-        var root    = false;
-        if(dd.isRootUser){
-            root = true   
-        }  	
-    	var w = Ext.widget('frmProfileAdd',{grid:me.getView().down('gridProfiles'),root:root});
+    	var w = Ext.widget('frmProfileAdd',{grid:me.getView().down('gridProfiles'),root:me.root});
         w.show(); 
     },
     onGridChildTap : function(a,sel){

@@ -4,21 +4,20 @@ Ext.define('RdMobile.view.profiles.vcDataLimit', {
     init    : function() {
         var me = this;
     },
-    sldrToggleChange: function(sldr){
+    sldrToggleChange: function(sldr,value){
 		var me 		= this;
 		var main	= sldr.up('cntDataLimit');
-		var cnt     = main.down('#cntDetail');		
-        var value  	= sldr.getValue();     
-		if(value == 0){
-		    cnt.hide();     
+		var cnt     = main.down('#cntDetail');		 
+		if(value){
+		    cnt.show();     
 		}else{
-		    cnt.show();
+		    cnt.hide();
 		}
 	},
-	rgrpDataResetChange: function(rgrp,valObj){
+	rgrpDataResetChange : function(rgrp,valObj){
 		var me 		    = this;
 		var pnl    	    = rgrp.up('panel');
-		if(valObj.data_reset == 'top_up'){	
+		if(valObj == 'top_up'){	
 		    pnl.down('#pnlDataTopUp').show();
 		    pnl.down('#rgrpDataCap').hide();
 		    pnl.down('rdSliderData').hide();
