@@ -1,13 +1,11 @@
-Ext.define('RdMobile.view.profiles.cntProfiles', {
+Ext.define('RdMobile.view.realms.cntRealms', {
     extend  : 'Ext.Container',
-    xtype   : 'cntProfiles',
-    controller  : 'vcProfiles',
+    xtype   : 'cntRealms',
+    controller  : 'vcRealms',
     requires	: [
-        'RdMobile.view.profiles.vcProfiles',
-        'RdMobile.view.profiles.frmProfileAdd',
-        'RdMobile.view.profiles.frmProfileEditSimple',
-        'RdMobile.view.profiles.frmProfileEditFup',
-        'RdMobile.view.profiles.frmProfileEditAdvanced'
+        'RdMobile.view.realms.vcRealms',
+        'RdMobile.view.realms.frmRealmAdd',
+        'RdMobile.view.realms.frmRealmEdit'
     ],
 	items   : [
         {
@@ -22,18 +20,15 @@ Ext.define('RdMobile.view.profiles.cntProfiles', {
 					{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
 					{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
 					{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
-					{ ui: 'normal',  iconCls: 'x-fa fa-puzzle-piece', itemId : 'btnProfileComponents' },
+					{ xtype: 'spacer'},
 					{
-		    xtype: 'spacer'
-		},
-			    {
-				    xtype	: 'label',
-				    itemId	: 'lblMeta'
-			    }
+						xtype	: 'label',
+						itemId	: 'lblMeta'
+					}
 		    ]
         },
         {
-        	xtype: 'gridProfiles'               
+        	xtype: 'gridRealms'               
         }      
     ],                   
     scrollable : true,
@@ -84,22 +79,28 @@ Ext.define('RdMobile.view.profiles.cntProfiles', {
 					 itemId		: 'btnDelete'
 				 }, 
 				 {
-					 text		: 'Simple Edit',
+					 text		: 'Edit',
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditSimple'
+					 itemId		: 'btnEdit'
 				 },
 				 {
-					 text		: 'FUP Edit',
-					 iconCls	: 'x-fa fa-handshake',
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				 {
+					 text		: 'Graphs',
+					 iconCls	: 'x-fa fa-chart-bar',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditFup'
+					 itemId		: 'btnGraphs'
 				 },
 				 {
-					 text		: 'Advanced Edit',
-					 iconCls	: 'x-fa fa-cogs',
+					 text		: 'Edit Logo',
+					 iconCls	: 'x-fa fa-camera',
 					 textAlign  : 'left',
-					 itemId		: 'btnEditAdv'
+					 itemId		: 'btnPhoto'
 				 }
 			 ]
 	 	});

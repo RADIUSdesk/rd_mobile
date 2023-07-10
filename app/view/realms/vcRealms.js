@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.profiles.vcProfiles', {
+Ext.define('RdMobile.view.realms.vcRealms', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcProfiles',
+    alias   : 'controller.vcRealms',
     sel		: null,
     init    : function() { 
     	var me = this;   
@@ -12,17 +12,17 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
         }
     },
     config: {
-        urlDelete           : '/cake4/rd_cake/profiles/delete.json',
+        urlDelete           : '/cake4/rd_cake/realms/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
         sortDesc			: true	
     },
     control: {
-    	'cntProfiles' : {
+    	'cntRealms' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-        'gridProfiles': {
+        'gridRealms': {
             select: 'onGridChildTap'
         },
         '#btnBack' : {
@@ -40,24 +40,15 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
       	'#txtFilterValue' : {
       		change	: 'txtFilterValueChange'
       	},
-      	'#btnProfileComponents' : {
-      		tap		: 'profileComponents'
-      	},
       	'#btnAdd' : {
       		tap	: 'add'
       	},
       	'#btnDelete' : {
       		tap	: 'delete'
       	},
-      	'#btnEditSimple' : {
-      		tap	: 'editSimple'
-      	},
-      	'#btnEditFup' : {
-      		tap	: 'editFup'
-      	},
-      	'#btnEditAdv' : {
-      		tap	: 'editAdv'
-      	}   	
+      	'#btnEdit' : {
+      		tap	: 'edit'
+      	}
     },
     show	: function(){
     	var me = this;
@@ -73,19 +64,14 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
         var me = this;
         btn.up(me.getContainedIn()).setActiveItem(0);
         me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
-    },
-    profileComponents :function(btn){
-    	var me = this;
-        btn.up(me.getContainedIn()).setActiveItem(8);
-        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-puzzle-piece fa-1x"></i> PROFILE COMP'); 
-    },    
+    }, 
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridProfiles').getStore().reload();  
+    	me.getView().down('gridRealms').getStore().reload();  
     },
     sort	: function(btn){
     	var me 		= this;
-    	var store 	= me.getView().down('gridProfiles').getStore();
+    	var store 	= me.getView().down('gridRealms').getStore();
     	me.setSortDesc(!me.getSortDesc());
     	if(me.getSortDesc()){
     		btn.setIconCls('x-fa fa-sort-alpha-down'); 
@@ -108,7 +94,7 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     },
     txtFilterValueChange : function(txt,new_value){
     	var me 		= this;
-    	var store 	= me.getView().down('gridProfiles').getStore();
+    	var store 	= me.getView().down('gridRealms').getStore();
     	var btn		= me.getView().down('#btnFilter');
     	var cmb		= me.getView().down('#cmbFilterOn'); 
     	if(new_value == ''){
@@ -140,28 +126,16 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     	});   	
     	me.getView().down('#asMenu').hide();
     },
-    editSimple  : function(btn){
+    edit  : function(btn){
     	var me = this;	
     	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmProfileEditSimple',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id'),profile_name : me.sel.get('name'),root:me.root});
-        w.show();
-    },
-    editFup  : function(btn){
-    	var me = this;	
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmProfileEditFup',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id'),profile_name : me.sel.get('name'),root:me.root});
-        w.show();
-    },
-    editAdv  : function(btn){
-    	var me = this;	
-    	me.getView().down('#asMenu').hide();
-    	var w = Ext.widget('frmProfileEditAdvanced',{grid:me.getView().down('gridProfiles'), profile_id: me.sel.get('id'),profile_name : me.sel.get('name'),root:me.root});
+    	var w = Ext.widget('frmRealmEdit',{grid:me.getView().down('gridRealms'), realm_id: me.sel.get('id'),realm_name : me.sel.get('name')});
         w.show();
     },
     add : function(){
     	var me 		= this;   	
     	var dd      = Ext.getApplication().getDashboardData();
-    	var w = Ext.widget('frmProfileAdd',{grid:me.getView().down('gridProfiles'),root:me.root});
+    	var w = Ext.widget('frmRealmAdd',{grid:me.getView().down('gridRealms'),root:me.root});
         w.show(); 
     },
     onGridChildTap : function(a,sel){
@@ -169,4 +143,4 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
     }
-});
+});	

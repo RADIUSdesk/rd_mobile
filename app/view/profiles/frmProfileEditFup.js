@@ -6,7 +6,7 @@ Ext.define('RdMobile.view.profiles.frmProfileEditFup', {
     centered: true,
     closable: true,
     fullscreen : true,
-    padding	: 5,
+    padding	: '0 10 0 10',
     margin	: 0,
     root 	: false,
     iconCls : 'x-fa fa-handshake',

@@ -90,6 +90,11 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         	xtype	: 'cntProfileComponents',
         	layout	: 'fit'
         },
+        //-- Realms --(9)
+        {
+        	xtype	: 'cntRealms',
+        	layout	: 'fit'
+        },
         
     ]
 });

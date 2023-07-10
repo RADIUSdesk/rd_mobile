@@ -39,5 +39,10 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
     		me.getView().setActiveItem(7);
     		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> Profiles');
     	}
+    	
+    	if((col == 1)&&(row == 1)){ 
+    		me.getView().setActiveItem(9);
+    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-volleyball-ball fa-1x"></i> Realms');
+    	}
     }
 });

@@ -1,7 +1,7 @@
-Ext.define('RdMobile.view.profiles.gridProfiles', {
+Ext.define('RdMobile.view.realms.gridRealms', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridProfiles',
-    emptyText: 'No Profiles Available',
+    xtype   : 'gridRealms',
+    emptyText: 'No Realms Available',
     config  : {
         compdata: undefined,
     },
@@ -23,10 +23,10 @@ Ext.define('RdMobile.view.profiles.gridProfiles', {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
-            model: 'RdMobile.model.mProfile', //FIXME MODEL 
+            model: 'RdMobile.model.mRealm', 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/profiles/index.json',
+                url         : '/cake4/rd_cake/realms/index.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
@@ -48,7 +48,7 @@ Ext.define('RdMobile.view.profiles.gridProfiles', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntProfiles').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">PROFILES</div></div>');
+                	this.up('cntRealms').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">REALMS</div></div>');
                 },
                 scope: this
             },
@@ -57,21 +57,15 @@ Ext.define('RdMobile.view.profiles.gridProfiles', {
         }));
         
         me.setColumns( [{
-                text: 'Profiles',
-                xtype: 'templatecolumn',                
-                
+                text: 'Realms',
+                xtype: 'templatecolumn',                             
                 cell: {
 					encodeHtml: false,
 					tpl: new Ext.XTemplate(
                 	'<div style="border-radius: 5px;border: 1px solid #a3aeb8;padding: 2px; margin: 2px;text-align: center; color:#0677c7">',
 		                '<div style="font-size: large;">',
-		                	'<tpl if="for_system"><span style="color:#0d8024;"><i class="fas fa-umbrella"></i></span></tpl>',
 		                	' {name}',
 		                '</div>',
-		             		'<tpl if="Ext.isEmpty(profile_components)"><div></div></tpl>',
-				            '<tpl for="profile_components">',     // interrogate the profile_components property within the data
-				                "<div style=\"color:#3e3f40;\"><i class=\"fas fa-puzzle-piece\"></i></i>   {groupname} <small><i>(priority => {priority})</i></small></div>",
-				            '</tpl>',
                     '</div>',
                 ),
 				},
