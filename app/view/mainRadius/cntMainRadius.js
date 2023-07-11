@@ -73,12 +73,12 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         //-- RADIUS Clients --(5)
         {
         	layout	: 'fit',
-        	html	: 'RADIUS Clients'
+        	xtype	: 'cntDynamicClients'
         },
         //-- NAS --(6)
         {
         	layout	: 'fit',
-        	html	: 'NAS'
+        	xtype	: 'cntNas'
         },
         //-- Profiles --(7)
         {
@@ -94,7 +94,7 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         {
         	xtype	: 'cntRealms',
         	layout	: 'fit'
-        },
+        }
         
     ]
 });

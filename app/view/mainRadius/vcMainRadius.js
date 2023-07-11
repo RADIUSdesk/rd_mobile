@@ -35,6 +35,16 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
     	var col = b[0][0]; 
     	var row = b[0][1];
     	
+    	if((col == 0)&&(row == 0)){ 
+    		me.getView().setActiveItem(5);
+    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-circle-notch fa-1x"></i> RADIUS Clients');
+    	}
+    	
+    	if((col == 1)&&(row == 0)){ 
+    		me.getView().setActiveItem(6);
+    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cube fa-1x"></i> NAS');
+    	}
+    	
     	if((col == 0)&&(row == 1)){ 
     		me.getView().setActiveItem(7);
     		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> Profiles');
