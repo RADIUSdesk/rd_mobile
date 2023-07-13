@@ -54,12 +54,9 @@ Ext.define('RdMobile.view.dynamicClients.gridUnknownDynamicClients', {
         }));
         
         me.setColumns( [{
-                text: 'UnknownDynamicClients',
-                xtype: 'templatecolumn',                             
-                cell: {
-					encodeHtml: false,
-					height	: 20,
-					tpl: new Ext.XTemplate(
+                text	: 'UnknownDynamicClients',
+                xtype	: 'templatecolumn',
+                tpl		: new Ext.XTemplate(
                 	'<div class="grid-tpl-item">',
                 		'<div class="two-columns-grid">',
 							'<div class="item-lbl">NAS-Identifier :</div>',					
@@ -107,7 +104,9 @@ Ext.define('RdMobile.view.dynamicClients.gridUnknownDynamicClients', {
 	        				return color;
 	    				}
 	    			}
-                ),
+                ),                            
+                cell	: {
+					encodeHtml: false,
 				},
                 flex: 1
             }]);

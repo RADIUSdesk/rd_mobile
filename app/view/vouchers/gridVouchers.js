@@ -62,13 +62,21 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         }));
         
         me.setColumns( [{
-                text: 'Vouchers',
-                xtype: 'templatecolumn',
-                
-                tpl: new Ext.XTemplate(
-                    '<div class="card" style="border-radius: 10px;border: 1px solid #33cc33;padding: 5px; margin: 0px;">',
-                 //   '<div><button type="button" class="btn"><span class="btnSpan">Button</span></button></div>',
-                    '<h3>{name}</h3>',
+                text	: 'Vouchers',
+                xtype	: 'templatecolumn',           
+                tpl	: new Ext.XTemplate(
+                	'<div class="grid-tpl-item">',
+			            '<div class="item-main">',
+			            	'{name}',
+			            '</div>',
+			            '<div class="two-columns-grid">',
+							'<div class="item-lbl"><i class="fa fa-cubes fa-1x"></i> Profile :</div>',					
+							'<div class="item-value">{profile}</div>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl"><i class="fa fa-volleyball-ball fa-1x"></i> Realm :</div>',					
+							'<div class="item-value">{realm}</div>',
+						'</div>',
                     '</div>',
                 ),
                 cell: {

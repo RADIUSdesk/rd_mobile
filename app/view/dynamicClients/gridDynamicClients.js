@@ -55,76 +55,77 @@ Ext.define('RdMobile.view.dynamicClients.gridDynamicClients', {
         
         me.setColumns( [{
                 text	: 'DynamicClients',
-                xtype	: 'templatecolumn',                             
+                xtype	: 'templatecolumn',
+                tpl		: new Ext.XTemplate(
+	            	'<div class="grid-tpl-item">',
+			            '<div class="item-main">',
+			            	'{name}',
+			            '</div>',
+			            '<div class="two-columns-grid">',
+							'<div class="item-lbl">NAS-Identifier :</div>',
+							"<tpl if='Ext.isEmpty(nasidentifier)'>",
+								'<div class="item-value clr-grey-dark">(Not Specified)</div>',
+							'<tpl else>',
+								'<div class="item-value">{nasidentifier}</div>',
+	                		'</tpl>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Called-Station-Id :</div>',
+							"<tpl if='Ext.isEmpty(calledstationid)'>",
+								'<div class="item-value clr-grey-dark">(Not Specified)</div>',
+							'<tpl else>',
+								'<div class="item-value">{calledstationid}</div>',
+							'</tpl>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Last Contact :</div>',
+							"<tpl if='Ext.isEmpty(last_contact)'>",
+								'<div class="item-value clr-grey-dark">(Never)</div>',
+							'<tpl else>',
+								'<tpl if="[this.isRecent(last_contact_human)]==\'green\'">',
+									'<div class="item-value clr-green">{last_contact_human}</div>',
+								'<tpl else>',
+									'<div class="item-value">{last_contact_human}</div>',
+								'</tpl>',								
+							'</tpl>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">From IP :</div>',
+							"<tpl if='Ext.isEmpty(last_contact_ip)'>",
+								'<div class="item-value clr-grey-dark">(Not Available)</div>',
+							'<tpl else>',
+								'<div class="item-value">{last_contact_ip}</div>',
+							"</tpl>",
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Realms :</div>',
+							'<tpl if="Ext.isEmpty(realms)">',
+								'<div class="item-value clr-orange">Available to all!</div><tpl else>',
+								'<div class="item-value">',
+								'<tpl for="realms">',     
+                            		"{name}<br>",
+                        		'</tpl>',
+                        		'</div>',
+							'</tpl>',		                        
+						'</div>',
+	                '</div>',
+	                {
+			            isRecent: function(value_human) {
+			            	var color = 'grey';
+			            	if(
+					            (value_human.match(/just now/g))||
+					            (value_human.match(/minute/g))||
+					            (value_human.match(/second/g))
+					        ){
+					            color = 'green';
+					        }
+	        				return color;
+	    				}
+	    			}
+	            ),     			                             
                 cell	: {
 					encodeHtml: false,
-					 tpl: new Ext.XTemplate(
-		            	'<div class="grid-tpl-item">',
-				            '<div class="item-main">',
-				            	'{name}',
-				            '</div>',
-				            '<div class="two-columns-grid">',
-    							'<div class="item-lbl">NAS-Identifier :</div>',
-    							"<tpl if='Ext.isEmpty(nasidentifier)'>",
-    								'<div class="item-value clr-grey-dark">(Not Specified)</div>',
-    							'<tpl else>',
-    								'<div class="item-value">{nasidentifier}</div>',
-		                		'</tpl>',
-							'</div>',
-							'<div class="two-columns-grid">',
-    							'<div class="item-lbl">Called-Station-Id :</div>',
-    							"<tpl if='Ext.isEmpty(calledstationid)'>",
-    								'<div class="item-value clr-grey-dark">(Not Specified)</div>',
-								'<tpl else>',
-    								'<div class="item-value">{calledstationid}</div>',
-    							'</tpl>',
-							'</div>',
-							'<div class="two-columns-grid">',
-    							'<div class="item-lbl">Last Contact :</div>',
-    							"<tpl if='Ext.isEmpty(last_contact)'>",
-    								'<div class="item-value clr-grey-dark">(Never)</div>',
-								'<tpl else>',
-									'<tpl if="[this.isRecent(last_contact_human)]==\'green\'">',
-										'<div class="item-value clr-green">{last_contact_human}</div>',
-									'<tpl else>',
-										'<div class="item-value">{last_contact_human}</div>',
-									'</tpl>',								
-    							'</tpl>',
-							'</div>',
-							'<div class="two-columns-grid">',
-    							'<div class="item-lbl">From IP :</div>',
-    							"<tpl if='Ext.isEmpty(last_contact_ip)'>",
-    								'<div class="item-value clr-grey-dark">(Not Available)</div>',
-    							'<tpl else>',
-    								'<div class="item-value">{last_contact_ip}</div>',
-    							"</tpl>",
-							'</div>',
-							'<div class="two-columns-grid">',
-    							'<div class="item-lbl">Realms :</div>',
-    							'<tpl if="Ext.isEmpty(realms)">',
-    								'<div class="item-value clr-orange">Available to all!</div><tpl else>',
-    								'<div class="item-value">',
-									'<tpl for="realms">',     
-	                            		"{name}<br>",
-	                        		'</tpl>',
-	                        		'</div>',
-								'</tpl>',		                        
-							'</div>',
-		                '</div>',
-		                {
-				            isRecent: function(value_human) {
-				            	var color = 'grey';
-				            	if(
-						            (value_human.match(/just now/g))||
-						            (value_human.match(/minute/g))||
-						            (value_human.match(/second/g))
-						        ){
-						            color = 'green';
-						        }
-		        				return color;
-		    				}
-		    			}
-		            )     			
+					
 				},
                 flex: 1
             }]);

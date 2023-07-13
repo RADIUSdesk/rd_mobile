@@ -68,7 +68,7 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         //-- Activity Viewer --(4)
         {
         	layout	: 'fit',
-        	html	: 'Activity Viewer'
+        	xtype	: 'cntRadaccts'
         },
         //-- RADIUS Clients --(5)
         {

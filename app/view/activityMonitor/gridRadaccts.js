@@ -1,7 +1,7 @@
-Ext.define('RdMobile.view.devices.gridDevices', {
+Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridDevices',
-    emptyText: 'No Devices Found',
+    xtype   : 'gridRadaccts',
+    emptyText: 'No Radaccts Available',
     config  : {
         compdata: undefined,
     },
@@ -16,22 +16,17 @@ Ext.define('RdMobile.view.devices.gridDevices', {
     },
     rowLines: false,
     disableSelection: true,
-    plugins: {
-        gridpagingtoolbar: true
-    },
     selectable: {
-		//rows: true,
-		mode: 'single',
-		//columns: false
+		mode: 'single'
 	},
     initialize: function () {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
-            model: 'RdMobile.model.mDevice', //FIXME MODEL 
+            model: 'RdMobile.model.mRadacct', 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/devices/index.json',
+                url         : '/cake4/rd_cake/radaccts/index.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
@@ -53,7 +48,7 @@ Ext.define('RdMobile.view.devices.gridDevices', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntDevices').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">DEVICES</div></div>');
+                	this.up('cntRadaccts').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">SESSIONS</div></div>');
                 },
                 scope: this
             },
@@ -62,38 +57,34 @@ Ext.define('RdMobile.view.devices.gridDevices', {
         }));
         
         me.setColumns( [{
-                text	: 'Devices',
-                xtype	: 'templatecolumn',
-                tpl		: new Ext.XTemplate(
-                	'<div class="grid-tpl-item">',
-			            '<div class="item-main">',
-			            	'{description}',
-			            '</div>',
-			            '<div class="two-columns-grid">',
-							'<div class="item-lbl"><i class="fa fa-user fa-1x"></i> Owner :</div>',					
-							'<div class="item-value">{permanent_user}</div>',
-						'</div>',
-                    	'<div class="two-columns-grid">',
-							'<div class="item-lbl">MAC Address :</div>',					
-							'<div class="item-value">{name}</div>',
-						'</div>',				
-			            '<div class="two-columns-grid">',
-							'<div class="item-lbl"><i class="fa fa-cubes fa-1x"></i> Profile :</div>',					
-							'<div class="item-value">{profile}</div>',
-						'</div>',
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl"><i class="fa fa-volleyball-ball fa-1x"></i> Realm :</div>',					
-							'<div class="item-value">{realm}</div>',
-						'</div>',
-                    '</div>',
-                ),
+                text: 'Sessions',
+                xtype: 'templatecolumn',                             
                 cell: {
-					encodeHtml: false
+					encodeHtml: false,
+					tpl: new Ext.XTemplate(
+                	'<div class="grid-tpl-item">',
+	                	'<div class="item-main">',
+			            	'{username}',
+			            '</div>',
+                    '</div>',
+                    {
+			            isRecent: function(value_human) {
+			            	var color = 'grey';
+			            	if(
+					            (value_human.match(/just now/g))||
+					            (value_human.match(/minute/g))||
+					            (value_human.match(/second/g))
+					        ){
+					            color = 'green';
+					        }
+	        				return color;
+	    				}
+	    			}
+                ),
 				},
                 flex: 1
             }]);
         me.getStore().reload()		
-		this.callParent();
-		//console.log(this._record)      
+		this.callParent();     
     }
  });
