@@ -46,7 +46,7 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
 				},
 				{
         			xtype	: 'gridMainRadiusComponents',
-        			height	: 200
+        			height	: 300
         		}
         	]
         }, 
@@ -75,22 +75,27 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         	layout	: 'fit',
         	xtype	: 'cntDynamicClients'
         },
-        //-- NAS --(6)
+        //-- Unknown Dynamic Clients --(6)
+        {
+        	layout	: 'fit',
+        	xtype	: 'cntUnknownDynamicClients'
+        },       
+        //-- NAS --(7)
         {
         	layout	: 'fit',
         	xtype	: 'cntNas'
         },
-        //-- Profiles --(7)
+        //-- Profiles --(8)
         {
         	xtype	: 'cntProfiles',
         	layout	: 'fit'
         },
-        //-- ProfileComponents --(8)
+        //-- ProfileComponents --(9)
         {
         	xtype	: 'cntProfileComponents',
         	layout	: 'fit'
         },
-        //-- Realms --(9)
+        //-- Realms --(10)
         {
         	xtype	: 'cntRealms',
         	layout	: 'fit'

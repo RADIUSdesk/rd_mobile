@@ -1,11 +1,10 @@
-Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
+Ext.define('RdMobile.view.dynamicClients.cntUnknownDynamicClients', {
     extend  : 'Ext.Container',
-    xtype   : 'cntDynamicClients',
-    controller  : 'vcDynamicClients',
+    xtype   : 'cntUnknownDynamicClients',
+    controller  : 'vcUnknownDynamicClients',
     requires	: [
-        'RdMobile.view.dynamicClients.vcDynamicClients',
-        'RdMobile.view.dynamicClients.frmDynamicClientAdd',
-        'RdMobile.view.dynamicClients.frmDynamicClientEdit'
+        'RdMobile.view.dynamicClients.vcUnknownDynamicClients',
+        'RdMobile.view.dynamicClients.frmAttachUnknownDynamicClient'
     ],
 	items   : [
         {
@@ -20,7 +19,6 @@ Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
 					{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
 					{ ui: 'normal',  iconCls: 'x-fa fa-sort-alpha-down', itemId : 'btnSort'	 },
 					{ ui: 'normal',  iconCls: 'x-fa fa-filter', itemId : 'btnFilter' },
-					{ ui: 'confirm', iconCls: 'x-fa fa-car', itemId : 'btnNewArrivals' },
 					{ xtype: 'spacer'},
 					{
 						xtype	: 'label',
@@ -29,7 +27,7 @@ Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
 		    ]
         },
         {
-        	xtype: 'gridDynamicClients'               
+        	xtype: 'gridUnknownDynamicClients'               
         }      
     ],                   
     scrollable : true,
@@ -80,52 +78,15 @@ Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
 					 itemId		: 'btnDelete'
 				 }, 
 				 {
-					 text		: 'Edit',
-					 iconCls	: 'x-fa fa-pen',
+					 text		: 'Attach',
+					 iconCls	: 'x-fa fa-paperclip',
 					 textAlign  : 'left',
-					 itemId		: 'btnEdit'
-				 },
-				 {
-					xtype	: 'label',
-					style	: {
-		   				'border-bottom' : '1px solid #667078'
-					}		
-				},
-				 {
-					 text		: 'Graphs',
-					 iconCls	: 'x-fa fa-chart-bar',
-					 textAlign  : 'left',
-					 itemId		: 'btnGraphs'
-				 },
-				 {
-					 text		: 'Edit Logo',
-					 iconCls	: 'x-fa fa-camera',
-					 textAlign  : 'left',
-					 itemId		: 'btnPhoto'
-				 },
-				 {
-					xtype	: 'label',
-					html	: '<div style="font-size: x-small;text-align: center;"><i class="far fa-lightbulb"></i> Site Wide Shared Secret</div><div style="color:#3e3f40;text-align: center;">testing123</div>',
-					style	: {
-		   				'border-bottom' : '1px solid #667078'
-					}		
-				},
+					 itemId		: 'btnAttach'
+				 }
 			 ]
 	 	});
 	 	
 	 	me.add(menu);
 	 	
-	 	var fab = Ext.create({
-			xtype: "button",
-			ui: 'round',
-			floated: true,
-			iconCls: "x-fa fa-plus",
-			right: 20,
-			bottom: 100,
-			border: false,
-			itemId	: 'btnAdd'
-		});
-	 	
-	 	me.add(fab);
   	}
 });

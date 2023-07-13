@@ -61,3 +61,59 @@ $enable-font-awesome: dynamic(true);
 
 
 /* END WIP Schedules */
+
+/*==== Template Column Related ==== */
+
+.item-main {
+	font-size:larger;
+	text-align:center;
+	color:#0567a3;
+}
+
+.grid-tpl-item {
+	border-radius:5px;
+	border:1px solid #a3aeb8;
+	padding:2px;
+	margin:2px;
+	color:#0677c7;
+}
+
+/* container */
+.two-columns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* columns */
+.two-columns-grid > * {
+    padding:0.2rem;
+}
+
+.item-lbl {
+	color:#a2a3a3;
+	text-align:right;
+	font-size:small;
+}
+
+.item-value {
+	color:#0677c7;
+}
+
+.clr-grey {
+	color:#a2a3a3;
+}
+
+.clr-grey-dark {
+	color: #6c7275;
+}
+
+.clr-orange {
+	color:#db970d;
+}
+
+.clr-green {
+	color:#03a120;
+}
+
+/*==== END Template Column Related ==== */
+

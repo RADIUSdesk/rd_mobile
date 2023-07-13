@@ -36,7 +36,7 @@ Ext.define('RdMobile.view.mainRadius.gridMainRadiusComponents', {
 		            'col_0_fa'		: 'cubes',
 		            "col_1_name"	: "Realms",
 		            'col_1_fa'		: 'volleyball-ball'
-		        }, 
+		        } 
             ]
         }));
       

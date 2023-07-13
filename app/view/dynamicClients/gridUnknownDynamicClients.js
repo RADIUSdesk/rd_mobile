@@ -1,13 +1,10 @@
-Ext.define('RdMobile.view.realms.gridRealms', {
+Ext.define('RdMobile.view.dynamicClients.gridUnknownDynamicClients', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridRealms',
-    emptyText: 'No Realms Available',
+    xtype   : 'gridUnknownDynamicClients',
+    emptyText: 'No Unknown Dynamic Clients Available',
     config  : {
         compdata: undefined,
     },
-    requires: [
-        'Ext.grid.plugin.PagingToolbar'
-    ],
     hideHeaders: true,
     rowLines: true,
     trackMouseOver: false,
@@ -23,10 +20,10 @@ Ext.define('RdMobile.view.realms.gridRealms', {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
-            model: 'RdMobile.model.mRealm', 
+            model: 'RdMobile.model.mUnknownDynamicClient', 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/realms/index.json',
+                url         : '/cake4/rd_cake/unknown-dynamic-clients/index.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
@@ -48,7 +45,7 @@ Ext.define('RdMobile.view.realms.gridRealms', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntRealms').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">REALMS</div></div>');
+                	this.up('cntUnknownDynamicClients').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">New Arrivals</div></div>');
                 },
                 scope: this
             },
@@ -57,33 +54,47 @@ Ext.define('RdMobile.view.realms.gridRealms', {
         }));
         
         me.setColumns( [{
-                text: 'Realms',
+                text: 'UnknownDynamicClients',
                 xtype: 'templatecolumn',                             
                 cell: {
 					encodeHtml: false,
+					height	: 20,
 					tpl: new Ext.XTemplate(
                 	'<div class="grid-tpl-item">',
-	                	'<div class="item-main">',
-			            	'{name}',
-			            '</div>',
-			            '<div class="two-columns-grid">',
-							'<div class="item-lbl">Created :</div>',	
-							'<tpl if="[this.isRecent(created_in_words)]==\'green\'">',
-								'<div class="item-value clr-green">{created_in_words}</div>',
-							'<tpl else>',
-								'<div class="item-value">{created_in_words}</div>',
-							'</tpl>',								
+                		'<div class="two-columns-grid">',
+							'<div class="item-lbl">NAS-Identifier :</div>',					
+							'<div class="item-value">{nasidentifier}</div>',
 						'</div>',
 						'<div class="two-columns-grid">',
-							'<div class="item-lbl">Modified :</div>',	
-							'<tpl if="[this.isRecent(modified_in_words)]==\'green\'">',
-								'<div class="item-value clr-green">{modified_in_words}</div>',
+							'<div class="item-lbl">Last Contact :</div>',
+							'<tpl if="[this.isRecent(last_contact_human)]==\'green\'">',
+								'<div class="item-value clr-green">{last_contact_human}</div>',
 							'<tpl else>',
-								'<div class="item-value">{modified_in_words}</div>',
-							'</tpl>',								
+								'<div class="item-value">{last_contact_human}</div>',
+							'</tpl>',						
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">From IP :</div>',					
+							'<div class="item-value">{last_contact_ip}</div>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Town / City :</div>',					
+							'<div class="item-value">',
+								"<tpl if='Ext.isEmpty(city)'><div>-</div><tpl else>",
+		                    		'<div><b>{city}</b>  ({postal_code})</div>',
+		                		"</tpl>",
+							'</div>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Country :</div>',					
+							'<div class="item-value">',
+								"<tpl if='Ext.isEmpty(country_name)'><div>-</div><tpl else>",
+		                    		'<div><b>{country_name}</b> ({country_code})</div>',
+		                		"</tpl>",
+							'</div>',
 						'</div>',
                     '</div>',
-                    {
+                     {
 			            isRecent: function(value_human) {
 			            	var color = 'grey';
 			            	if(

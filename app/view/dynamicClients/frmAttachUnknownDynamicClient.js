@@ -1,30 +1,27 @@
-Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
+Ext.define('RdMobile.view.dynamicClients.frmAttachUnknownDynamicClient', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmDynamicClientEdit',
+    xtype   : 'frmAttachUnknownDynamicClient',
     floated	: true,
     modal	: true,
     centered: true,
     closable: true,
     fullscreen : true,
     padding	: 6,
-    iconCls : 'x-fa fa-pencil-alt',
+    iconCls : 'x-fa fa-paperclip',
     root 	: false,
     requires	: [
-        'RdMobile.view.dynamicClients.vcDynamicClientEdit',
+        'RdMobile.view.dynamicClients.vcAttachUnknownDynamicClient',
     ],
-    controller  : 'vcDynamicClientEdit',
+    controller  : 'vcAttachUnknownDynamicClient',
     buttons: {
         submit: {
             handler: 'onSubmit'
         }
     },
-    listeners       : {
-        show : 'loadDynamicClient' //Trigger a load of the settings (This is only on the initial load)
-    },
     initialize: function () {
         const me  = this;
         
-        me.setTitle(me.dynamic_client_name);
+        me.setTitle(me.nasidentifier);
         
      	var store_proto = Ext.create('Ext.data.Store', {
             fields: ['id', 'Name'],
@@ -38,7 +35,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
             xtype   : 'panel',
             itemId  : 'cntMikrotik',
             padding	: 10,
-            hidden  : false,
+            hidden  : true,
             disabled: true,
             style   : {'background' : '#e0ebeb'},
             items   : [
@@ -57,6 +54,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
                     label  		: 'IP Address',
                     itemId		: 'mt_host',
                     name        : 'mt_host',
+                    disabled	: true,
                     value		: '',
                     required		: true,
 				    errorTip		: {
@@ -82,6 +80,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
                     label      	: 'Username',
                     itemId      : 'mt_user',
                     name        : 'mt_user',
+                    disabled	: true,
                     value		: '',
                     required	: true,
 				    errorTip	: {
@@ -94,6 +93,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
                     xtype		: 'passwordfield',
                     label		: 'Password',
                     name		: 'mt_pass',
+                    disabled	: true,
                     itemId		: 'mt_pass',
                     value		: '',
                     required	: true,
@@ -147,6 +147,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
                     xtype       	: 'textfield',
                     label  			: 'Default Key',
                     name        	: 'ppsk_default_key',
+                    disabled		: true,
                     itemId      	: 'default_key',
                     minLength   	: 8, //FIXME TEST FOR MIN AMOUNT OF CHARS
                     required		: true,
@@ -182,9 +183,9 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
         var items = [
         	{
 		        xtype   : 'textfield',
-		        name    : 'id',
+		        name    : 'unknown_dynamic_client_id',
 		        hidden  : true,
-		        value	: me.dynamic_client_id
+		        value	: me.unknown_dynamic_client_id
 		    },
 			{
 				xtype	: 'label',
@@ -211,17 +212,20 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
 		    {
                 xtype       : 'textfield',
                 label  	    : 'NAS-Identifier',
+                readOnly	: true,
                 name        : "nasidentifier",
                 value		: ''
             },
             {
                 xtype       : 'textfield',
                 label  		: 'Called-Station-Id',
+                readOnly	: true,
                 name        : "calledstationid",
                 value		: ''
             },
             {
                 xtype       : 'cmbNasTypes',
+                value		: 'other',
                 listeners   : {
 	                change : 'onCmbNasTypesChange'
 		        } 
@@ -287,7 +291,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
                 label    	: 'Auto close stale sessions',
                 name        : 'session_auto_close',
                 itemId      : 'chkSessionAutoClose',
-                checked     : true,
+                checked     : false,
                 labelWidth  : 'auto'
             },
             {
@@ -296,6 +300,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
                 name        : 'session_dead_time',
                 label  		: 'Auto close activation time',
                 value       : 300,
+                disabled	: true,
                 maxValue    : 21600,
                 minValue    : 300
             },
@@ -311,6 +316,7 @@ Ext.define('RdMobile.view.dynamicClients.frmDynamicClientEdit', {
 				errorTarget: 'under'
             }
 		];	
-		me.setItems(items);        
+		me.setItems(items);
+		me.setValues(me.r.getData());        
  	}
 });

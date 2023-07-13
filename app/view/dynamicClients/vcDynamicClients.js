@@ -15,7 +15,17 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
         urlDelete           : '/cake4/rd_cake/dynamic-clients/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
-        sortDesc			: true	
+        sortDesc			: true,
+        cntPermanentUsers  	: 1,
+        cntVouchers			: 2,
+        cntDevices			: 3,
+        cntRadaccts			: 4,
+        cntDynamicClients	: 5,
+        cntUnknownDynamicClients : 6,
+        cntNas				: 7,
+        cntProfiles			: 8,
+        cntProfileComponents: 9,
+        cntRealms			: 10	
     },
     control: {
     	'cntDynamicClients' : {
@@ -48,6 +58,9 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
       	},
       	'#btnEdit' : {
       		tap	: 'edit'
+      	},
+      	'#btnNewArrivals' : {
+      		tap : 'unknownDynamicClients'
       	}
     },
     show	: function(){
@@ -64,7 +77,12 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
         var me = this;
         btn.up(me.getContainedIn()).setActiveItem(0);
         me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
-    }, 
+    },
+    unknownDynamicClients :function(btn){
+    	var me = this;
+        btn.up(me.getContainedIn()).setActiveItem(me.getCntUnknownDynamicClients());
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-car fa-1x"></i> New Arrivals'); 
+    },    
     reload	: function(btn){
     	var me = this;
     	me.getView().down('gridDynamicClients').getStore().reload();  

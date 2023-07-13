@@ -63,14 +63,14 @@ Ext.define('RdMobile.view.profiles.gridProfiles', {
                 cell: {
 					encodeHtml: false,
 					tpl: new Ext.XTemplate(
-                	'<div style="border-radius: 5px;border: 1px solid #a3aeb8;padding: 2px; margin: 2px;text-align: center; color:#0677c7">',
-		                '<div style="font-size: large;">',
+                	'<div class="grid-tpl-item">',
+		                '<div class="item-main">',
 		                	'<tpl if="for_system"><span style="color:#0d8024;"><i class="fas fa-umbrella"></i></span></tpl>',
 		                	' {name}',
 		                '</div>',
 		             		'<tpl if="Ext.isEmpty(profile_components)"><div></div></tpl>',
 				            '<tpl for="profile_components">',     // interrogate the profile_components property within the data
-				                "<div style=\"color:#3e3f40;\"><i class=\"fas fa-puzzle-piece\"></i></i>   {groupname} <small><i>(priority => {priority})</i></small></div>",
+				                "<div style=\"color:#3e3f40;text-align:center;\"><i class=\"fas fa-puzzle-piece\"></i></i>   {groupname} <small><i>(priority => {priority})</i></small></div>",
 				            '</tpl>',
                     '</div>',
                 ),
