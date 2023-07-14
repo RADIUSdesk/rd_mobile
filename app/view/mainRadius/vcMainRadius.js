@@ -11,7 +11,8 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
         cntNas				: 7,
         cntProfiles			: 8,
         cntProfileComponents: 9,
-        cntRealms			: 10
+        cntRealms			: 10,
+        cntRadiusGraphs		: 11
     },
     control: {
     	'gridMainRadiusUsers': {

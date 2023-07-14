@@ -6,7 +6,9 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
         urlDelete           : '/cake4/rd_cake/permanent-users/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
-        sortDesc			: true	
+        sortDesc			: true,
+        cntPermanentUsers  	: 1,
+        cntRadiusGraphs		: 11	
     },
     control: {
     	'cntPermanentUsers' : {
@@ -51,7 +53,13 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
       	},
       	'#btnRadius' : {
       		tap	: 'radius'
-      	},        	
+      	}, 
+      	'#btnGraphs' : {
+      		tap	: 'graphs'
+      	},  
+      	'#btnActivity' : {
+      		tap	: 'activity'
+      	}        	
     },
     show	: function(){
     	var me = this;
@@ -169,5 +177,24 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
     	me.getView().down('#asMenu').hide();
     	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id'),user_name : me.sel.get('username'), user_type : 'permanent' });
     	w.show();    	
-    }
+    },
+    graphs	: function(btn){
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadiusGraphs());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
+		var ts 			= me.truncString(me.sel.get('username'),10,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
+    },
+    activity : function(btn){
+    	var me = this;
+    	console.log('Activity Clicked');
+    	me.getView().down('#asMenu').hide();
+    },
+    truncString : function truncString(str, max, add){
+	   add = add || '...';
+	   return (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
+	}
 });

@@ -7,6 +7,15 @@ Ext.define('RdMobile.Application', {
     extend: 'Ext.app.Application',
 
     name: 'RdMobile',
+    requires: [
+    	'Ext.chart.interactions.Rotate',
+		'Ext.chart.interactions.ItemHighlight',
+		'Ext.chart.series.Pie',
+		'Ext.chart.axis.Numeric',
+		'Ext.chart.axis.Category',
+		'Ext.chart.series.Bar',
+		'RdMobile.*'    //Uncomment when building production
+    ],
     
     dashboardData : null,  //Data on how the dashboard will look like which will be returned after login
 

@@ -99,7 +99,12 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
         {
         	xtype	: 'cntRealms',
         	layout	: 'fit'
-        }
-        
+        },
+        //-- Graphs --(11)
+        {
+        	xtype	: 'cntRadiusGraphs',
+        	//xtype	: 'container',
+        	layout	: 'fit'
+        }       
     ]
 });
