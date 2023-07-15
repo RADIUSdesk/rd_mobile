@@ -131,6 +131,12 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
 		   				'border-bottom' : '1px solid #667078'
 					}		
 				},
+				{
+					 text		: 'More Detail',
+					 iconCls	: 'x-fa fa-info-circle',
+					 textAlign  : 'left',
+					 itemId		: 'btnDetail'
+				 },
 				 {
 					 text		: 'Graphs',
 					 iconCls	: 'x-fa fa-chart-bar',

@@ -16,16 +16,9 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
-        cntPermanentUsers  	: 1,
-        cntVouchers			: 2,
-        cntDevices			: 3,
-        cntRadaccts			: 4,
         cntDynamicClients	: 5,
         cntUnknownDynamicClients : 6,
-        cntNas				: 7,
-        cntProfiles			: 8,
-        cntProfileComponents: 9,
-        cntRealms			: 10	
+        cntRadiusGraphs		: 11	
     },
     control: {
     	'cntDynamicClients' : {
@@ -61,7 +54,13 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
       	},
       	'#btnNewArrivals' : {
       		tap : 'unknownDynamicClients'
-      	}
+      	},
+      	'#btnGraphs' : {
+      		tap	: 'graphs'
+      	},
+      	'#btnActivity' : {
+      		tap	: 'activity'
+      	}  
     },
     show	: function(){
     	var me = this;
@@ -160,5 +159,24 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
-    }
+    },
+    graphs	: function(btn){
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadiusGraphs());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateGraph({type: 'dynamic_client',backTo : me.getCntDynamicClients(),username:me.sel.get('id')});
+		var ts 			= me.truncString(me.sel.get('name'),17,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-circle-notch fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
+    },
+    activity : function(btn){
+    	var me = this;
+    	console.log('Activity Clicked');
+    	me.getView().down('#asMenu').hide();
+    },
+    truncString : function truncString(str, max, add){
+	   add = add || '...';
+	   return (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
+	}
 });	

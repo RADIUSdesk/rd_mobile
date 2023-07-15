@@ -58,7 +58,7 @@ Ext.define('RdMobile.view.radiusGraphs.vcRadiusGraphs', {
     	var me = this;
     	me.setType(upd_info['type']);
     	me.setUsername(upd_info['username'])
-    	me.setBackTo(upd_info['backTo']);
+    	me.setBackTo(upd_info['backTo']);  	
     	me.setParams();
     	me.reload();  	
     },
@@ -68,32 +68,45 @@ Ext.define('RdMobile.view.radiusGraphs.vcRadiusGraphs', {
     },
     setParams	: function(){
     	var me = this;
-    	chart = me.getView().down('#chrtUsage').getStore().getProxy().setExtraParams({
-    		username 	: me.getUsername(),
-    		span		: me.getSpan(),
-    		type		: me.getType()	
-    	});    
+    	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('username',me.getUsername());
+    	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('span',me.getSpan());
+    	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('type',me.getType());
+    	
+    	var d  	= me.getView().down('#day').getValue();
+    	var d_s = d.toJSON();
+    	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('day', d_s);  	
+    	me.updateInfo();    
     },
     dayChange	: function(a,value){
     	var me = this;
     	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('day',value);
+    	me.updateInfo();
         me.reload();
     },
     spanChange	: function(a,value){
     	var me = this;
+    	me.setSpan(value);
     	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('span',value);
+    	me.updateInfo();
         me.reload(); 	
     },
     tzChange	: function(a,value){
     	var me = this;
     	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('timezone_id',value);
-        me.reload();
-        me.updateInfo(); 
+    	me.updateInfo();
+        me.reload();       
     },
     updateInfo	: function(){
-    	var me = this;
-    	var d  = me.getView().down('#day').getValue();
-    	
-    	me.getView().down('#lblInfo').setHtml('<div style="color:#3e3f40;text-align: center;font-size:small">'+d.toDateString()+'<div style="font-size: xx-small;">DAILY</div><div style="font-size: xx-small;">Africa/Johannesburg</div></div>');    
+    	var me        = this;
+    	var d         = me.getView().down('#day').getValue();
+    	var d_s       = d.toDateString();
+    	var tz_id     = me.getView().down('cmbTimezones').getValue() 
+    	var tz_record = me.getView().down('cmbTimezones').getStore().findRecord('id',tz_id);
+    	var span 	  = me.getView().down('#rgrpSpan').getChecked().getValue();
+    	me.getView().down('#lblInfo').setData({
+    		day 		: d_s,
+    		span		: span.toUpperCase(),
+    		timezone 	: tz_record.get('name')
+    	});   
     }
 });	

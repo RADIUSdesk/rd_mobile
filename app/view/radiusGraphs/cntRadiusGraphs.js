@@ -29,12 +29,19 @@ Ext.define('RdMobile.view.radiusGraphs.cntRadiusGraphs', {
                 },
                 load        : function(s){
                     me.down('#chrtUsage').setMasked(false);
-                   /* var rawData     = chart.getStore().getProxy().getReader().rawData;
-                    var totalIn     = Ext.ux.bytesToHuman(rawData.totalIn);
-                    var totalOut    = Ext.ux.bytesToHuman(rawData.totalOut);
-                    var totalInOut  = Ext.ux.bytesToHuman(rawData.totalInOut);
-                    me.down('#totals').update({'in': totalIn, 'out': totalOut, 'total': totalInOut });*/
-                }
+                },
+                metachange : function(store,meta,options) {
+                
+                	var totalIn     = Ext.ux.bytesToHuman(meta.totalIn);
+                    var totalOut    = Ext.ux.bytesToHuman(meta.totalOut);
+                    var totalInOut  = Ext.ux.bytesToHuman(meta.totalInOut);
+                
+                	me.down('#lblMeta').setData({
+                		in 		: totalIn,
+                		out		: totalOut,
+                		total	: totalInOut
+                	});
+                },
             },
             autoLoad: false   
         });
@@ -54,13 +61,28 @@ Ext.define('RdMobile.view.radiusGraphs.cntRadiusGraphs', {
 						{
 							xtype	: 'label',
 							itemId	: 'lblInfo',
-							html	: 'gooi hom'
+							tpl	    : '<div style="color:#3e3f40;text-align: center;font-size:small">{day}<div style="font-size: xx-small;">{span}</div><div style="font-size: xx-small;">{timezone}</div></div>',
+							data	: {}
 						},
 						{ xtype: 'spacer'},
 						{
 							xtype	: 'label',
 							itemId	: 'lblMeta',
-							html	: 'gooi haar'
+							tpl		: new Ext.XTemplate(
+								'<div class="two-columns-grid">',
+									'<div class="item-lbl" style="font-size: x-small;padding:0px;">IN :</div>',
+									'<div class="item-value" style="font-size: x-small;padding:0px;">{in}</div>',
+								'</div>',
+								'<div class="two-columns-grid">',
+									'<div class="item-lbl" style="font-size: x-small;padding:0px;">OUT :</div>',
+									'<div class="item-value" style="font-size: x-small;padding:0px;">{out}</div>',
+								'</div>',
+								'<div class="two-columns-grid">',
+									'<div class="item-lbl" style="font-size: x-small;padding:0px;">TOTAL :</div>',
+									'<div class="item-value" style="font-size: x-small;padding:0px;">{total}</div>',
+								'</div>'
+							),
+							data	: {}
 						}
 				]
 		    },
@@ -75,10 +97,9 @@ Ext.define('RdMobile.view.radiusGraphs.cntRadiusGraphs', {
 			            adjustByMajorUnit: true,
 			            grid        : true,
 			            fields      : ['data_in', 'data_out'],
-			            //renderer    : function(axis, label, layoutContext) {
-			                //return Ext.ux.bytesToHuman(label);
-			                //return label;
-			            //},
+			            renderer    : function(axis, label, layoutContext) {
+			                return Ext.ux.bytesToHuman(label);
+			            },
 			            minimum: 0
 			        }, 
 			        {

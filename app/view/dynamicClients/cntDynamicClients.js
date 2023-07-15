@@ -98,11 +98,11 @@ Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
 					 itemId		: 'btnGraphs'
 				 },
 				 {
-					 text		: 'Edit Logo',
-					 iconCls	: 'x-fa fa-camera',
+					 text		: 'Activity',
+					 iconCls	: 'x-fa fa-running',
 					 textAlign  : 'left',
-					 itemId		: 'btnPhoto'
-				 },
+					 itemId		: 'btnActivity'
+				 },	
 				 {
 					xtype	: 'label',
 					html	: '<div style="font-size: x-small;text-align: center;"><i class="far fa-lightbulb"></i> Site Wide Shared Secret</div><div style="color:#3e3f40;text-align: center;">testing123</div>',

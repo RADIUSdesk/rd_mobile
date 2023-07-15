@@ -6,7 +6,9 @@ Ext.define('RdMobile.view.devices.vcDevices', {
         urlDelete           : '/cake4/rd_cake/devices/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
-        sortDesc			: true	
+        sortDesc			: true,
+        cntDevices			: 3,
+        cntRadiusGraphs		: 11	
     },
     control: {
     	'cntDevices' : {
@@ -51,7 +53,13 @@ Ext.define('RdMobile.view.devices.vcDevices', {
       	},
       	'#btnRadius' : {
       		tap	: 'radius'
-      	},        	
+      	},
+      	'#btnGraphs' : {
+      		tap	: 'graphs'
+      	},  
+      	'#btnActivity' : {
+      		tap	: 'activity'
+      	}            	
     },
     show	: function(){
     	var me = this;
@@ -179,5 +187,24 @@ Ext.define('RdMobile.view.devices.vcDevices', {
     	me.getView().down('#asMenu').hide();
     	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridDevices'), device_id: me.sel.get('id'),device_name : me.sel.get('name'), user_type : 'device' });
     	w.show();    	
-    }
+    },
+    graphs	: function(btn){
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadiusGraphs());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateGraph({type: 'device',backTo : me.getCntDevices(),username:me.sel.get('name')});
+		var ts 			= me.truncString(me.sel.get('name'),17,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-tablet-alt fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
+    },
+    activity : function(btn){
+    	var me = this;
+    	console.log('Activity Clicked');
+    	me.getView().down('#asMenu').hide();
+    },
+    truncString : function truncString(str, max, add){
+	   add = add || '...';
+	   return (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
+	}
 });

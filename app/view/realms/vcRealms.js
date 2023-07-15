@@ -15,7 +15,9 @@ Ext.define('RdMobile.view.realms.vcRealms', {
         urlDelete           : '/cake4/rd_cake/realms/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
-        sortDesc			: true	
+        sortDesc			: true,
+        cntRealms			: 10,
+        cntRadiusGraphs		: 11	
     },
     control: {
     	'cntRealms' : {
@@ -48,7 +50,13 @@ Ext.define('RdMobile.view.realms.vcRealms', {
       	},
       	'#btnEdit' : {
       		tap	: 'edit'
-      	}
+      	},
+      	'#btnGraphs' : {
+      		tap	: 'graphs'
+      	},
+      	'#btnActivity' : {
+      		tap	: 'activity'
+      	}  
     },
     show	: function(){
     	var me = this;
@@ -142,5 +150,24 @@ Ext.define('RdMobile.view.realms.vcRealms', {
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
-    }
+    },
+    graphs	: function(btn){
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadiusGraphs());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateGraph({type: 'realm',backTo : me.getCntRealms(),username:me.sel.get('id')});
+		var ts 			= me.truncString(me.sel.get('name'),17,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-volleyball-ball fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
+    },
+    activity : function(btn){
+    	var me = this;
+    	console.log('Activity Clicked');
+    	me.getView().down('#asMenu').hide();
+    },
+    truncString : function truncString(str, max, add){
+	   add = add || '...';
+	   return (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
+	}
 });	

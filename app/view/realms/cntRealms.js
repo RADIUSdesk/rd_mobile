@@ -85,6 +85,12 @@ Ext.define('RdMobile.view.realms.cntRealms', {
 					 itemId		: 'btnEdit'
 				 },
 				 {
+					 text		: 'Edit Logo',
+					 iconCls	: 'x-fa fa-camera',
+					 textAlign  : 'left',
+					 itemId		: 'btnPhoto'
+				 },
+				 {
 					xtype	: 'label',
 					style	: {
 		   				'border-bottom' : '1px solid #667078'
@@ -97,11 +103,11 @@ Ext.define('RdMobile.view.realms.cntRealms', {
 					 itemId		: 'btnGraphs'
 				 },
 				 {
-					 text		: 'Edit Logo',
-					 iconCls	: 'x-fa fa-camera',
+					 text		: 'Activity',
+					 iconCls	: 'x-fa fa-running',
 					 textAlign  : 'left',
-					 itemId		: 'btnPhoto'
-				 }
+					 itemId		: 'btnActivity'
+				 }					
 			 ]
 	 	});
 	 	
