@@ -16,6 +16,7 @@ Ext.define('RdMobile.view.realms.vcRealms', {
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
+        cntRadaccts			: 4,
         cntRealms			: 10,
         cntRadiusGraphs		: 11	
     },
@@ -162,9 +163,14 @@ Ext.define('RdMobile.view.realms.vcRealms', {
         me.getView().down('#asMenu').hide();
     },
     activity : function(btn){
-    	var me = this;
-    	console.log('Activity Clicked');
-    	me.getView().down('#asMenu').hide();
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadaccts());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateRadaccts({type: 'realm',backTo : me.getCntRealms(),username:me.sel.get('id')});
+		var ts 			= me.truncString(me.sel.get('name'),17,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-volleyball-ball fa-1x"></i> <i class="fa fa-running fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
     },
     truncString : function truncString(str, max, add){
 	   add = add || '...';

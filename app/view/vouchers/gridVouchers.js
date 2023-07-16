@@ -20,9 +20,7 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
         gridpagingtoolbar: true
     },
     selectable: {
-		//rows: true,
 		mode: 'single',
-		//columns: false
 	},
     initialize: function () {
         const me = this;

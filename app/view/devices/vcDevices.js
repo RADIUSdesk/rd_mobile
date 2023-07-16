@@ -8,6 +8,7 @@ Ext.define('RdMobile.view.devices.vcDevices', {
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
         cntDevices			: 3,
+        cntRadaccts			: 4,
         cntRadiusGraphs		: 11	
     },
     control: {
@@ -199,9 +200,14 @@ Ext.define('RdMobile.view.devices.vcDevices', {
         me.getView().down('#asMenu').hide();
     },
     activity : function(btn){
-    	var me = this;
-    	console.log('Activity Clicked');
-    	me.getView().down('#asMenu').hide();
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadaccts());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateRadaccts({type: 'device',backTo : me.getCntDevices(),username:me.sel.get('name')});
+		var ts 			= me.truncString(me.sel.get('name'),17,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-tablet-alt fa-1x"></i> <i class="fa fa-running fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
     },
     truncString : function truncString(str, max, add){
 	   add = add || '...';

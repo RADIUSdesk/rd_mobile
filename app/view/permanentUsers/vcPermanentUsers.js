@@ -8,6 +8,7 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
         cntPermanentUsers  	: 1,
+        cntRadaccts			: 4,
         cntRadiusGraphs		: 11	
     },
     control: {
@@ -189,9 +190,14 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
         me.getView().down('#asMenu').hide();
     },
     activity : function(btn){
-    	var me = this;
-    	console.log('Activity Clicked');
-    	me.getView().down('#asMenu').hide();
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadaccts());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateRadaccts({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
+		var ts 			= me.truncString(me.sel.get('username'),10,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-running fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
     },
     truncString : function truncString(str, max, add){
 	   add = add || '...';

@@ -15,9 +15,16 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
         urlDelete           : '/cake4/rd_cake/radaccts/delete.json',
         containedIn			: 'cntMainRadius',
         appTitle			: 'RADIUSdesk',
-        sortDesc			: true	
+        sortDesc			: true,
+        backTo				: 0,
+        type				: 'cloud', //can be voucher, device, permanent, realm, nas??
+        span				: 'daily', //can be daily, weekly, monthly
+        username			: 0 //Zero has special meaning 	
     },
     control: {
+    	'cntRadaccts' : {
+    		show	: 'show'
+    	},
         'gridRadaccts': {
             select: 'onGridChildTap'
         },
@@ -27,64 +34,99 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
       	'#btnReload' : {
       		tap		: 'reload'
       	},
-      	'#btnSort' : {
-      		tap		: 'sort'
+      	'#btnDate' : {
+      		tap		: 'date'
+      	}, 
+      	'#day'	: {
+      		change	: 'dayChange'
       	},
-      	'#btnFilter' : {
-      		tap		: 'filter'
+      	'#rgrpSpan' : {
+      		change 	: 'spanChange'
       	},
-      	'#txtFilterValue' : {
-      		change	: 'txtFilterValueChange'
+      	'cmbTimezones' : {
+      		change	: 'tzChange'
       	}
+    },
+    show : function(){
+    	var me = this;
+    	me.setParams();
+    	me.reload();
     },
     back : function(btn){
         var me = this;
-        btn.up(me.getContainedIn()).setActiveItem(0);
+        btn.up(me.getContainedIn()).setActiveItem(me.getBackTo());
         me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
     }, 
     reload	: function(btn){
     	var me = this;
     	me.getView().down('gridRadaccts').getStore().reload();  
     },
-    sort	: function(btn){
-    	var me 		= this;
-    	var store 	= me.getView().down('gridRadaccts').getStore();
-    	me.setSortDesc(!me.getSortDesc());
-    	if(me.getSortDesc()){
-    		btn.setIconCls('x-fa fa-sort-alpha-down'); 
-    		store.sort([{
-				property : 'username',
-				direction: 'ASC'
-			}]);
-    	}else{
-    		btn.setIconCls('x-fa fa-sort-alpha-up');
-    		store.sort([{
-				property : 'username',
-				direction: 'DESC'
-			}]); 
-    	}
-    },
-    filter	: function(tbn){
+    date	: function(tbn){
     	var me  = this;
-    	console.log("Filter Button Tapped");
-    	me.getView().down('#asFilter').show();
+    	me.getView().down('#asDate').show();
     },
-    txtFilterValueChange : function(txt,new_value){
-    	var me 		= this;
-    	var store 	= me.getView().down('gridRadaccts').getStore();
-    	var btn		= me.getView().down('#btnFilter');
-    	var cmb		= me.getView().down('#cmbFilterOn'); 
-    	if(new_value == ''){
-    		store.clearFilter();
-    		btn.setBadgeText('');
-    	}else{
-    		store.filter([{'property':cmb.getValue(),'value':new_value,'operator':'like'}]);
-    		btn.setBadgeText('+');
-    	}
+    asClose : function(){
+    	var me = this
+    	me.getView().down('#asDate').hide();
+    },
+    setParams	: function(){
+    	var me = this;
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('username',me.getUsername());
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('span',me.getSpan());
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('type',me.getType());
+    	
+    	var d  	= me.getView().down('#day').getValue();
+    	var d_s = d.toJSON();
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('day', d_s);  	
+    	me.updateInfo();    
+    },
+    dayChange	: function(a,value){
+    	var me = this;
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('day',value);
+    	me.updateInfo();
+        me.reload();
+    },
+    spanChange	: function(a,value){
+    	var me = this;
+    	me.setSpan(value);
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('span',value);
+    	me.updateInfo();
+        me.reload(); 	
+    },
+    tzChange	: function(a,value){
+    	var me = this;
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('timezone_id',value);
+    	me.updateInfo();
+        me.reload();       
+    },
+    updateInfo	: function(){
+    	var me        = this;
+    	var d         = me.getView().down('#day').getValue();
+    	var d_s       = d.toDateString();
+    	var tz_id     = me.getView().down('cmbTimezones').getValue() 
+    	var tz_record = me.getView().down('cmbTimezones').getStore().findRecord('id',tz_id);
+    	var span 	  = me.getView().down('#rgrpSpan').getChecked().getValue();
+    	me.getView().down('#lblInfo').setData({
+    		day 		: d_s,
+    		span		: span.toUpperCase(),
+    		timezone 	: tz_record.get('name')
+    	});   
     },
     onGridChildTap : function(a,sel){
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
+    },
+    updateRadaccts : function(upd_info){
+    	var me = this;
+    	me.setType(upd_info['type']);
+    	me.setUsername(upd_info['username'])
+    	me.setBackTo(upd_info['backTo']);  	
+    	me.setParams();
+    	me.reload();  	
+    },
+    clearBackButton : function(){
+    	var me = this;
+    	me.setBackTo(0);
     }
 });	

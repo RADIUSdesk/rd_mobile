@@ -16,8 +16,11 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
     },
     rowLines: false,
     disableSelection: true,
+    plugins: {
+        gridpagingtoolbar: true
+    },
     selectable: {
-		mode: 'single'
+		mode: 'single',
 	},
     initialize: function () {
         const me = this;
@@ -52,8 +55,9 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
                 },
                 scope: this
             },
+            autoLoad	: false,
             remoteFilter: true,
-            remoteSort: true
+            remoteSort  : true
         }));
         
         me.setColumns( [{
@@ -84,7 +88,7 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
 				},
                 flex: 1
             }]);
-        me.getStore().reload()		
+        //me.getStore().reload()		
 		this.callParent();     
     }
  });

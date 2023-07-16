@@ -44,6 +44,8 @@ Ext.define('RdMobile.view.mainRadius.vcMainRadius', {
     	
     	if((col == 1)&&(row == 1)){ 
     		me.getView().setActiveItem(me.getCntRadaccts());
+    		var cntRG 		= me.getView().getActiveItem();
+			cntRG.getController().clearBackButton();
     		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-running fa-1x"></i> Activity Monitor');
     	}
     },

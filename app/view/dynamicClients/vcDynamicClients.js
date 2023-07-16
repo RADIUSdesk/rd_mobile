@@ -17,6 +17,7 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
         cntDynamicClients	: 5,
+        cntRadaccts			: 4,
         cntUnknownDynamicClients : 6,
         cntRadiusGraphs		: 11	
     },
@@ -171,9 +172,14 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
         me.getView().down('#asMenu').hide();
     },
     activity : function(btn){
-    	var me = this;
-    	console.log('Activity Clicked');
-    	me.getView().down('#asMenu').hide();
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadaccts());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateRadaccts({type: 'dynamic_client',backTo : me.getCntDynamicClients(),username:me.sel.get('id')});
+		var ts 			= me.truncString(me.sel.get('name'),17,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-circle-notch fa-1x"></i> <i class="fa fa-running fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
     },
     truncString : function truncString(str, max, add){
 	   add = add || '...';

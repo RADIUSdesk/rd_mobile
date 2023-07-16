@@ -34,6 +34,12 @@ Ext.define('RdMobile.Application', {
     
     launch  : function() {
     	var me = this;
+    	
+    	const target = document.getElementById("target");
+    	// If you want to remove it from the page after the fadeout
+		target.addEventListener('transitionend', () => target.remove());
+		target.style.opacity = '0';
+		
     	me.addUx();
     	console.log("App Launching");
         Ext.Viewport.getController().onLaunch();

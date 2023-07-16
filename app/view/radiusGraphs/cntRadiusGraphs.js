@@ -150,10 +150,9 @@ Ext.define('RdMobile.view.radiusGraphs.cntRadiusGraphs', {
 				{
 				    xtype	: 'datefield',
 				    label	: 'Day',
-				    name   	: 'day',
 				    itemId  : 'day',
 				    format  : 'Y-m-d',
-				    value   : new Date(),  // limited to the current date or after
+				    value   : new Date()
 				},
 				{
 					xtype	: 'cmbTimezones',

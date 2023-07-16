@@ -31,7 +31,8 @@ Ext.define('RdMobile.view.main.pnlMain', {
 					itemId	: 'lblMain',
 					html	: 'RADIUSdesk',
 					style	: {
-		   				'color'			: '#0677c7'
+		   				'color'			: '#005691',
+		   				'letter-spacing': '4px'
 					}	
 				},
 				{
@@ -54,7 +55,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
 		        }
 		   	},
           	items: [                               
-                {
+            /*    {
                     title	: 'HOME',
                     itemId	: 'home',
 					xtype: 'panel',
@@ -71,7 +72,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
 						    ]
 					    }					
 					],
-                },
+                },*/
                 {
                 	title	: 'RADIUS',
                 	xtype	: 'cntMainRadius',
