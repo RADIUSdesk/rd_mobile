@@ -25,11 +25,7 @@ Ext.define('RdMobile.view.permanentUsers.frmPermanentUserAdd', {
 			html	: 'Basic Info',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}		
+			cls		: 'form-section'	
 		},
 		{
             xtype	: 'checkboxfield',
@@ -85,11 +81,7 @@ Ext.define('RdMobile.view.permanentUsers.frmPermanentUserAdd', {
 			html	: 'Personal Info',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}			
+			cls		: 'form-section'		
 		},
 		{
             xtype	: 'textfield',
@@ -124,11 +116,7 @@ Ext.define('RdMobile.view.permanentUsers.frmPermanentUserAdd', {
 			html	: 'Activate & Expire',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}			
+			cls		: 'form-section'
 		},
 		{
             xtype	: 'checkboxfield',
@@ -170,11 +158,7 @@ Ext.define('RdMobile.view.permanentUsers.frmPermanentUserAdd', {
 			html	: 'Optional Fields',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}		
+			cls		: 'form-section'
 		},
 		{
             xtype	: 'textfield',

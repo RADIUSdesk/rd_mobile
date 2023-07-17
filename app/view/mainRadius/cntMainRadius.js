@@ -23,11 +23,7 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
 					html	: 'RADIUS Users',
 					margin	: 5,
 					padding : 5,
-					style	: {
-		   				'font-size' 	: '1.5em',
-		   				'border-bottom' : '5px solid #667078',
-		   				'color'			: '#027534'
-					}			
+					cls		: 'detail-section'	
 				},
         		{
         			xtype	: 'gridMainRadiusUsers',
@@ -38,11 +34,7 @@ Ext.define('RdMobile.view.mainRadius.cntMainRadius', {
 					html	: 'RADIUS Components',
 					margin	: 5,
 					padding : 5,
-					style	: {
-		   				'font-size' 	: '1.5em',
-		   				'border-bottom' : '5px solid #667078',
-		   				'color'			: '#027534'
-					}			
+					cls		: 'detail-section'		
 				},
 				{
         			xtype	: 'gridMainRadiusComponents',

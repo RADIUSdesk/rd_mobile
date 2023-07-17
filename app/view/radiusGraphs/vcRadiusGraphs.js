@@ -72,9 +72,12 @@ Ext.define('RdMobile.view.radiusGraphs.vcRadiusGraphs', {
     	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('span',me.getSpan());
     	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('type',me.getType());
     	
-    	var d  	= me.getView().down('#day').getValue();
-    	var d_s = d.toJSON();
-    	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('day', d_s);  	
+    	var tz_id  = me.getView().down('cmbTimezones').getValue(); 
+    	me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('timezone_id',tz_id);
+    	
+    	//var d  	= me.getView().down('#day').getValue();
+    	//var d_s = d.toJSON();
+    	//me.getView().down('#chrtUsage').getStore().getProxy().setExtraParam('day', d_s);  	//The timezone from the browser causes k*k leave it out here
     	me.updateInfo();    
     },
     dayChange	: function(a,value){

@@ -55,6 +55,9 @@ Ext.define('RdMobile.view.devices.vcDevices', {
       	'#btnRadius' : {
       		tap	: 'radius'
       	},
+      	'#btnDetail' : {
+      		tap	: 'detail'
+      	}, 
       	'#btnGraphs' : {
       		tap	: 'graphs'
       	},  
@@ -188,6 +191,12 @@ Ext.define('RdMobile.view.devices.vcDevices', {
     	me.getView().down('#asMenu').hide();
     	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridDevices'), device_id: me.sel.get('id'),device_name : me.sel.get('name'), user_type : 'device' });
     	w.show();    	
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('pnlDeviceDetail',{device_name : me.sel.get('name'), r: me.sel });
+    	w.show();
     },
     graphs	: function(btn){
     	var me 			= this;

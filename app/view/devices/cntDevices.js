@@ -10,6 +10,7 @@ Ext.define('RdMobile.view.devices.cntDevices', {
         'RdMobile.view.devices.frmDeviceAdd',
         'RdMobile.view.devices.frmDeviceEdit',
         'RdMobile.view.devices.frmDeviceEnableDisable',
+        'RdMobile.view.devices.pnlDeviceDetail'
     ],
 	items   : [
         {

@@ -3,7 +3,8 @@ Ext.define('RdMobile.view.activityMonitor.cntRadaccts', {
     xtype   : 'cntRadaccts',
     controller  : 'vcRadaccts',
     requires	: [
-        'RdMobile.view.activityMonitor.vcRadaccts'
+        'RdMobile.view.activityMonitor.vcRadaccts',
+        'RdMobile.view.activityMonitor.pnlRadacctDetail'
     ],
 	items   : [
         {
@@ -100,6 +101,12 @@ Ext.define('RdMobile.view.activityMonitor.cntRadaccts', {
 			 centered: false,
 			 title: 'MENU',
 				 items: [
+				 	{
+						 text		: 'More Detail',
+						 iconCls	: 'x-fa fa-info-circle',
+						 textAlign  : 'left',
+						 itemId		: 'btnDetail'
+					 },
 					 {
 						 text		: 'Graphs',
 						 iconCls	: 'x-fa fa-chart-bar',

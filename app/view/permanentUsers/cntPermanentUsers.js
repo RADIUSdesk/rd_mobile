@@ -8,6 +8,7 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
         'RdMobile.view.permanentUsers.frmPermanentUserAdd',
         'RdMobile.view.permanentUsers.frmPermanentUserEditBasic',
         'RdMobile.view.permanentUsers.frmPermanentUserEditPersonal',
+        'RdMobile.view.permanentUsers.pnlPermanentUserDetail',
         'RdMobile.view.permanentUsers.frmEnableDisable',
         'RdMobile.view.password.frmPassword'
     ],

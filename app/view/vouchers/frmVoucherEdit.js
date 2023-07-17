@@ -26,11 +26,7 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
 			html	: 'Basic Info',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}		
+			cls		: 'form-section'
 		},
 		{
             xtype   : 'textfield',
@@ -61,11 +57,7 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
 			html	: 'Activate & Expire',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}			
+			cls		: 'form-section'		
 		},
 		{
             xtype	: 'checkboxfield',
@@ -148,11 +140,7 @@ Ext.define('RdMobile.view.vouchers.frmVoucherEdit', {
 			html	: 'Extra Field',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}		
+			cls		: 'form-section'	
 		},
 		{
             xtype	: 'textfield',

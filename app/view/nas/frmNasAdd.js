@@ -27,11 +27,7 @@ Ext.define('RdMobile.view.nas.frmNasAdd', {
 				html	: '<i class="fas fa-cogs"></i> General',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'	
 			},
 		    {
 		        xtype       : 'textfield',
@@ -61,11 +57,7 @@ Ext.define('RdMobile.view.nas.frmNasAdd', {
 				html	: '<i class="fas fa-map-marker"></i> Maps',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'	
 			},
 			{
                 xtype       : 'numberfield',
@@ -97,11 +89,7 @@ Ext.define('RdMobile.view.nas.frmNasAdd', {
 				html	: '<i class="fas fa-star"></i> Enhancements',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'		
 			},
 			{
                 xtype       : 'checkbox',      

@@ -25,11 +25,7 @@ Ext.define('RdMobile.view.vouchers.frmVoucherPdf', {
 			html	: 'Basic',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}		
+			cls		: 'form-section'	
 		},
 		{ 
 			xtype  	: 'cmbPdfFormats'
@@ -60,11 +56,7 @@ Ext.define('RdMobile.view.vouchers.frmVoucherPdf', {
 			html	: 'Advanced',
 			margin	: 0,
 			padding : 5,
-			style	: {
-   				'font-size' 	: '1.5em',
-   				'border-bottom' : '5px solid #667078',
-   				'color'			: '#027534'
-			}			
+			cls		: 'form-section'			
 		},
 		{
 		    xtype	: 'combobox',

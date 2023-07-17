@@ -26,11 +26,7 @@ Ext.define('RdMobile.view.realms.frmRealmAdd', {
 				html	: '<i class="fas fa-cogs"></i> General',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'		
 			},
 		    {
 		        xtype       : 'textfield',
@@ -81,11 +77,7 @@ Ext.define('RdMobile.view.realms.frmRealmAdd', {
 				html	: '<i class="fas fa-mobile"></i> Contact Detail',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'		
 			},
 		    {
                 xtype       : 'textfield',
@@ -122,11 +114,7 @@ Ext.define('RdMobile.view.realms.frmRealmAdd', {
 				html	: '<i class="fas fa-map-marker"></i> Address',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'	
 			},
 			{
                 xtype       : 'textfield',
@@ -181,11 +169,7 @@ Ext.define('RdMobile.view.realms.frmRealmAdd', {
 				html	: '<i class="fab fa-facebook"></i> Social Media',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'		
 			},
 			{
                 xtype		: 'urlfield',
@@ -222,11 +206,7 @@ Ext.define('RdMobile.view.realms.frmRealmAdd', {
 				html	: '<i class="fas fa-gavel"></i> Terms & Conditions',
 				margin	: 0,
 				padding : 5,
-				style	: {
-	   				'font-size' 	: '1.5em',
-	   				'border-bottom' : '5px solid #667078',
-	   				'color'			: '#027534'
-				}		
+				cls		: 'form-section'		
 			},
 			{
                 xtype       : 'textfield',

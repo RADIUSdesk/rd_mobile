@@ -52,6 +52,9 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
       	'#btnRadius' : {
       		tap	: 'radius'
       	},
+      	'#btnDetail' : {
+      		tap	: 'detail'
+      	}, 
       	'#btnGraphs' : {
       		tap	: 'graphs'
       	},  
@@ -169,6 +172,12 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     	me.getView().down('#asMenu').hide();
     	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridVouchers'), voucher_id: me.sel.get('id'),voucher_name : me.sel.get('name'), user_type : 'voucher' });
     	w.show();    	
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('pnlVoucherDetail',{voucher_name : me.sel.get('name'), r: me.sel });
+    	w.show();
     },
     graphs	: function(btn){
     	var me 			= this;

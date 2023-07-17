@@ -8,7 +8,8 @@ Ext.define('RdMobile.view.vouchers.cntVouchers', {
         'RdMobile.view.vouchers.frmVoucherEdit',
         'RdMobile.view.vouchers.frmVoucherPdf',
         'RdMobile.view.vouchers.frmVoucherEmail',
-        'RdMobile.view.radiusClient.frmRadiusClient'
+        'RdMobile.view.radiusClient.frmRadiusClient',
+        'RdMobile.view.vouchers.pnlVoucherDetail'
     ],
 	items   : [
         {

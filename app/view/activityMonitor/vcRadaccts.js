@@ -17,7 +17,7 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
         backTo				: 0,
-        type				: 'cloud', //can be voucher, device, permanent, realm, nas??
+        userType			: 'cloud', //can be voucher, device, permanent, realm, nas??
         span				: 'daily', //can be daily, weekly, monthly
         username			: 0 //Zero has special meaning 	
     },
@@ -45,7 +45,13 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
       	},
       	'cmbTimezones' : {
       		change	: 'tzChange'
-      	}
+      	},
+      	'#btnDetail' : {
+      		tap	: 'detail'
+      	}, 
+      	'#btnGraphs' : {
+      		tap	: 'graphs'
+      	},  
     },
     show : function(){
     	var me = this;
@@ -73,11 +79,14 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
     	var me = this;
     	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('username',me.getUsername());
     	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('span',me.getSpan());
-    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('type',me.getType());
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('type',me.getUserType());
     	
-    	var d  	= me.getView().down('#day').getValue();
-    	var d_s = d.toJSON();
-    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('day', d_s);  	
+    	var tz_id  = me.getView().down('cmbTimezones').getValue(); 
+    	me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('timezone_id',tz_id);
+    	
+    	//var d  	= me.getView().down('#day').getValue();
+    	//var d_s = d.toDateString();
+    	//me.getView().down('gridRadaccts').getStore().getProxy().setExtraParam('day', d_s); //The timezone from the browser causes k*k leave it out here   	 	
     	me.updateInfo();    
     },
     dayChange	: function(a,value){
@@ -103,7 +112,7 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
     	var me        = this;
     	var d         = me.getView().down('#day').getValue();
     	var d_s       = d.toDateString();
-    	var tz_id     = me.getView().down('cmbTimezones').getValue() 
+    	var tz_id     = me.getView().down('cmbTimezones').getValue(); 
     	var tz_record = me.getView().down('cmbTimezones').getStore().findRecord('id',tz_id);
     	var span 	  = me.getView().down('#rgrpSpan').getChecked().getValue();
     	me.getView().down('#lblInfo').setData({
@@ -119,7 +128,7 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
     },
     updateRadaccts : function(upd_info){
     	var me = this;
-    	me.setType(upd_info['type']);
+    	me.setUserType(upd_info['type']);
     	me.setUsername(upd_info['username'])
     	me.setBackTo(upd_info['backTo']);  	
     	me.setParams();
@@ -128,5 +137,21 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
     clearBackButton : function(){
     	var me = this;
     	me.setBackTo(0);
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('pnlRadacctDetail',{user_name : me.sel.get('username'), r: me.sel });
+    	w.show();
+    },
+    graphs	: function(btn){
+    	var me 			= this;
+    	var containedIn = btn.up(me.getContainedIn());
+		containedIn.setActiveItem(me.getCntRadiusGraphs());
+		var cntRG 		= containedIn.getActiveItem();
+		cntRG.getController().updateGraph({type: 'voucher',backTo : me.getCntVouchers(),username:me.sel.get('name')});
+		var ts 			= me.truncString(me.sel.get('name'),10,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-ticket-alt fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+        me.getView().down('#asMenu').hide();
     }
 });	

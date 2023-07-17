@@ -55,6 +55,9 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
       	'#btnRadius' : {
       		tap	: 'radius'
       	}, 
+      	'#btnDetail' : {
+      		tap	: 'detail'
+      	},  
       	'#btnGraphs' : {
       		tap	: 'graphs'
       	},  
@@ -178,6 +181,12 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
     	me.getView().down('#asMenu').hide();
     	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id'),user_name : me.sel.get('username'), user_type : 'permanent' });
     	w.show();    	
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('pnlPermanentUserDetail',{user_name : me.sel.get('username'), r: me.sel });
+    	w.show();
     },
     graphs	: function(btn){
     	var me 			= this;

@@ -29,7 +29,7 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
             model: 'RdMobile.model.mRadacct', 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/radaccts/index.json',
+                url         : '/cake4/rd_cake/radaccts/index-with-span.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
@@ -51,7 +51,14 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntRadaccts').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">SESSIONS</div></div>');
+                	var totalIn     = Ext.ux.bytesToHuman(meta.totalIn);
+                    var totalOut    = Ext.ux.bytesToHuman(meta.totalOut);
+                    var totalInOut  = Ext.ux.bytesToHuman(meta.totalInOut);             
+                	this.up('cntRadaccts').down('#lblMeta').setData({
+                		in 		: totalIn,
+                		out		: totalOut,
+                		total	: totalInOut
+                	});
                 },
                 scope: this
             },
@@ -70,6 +77,26 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
 	                	'<div class="item-main">',
 			            	'{username}',
 			            '</div>',
+			            '<div class="two-columns-grid">',
+							'<div class="item-lbl">Start time :</div>',							
+							'<div class="item-value">{acctstarttime}</div>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Stop time :</div>',
+							"<tpl if='active'>",
+								'<div class="item-value clr-grey-dark" style="color: #1e5304; background: #d4e0ce;border-radius:3px;border:1px solid #1e5304;">{online_human} online</div>',
+							'<tpl else>',
+								'<div class="item-value">{acctstoptime}</div>',
+							'</tpl>',							
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Session Time :</div>',							
+							'<div class="item-value">{[Ext.ux.secondsToHuman(values.acctsessiontime)]}</div>',
+						'</div>',
+						'<div class="two-columns-grid">',
+							'<div class="item-lbl">Data Usage :</div>',							
+							'<div class="item-value"><span class="clr-grey-dark">In</span> {[Ext.ux.bytesToHuman(values.acctinputoctets)]} <span class="clr-grey-dark">Out</span> {[Ext.ux.bytesToHuman(values.acctoutputoctets)]} </div>',
+						'</div>',
                     '</div>',
                     {
 			            isRecent: function(value_human) {
@@ -84,6 +111,7 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
 	        				return color;
 	    				}
 	    			}
+	    			
                 ),
 				},
                 flex: 1
