@@ -5,7 +5,9 @@ Ext.define('RdMobile.view.realms.cntRealms', {
     requires	: [
         'RdMobile.view.realms.vcRealms',
         'RdMobile.view.realms.frmRealmAdd',
-        'RdMobile.view.realms.frmRealmEdit'
+        'RdMobile.view.realms.frmRealmEdit',
+        'RdMobile.view.realms.frmRealmEditLogo',
+        'RdMobile.view.realms.pnlRealmDetail'
     ],
 	items   : [
         {
@@ -96,6 +98,12 @@ Ext.define('RdMobile.view.realms.cntRealms', {
 		   				'border-bottom' : '1px solid #667078'
 					}		
 				},
+				{
+					 text		: 'More Detail',
+					 iconCls	: 'x-fa fa-info-circle',
+					 textAlign  : 'left',
+					 itemId		: 'btnDetail'
+				 },
 				 {
 					 text		: 'Graphs',
 					 iconCls	: 'x-fa fa-chart-bar',

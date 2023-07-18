@@ -53,9 +53,15 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
       	'#btnEdit' : {
       		tap	: 'edit'
       	},
+      	'#btnEditRealm' : {
+      		tap	: 'editRealm'
+      	},
       	'#btnNewArrivals' : {
       		tap : 'unknownDynamicClients'
       	},
+      	'#btnDetail' : {
+      		tap	: 'detail'
+      	}, 
       	'#btnGraphs' : {
       		tap	: 'graphs'
       	},
@@ -150,6 +156,12 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
     	var w = Ext.widget('frmDynamicClientEdit',{grid:me.getView().down('gridDynamicClients'), dynamic_client_id: me.sel.get('id'),dynamic_client_name : me.sel.get('name')});
         w.show();
     },
+    editRealm  : function(btn){
+    	var me = this;	
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmDynamicClientEditRealm',{grid:me.getView().down('gridDynamicClients'), dynamic_client_id: me.sel.get('id'),dynamic_client_name : me.sel.get('name')});
+        w.show();
+    },
     add : function(){
     	var me 		= this;   	
     	var dd      = Ext.getApplication().getDashboardData();
@@ -160,6 +172,12 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('pnlDynamicClientDetail',{dynamic_client_name : me.sel.get('name'), r: me.sel });
+    	w.show();
     },
     graphs	: function(btn){
     	var me 			= this;

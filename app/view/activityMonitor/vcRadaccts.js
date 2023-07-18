@@ -19,7 +19,9 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
         backTo				: 0,
         userType			: 'cloud', //can be voucher, device, permanent, realm, nas??
         span				: 'daily', //can be daily, weekly, monthly
-        username			: 0 //Zero has special meaning 	
+        username			: 0, //Zero has special meaning,
+        cntRadaccts			: 4,
+        cntRadiusGraphs		: 11 	
     },
     control: {
     	'cntRadaccts' : {
@@ -149,9 +151,13 @@ Ext.define('RdMobile.view.activityMonitor.vcRadaccts', {
     	var containedIn = btn.up(me.getContainedIn());
 		containedIn.setActiveItem(me.getCntRadiusGraphs());
 		var cntRG 		= containedIn.getActiveItem();
-		cntRG.getController().updateGraph({type: 'voucher',backTo : me.getCntVouchers(),username:me.sel.get('name')});
-		var ts 			= me.truncString(me.sel.get('name'),10,'...');
-        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-ticket-alt fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+		cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntRadaccts(),username:me.sel.get('username')}); //Make the type as permanent
+		var ts 			= me.truncString(me.sel.get('username'),10,'...');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-running fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
         me.getView().down('#asMenu').hide();
-    }
+    },
+    truncString : function truncString(str, max, add){
+	   add = add || '...';
+	   return (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
+	}
 });	

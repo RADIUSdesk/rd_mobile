@@ -95,7 +95,7 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
 						'</div>',
 						'<div class="two-columns-grid">',
 							'<div class="item-lbl">Data Usage :</div>',							
-							'<div class="item-value"><span class="clr-grey-dark">In</span> {[Ext.ux.bytesToHuman(values.acctinputoctets)]} <span class="clr-grey-dark">Out</span> {[Ext.ux.bytesToHuman(values.acctoutputoctets)]} </div>',
+							'<div class="item-value"><span class="clr-grey-dark">In</span><b> {[Ext.ux.bytesToHuman(values.acctinputoctets)]} </b><span class="clr-grey-dark">Out</span><b> {[Ext.ux.bytesToHuman(values.acctoutputoctets)]}</b> </div>',
 						'</div>',
                     '</div>',
                     {

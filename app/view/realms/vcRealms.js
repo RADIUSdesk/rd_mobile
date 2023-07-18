@@ -52,6 +52,12 @@ Ext.define('RdMobile.view.realms.vcRealms', {
       	'#btnEdit' : {
       		tap	: 'edit'
       	},
+      	'#btnPhoto' : {
+      		tap	: 'editLogo'
+      	},
+      	'#btnDetail' : {
+      		tap	: 'detail'
+      	}, 
       	'#btnGraphs' : {
       		tap	: 'graphs'
       	},
@@ -141,6 +147,12 @@ Ext.define('RdMobile.view.realms.vcRealms', {
     	var w = Ext.widget('frmRealmEdit',{grid:me.getView().down('gridRealms'), realm_id: me.sel.get('id'),realm_name : me.sel.get('name')});
         w.show();
     },
+    editLogo  : function(btn){
+    	var me = this;	
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmRealmEditLogo',{grid:me.getView().down('gridRealms'), realm_id: me.sel.get('id'),realm_name : me.sel.get('name')});
+        w.show();
+    },
     add : function(){
     	var me 		= this;   	
     	var dd      = Ext.getApplication().getDashboardData();
@@ -151,6 +163,12 @@ Ext.define('RdMobile.view.realms.vcRealms', {
     	var me 	= this;
    		me.sel = sel;
     	me.getView().down('#asMenu').show();	    	  	 
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('pnlRealmDetail',{realm_name : me.sel.get('name'), r: me.sel });
+    	w.show();
     },
     graphs	: function(btn){
     	var me 			= this;

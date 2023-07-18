@@ -5,11 +5,8 @@ Ext.define('RdMobile.view.main.pnlMain', {
     layout      : 'vbox',
     controller  : 'vcMain',
     requires	: [
-        'RdMobile.view.components.cmpBasic',
-        'RdMobile.view.vouchers.gridVouchers',
-        'RdMobile.view.vouchers.cntVouchers',
         'RdMobile.view.mainRadius.cntMainRadius',
-        'RdMobile.model.mVoucher',
+        'RdMobile.view.components.cmbCloud',
         'Ext.tab.Panel'
     ],
     items       : [
@@ -57,21 +54,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
           	items: [                               
             /*    {
                     title	: 'HOME',
-                    itemId	: 'home',
-					xtype: 'panel',
-					bodyPadding: true,
-					items: [
-					    {
-						    xtype 	: 'toolbar',
-						    docked	: 'top',
-						    items	: [
-							    { ui: 'normal', iconCls: 'x-fa fa-redo' 	},
-							    { ui: 'normal', iconCls: 'x-fa fa-plus' 	},
-							    { ui: 'normal', iconCls: 'x-fa fa-trash-alt' },
-							    { ui: 'normal', iconCls: 'x-fa fa-pencil-alt' }
-						    ]
-					    }					
-					],
+                    itemId	: 'home'
                 },*/
                 {
                 	title	: 'RADIUS',
@@ -94,24 +77,58 @@ Ext.define('RdMobile.view.main.pnlMain', {
     ],
     initialize: function () {
      	const me = this;
+     	
+     	var cloud = {
+				 	xtype		: 'cmbCloud'
+				 };
+     	
+     	var dd = Ext.getApplication().getDashboardData();
+        if(dd.user){
+        	if(dd.user.cloud_id){
+        		cloud = {
+        			xtype : 'cmbCloud',
+        			value : dd.user.cloud_id
+        		}      	
+        	}
+     	}
+     	
        	var menu = Ext.create({
 		 xtype: 'actionsheet',
 		 centered: false,
 		 title: 'MENU',
 			 items: [
-				 {
+				/* {
 					 text		: 'Cloud',
 					 iconCls	: 'x-fa fa-cloud',
 					 textAlign  : 'left',
 					 itemId		: 'btnCloud'
+				 },*/
+				 cloud,
+				  {
+					 text		: 'Setup Wizard',
+					 iconCls	: 'x-fa fa-magic',
+					 textAlign  : 'left',
+					 itemId		: 'btnSetup'
+				  }, 			 
+				 {
+					 text		: 'Settings',
+					 iconCls	: 'x-fa fa-wrench',
+					 textAlign  : 'left',
+					 itemId		: 'btnSettings'
 				 }, 
 				 {
 					 text		: 'Password',
 					 iconCls	: 'x-fa fa-lock',
 					 textAlign  : 'left',
 					 itemId		: 'btnPassword'
-				 }, 
+				 }, 		 
 				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				{
 					 text		: 'Logout',
 					 iconCls	: 'x-fa fa-power-off',
 					 textAlign  : 'left',

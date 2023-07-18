@@ -5,7 +5,9 @@ Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
     requires	: [
         'RdMobile.view.dynamicClients.vcDynamicClients',
         'RdMobile.view.dynamicClients.frmDynamicClientAdd',
-        'RdMobile.view.dynamicClients.frmDynamicClientEdit'
+        'RdMobile.view.dynamicClients.frmDynamicClientEdit',
+        'RdMobile.view.dynamicClients.frmDynamicClientEditRealm',
+        'RdMobile.view.dynamicClients.pnlDynamicClientDetail'
     ],
 	items   : [
         {
@@ -86,11 +88,23 @@ Ext.define('RdMobile.view.dynamicClients.cntDynamicClients', {
 					 itemId		: 'btnEdit'
 				 },
 				 {
+					 text		: 'Edit Realms',
+					 iconCls	: 'x-fa fa-volleyball-ball',
+					 textAlign  : 'left',
+					 itemId		: 'btnEditRealm'
+				 },
+				 {
 					xtype	: 'label',
 					style	: {
 		   				'border-bottom' : '1px solid #667078'
 					}		
 				},
+				{
+					 text		: 'More Detail',
+					 iconCls	: 'x-fa fa-info-circle',
+					 textAlign  : 'left',
+					 itemId		: 'btnDetail'
+				 },
 				 {
 					 text		: 'Graphs',
 					 iconCls	: 'x-fa fa-chart-bar',

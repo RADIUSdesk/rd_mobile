@@ -66,7 +66,11 @@ Ext.define('RdMobile.view.permanentUsers.gridPermanentUsers', {
                 xtype	: 'templatecolumn',               
                 tpl		: new Ext.XTemplate(
                 	'<div class="grid-tpl-item">',
-			            '<div class="item-main">',
+                		"<tpl if='active'>",
+			            	'<div class="item-main">',
+			            '<tpl else>',
+			            	'<div class="item-main clr-grey-dark"><i class="fa fa-lock fa-1x"></i>  ',
+			            '</tpl>',
 			            	'{username}',
 			            '</div>',
 			            '<div class="two-columns-grid">',
