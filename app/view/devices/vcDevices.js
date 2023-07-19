@@ -68,6 +68,7 @@ Ext.define('RdMobile.view.devices.vcDevices', {
     show	: function(){
     	var me = this;
     	me.getView().down('#btnAdd').show();
+    	me.reload();
     },
     hide	: function(){
     	var me = this;

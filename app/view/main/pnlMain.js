@@ -79,15 +79,17 @@ Ext.define('RdMobile.view.main.pnlMain', {
      	const me = this;
      	
      	var cloud = {
-				 	xtype		: 'cmbCloud'
+				 	xtype		: 'cmbCloud',
+				 	itemId		: 'cmbMainCloud'
 				 };
      	
      	var dd = Ext.getApplication().getDashboardData();
         if(dd.user){
         	if(dd.user.cloud_id){
         		cloud = {
-        			xtype : 'cmbCloud',
-        			value : dd.user.cloud_id
+        			xtype 	: 'cmbCloud',
+        			value 	: dd.user.cloud_id,
+        			itemId	: 'cmbMainCloud'
         		}      	
         	}
      	}
@@ -97,12 +99,6 @@ Ext.define('RdMobile.view.main.pnlMain', {
 		 centered: false,
 		 title: 'MENU',
 			 items: [
-				/* {
-					 text		: 'Cloud',
-					 iconCls	: 'x-fa fa-cloud',
-					 textAlign  : 'left',
-					 itemId		: 'btnCloud'
-				 },*/
 				 cloud,
 				  {
 					 text		: 'Setup Wizard',

@@ -3,17 +3,19 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
     alias   : 'controller.vcViewport',
     config  : {
         urlCheckToken:          '/cake4/rd_cake/dashboard/check_token.json'
-    },
-    
+    },    
     control: {
-         '#btnCloud': {
-            tap : 'onBtnCloudTap'
+        '#btnSettings': {
+        	tap	: 'onBtnSettingsTap'
         },
         '#btnPassword': {
         	tap	: 'onBtnPasswordTap'
         },
         '#btnLogout' : {
         	tap	: 'onBtnLogoutTap'
+        },
+        '#cmbMainCloud' : {
+        	change	: 'onCloudChange'
         }
     },
     
@@ -55,8 +57,8 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
                 reference: xtype
             });
         }else{
+        	viewport.removeAll(true);
         	viewport.add(view);
-        	viewport.setActiveItem(view);
       	}
     }, 
     
@@ -85,18 +87,15 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
     },
     
     initiateSession: function(session) {
+    	me = this;
         if(session.token != undefined){
             Ext.Ajax.setExtraParams({});
             Ext.Ajax.setExtraParams({'token': session.token});
         }
         this.saveSession(session);
-    
-    	var extra_p 	 = Ext.Ajax.getExtraParams();
     	if(session.user.cloud_id){
-    		extra_p.cloud_id = session.user.cloud_id;
-    		Ext.Ajax.setExtraParams(extra_p);	
-    	}
-    	
+    		me.setCloudId(session.user.cloud_id);
+    	}    	
     	//Set the dashboard data
     	Ext.getApplication().setDashboardData(session);
     	        
@@ -159,22 +158,36 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
             });
 		});
 	},
-	onBtnCloudTap: function(){
+	onBtnSettingsTap: function(){
 		var me = this;
-		console.log("Cloud Tapped");
-		Ext.Viewport.hideMenu('left');
+		var p = Ext.Ajax.getExtraParams();		
+		Ext.Viewport.hideMenu('left',false);
+		var w  = Ext.widget('frmMainSettings',{api_key : p.token});
+        w.show();
 	
 	},
 	onBtnPasswordTap: function(){
 		var me = this;
-		console.log("Password Tapped");
-		Ext.Viewport.hideMenu('left');
+		Ext.Viewport.hideMenu('left',false);
+		var w  = Ext.widget('frmMainPassword',{});
+        w.show();	
 	},
 	onBtnLogoutTap: function(){
 		var me = this;
 		console.log("Logout Tapped");
 		Ext.Viewport.hideMenu('left');
 		me.onLogout();
-	}
+	},
+	onCloudChange	: function(cmb,value){
+    	var me = this;
+    	me.setCloudId(value);
+    	Ext.Viewport.hideMenu('left');  
+    },
+    setCloudId	: function(cloud_id){
+    	var me 			= this;
+    	var e_p			= Ext.Ajax.getExtraParams();
+    	e_p.cloud_id	= cloud_id;
+    	Ext.Ajax.setExtraParams(e_p);  
+    }
 });
 

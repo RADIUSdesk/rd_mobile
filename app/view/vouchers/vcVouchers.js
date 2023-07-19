@@ -66,6 +66,7 @@ Ext.define('RdMobile.view.vouchers.vcVouchers', {
     	var me = this;
     	console.log("Show");
     	me.getView().down('#btnAdd').show();
+    	me.reload();
     },
     hide	: function(){
     	var me = this;

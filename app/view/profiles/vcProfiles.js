@@ -73,6 +73,7 @@ Ext.define('RdMobile.view.profiles.vcProfiles', {
     	var me = this;
     	console.log("Show");
     	me.getView().down('#btnAdd').show();
+    	me.reload();
     },
     hide	: function(){
     	var me = this;

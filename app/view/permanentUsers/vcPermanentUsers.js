@@ -69,6 +69,7 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
     	var me = this;
     	console.log("Show");
     	me.getView().down('#btnAdd').show();
+    	me.reload();
     },
     hide	: function(){
     	var me = this;

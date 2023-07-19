@@ -55,6 +55,7 @@ Ext.define('RdMobile.view.profileComponents.vcProfileComponents', {
     	var me = this;
     	console.log("Show");
     	me.getView().down('#btnAdd').show();
+    	me.reload();
     },
     hide	: function(){
     	var me = this;
