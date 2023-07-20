@@ -24,14 +24,17 @@ Ext.define('RdMobile.view.main.vcMainSettings', {
     },
     load : function(){    
         var me     	= this;
-        var lblApi 	= me.getView().down('#lblApi');
+        var img     = me.getView().down('#imgWlLogo');
         Ext.Ajax.request({
 			url		: me.getUrlViewSettings(),
 			method	: 'get',
 		  	success: function(response) {
 		  		var jsonData	= Ext.JSON.decode(response.responseText);
         		if(jsonData.success){
-				    me.getView().setValues(jsonData.data);  
+				    me.getView().setValues(jsonData.data);
+				   	if(jsonData.data.wl_img != null){
+		                img.setSrc(jsonData.data.wl_img);
+		            }    
         		}
 		  	},
 		  	failure: function() {

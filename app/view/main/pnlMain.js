@@ -46,11 +46,6 @@ Ext.define('RdMobile.view.main.pnlMain', {
             xtype           : 'tabpanel',
             tabBarPosition	: 'bottom',
             itemId			: 'tpMain',
-            listeners		: {
-		        activeitemchange: function(tabpanel, newTab) {
-		       		console.log(newTab.getItemId());                 
-		        }
-		   	},
           	items: [                               
             /*    {
                     title	: 'HOME',
@@ -63,12 +58,28 @@ Ext.define('RdMobile.view.main.pnlMain', {
                 },               
                 {
                     title	: 'NETWORKS',
-                    html    : 'Networks Screen',
+                    items    : [                	
+                    	{
+							xtype	: 'label',
+							html	: '<i class="fas fa-heartbeat"></i> In the works....',
+							margin	: 0,
+							padding : 5,
+							cls		: 'form-section'	
+						}
+                    ],
                     itemId	: 'networks'
                 },
                 {
                     title	: 'OTHER',
-                    html    : 'OTHER Screen',
+                    items    : [                	
+                    	{
+							xtype	: 'label',
+							html	: '<i class="fas fa-heartbeat"></i> In the works....',
+							margin	: 0,
+							padding : 5,
+							cls		: 'form-section'	
+						}
+                    ],
                     itemId	: 'other'
                 }
             ],
@@ -100,12 +111,12 @@ Ext.define('RdMobile.view.main.pnlMain', {
 		 title: 'MENU',
 			 items: [
 				 cloud,
-				  {
+				/*  {
 					 text		: 'Setup Wizard',
 					 iconCls	: 'x-fa fa-magic',
 					 textAlign  : 'left',
 					 itemId		: 'btnSetup'
-				  }, 			 
+				  }, */			 
 				 {
 					 text		: 'Settings',
 					 iconCls	: 'x-fa fa-wrench',

@@ -30,15 +30,15 @@ Ext.define('RdMobile.view.main.vcMain', {
     },
     onRouteRadius	: function(){
     	var me = this;
-    	me.getView().down('#tpMain').setActiveItem(1);  
+    	me.getView().down('#tpMain').setActiveItem(0);  
     },
     onRouteNetworks	: function(){
     	var me = this;
-    	me.getView().down('#tpMain').setActiveItem(2);  
+    	me.getView().down('#tpMain').setActiveItem(1);  
     },
     onRouteOther	: function(){
     	var me = this;
-    	me.getView().down('#tpMain').setActiveItem(3);  
+    	me.getView().down('#tpMain').setActiveItem(2);  
     },
     onBtnMenuTap 	: function(){
     	var me = this;

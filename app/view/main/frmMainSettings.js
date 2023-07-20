@@ -36,31 +36,31 @@ Ext.define('RdMobile.view.main.frmMainSettings', {
         	{
                 xtype           : 'combobox',
                 label      		: 'Include Overviews',
-                forceSelection	: false,
-                queryMode       : 'local',
                 name            : 'overviews_to_include[]',
-                displayField    : 'name',
                 valueField      : 'id',
+    			displayField    : 'name',
                 multiSelect		: true,
+                errorTarget		: 'under',
+                required	    : true,
+   				queryMode       : 'local',        
                 listeners   	: {
                     select  : 'onOverviewsToIncludeSelect',
                     change  : 'onOverviewsToIncludeSelect'
                 },
                 store: {
-                    autoLoad    : false,
-                    storeId     : "Overviews",
+                    autoLoad    : true,
                     fields      :[
-                        {name   :'id',      type:'string'},
-                        {name   :'name',    type:'string'}
+                       'id',
+                       'name'
                     ],
-                    data: [
-                        {
-                            id  : 'radius_overview',
-                            name: "Data Usage (RADIUS)"
-                        },
+                    data: [                       
                         {
                             id  : 'meshdesk_overview',
                             name: "Networks"
+                        },
+                        {
+                            id  : 'radius_overview',
+                            name: "RADIUS"
                         }
                     ]
                 }    
@@ -70,7 +70,9 @@ Ext.define('RdMobile.view.main.frmMainSettings', {
                 label  		: 'Default Cloud',
                 hidden      : false,
                 disabled    : false,
+                required	: true,
                 name		: 'cloud_id',
+                errorTarget : 'under',
                 listeners   : {
                     change  : 'onCmbCloudsChange'
                 }
@@ -85,11 +87,15 @@ Ext.define('RdMobile.view.main.frmMainSettings', {
                 xtype       : 'cmbRealm',
                 label  		: 'Default Realm',
                 hidden      : true,
-                disabled    : true
+                required	: true,
+                disabled    : true,
+                errorTarget : 'under'
             },
             {
                 xtype       : 'cmbTimezones',
-                name        : 'timezone_id'
+                name        : 'timezone_id',
+                required	: true,
+                errorTarget : 'under'
             },
             {
                 xtype       : 'checkbox',      
@@ -113,27 +119,31 @@ Ext.define('RdMobile.view.main.frmMainSettings', {
                 xtype       : 'textfield',
                 label  		: 'Header Text',
                 required	: true,
-                name        : 'wl_header'
+                name        : 'wl_header',
+                errorTarget : 'under'
             },
             {
             	xtype		: 'colorfield',
-     			required	: true,
+     			//required	: true,
      			format		: 'hex8',
             	name        : 'wl_h_bg',
             	label  		: 'Header Background',
+            	errorTarget : 'under'
             },
             {
             	xtype		: 'colorfield',
-     			required	: true,
+     			//required	: true,
      			format		: 'hex8',
             	name        : 'wl_h_fg',
             	label  		: 'Header Foreground',
+            	errorTarget : 'under'
             },
             {
                 xtype       : 'textfield',
                 label  		: 'Footer Text',
                 required	: true,
-                name        : 'wl_footer'
+                name        : 'wl_footer',
+                errorTarget : 'under'
             },
              {
                 xtype       : 'checkbox',
@@ -161,7 +171,8 @@ Ext.define('RdMobile.view.main.frmMainSettings', {
                 xtype       : 'image',
                 src         : '/cake4/rd_cake/img/access_providers/logo.png', //Souces it when form loads
                 itemId      : 'imgWlLogo',
-                height		: 50,
+                maxHeight	: 100,
+                minHeight	: 50,
                 margin      : 5,
                 padding		: 5
             },
@@ -175,6 +186,7 @@ Ext.define('RdMobile.view.main.frmMainSettings', {
 			{
 				xtype	: 'label',
 				html	: me.api_key,
+				userSelectable : true,
 				margin	: 0,
 				padding : 5	
 			}
