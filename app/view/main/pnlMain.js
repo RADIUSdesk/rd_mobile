@@ -110,7 +110,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
 		 centered: false,
 		 title: 'MENU',
 			 items: [
-				 cloud,
+				
 				/*  {
 					 text		: 'Setup Wizard',
 					 iconCls	: 'x-fa fa-magic',
@@ -129,18 +129,19 @@ Ext.define('RdMobile.view.main.pnlMain', {
 					 textAlign  : 'left',
 					 itemId		: 'btnPassword'
 				 }, 		 
-				 {
-					xtype	: 'label',
-					style	: {
-		   				'border-bottom' : '1px solid #667078'
-					}		
-				},
 				{
 					 text		: 'Logout',
 					 iconCls	: 'x-fa fa-power-off',
 					 textAlign  : 'left',
 					 itemId		: 'btnLogout'
-				 }
+				 },
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '5px solid #667078'
+					}		
+				 },
+				 cloud
 			 ]
 	 	});
 	 	Ext.Viewport.setMenu(menu, {
