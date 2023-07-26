@@ -6,6 +6,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
     controller  : 'vcMain',
     requires	: [
         'RdMobile.view.mainRadius.cntMainRadius',
+        'RdMobile.view.mainNetworks.cntMainNetworks',
         'RdMobile.view.components.cmbCloud',
         'Ext.tab.Panel'
     ],
@@ -55,20 +56,12 @@ Ext.define('RdMobile.view.main.pnlMain', {
                 	title	: 'RADIUS',
                 	xtype	: 'cntMainRadius',
                 	itemId	: 'mainRadius'              
-                },               
-                {
-                    title	: 'NETWORKS',
-                    items    : [                	
-                    	{
-							xtype	: 'label',
-							html	: '<i class="fas fa-heartbeat"></i> In the works....',
-							margin	: 0,
-							padding : 5,
-							cls		: 'form-section'	
-						}
-                    ],
-                    itemId	: 'networks'
                 },
+                {
+                	title	: 'NETWORKS',
+                	xtype	: 'cntMainNetworks',
+                	itemId	: 'mainNetworks'              
+                },               
                 {
                     title	: 'OTHER',
                     items    : [                	
