@@ -29,16 +29,14 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         			height	: 300	
         		}
         	]
-        }, 
-       /* //-- Meshes --(1)    
+        },
         {
             xtype	: 'cntMeshes',
             layout	: 'fit'
          },
-         //-- MeshNodes --(2)
          {
-            xtype	: 'cntNodes',
+            xtype	: 'cntMeshEditEntries',
         	layout	: 'fit'
-        }*/
+        }
     ]
 });

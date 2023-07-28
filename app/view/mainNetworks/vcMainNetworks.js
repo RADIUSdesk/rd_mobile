@@ -2,17 +2,7 @@ Ext.define('RdMobile.view.mainNetworks.vcMainNetworks', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcMainNetworks',
     config		: {
-        cntPermanentUsers  	: 1,
-        cntVouchers			: 2,
-        cntDevices			: 3,
-        cntRadaccts			: 4,
-        cntDynamicClients	: 5,
-        cntUnknownDynamicClients : 6,
-        cntNas				: 7,
-        cntProfiles			: 8,
-        cntProfileComponents: 9,
-        cntRealms			: 10,
-        cntRadiusGraphs		: 11
+        cntGooiHom	: 7,
     },
     control: {
     	'gridMainNetworks': {
@@ -20,30 +10,20 @@ Ext.define('RdMobile.view.mainNetworks.vcMainNetworks', {
         }
     },
     onGridChildTap : function(a,b,c){
-    	var me = this;
-    	console.log("Tapped Grid Main Networks");
+    	var me 	= this;
     	var col = b[0][0]; 
     	var row = b[0][1];
-    	var r   = a.getStore().findRecord('id',row);
-    	
-    	if((col == 0)&&(row == 0)){    	
-    		//me.getView().setActiveItem(me.getCntPermanentUsers());
-    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> Permanent Users');
-    	}
-    	if((col == 1)&&(row == 0)){    	
-    		//me.getView().setActiveItem(me.getCntVouchers());
-    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-ticket-alt fa-1x"></i> Vouchers');
-    	}   	
-    	if((col == 0)&&(row == 1)){ 
-    		//me.getView().setActiveItem(me.getCntDevices());
-    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-tablet-alt fa-1x"></i> BYOD');
-    	}
-    	
-    	if((col == 1)&&(row == 1)){ 
-    		//me.getView().setActiveItem(me.getCntRadaccts());
-    		//var cntRG 		= me.getView().getActiveItem();
-			//cntRG.getController().clearBackButton();
-    		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-running fa-1x"></i> Activity Monitor');
-    	}
+    	var r   = a.getStore().findRecord('id',row);	
+    	var c 	= r.get(col);
+		var cnt = me.getView().down(c.cmp);
+		if(!cnt){
+			var c = Ext.create({
+				xtype	: c.cmp,
+				layout	: 'fit'
+			});
+			cnt = me.getView().add(c);
+		}
+		me.getView().setActiveItem(cnt);
+		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-code-branch fa-1x"></i> '+c.name);
     }
 });

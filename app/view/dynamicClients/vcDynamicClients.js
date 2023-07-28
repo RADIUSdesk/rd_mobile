@@ -14,7 +14,6 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
     config: {
         urlDelete           : '/cake4/rd_cake/dynamic-clients/delete.json',
         containedIn			: 'cntMainRadius',
-        appTitle			: 'RADIUSdesk',
         sortDesc			: true,
         cntDynamicClients	: 5,
         cntRadaccts			: 4,
@@ -77,13 +76,12 @@ Ext.define('RdMobile.view.dynamicClients.vcDynamicClients', {
     },
     hide	: function(){
     	var me = this;
-    	console.log("Hide");
     	me.getView().down('#btnAdd').hide();
     },
     back : function(btn){
         var me = this;
         btn.up(me.getContainedIn()).setActiveItem(0);
-        me.getView().up('pnlMain').down('#lblMain').setHtml(me.getAppTitle());
+        me.getView().up('pnlMain').down('#lblMain').setHtml(Ext.getApplication().getAppTitle());
     },
     unknownDynamicClients :function(btn){
     	var me = this;

@@ -18,7 +18,9 @@ Ext.define('RdMobile.Application', {
     ],
     
     dashboardData : null,  //Data on how the dashboard will look like which will be returned after login
-
+    config  : {
+        appTitle : 'RADIUSdesk'
+    },
     quickTips: false,
     platformConfig: {
         desktop: {
@@ -103,6 +105,21 @@ Ext.define('RdMobile.Application', {
         Ext.ux.centsToHuman = function(cents) {
             return (cents/100).toFixed(2); 
         }
+        
+        //-- return true if value human is recent 
+		Ext.ux.isRecent = function(value_human) {
+        	var recent = false;
+        	if(
+	            (value_human.match(/just now/g))||
+	            (value_human.match(/minute/g))||
+	            (value_human.match(/second/g))
+	        ){
+	            recent = true;
+	        }
+			return recent;
+		}
+
+		
     }
     
     

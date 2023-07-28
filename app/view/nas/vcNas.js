@@ -57,7 +57,6 @@ Ext.define('RdMobile.view.nas.vcNas', {
     },
     hide	: function(){
     	var me = this;
-    	console.log("Hide");
     	me.getView().down('#btnAdd').hide();
     },
     back : function(btn){
