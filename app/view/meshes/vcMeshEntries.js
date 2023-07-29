@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.meshes.vcMeshEditEntries', {
+Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcMeshEditEntries',
+    alias   : 'controller.vcMeshEntries',
     config: {
         urlDelete           : '/cake4/rd_cake/radaccts/delete.json',
         containedIn			: 'cntMainNetworks',
@@ -8,12 +8,25 @@ Ext.define('RdMobile.view.meshes.vcMeshEditEntries', {
         backTo				: 0
     },
     control: {
+    	'cntMeshEntries' : {
+    		show	: 'show',
+    		hide	: 'hide'
+    	},
         '#btnBack' : {
       		tap		: 'back'
       	},
       	'#btnReload' : {
       		tap		: 'reload'
       	}
+    },
+    show	: function(){
+    	var me = this;
+    	me.getView().down('#btnAdd').show();
+    	me.reload();
+    },
+    hide	: function(){
+    	var me = this;
+    	me.getView().down('#btnAdd').hide();
     },
     back : function(btn){
         var me = this;
@@ -24,6 +37,12 @@ Ext.define('RdMobile.view.meshes.vcMeshEditEntries', {
     }, 
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('#chrtUsage').getStore().reload();  
+    	me.getView().down('gridMeshEntries').getStore().reload(); 
+  
+    },
+    updateEntries : function(info){
+    	var me = this;
+    	me.getView().down('gridMeshEntries').getStore().getProxy().setExtraParam('mesh_id',info.mesh_id);
+    	me.reload();    
     }
 });

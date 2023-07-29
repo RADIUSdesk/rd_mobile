@@ -68,7 +68,7 @@ Ext.define('RdMobile.view.realms.gridRealms', {
 			            '</div>',
 			            '<div class="two-columns-grid">',
 							'<div class="item-lbl">Created :</div>',	
-							'<tpl if="[this.isRecent(created_in_words)]==\'green\'">',
+							'<tpl if="[Ext.ux.isRecent(created_in_words)]==\'green\'">',
 								'<div class="item-value clr-green">{created_in_words}</div>',
 							'<tpl else>',
 								'<div class="item-value">{created_in_words}</div>',
@@ -76,26 +76,13 @@ Ext.define('RdMobile.view.realms.gridRealms', {
 						'</div>',
 						'<div class="two-columns-grid">',
 							'<div class="item-lbl">Modified :</div>',	
-							'<tpl if="[this.isRecent(modified_in_words)]==\'green\'">',
+							'<tpl if="[Ext.ux.isRecent(modified_in_words)]==\'green\'">',
 								'<div class="item-value clr-green">{modified_in_words}</div>',
 							'<tpl else>',
 								'<div class="item-value">{modified_in_words}</div>',
 							'</tpl>',								
 						'</div>',
-                    '</div>',
-                    {
-			            isRecent: function(value_human) {
-			            	var color = 'grey';
-			            	if(
-					            (value_human.match(/just now/g))||
-					            (value_human.match(/minute/g))||
-					            (value_human.match(/second/g))
-					        ){
-					            color = 'green';
-					        }
-	        				return color;
-	    				}
-	    			}
+                    '</div>'
                 ),
 				},
                 flex: 1

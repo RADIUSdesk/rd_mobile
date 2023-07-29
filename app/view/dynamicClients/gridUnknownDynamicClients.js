@@ -64,7 +64,7 @@ Ext.define('RdMobile.view.dynamicClients.gridUnknownDynamicClients', {
 						'</div>',
 						'<div class="two-columns-grid">',
 							'<div class="item-lbl">Last Contact :</div>',
-							'<tpl if="[this.isRecent(last_contact_human)]==\'green\'">',
+							'<tpl if="[Ext.ux.isRecent(last_contact_human)]==\'green\'">',
 								'<div class="item-value clr-green">{last_contact_human}</div>',
 							'<tpl else>',
 								'<div class="item-value">{last_contact_human}</div>',
@@ -90,20 +90,7 @@ Ext.define('RdMobile.view.dynamicClients.gridUnknownDynamicClients', {
 		                		"</tpl>",
 							'</div>',
 						'</div>',
-                    '</div>',
-                     {
-			            isRecent: function(value_human) {
-			            	var color = 'grey';
-			            	if(
-					            (value_human.match(/just now/g))||
-					            (value_human.match(/minute/g))||
-					            (value_human.match(/second/g))
-					        ){
-					            color = 'green';
-					        }
-	        				return color;
-	    				}
-	    			}
+                    '</div>'
                 ),                            
                 cell	: {
 					encodeHtml: false,

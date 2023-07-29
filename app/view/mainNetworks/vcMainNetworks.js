@@ -24,6 +24,6 @@ Ext.define('RdMobile.view.mainNetworks.vcMainNetworks', {
 			cnt = me.getView().add(c);
 		}
 		me.getView().setActiveItem(cnt);
-		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-code-branch fa-1x"></i> '+c.name);
+		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-'+c.fa+' fa-1x"></i> '+c.name);
     }
 });

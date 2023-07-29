@@ -43,10 +43,10 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
       		tap	: 'detail'
       	},
       	'#cmbEdit' : {
-      		change: 'cmbEditChange'
+      		select: 'cmbEditChange'
       	},
       	'#cmbView' : {
-      		change: 'cmbViewChange'
+      		select: 'cmbViewChange'
       	}        	
     },
     initCnt	: function(){
@@ -130,7 +130,9 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     },
     add : function(){
     	var me = this;
-    	var w = Ext.widget('frmMeshAdd',{grid:me.getView().down('gridMeshes')});
+    	//var w = Ext.widget('frmMeshAdd',{grid:me.getView().down('gridMeshes')});
+        //w.show(); 
+        var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshes')});
         w.show(); 
     },
     onGridChildTap : function(a,sel){
@@ -141,36 +143,35 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     detail	: function(){
     	var me = this;
     	me.getAsMenu().hide();
-    	var w = Ext.widget('pnlMeshDetail',{device_name : me.sel.get('name'), r: me.sel });
+    	var w = Ext.widget('pnlMeshDetail',{mesh_name : me.sel.get('name'), r: me.sel });
     	w.show();
     },
-    cmbEditChange : function(a,b){
-    	var me = this;
+    cmbEditChange : function(a,value){
+    	var me 	= this;
+    	var b 	= a.getValue();
     	if(b == 'general'){
     		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
     		w.show();
     	}
     	if(b == 'entry_points'){
     		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshEditEntries');
+    		var cnt = containedIn.down('cntMeshEntries');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
-			//cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
-			//var ts 			= me.truncString(me.sel.get('username'),10,'...');
-        	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+			cntRG.getController().updateEntries({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Entry Points'); 
     	}
-    	if(b == 'mesh_settings'){
+    /*	if(b == 'mesh_settings'){
     		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
     		w.show();
     	}
     	if(b == 'exit_points'){
     		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshEditEntries');
+    		var cnt = containedIn.down('cntMeshEditExits');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
-			//cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
-			//var ts 			= me.truncString(me.sel.get('username'),10,'...');
-        	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
+			cntRG.getController().updateExits({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
+			me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Exit Points');
     	}
     	if(b == 'node_settings'){
     		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
@@ -184,13 +185,12 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			//cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
 			//var ts 			= me.truncString(me.sel.get('username'),10,'...');
         	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
-    	}
-		me.getAsMenu().hide(); 	    
+    	}*/
+		me.getAsMenu().hide();  //FIXME ON Slow browsers cause double trigger	    
     },
     cmbViewChange : function(a,b){
     	var me = this;
     	console.log(b);
-    	a.setValue('choose_one');
     	me.getAsMenu().hide();    
     
     }

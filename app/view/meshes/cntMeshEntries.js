@@ -1,9 +1,10 @@
-Ext.define('RdMobile.view.meshes.cntMeshEditEntries', {
+Ext.define('RdMobile.view.meshes.cntMeshEntries', {
     extend  : 'Ext.Container',
-    xtype   : 'cntMeshEditEntries',
-    controller  : 'vcMeshEditEntries',
+    xtype   : 'cntMeshEntries',
+    controller  : 'vcMeshEntries',
     requires	: [
-        'RdMobile.view.meshes.vcMeshEditEntries',
+        'RdMobile.view.meshes.vcMeshEntries',
+        'RdMobile.view.meshes.gridMeshEntries',
     ],
 	items   : [
         {
@@ -26,7 +27,7 @@ Ext.define('RdMobile.view.meshes.cntMeshEditEntries', {
 		    ]
         },
         {
-        	xtype: 'container'               
+        	xtype: 'gridMeshEntries'               
         }     
     ],                   
     scrollable : true,
@@ -67,7 +68,7 @@ Ext.define('RdMobile.view.meshes.cntMeshEditEntries', {
 			floated: true,
 			iconCls: "x-fa fa-plus",
 			right: 20,
-			bottom: 140,
+			bottom: 80,
 			border: false,
 			itemId	: 'btnAdd'
 		});

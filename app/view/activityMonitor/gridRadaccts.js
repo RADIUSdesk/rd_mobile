@@ -97,21 +97,7 @@ Ext.define('RdMobile.view.activityMonitor.gridRadaccts', {
 							'<div class="item-lbl">Data Usage :</div>',							
 							'<div class="item-value"><span class="clr-grey-dark">In</span><b> {[Ext.ux.bytesToHuman(values.acctinputoctets)]} </b><span class="clr-grey-dark">Out</span><b> {[Ext.ux.bytesToHuman(values.acctoutputoctets)]}</b> </div>',
 						'</div>',
-                    '</div>',
-                    {
-			            isRecent: function(value_human) {
-			            	var color = 'grey';
-			            	if(
-					            (value_human.match(/just now/g))||
-					            (value_human.match(/minute/g))||
-					            (value_human.match(/second/g))
-					        ){
-					            color = 'green';
-					        }
-	        				return color;
-	    				}
-	    			}
-	    			
+                    '</div>'	    			
                 ),
 				},
                 flex: 1

@@ -108,13 +108,13 @@ Ext.define('RdMobile.Application', {
         
         //-- return true if value human is recent 
 		Ext.ux.isRecent = function(value_human) {
-        	var recent = false;
+        	var recent = 'grey';
         	if(
 	            (value_human.match(/just now/g))||
 	            (value_human.match(/minute/g))||
 	            (value_human.match(/second/g))
 	        ){
-	            recent = true;
+	            recent = 'green';
 	        }
 			return recent;
 		}
