@@ -7,7 +7,7 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
         'RdMobile.view.meshes.gridMeshes',
         'RdMobile.view.meshes.frmMeshAdd',
         'RdMobile.view.meshes.frmMeshEditGeneral',
-        'RdMobile.view.components.frmWifiEntryPoint'
+        'RdMobile.view.components.vcWifiExitPoint' //FIXME TEMP
     ],
 	items   : [
         {
@@ -145,11 +145,11 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 					queryMode: 'local',
 					displayField: 'name',
 					valueField: 'id',
-					value	: 'choose_two',
+					value	: 'choose_one',
 					itemId	: 'cmbView',
 					store: [ 
 						{
-							id	: 'choose_two',
+							id	: 'choose_one',
 							name: 'Choose One'
 						},
 						{

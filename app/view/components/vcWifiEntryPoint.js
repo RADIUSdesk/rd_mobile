@@ -23,16 +23,15 @@ Ext.define('RdMobile.view.components.vcWifiEntryPoint', {
     },
     onSubmit : function(btn){   
     	var me 		= this;
-    	var store 	= me.getView().grid.getStore();  	
+    	var store 	= me.getView().grid.getStore();
+    	var url		= me.getView().submitUrl;  	
     	if(btn.up('formpanel').validate()){    	
     		btn.up('formpanel').submit({
                 clientValidation    : true,
-                url                 : me.getUrlAdd(),
-                waitMsg				: 'Add MESH Network',
+                url                 : url,
+                waitMsg				: 'Add MESH Entry',
                 success: function(form, result) {
-                	if(!form.down('#chkMultiple').isChecked){
-            	    	form.close();
-            	    }
+            	    form.close();
             	    store.reload();        
                 },
                 failure: function(form,result ) {

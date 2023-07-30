@@ -1,21 +1,21 @@
-Ext.define('RdMobile.view.meshes.vcMeshEntries', {
+Ext.define('RdMobile.view.meshes.vcMeshExits', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcMeshEntries',
+    alias   : 'controller.vcMeshExits',
     config: {
-        urlDelete   : '/cake4/rd_cake/meshes/mesh-entry-delete.json',
-        urlAdd		: '/cake4/rd_cake/meshes/mesh-entry-add.json',
-        urlView		: '/cake4/rd_cake/meshes/mesh-entry-view.json',
-        urlEdit		: '/cake4/rd_cake/meshes/mesh-entry-edit.json',
+        urlDelete   : '/cake4/rd_cake/meshes/mesh-exit-delete.json',
+        urlAdd		: '/cake4/rd_cake/meshes/mesh-exit-add.json',
+        urlView		: '/cake4/rd_cake/meshes/mesh-exit-view.json',
+        urlEdit		: '/cake4/rd_cake/meshes/mesh-exit-edit.json',
         containedIn	: 'cntMainNetworks',
         backTo		: 0,
         meshId		: undefined
     },
     control: {
-    	'cntMeshEntries' : {
+    	'cntMeshExits' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-    	'gridMeshEntries': {
+    	'gridMeshExits': {
             select: 'onGridChildTap'
         },
         '#btnBack' : {
@@ -52,13 +52,13 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     }, 
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridMeshEntries').getStore().reload(); 
+    	me.getView().down('gridMeshExits').getStore().reload(); 
   
     },
-    updateEntries : function(info){
+    updateExits : function(info){
     	var me = this;
     	me.setMeshId(info.mesh_id);
-    	me.getView().down('gridMeshEntries').getStore().getProxy().setExtraParam('mesh_id',info.mesh_id);
+    	me.getView().down('gridMeshExits').getStore().getProxy().setExtraParam('mesh_id',info.mesh_id);
     	me.reload();    
     },
     delete  : function(btn){
@@ -84,23 +84,23 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     },
     add : function(){
     	var me = this;
-        var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'meshId': me.getMeshId(),'submitUrl' : me.getUrlAdd()});
-        w.show(); 
+        //var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'meshId': me.getMeshId(),'submitUrl' : me.getUrlAdd()});
+       // w.show(); 
     },
     edit : function(){
     	var me = this;
     	me.getView().down('#asMenu').hide();
-        var entry_id  = me.sel.get('id');
+        var exit_id  = me.sel.get('id');
         Ext.Ajax.request({
 			url		: me.getUrlView(),
 			method	: 'get',
-		  	params	: {entry_id : entry_id},
+		  	params	: {exit_id : exit_id},
 		  	success: function(response) {
 		  		var jsonData	= Ext.JSON.decode(response.responseText);
         		if(jsonData.success){
-				    var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'submitUrl' : me.getUrlEdit()});
-				    w.setValues(jsonData.data);
-        			w.show();       			        
+				  //  var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'submitUrl' : me.getUrlEdit()});
+				 //   w.setValues(jsonData.data);
+        		//	w.show();       			        
         		}
 		  	},
 		  	failure: function() {

@@ -132,7 +132,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	var me = this;
     	//var w = Ext.widget('frmMeshAdd',{grid:me.getView().down('gridMeshes')});
         //w.show(); 
-        var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshes')});
+        var w = Ext.widget('frmWifiExitPoint',{grid:me.getView().down('gridMeshes')});
         w.show(); 
     },
     onGridChildTap : function(a,sel){
@@ -164,15 +164,16 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     /*	if(b == 'mesh_settings'){
     		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
     		w.show();
-    	}
+    	}*/
     	if(b == 'exit_points'){
     		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshEditExits');
+    		var cnt = containedIn.down('cntMeshExits');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().updateExits({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
 			me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Exit Points');
     	}
+    	/*
     	if(b == 'node_settings'){
     		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
     		w.show();
@@ -186,7 +187,10 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			//var ts 			= me.truncString(me.sel.get('username'),10,'...');
         	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
     	}*/
-		me.getAsMenu().hide();  //FIXME ON Slow browsers cause double trigger	    
+    	setTimeout(function(){
+    		me.getAsMenu().hide();  //FIXME ON Slow browsers cause double trigger
+    		a.setValue('choose_one');   		
+    	}, 1000);			    
     },
     cmbViewChange : function(a,b){
     	var me = this;
