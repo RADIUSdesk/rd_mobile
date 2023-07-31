@@ -84,8 +84,14 @@ Ext.define('RdMobile.view.meshes.vcMeshExits', {
     },
     add : function(){
     	var me = this;
-        //var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'meshId': me.getMeshId(),'submitUrl' : me.getUrlAdd()});
-       // w.show(); 
+    	var w = Ext.widget('frmWifiExitPointAdd',{
+    		grid		: me.getView().down('gridMeshExits'),
+    		action		: 'add',					
+    		meshId  	: me.getMeshId(),
+    		mode		: 'mesh',		//Will determine the url called for available 'connect_with' list (from MESH or APdesk)
+    		submitUrl 	: me.getUrlAdd()
+    	});
+        w.show();
     },
     edit : function(){
     	var me = this;
@@ -98,9 +104,18 @@ Ext.define('RdMobile.view.meshes.vcMeshExits', {
 		  	success: function(response) {
 		  		var jsonData	= Ext.JSON.decode(response.responseText);
         		if(jsonData.success){
-				  //  var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'submitUrl' : me.getUrlEdit()});
-				 //   w.setValues(jsonData.data);
-        		//	w.show();       			        
+        			console.log(jsonData);
+				    var w = Ext.widget('frmWifiExitPointEdit',{
+				    	grid		: me.getView().down('gridMeshExits'),
+				    	action		: 'edit',
+				    	exit_type	: jsonData.data.type,
+				    	exit_id		: exit_id,
+				    	meshId  	: me.getMeshId(),
+				    	mode		: 'mesh',		//Will determine the url called for available 'connect_with' list (from MESH or APdesk)
+				    	submitUrl 	: me.getUrlEdit(),
+				    	values		: jsonData.data //Exit ID will be in here
+				    });
+        			w.show();       			        
         		}
 		  	},
 		  	failure: function() {

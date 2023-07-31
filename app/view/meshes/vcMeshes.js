@@ -130,9 +130,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     },
     add : function(){
     	var me = this;
-    	//var w = Ext.widget('frmMeshAdd',{grid:me.getView().down('gridMeshes')});
-        //w.show(); 
-        var w = Ext.widget('frmWifiExitPoint',{grid:me.getView().down('gridMeshes')});
+    	var w = Ext.widget('frmMeshAdd',{grid:me.getView().down('gridMeshes')});
         w.show(); 
     },
     onGridChildTap : function(a,sel){

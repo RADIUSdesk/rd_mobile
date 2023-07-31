@@ -6,8 +6,7 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
         'RdMobile.view.meshes.vcMeshes',
         'RdMobile.view.meshes.gridMeshes',
         'RdMobile.view.meshes.frmMeshAdd',
-        'RdMobile.view.meshes.frmMeshEditGeneral',
-        'RdMobile.view.components.vcWifiExitPoint' //FIXME TEMP
+        'RdMobile.view.meshes.frmMeshEditGeneral'
     ],
 	items   : [
         {
