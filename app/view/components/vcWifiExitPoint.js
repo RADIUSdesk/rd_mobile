@@ -36,5 +36,48 @@ Ext.define('RdMobile.view.components.vcWifiExitPoint', {
                 }
             });    	
     	}
-    }
+    },
+    onRgrpNatDhpcConfigChange : function(grp,value){
+	    var me          = this; 
+	    var pnl         = grp.up('formpanel');
+        var dhcpDetail  = pnl.down('#pnlNatDhcpDetail'); 
+        if(value == 'manual'){ 
+            dhcpDetail.show();
+            dhcpDetail.enable();                    
+        }else{
+            dhcpDetail.hide();
+            dhcpDetail.disable();                       
+        }
+	},
+	onChkNatIgnoreChange : function(chk, value){
+	    var me      = this;
+	    var pnl     = chk.up('panel');    
+	    if(value){
+	    	pnl.down('#nmbrStart').disable();
+        	pnl.down('#nmbrEnd').disable();          
+        	pnl.down('#nmbrLease').disable();
+        	pnl.down('#txtNatDns1').disable();
+        	pnl.down('#txtNatDns2').disable();	    	    
+	    }else{
+	    	pnl.down('#nmbrStart').enable();
+        	pnl.down('#nmbrEnd').enable();          
+        	pnl.down('#nmbrLease').enable();
+        	pnl.down('#txtNatDns1').enable();
+        	pnl.down('#txtNatDns2').enable();
+	    
+	    }
+	},
+	onChkDnsOverrideChange: function(chk,value){
+		var me 		= this;
+		var form    = chk.up('formpanel');
+		var d1      = form.down('#txtDns1');
+		var d2      = form.down('#txtDns2');
+		if(value){
+		    d1.enable();
+		    d2.enable();
+		}else{
+		    d1.disable();
+		    d2.disable();
+		}
+	}
 });

@@ -104,7 +104,6 @@ Ext.define('RdMobile.view.meshes.vcMeshExits', {
 		  	success: function(response) {
 		  		var jsonData	= Ext.JSON.decode(response.responseText);
         		if(jsonData.success){
-        			console.log(jsonData);
 				    var w = Ext.widget('frmWifiExitPointEdit',{
 				    	grid		: me.getView().down('gridMeshExits'),
 				    	action		: 'edit',
