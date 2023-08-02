@@ -174,7 +174,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	}
     	
     	if(b == 'node_settings'){
-    		var w = Ext.widget('frmMeshEditNodeSettings',{mesh_name : me.sel.get('name'), r: me.sel });
+    		var w = Ext.widget('frmMeshEditNodeSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id')});
     		w.show();
     	}
     	/*
