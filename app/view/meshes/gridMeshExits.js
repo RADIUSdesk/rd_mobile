@@ -64,7 +64,7 @@ Ext.define('RdMobile.view.meshes.gridMeshExits', {
 			            '<div class="two-columns-grid">',
 							'<div class="item-lbl">Connects With :</div>',
 							'<div class="item-value">',
-								'<tpl if="(Ext.isEmpty(connects_with)&&(type!=\'tagged_bridge_l3\'))">',
+								'<tpl if="(Ext.isEmpty(connects_with)&&(type!=\'tagged_bridge_l3\'))">',//FIXME Try to figure out why it cant connect to no-one 
 								 	'<span class="clr-red"><i class="fa fa-exclamation-circle"></i> No One</span>',
 								 '</tpl>',
 						        '<tpl for="connects_with">', 

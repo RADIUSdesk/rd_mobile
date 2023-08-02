@@ -13,18 +13,18 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
        //== Buttons ==      
        	if(me.action == 'edit'){
        		var buttons = [		
-				{ ui: 'confirm', text: 'OK', iconCls: 'x-fa fa-check', handler: 'onSubmit' } 	
+				{ ui: 'forward', text: 'OK', iconCls: 'x-fa fa-check', handler: 'onSubmit' } 	
 			]
 			me.setButtons(buttons);       	
        	}
         
         if(me.action == 'add'){      
         	var buttons = [   
-				{ ui: 'confirm',  text: 'Back', iconCls: 'x-fa fa-arrow-left', 	handler: 'onBack'  },
+				{ ui: 'back',  text: 'Back', iconCls: 'x-fa fa-arrow-left', 	handler: 'onBack'  },
 				{
                     xtype: 'spacer'
                 }, 
-				{ ui: 'confirm', text: 'Save', iconCls: 'x-fa fa-check', 		handler: 'onSubmit' } 
+				{ ui: 'forward', text: 'Save', iconCls: 'x-fa fa-check', 		handler: 'onSubmit' } 
 			];
 			me.setButtons(buttons);   
         }
@@ -108,7 +108,7 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
       		me.setItems(items);	
       	}
       	
-      	if(me.exit_type == 'nat'){   	//Bridge is the basic one 
+      	if(me.exit_type == 'nat'){   	
       	
       		var nat_items = [
       			{
@@ -401,6 +401,145 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
       		items = Ext.Array.merge(items,cp_items);
       		me.setItems(items);
       	}
+      	
+      	if(me.exit_type == 'openvpn_bridge'){ 
+      	
+      		var vpn_items = [
+      			{
+                    itemId      : 'cmbOpenVpnServers',
+                    xtype       : 'cmbOpenVpnServers',
+                    required	: true,		
+					errorTarget	: 'under'		
+                }      		
+      		];
+      		     	
+      		items = Ext.Array.merge(items,vpn_items);
+      		me.setItems(items);     	
+      	}
+      	
+      	if(me.exit_type == 'tagged_bridge'){ 
+      	
+      		var br_items = [
+      			 {
+		            xtype       : 'numberfield',
+		            name        : 'vlan',
+		            itemId      : 'vlan',
+		            label  		: 'VLAN Number',
+		            value       : 0,
+		            maxValue    : 4095,
+		            step        : 1,
+		            minValue    : 0,
+		            required	: true,		
+					errorTarget	: 'under'
+		        }  		
+      		];
+      		     	
+      		items = Ext.Array.merge(items,br_items);
+      		me.setItems(items);     	
+      	}
+      	
+      	if(me.exit_type == 'tagged_bridge_l3'){ 
+      	
+      		var br_items = [
+      			 {
+		            xtype       : 'numberfield',
+		            name        : 'vlan',
+		            itemId      : 'vlan',
+		            label  		: 'VLAN Number',
+		            value       : 0,
+		            maxValue    : 4095,
+		            step        : 1,
+		            minValue    : 0,
+		            required	: true,		
+					errorTarget	: 'under'
+		        }  		
+      		];     		     	
+      		items = Ext.Array.merge(items,br_items);
+      		
+      		var l3_items = [
+      			{
+					xtype		: 'label',
+					html		: 'Layer3 Settings',
+					margin		: 0,
+					padding 	: 5,
+					cls			: 'form-section'	
+				},
+				{
+					xtype		: 'radiogroup',
+					vertical	: false,
+					items		: [
+						{ label: 'DHCP',     name: 'proto', value: 'dhcp', checked: true,labelWidth  : 170 },
+						{ label: 'Static',  name: 'proto', value: 'static',labelWidth  : 'auto'}
+					],
+					listeners   : {
+				        change  : 'onRgrpL3ConfigChange'
+				    }
+				},
+				{
+		            xtype       : 'panel',
+		            bodyStyle   : 'background: #e0ebeb',
+		            hidden      : true,
+		            itemId      : 'pnlL3Detail',
+		            padding		: 10,
+		            disabled    : true,
+		            items       : [	            
+				        {
+		                    itemId      : 'txtIpaddr',
+		                    xtype       : 'textfield',
+		                    label  		: 'IP Address',
+		                    name        : 'ipaddr',
+		                    required	: true,
+							errorTarget : 'under',
+							disabled	: true                 
+				            //vtype       : 'IPAddress'
+		                },
+		                {
+				            itemId      : 'txtNetmask',
+				            xtype       : 'textfield',
+				            label  		: 'Netmask',
+				            name        : 'netmask',
+				           	required	: true,
+							errorTarget : 'under',
+							disabled	: true  
+				            //vtype       : 'IPAddress'
+				        },		            
+		                {
+		                    itemId      : 'txtGateway',
+		                    xtype       : 'textfield',
+		                    label  		: 'Gateway',
+		                    name        : 'gateway',
+		                    required	: true,
+							errorTarget : 'under',
+							disabled	: true  
+				            //vtype       : 'IPAddress'
+		                },	             
+				      	{
+		                    itemId      : 'txtDns1Tagged',
+		                    xtype       : 'textfield',
+		                    label  		: 'DNS Primary',
+		                    name        : 'dns_1',
+		                    required	: false,
+							errorTarget : 'under',
+							value		: ''
+		                   // vtype       : 'IPAddress'
+		                },
+		                {
+		                    itemId      : 'txtDns2Tagged',
+		                    xtype       : 'textfield',
+		                    label  		: 'DNS Secondary',
+		                    name        : 'dns_2',
+		                    required	: false,
+							errorTarget : 'under',
+							value		: ''
+		                    //vtype       : 'IPAddress'
+		                }  
+				 	]
+				 }	
+      		];
+      		
+      		items = Ext.Array.merge(items,l3_items);  		
+      		me.setItems(items);     	
+      	}   	
              
         this.callParent(arguments);  
  	}

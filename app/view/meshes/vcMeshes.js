@@ -159,10 +159,11 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			cntRG.getController().updateEntries({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
         	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Entry Points'); 
     	}
-    /*	if(b == 'mesh_settings'){
-    		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
+    	if(b == 'mesh_settings'){
+    		var w = Ext.widget('frmMeshEditMeshSettings',{mesh_name : me.sel.get('name'), r: me.sel });
     		w.show();
-    	}*/
+    	}
+    	
     	if(b == 'exit_points'){
     		var containedIn = a.up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshExits');
@@ -171,11 +172,12 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			cntRG.getController().updateExits({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
 			me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Exit Points');
     	}
-    	/*
+    	
     	if(b == 'node_settings'){
-    		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
+    		var w = Ext.widget('frmMeshEditNodeSettings',{mesh_name : me.sel.get('name'), r: me.sel });
     		w.show();
     	}
+    	/*
     	if(b == 'nodes'){
     		var containedIn = a.up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshEditEntries');
@@ -186,7 +188,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
         	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
     	}*/
     	setTimeout(function(){
-    		me.getAsMenu().hide();  //FIXME ON Slow browsers cause double trigger
+    		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);			    
     },

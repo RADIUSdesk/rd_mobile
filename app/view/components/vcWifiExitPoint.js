@@ -1,8 +1,13 @@
 Ext.define('RdMobile.view.components.vcWifiExitPoint', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcWifiExitPoint',
-   	config	: {
-        urlAdd  : '/cake4/rd_cake/realms/add.json'
+    control: {
+    	'#chkNasClient' : {
+    		change	: 'chkNasClientChange',
+    	},
+    	'#chkLoginPage' : {
+    		change	: 'chkLoginPageChange',
+    	}
     },
    	onBack : function(btn){
     	var me = this;
@@ -67,7 +72,7 @@ Ext.define('RdMobile.view.components.vcWifiExitPoint', {
 	    
 	    }
 	},
-	onChkDnsOverrideChange: function(chk,value){
+	onChkDnsOverrideChange : function(chk,value){
 		var me 		= this;
 		var form    = chk.up('formpanel');
 		var d1      = form.down('#txtDns1');
@@ -79,5 +84,41 @@ Ext.define('RdMobile.view.components.vcWifiExitPoint', {
 		    d1.disable();
 		    d2.disable();
 		}
+	},
+	chkNasClientChange : function(chk,value){
+		var me 		= this;
+		var form    = chk.up('formpanel');
+		if(value){
+			form.down('#cmbRealm').enable();
+		}else{
+			form.down('#cmbRealm').disable();
+		}	
+	},
+	chkLoginPageChange : function(chk,value){
+		var me 		= this;
+		var form    = chk.up('formpanel');
+		if(value){
+			form.down('#cmbDynamicDetail').enable();
+		}else{
+			form.down('#cmbDynamicDetail').disable();
+		}	
+	},
+	onRgrpL3ConfigChange : function(grp,value){
+		var me = this;
+		var pnl    	= grp.up('formpanel');
+        var pnlL3  	= pnl.down('#pnlL3Detail'); 
+        if(value == 'static'){ 
+            pnlL3.show();
+            pnlL3.enable();
+            pnl.down('#txtIpaddr').enable(); 
+            pnl.down('#txtNetmask').enable();
+            pnl.down('#txtGateway').enable();                    
+        }else{
+            pnlL3.hide();
+            pnlL3.disable();
+            pnl.down('#txtIpaddr').disable();
+            pnl.down('#txtNetmask').disable();
+            pnl.down('#txtGateway').disable();                      
+        }	
 	}
 });

@@ -45,18 +45,6 @@ Ext.define('RdMobile.view.components.frmWifiExitPointAdd', {
 			    	checked	: true 
 			    },
 			    { 
-			    	label	: '<i class="fa fa-tag"></i> Layer2 Tagged Ethernet Bridge',
-			    	name	: 'exit_type', 
-			    	value	: 'tagged_bridge',
-			    	labelWidth  : 'auto' 
-			    },
-			    { 
-			    	label	: '<i class="fa fa-tag"></i> Layer3 Tagged Ethernet Bridge', 
-			    	name	: 'exit_type', 
-			    	value	: 'tagged_bridge_l3',
-			    	labelWidth  : 'auto' 
-			    },
-			    { 
 			    	label	: '<i class="fa fa-arrows-alt"></i> NAT + DHCP',
 			    	name	: 'exit_type', 
 			    	value	: 'nat',
@@ -72,6 +60,18 @@ Ext.define('RdMobile.view.components.frmWifiExitPointAdd', {
 			    	label	: '<i class="fa fa-quote-right"></i> OpenVPN Bridge',
 			    	name	: 'exit_type', 
 			    	value	: 'openvpn_bridge',
+			    	labelWidth  : 'auto' 
+			    },
+			    { 
+			    	label	: '<i class="fa fa-tag"></i> Layer2 Tagged Ethernet Bridge',
+			    	name	: 'exit_type', 
+			    	value	: 'tagged_bridge',
+			    	labelWidth  : 'auto' 
+			    },
+			    { 
+			    	label	: '<i class="fa fa-tag"></i> Layer3 Tagged Ethernet Bridge', 
+			    	name	: 'exit_type', 
+			    	value	: 'tagged_bridge_l3',
 			    	labelWidth  : 'auto' 
 			    }
 			];
@@ -95,7 +95,7 @@ Ext.define('RdMobile.view.components.frmWifiExitPointAdd', {
         var scrnType = Ext.create('Ext.form.Panel',{
         	itemId 	: 'scrnType',
 			buttons	: [
-				{ ui: 'confirm', text: 'Next', iconCls: 'x-fa fa-arrow-right', 		handler: 'onNext' }  
+				{ ui: 'forward', text: 'Next', iconCls: 'x-fa fa-arrow-right', 		handler: 'onNext' }  
 			],
         	items	:[{
 				xtype	: 'radiogroup',
