@@ -148,7 +148,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	var me 	= this;
     	var b 	= a.getValue();
     	if(b == 'general'){
-    		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'), r: me.sel });
+    		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'),grid:me.getView().down('gridMeshes'), meshId : me.sel.get('id') });
     		w.show();
     	}
     	if(b == 'entry_points'){
@@ -160,7 +160,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
         	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Entry Points'); 
     	}
     	if(b == 'mesh_settings'){
-    		var w = Ext.widget('frmMeshEditMeshSettings',{mesh_name : me.sel.get('name'), r: me.sel });
+    		var w = Ext.widget('frmMeshEditMeshSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id') });
     		w.show();
     	}
     	

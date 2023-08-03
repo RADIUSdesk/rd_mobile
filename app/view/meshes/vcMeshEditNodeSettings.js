@@ -2,30 +2,8 @@ Ext.define('RdMobile.view.meshes.vcMeshEditNodeSettings', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcMeshEditNodeSettings',
     config : {
-        urlView  	: '/cake4/rd_cake/meshes/node_common_settings_view.json',
-        urlEdit  	: '/cake4/rd_cake/meshes/node_common_settings_edit.json'
-    },
-    onSubmit : function(btn){   
-    	var me 		= this;
-    	var store 	= me.getView().grid.getStore();  	
-    	if(btn.up('formpanel').validate()){    	
-    		btn.up('formpanel').submit({
-                clientValidation    : true,
-                url                 : me.getUrlAdd(),
-                waitMsg				: 'Add MESH Network',
-                success: function(form, result) {
-                	if(!form.down('#chkMultiple').isChecked){
-            	    	form.close();
-            	    }
-            	    store.reload();        
-                },
-                failure: function(form,result ) {
-                	form.setErrors(result.errors);          
-                }
-            });    	
-    	}else{
-    		console.log("Form does not validate");
-    	}
+        urlView  	: '/cake4/rd_cake/meshes/node-common-settings-view.json',
+        urlEdit  	: '/cake4/rd_cake/meshes/node-common-settings-edit.json'
     },
     chkEthBrChange : function(chk,value){
  		var me 	= this;

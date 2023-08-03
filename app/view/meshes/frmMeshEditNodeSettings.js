@@ -48,7 +48,8 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
 			{
 				xtype       : 'textfield',
 				hidden		: true,
-				name		: 'mesh_id'	
+				name		: 'mesh_id',
+				value		: me.meshId 
 			},
 		   	{
                 xtype		: 'passwordfield',
