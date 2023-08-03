@@ -18,6 +18,9 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
             handler: 'onSubmit'
         }
     },
+    listeners       : {
+        show : 'loadNodeSettings' //Trigger a load of the settings (This is only on the initial load)
+    },
     initialize: function () {
         const me  = this;
         
@@ -36,6 +39,16 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
 				margin	: 0,
 				padding : 5,
 				cls		: 'form-section'	
+			},
+			{
+				xtype       : 'textfield',
+				hidden		: true,
+				name		: 'id'	
+			},
+			{
+				xtype       : 'textfield',
+				hidden		: true,
+				name		: 'mesh_id'	
 			},
 		   	{
                 xtype		: 'passwordfield',
