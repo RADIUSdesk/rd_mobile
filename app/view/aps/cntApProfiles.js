@@ -1,12 +1,12 @@
-Ext.define('RdMobile.view.meshes.cntMeshes', {
+Ext.define('RdMobile.view.aps.cntApProfiles', {
     extend  : 'Ext.Container',
-    xtype   : 'cntMeshes',
-    controller  : 'vcMeshes',
+    xtype   : 'cntApProfiles',
+    controller  : 'vcApProfiles',
     requires	: [
-        'RdMobile.view.meshes.vcMeshes',
-        'RdMobile.view.meshes.gridMeshes',
-        'RdMobile.view.meshes.frmMeshAdd',
-        'RdMobile.view.meshes.frmMeshEditGeneral'
+        'RdMobile.view.aps.vcApProfiles',
+        'RdMobile.view.aps.gridApProfiles',
+       // 'RdMobile.view.aps.frmApProfileAdd',
+       // 'RdMobile.view.aps.frmApProfileEditGeneral'
     ],
 	items   : [
         {
@@ -29,12 +29,12 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 					itemId	: 'lblMeta',
 					tpl		: new Ext.XTemplate(
 						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">MESHES :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{meshes_total} ({meshes_up} ONLINE)</div>',
+							'<div class="item-lbl" style="font-size: x-small;padding:0px;">AP Profiles :</div>',
+							'<div class="item-value" style="font-size: x-small;padding:0px;">{ap_profiles_total} ({ap_profiles_up} ONLINE)</div>',
 						'</div>',
 						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">NODES :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{nodes_total} ({nodes_up} ONLINE)</div>',
+							'<div class="item-lbl" style="font-size: x-small;padding:0px;">APs :</div>',
+							'<div class="item-value" style="font-size: x-small;padding:0px;">{aps_total} ({aps_up} ONLINE)</div>',
 						'</div>',
 					),
 					data	: {}
@@ -42,7 +42,7 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 	    	]
         },
         {
-        	xtype: 'gridMeshes'               
+        	xtype: 'gridApProfiles'               
         }     
     ],                   
     scrollable : true,
@@ -105,24 +105,20 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 							name: 'General'
 						},
 						{
-							id	: 'entry_points',
-							name: 'Entry Points'
-						},
-						{
-							id	: 'mesh_settings',
-							name: 'Mesh Settings'
+							id	: 'ssids',
+							name: 'SSIDs'
 						},
 						{
 							id	: 'exit_points',
 							name: 'Exit Points'
 						},
 						{
-							id	: 'node_settings',
-							name: 'Node Settings'
+							id	: 'common_settings',
+							name: 'Common Settings'
 						},
 						{
-							id	: 'nodes',
-							name: 'Nodes'
+							id	: 'aps',
+							name: 'APs'
 						}					
 					]
 				},
@@ -154,27 +150,7 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 						{
 							id	: 'general',
 							name: 'General'
-						},
-						{
-							id	: 'entry_points',
-							name: 'Entry Points'
-						},
-						{
-							id	: 'mesh_settings',
-							name: 'Mesh Settings'
-						},
-						{
-							id	: 'exit_points',
-							name: 'Exit Points'
-						},
-						{
-							id	: 'node_settings',
-							name: 'Node Settings'
-						},
-						{
-							id	: 'nodes',
-							name: 'Nodes'
-						}					
+						}				
 					]
 				},
 				{

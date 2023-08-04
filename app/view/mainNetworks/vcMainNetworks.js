@@ -11,6 +11,7 @@ Ext.define('RdMobile.view.mainNetworks.vcMainNetworks', {
     },
     onGridChildTap : function(a,b,c){
     	var me 	= this;
+    	console.log("TTTTTTT");
     	var col = b[0][0]; 
     	var row = b[0][1];
     	var r   = a.getStore().findRecord('id',row);	

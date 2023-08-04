@@ -41,6 +41,14 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         {
             xtype	: 'cntMeshExits',
         	layout	: 'fit'
+        },
+        {
+        	xtype	: 'cntApProfiles',
+        	layout	: 'fit'
+        },
+        {
+        	xtype	: 'cntUnknownNodes',
+        	layout	: 'fit'
         }
     ]
 });
