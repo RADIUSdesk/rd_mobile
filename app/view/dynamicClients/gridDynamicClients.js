@@ -116,7 +116,6 @@ Ext.define('RdMobile.view.dynamicClients.gridDynamicClients', {
 				},
                 flex: 1
             }]);
-        me.getStore().reload()		
 		this.callParent();     
     }
  });

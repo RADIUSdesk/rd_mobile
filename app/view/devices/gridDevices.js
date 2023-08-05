@@ -20,9 +20,7 @@ Ext.define('RdMobile.view.devices.gridDevices', {
         gridpagingtoolbar: true
     },
     selectable: {
-		//rows: true,
-		mode: 'single',
-		//columns: false
+		mode: 'single'
 	},
     initialize: function () {
         const me = this;
@@ -107,9 +105,7 @@ Ext.define('RdMobile.view.devices.gridDevices', {
 					encodeHtml: false
 				},
                 flex: 1
-            }]);
-        me.getStore().reload()		
+            }]);	
 		this.callParent();
-		//console.log(this._record)      
     }
  });

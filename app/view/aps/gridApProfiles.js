@@ -28,6 +28,7 @@ Ext.define('RdMobile.view.aps.gridApProfiles', {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
+        	autoLoad: false,
             model: 'RdMobile.model.mApProfile', //FIXME MODEL 
             proxy: {
                 type        :'ajax',
@@ -76,7 +77,6 @@ Ext.define('RdMobile.view.aps.gridApProfiles', {
 				},
                 flex: 1
             }]);
-        me.getStore().reload()		
 		this.callParent();   
     }
  });

@@ -98,8 +98,6 @@ Ext.define('RdMobile.view.vouchers.gridVouchers', {
 				},
                 flex: 1
             }]);
-        me.getStore().reload()		
-		this.callParent();
-		//console.log(this._record)      
+		this.callParent();   
     }
  });

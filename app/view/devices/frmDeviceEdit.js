@@ -7,6 +7,7 @@ Ext.define('RdMobile.view.devices.frmDeviceEdit', {
     closable: true,
     fullscreen : true,
     padding	: 6,
+    iconCls : 'x-fa fa-pencil-alt',
     title	: 'Edit Device',
     requires	: [
         'RdMobile.view.components.cmbProfile',

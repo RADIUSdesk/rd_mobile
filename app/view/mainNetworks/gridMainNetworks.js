@@ -25,18 +25,18 @@ Ext.define('RdMobile.view.mainNetworks.gridMainNetworks', {
             data    : [
 		       {
 		        	id  : 0,
-		            0	: {'name':'MESH Networks','cmp' : 'cntMeshes','fa': 'sitemap'},
-		            1	: {'name':'MESH Nodes','cmp' : 'cntNodes','fa': 'code-branch'}
+		            0	: {'name':'MESH Networks',	'cmp' : 'cntMeshes','fa': 'sitemap'},
+		            1	: {'name':'MESH Nodes',		'cmp' : 'cntNodes','fa': 'code-branch'}
 		        },
 		        {
 		        	id	: 1,
-		            0	: {'name':'AP Profiles', 'cmp' 	: 'cntApProfiles',	'fa': 'cubes'},
-		            1	: {'name':'APs',  		'cmp' 	: 'cntAps',			'fa': 'cube'}
+		            0	: {'name':'AP Profiles', 	'cmp' 	: 'cntApProfiles',	'fa': 'cubes'},
+		            1	: {'name':'APs',  			'cmp' 	: 'cntAps',			'fa': 'cube'}
 		        },
 		        {
 		        	'id'	: 2,
-		            0	: {'name':'New Arrivals', 'cmp' 	: 'cntUnknownNodes',	'fa': 'car'},
-		            1	: {'name':'Limited Devices',  'cmp' 	: 'cntAps',			'fa': 'traffic-light'}
+		            0	: {'name':'New Arrivals', 	'cmp' 	: 'cntUnknownNodes',	'fa': 'car'},
+		            1	: {'name':'Limited Devices','cmp' 	: 'cntAps',			'fa': 'traffic-light'}
 		        }
             ]
         }));

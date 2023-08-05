@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.meshes.vcMeshes', {
+Ext.define('RdMobile.view.meshes.vcNodes', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcMeshes',
+    alias   : 'controller.vcNodes',
     sel		: null,
     config: {
         urlDelete           : '/cake4/rd_cake/meshes/delete.json',
@@ -10,12 +10,12 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
         asMenu				: false	
     },
     control: {
-    	'cntMeshes' : {
+    	'cntNodes' : {
     		show	: 'show',
     		hide	: 'hide',
-    		initialize : 'initCnt'    		
+    		initialize : 'initCnt' 		
     	},
-        'gridMeshes': {
+        'gridNodes': {
             select: 'onGridChildTap'
         },
         '#btnBack' : {
@@ -41,13 +41,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
       	},
       	'#btnDetail' : {
       		tap	: 'detail'
-      	},
-      	'#cmbEdit' : {
-      		select: 'cmbEditChange'
-      	},
-      	'#cmbView' : {
-      		select: 'cmbViewChange'
-      	}        	
+      	}     	
     },
     initCnt	: function(){
     	var me = this;  	
@@ -69,11 +63,11 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     },
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridMeshes').getStore().reload();    	  
+    	me.getView().down('gridNodes').getStore().reload();    	  
     },
     sort	: function(btn){
     	var me 		= this;
-    	var store 	= me.getView().down('gridMeshes').getStore();
+    	var store 	= me.getView().down('gridNodes').getStore();
     	me.setSortDesc(!me.getSortDesc());
     	if(me.getSortDesc()){
     		btn.setIconCls('x-fa fa-sort-alpha-down'); 
@@ -95,7 +89,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     },
     txtFilterValueChange : function(txt,new_value){
     	var me 		= this;
-    	var store 	= me.getView().down('gridMeshes').getStore();
+    	var store 	= me.getView().down('gridNodes').getStore();
     	var btn		= me.getView().down('#btnFilter');
     	var cmb		= me.getView().down('#cmbFilterOn'); 
     	if(new_value == ''){
@@ -129,7 +123,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     },
     add : function(){
     	var me = this;
-    	var w = Ext.widget('frmMeshAdd',{grid:me.getView().down('gridMeshes')});
+    	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridNodes')});
         w.show(); 
     },
     onGridChildTap : function(a,sel){
@@ -140,61 +134,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     detail	: function(){
     	var me = this;
     	me.getAsMenu().hide();
-    	var w = Ext.widget('pnlMeshDetail',{mesh_name : me.sel.get('name'), r: me.sel });
+    	var w = Ext.widget('pnlNodeDetail',{node_name : me.sel.get('name'), r: me.sel });
     	w.show();
-    },
-    cmbEditChange : function(a,value){
-    	var me 	= this;
-    	var b 	= a.getValue();
-    	if(b == 'general'){
-    		var w = Ext.widget('frmMeshEditGeneral',{mesh_name : me.sel.get('name'),grid:me.getView().down('gridMeshes'), meshId : me.sel.get('id') });
-    		w.show();
-    	}
-    	if(b == 'entry_points'){
-    		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshEntries');
-			containedIn.setActiveItem(cnt);
-			var cntRG 	= containedIn.getActiveItem();
-			cntRG.getController().updateEntries({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
-        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Entry Points'); 
-    	}
-    	if(b == 'mesh_settings'){
-    		var w = Ext.widget('frmMeshEditMeshSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id') });
-    		w.show();
-    	}
-    	
-    	if(b == 'exit_points'){
-    		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshExits');
-			containedIn.setActiveItem(cnt);
-			var cntRG 	= containedIn.getActiveItem();
-			cntRG.getController().updateExits({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
-			me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Exit Points');
-    	}
-    	
-    	if(b == 'node_settings'){
-    		var w = Ext.widget('frmMeshEditNodeSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id')});
-    		w.show();
-    	}
-    	/*
-    	if(b == 'nodes'){
-    		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshEditEntries');
-			containedIn.setActiveItem(cnt);
-			var cntRG 	= containedIn.getActiveItem();
-			//cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
-			//var ts 			= me.truncString(me.sel.get('username'),10,'...');
-        	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
-    	}*/
-    	setTimeout(function(){
-    		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
-    		a.setValue('choose_one');   		
-    	}, 1000);			    
-    },
-    cmbViewChange : function(a,b){
-    	var me = this;
-    	console.log(b);
-    	me.getAsMenu().hide();   
-    
     }
 });

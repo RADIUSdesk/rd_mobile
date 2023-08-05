@@ -148,9 +148,32 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
     	var me 	= this;
     	var b 	= a.getValue();
     	if(b == 'general'){
-    	//	var w = Ext.widget('frmApProfileEditGeneral',{ap_profile_name : me.sel.get('name'),grid:me.getView().down('gridApProfiles'), apProfileId : me.sel.get('id') });
-    	//	w.show();
+    		var w = Ext.widget('frmApEditGeneral',{ap_profile_name : me.sel.get('name'),grid:me.getView().down('gridApProfiles'), apProfileId : me.sel.get('id') });
+    		w.show();
     	}
+    	if(b == 'ssids'){
+    		var containedIn = a.up(me.getContainedIn());
+    		var cnt = containedIn.down('cntAccessPointEntries');
+			containedIn.setActiveItem(cnt);
+			var cntRG 	= containedIn.getActiveItem();
+			cntRG.getController().updateEntries({ap_profile_name : me.sel.get('name'), ap_profile_id : me.sel.get('id')});
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> <i class="fa fa-pen fa-1x"></i> SSIDs'); 
+    	}
+    	
+    	if(b == 'exit_points'){
+    		var containedIn = a.up(me.getContainedIn());
+    		var cnt = containedIn.down('cntAccessPointExits');
+			containedIn.setActiveItem(cnt);
+			var cntRG 	= containedIn.getActiveItem();
+			cntRG.getController().updateExits({ap_profile_name : me.sel.get('name'), ap_profile_id : me.sel.get('id')});
+			me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> <i class="fa fa-pen fa-1x"></i> Exit Points');
+    	}
+    	
+    	if(b == 'common_settings'){
+    		var w = Ext.widget('frmAccessPointCommonSettings',{ap_profile_name : me.sel.get('name'),grid:me.getView().down('gridApProfiles'), apProfileId : me.sel.get('id')});
+    		w.show();
+    	}
+    	
     	setTimeout(function(){
     		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		

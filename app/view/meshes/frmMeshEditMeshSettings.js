@@ -7,6 +7,7 @@ Ext.define('RdMobile.view.meshes.frmMeshEditMeshSettings', {
     closable: true,
     fullscreen : true,
     padding	: 6,
+    iconCls : 'x-fa fa-pencil-alt',
     title	: 'Edit MESH Settings',
     root 	: false,
     requires	: [

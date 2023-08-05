@@ -7,6 +7,7 @@ Ext.define('RdMobile.view.components.frmWifiEntryPoint', {
     closable: true,
     fullscreen : true,
     padding	: 10,
+    iconCls : 'x-fa fa-plus',
     title	: 'Add Entry',
     root 	: false,
     requires	: [
@@ -20,7 +21,16 @@ Ext.define('RdMobile.view.components.frmWifiEntryPoint', {
         }
     },
     initialize: function () {
-        const me  = this;    	          
+        const me  = this; 
+        
+        var hide_apply_to_all = false;
+        
+        if(me.apProfileId){
+        
+        	hide_apply_to_all = true;
+        }
+        
+           	          
         var items = [
 			{
 				xtype	: 'label',
@@ -109,7 +119,8 @@ Ext.define('RdMobile.view.components.frmWifiEntryPoint', {
                 label  		: 'Apply To All Nodes',
                 name        : 'apply_to_all',
                 checked     : true,
-                labelWidth  : 'auto'
+                labelWidth  : 'auto',
+                hidden		: hide_apply_to_all
             },
             {
 				xtype		: 'label',

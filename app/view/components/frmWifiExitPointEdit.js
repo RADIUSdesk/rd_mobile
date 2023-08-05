@@ -7,6 +7,7 @@ Ext.define('RdMobile.view.components.frmWifiExitPointEdit', {
     closable: true,
     fullscreen : true,
     layout	: 'fit',
+    iconCls : 'x-fa fa-pencil-alt',
     title	: 'Edit Exit Point',
     initialize: function () {
         const me  = this;         
@@ -15,7 +16,8 @@ Ext.define('RdMobile.view.components.frmWifiExitPointEdit', {
     		action		: 'edit',
     		exit_type	: me.exit_type,
 			exit_id		: me.exit_id,
-    		meshId		: me.meshId,				
+    		meshId		: me.meshId,
+    		apProfileId : me.apProfileId,				
     		mode		: me.mode,		//Will determine the url called for available 'connect_with' list (from MESH or APdesk)
     		submitUrl 	: me.submitUrl,
     		grid		: me.grid,

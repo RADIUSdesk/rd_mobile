@@ -77,7 +77,6 @@ Ext.define('RdMobile.view.profiles.gridProfiles', {
 				},
                 flex: 1
             }]);
-        me.getStore().reload()		
 		this.callParent();     
     }
  });

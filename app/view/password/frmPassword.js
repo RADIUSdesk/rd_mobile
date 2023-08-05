@@ -1,5 +1,6 @@
 Ext.define('RdMobile.view.password.frmPassword', {
     extend  : 'Ext.form.Panel',
+    ui		: 'lekker',
     xtype   : 'frmPassword',
     floated	: true,
     modal	: true,

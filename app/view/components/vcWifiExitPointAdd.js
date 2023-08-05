@@ -23,7 +23,8 @@ Ext.define('RdMobile.view.components.vcWifiExitPointAdd', {
 		var frm = Ext.widget('frmWifiExitPoint',{
 			action		: 'add',
 			exit_type	: exit_type,
-			meshId		: me.getView().meshId,					
+			meshId		: me.getView().meshId,
+			apProfileId	: me.getView().apProfileId,					
 			mode		: me.getView().mode,		//Will determine the url called for available 'connect_with' list (from MESH or APdesk)
 			submitUrl 	: me.getView().submitUrl,
 			grid		: me.getView().grid,

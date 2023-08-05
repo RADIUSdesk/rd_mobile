@@ -8,6 +8,7 @@ Ext.define('RdMobile.view.devices.frmDeviceAdd', {
     fullscreen : true,
     padding	: 6,
     title	: 'Add Device',
+    iconCls : 'x-fa fa-plus',
     requires	: [
         'RdMobile.view.components.cmbProfile',
         'RdMobile.view.components.cmbPermanentUser',

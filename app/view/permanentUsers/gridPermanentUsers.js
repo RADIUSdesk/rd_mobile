@@ -103,9 +103,7 @@ Ext.define('RdMobile.view.permanentUsers.gridPermanentUsers', {
 					encodeHtml: false
 				},
                 flex: 1
-            }]);
-        me.getStore().reload()		
-		this.callParent();
-		//console.log(this._record)      
+            }]);	
+		this.callParent();   
     }
  });

@@ -86,8 +86,7 @@ Ext.define('RdMobile.view.realms.gridRealms', {
                 ),
 				},
                 flex: 1
-            }]);
-        me.getStore().reload()		
+            }]);	
 		this.callParent();     
     }
  });

@@ -75,8 +75,7 @@ Ext.define('RdMobile.view.unknownNodes.gridUnknownNodes', {
 					encodeHtml: false
 				},
                 flex: 1
-            }]);
-        me.getStore().reload()		
+            }]);	
 		this.callParent();   
     }
  });

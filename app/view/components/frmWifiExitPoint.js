@@ -33,8 +33,7 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
       	
       	//Connects with is used with every option
       	if(me.mode == 'mesh'){
-	  		var cmbConnectWith = Ext.create('RdMobile.view.meshes.cmbMeshEntryPoints',{
-			});
+	  		var cmbConnectWith = Ext.create('RdMobile.view.meshes.cmbMeshEntryPoints',{});
 			cmbConnectWith.getStore().getProxy().setExtraParam('mesh_id',me.meshId);
 			if(me.exit_id){
 				cmbConnectWith.getStore().getProxy().setExtraParam('exit_id',me.exit_id);
@@ -42,7 +41,15 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 	    	cmbConnectWith.getStore().load();
 	    }
 	    
-	    
+	    if(me.mode == 'ap'){	    
+	    	var cmbConnectWith = Ext.create('RdMobile.view.aps.cmbAccessPointEntryPoints',{});	    	 
+	    	cmbConnectWith.getStore().getProxy().setExtraParam('ap_profile_id',me.apProfileId);
+			if(me.exit_id){
+				cmbConnectWith.getStore().getProxy().setExtraParam('exit_id',me.exit_id);
+			}
+	    	cmbConnectWith.getStore().load();
+	    }
+	    	    
 	    var items = [
 	    	{
 				xtype		: 'label',

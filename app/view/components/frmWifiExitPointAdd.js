@@ -6,6 +6,7 @@ Ext.define('RdMobile.view.components.frmWifiExitPointAdd', {
     centered: true,
     closable: true,
     fullscreen : true,
+    iconCls : 'x-fa fa-plus',
     title	: 'Add Exit',
     layout: {
 		type        : 'card',

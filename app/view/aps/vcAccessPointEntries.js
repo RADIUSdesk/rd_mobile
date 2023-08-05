@@ -1,21 +1,21 @@
-Ext.define('RdMobile.view.meshes.vcMeshEntries', {
+Ext.define('RdMobile.view.aps.vcAccessPointEntries', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcMeshEntries',
+    alias   : 'controller.vcAccessPointEntries',
     config: {
-        urlDelete   : '/cake4/rd_cake/meshes/mesh-entry-delete.json',
-        urlAdd		: '/cake4/rd_cake/meshes/mesh-entry-add.json',
-        urlView		: '/cake4/rd_cake/meshes/mesh-entry-view.json',
-        urlEdit		: '/cake4/rd_cake/meshes/mesh-entry-edit.json',
+        urlDelete   : '/cake4/rd_cake/ap-profiles/ap-profile-entry-delete.json',
+        urlAdd		: '/cake4/rd_cake/ap-profiles/ap-profile-entry-add.json',
+        urlView		: '/cake4/rd_cake/ap-profiles/ap-profile-entry-view.json',
+        urlEdit		: '/cake4/rd_cake/ap-profiles/ap-profile-entry-edit.json',
         containedIn	: 'cntMainNetworks',
         backTo		: 0,
-        meshId		: undefined
+        apProfileId		: undefined
     },
     control: {
-    	'cntMeshEntries' : {
+    	'cntAccessPointEntries' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-    	'gridMeshEntries': {
+    	'gridAccessPointEntries': {
             select: 'onGridChildTap'
         },
         '#btnBack' : {
@@ -46,19 +46,19 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     back : function(btn){
         var me = this;
         var c = btn.up(me.getContainedIn());
-        var m = c.down('cntMeshes');       
+        var m = c.down('cntApProfiles');       
         c.setActiveItem(m);
-        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> MESH Networks');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> AP Profiles');
     }, 
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridMeshEntries').getStore().reload(); 
+    	me.getView().down('gridAccessPointEntries').getStore().reload(); 
   
     },
     updateEntries : function(info){
     	var me = this;
-    	me.setMeshId(info.mesh_id);
-    	me.getView().down('gridMeshEntries').getStore().getProxy().setExtraParam('mesh_id',info.mesh_id);
+    	me.setApProfileId(info.ap_profile_id);
+    	me.getView().down('gridAccessPointEntries').getStore().getProxy().setExtraParam('ap_profile_id',info.ap_profile_id);
     	me.reload();    
     },
     delete  : function(btn){
@@ -84,7 +84,8 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     },
     add : function(){
     	var me = this;
-        var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'meshId': me.getMeshId(),'submitUrl' : me.getUrlAdd()});
+        var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridAccessPointEntries'),'apProfileId': me.getApProfileId(),'submitUrl' : me.getUrlAdd()});
+        w.setTitle('Add SSID');
         w.show(); 
     },
     edit : function(){
@@ -98,8 +99,10 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
 		  	success: function(response) {
 		  		var jsonData	= Ext.JSON.decode(response.responseText);
         		if(jsonData.success){
-				    var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'submitUrl' : me.getUrlEdit()});
+				    var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridAccessPointEntries'),'submitUrl' : me.getUrlEdit(),'apProfileId': me.getApProfileId()});
 				    w.setValues(jsonData.data);
+				    w.setIconCls('x-fa fa-pencil-alt');
+				    w.setTitle('Edit SSID');
         			w.show();       			        
         		}
 		  	},

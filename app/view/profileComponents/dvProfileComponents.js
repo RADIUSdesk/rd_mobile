@@ -81,8 +81,6 @@ Ext.define('RdMobile.view.profileComponents.dvProfileComponents', {
             remoteFilter: true,
             remoteSort: true
         }));
-       // me.setItemTpl('<div>{name} is {age} years old</div>');
-        me.getStore().reload()		
 		this.callParent();    
     }
  });

@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
+Ext.define('RdMobile.view.aps.frmAccessPointCommonSettings', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmMeshEditNodeSettings',
+    xtype   : 'frmAccessPointCommonSettings',
     floated	: true,
     modal	: true,
     centered: true,
@@ -8,19 +8,19 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
     fullscreen : true,
     padding	: 6,
     iconCls : 'x-fa fa-pencil-alt',
-    title	: 'Edit MESH Node Settings',
+    title	: 'Edit Common Settings',
     root 	: false,
     requires	: [
-        'RdMobile.view.meshes.vcMeshEditNodeSettings',
+        'RdMobile.view.aps.vcAccessPointCommonSettings',
     ],
-    controller  : 'vcMeshEditNodeSettings',
+    controller  : 'vcAccessPointCommonSettings',
     buttons: {
         submit: {
             handler: 'onSubmit'
         }
     },
     listeners       : {
-        show : 'loadNodeSettings' //Trigger a load of the settings (This is only on the initial load)
+        show : 'loadApCommonSettings' //Trigger a load of the settings (This is only on the initial load)
     },
     initialize: function () {
         const me  = this;
@@ -49,8 +49,8 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
 			{
 				xtype       : 'textfield',
 				hidden		: true,
-				name		: 'mesh_id',
-				value		: me.meshId 
+				name		: 'ap_profile_id',
+				value		: me.apProfileId 
 			},
 		   	{
                 xtype		: 'passwordfield',
@@ -79,57 +79,6 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
             },
 			{
 				xtype       : 'cmbSchedule',
-				required	: true,		
-				errorTarget	: 'under',
-				disabled	: true
-			},
-			{
-				xtype	: 'label',
-				html	: '<i class="fas fa-signal"></i> Mesh Wi-Fi Channel',
-				margin	: 0,
-				padding : 5,
-				cls		: 'form-section'	
-			},
-			{
-                xtype       : 'cmbTwoGigChannels',
-                required	: true,		
-				errorTarget	: 'under'
-            },
-            {
-                xtype       : 'cmbFiveGigChannels',
-                required	: true,		
-				errorTarget	: 'under'
-            },
-            {
-                xtype       : 'passwordfield',
-                label  		: 'Client Key',
-                name        : 'client_key',
-                minLength   : 8,
-                revealable	: true,
-                required	: true,		
-				errorTarget	: 'under',
-				hidden		: true
-            },
-			{
-				xtype	: 'label',
-				html	: '<i class="fas fa-arrows-alt-h"></i> Bridge',
-				margin	: 0,
-				padding : 5,
-				cls		: 'form-section'	
-			},
-			{
-                xtype       : 'checkbox',      
-                label  		: 'Bridge Repeater WAN',
-                name        : 'eth_br_chk',
-                checked     : false,
-                labelWidth  : 'auto',
-                listeners   : {
-                    change  : 'chkEthBrChange'
-                }
-            },
-			{
-				xtype		: 'cmbEthBridgeOptions',
-				meshId		: me.meshId,
 				required	: true,		
 				errorTarget	: 'under',
 				disabled	: true
@@ -217,23 +166,6 @@ Ext.define('RdMobile.view.meshes.frmMeshEditNodeSettings', {
                 checked     : true,
                 labelWidth  : 'auto'
             },  
-            {
-                xtype       : 'checkbox',      
-                label  		: 'Reboot node if gateway is unreachable',
-                name        : 'gw_auto_reboot',
-                checked     : true,
-                labelWidth  : 'auto'
-            },     
-            {
-                xtype       : 'numberfield',
-                name        : 'gw_auto_reboot_time',
-                label  		: 'Reboot trigger time',
-                value       : 600,
-                maxValue    : 3600,
-                minValue    : 240,
-                required	: true,		
-				errorTarget	: 'under'
-            },
 			{
 				xtype	: 'label',
 				html	: '<i class="fas fa-arrows-alt-h"></i> Dynamic VLANs (Needs RADIUS)',

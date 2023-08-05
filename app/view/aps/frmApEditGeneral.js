@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.meshes.frmMeshEditGeneral', {
+Ext.define('RdMobile.view.aps.frmApEditGeneral', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmMeshEditGeneral',
+    xtype   : 'frmApEditGeneral',
     floated	: true,
     modal	: true,
     centered: true,
@@ -8,19 +8,19 @@ Ext.define('RdMobile.view.meshes.frmMeshEditGeneral', {
     fullscreen : true,
     padding	: 6,
     iconCls : 'x-fa fa-pencil-alt',
-    title	: 'Edit MESH Network General',
+    title	: 'Edit AP Profile General',
     root 	: false,
     requires	: [
-        'RdMobile.view.meshes.vcMeshEditGeneral',
+        'RdMobile.view.aps.vcApEditGeneral',
     ],
-    controller  : 'vcMeshEditGeneral',
+    controller  : 'vcApEditGeneral',
     buttons: {
         submit: {
             handler: 'onSubmit'
         }
     },
     listeners       : {
-        show : 'loadMeshSettings' //Trigger a load of the settings (This is only on the initial load)
+        show : 'loadApSettings' //Trigger a load of the settings (This is only on the initial load)
     },
     initialize: function () {
         const me  = this;    	          
@@ -28,33 +28,8 @@ Ext.define('RdMobile.view.meshes.frmMeshEditGeneral', {
         	{
 				xtype       : 'textfield',
 				hidden		: true,
-				name		: 'mesh_id',
-				value		: me.meshId	
-			},
-			{
-				xtype	: 'label',
-				html	: 'Grouping',
-				margin	: 0,
-				padding : 5,
-				cls		: 'form-section'	
-			},
-			
-			{
-                itemId      : 'displTag',
-                xtype       : 'label',
-                label  		: 'Grouping',
-                name        : 'tag_path'
-            },
-            {
-                xtype	: 'button',
-                text	: 'Change Grouping',
-                handler	: 'btnChangeGrouping'
-            },
-            {
-				xtype	: 'label',
-				margin	: 0,
-				padding : 10,
-				cls		: 'form-section'	
+				name		: 'ap_profile_id',
+				value		: me.apProfileId	
 			},
 		    {
 		        xtype       : 'textfield',

@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.meshes.frmMeshAdd', {
+Ext.define('RdMobile.view.aps.frmApProfileAdd', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmMeshAdd',
+    xtype   : 'frmApProfileAdd',
     floated	: true,
     modal	: true,
     centered: true,
@@ -8,12 +8,12 @@ Ext.define('RdMobile.view.meshes.frmMeshAdd', {
     fullscreen : true,
     padding	: 6,
     iconCls : 'x-fa fa-plus',
-    title	: 'Add MESH Network',
+    title	: 'Add AP Profile',
     root 	: false,
     requires	: [
-        'RdMobile.view.meshes.vcMeshAdd',
+        'RdMobile.view.aps.vcApProfileAdd',
     ],
-    controller  : 'vcMeshAdd',
+    controller  : 'vcApProfileAdd',
     buttons: {
         submit: {
             handler: 'onSubmit'
@@ -35,15 +35,7 @@ Ext.define('RdMobile.view.meshes.frmMeshAdd', {
 		        name        : 'name',
 		        required	: true,
 				errorTarget: 'under'
-		    },
-		    {
-                xtype       : 'checkbox',      
-                label    	: 'Create Multiple Items',
-                name        : 'multiple',
-                itemId		: 'chkMultiple',
-                checked     : false,
-                labelWidth  : 'auto'
-            },         
+		    }      
 		];	
 		me.setItems(items);        
  	}

@@ -1,6 +1,6 @@
-Ext.define('RdMobile.view.meshes.cmbMeshEntryPoints', {
+Ext.define('RdMobile.view.aps.cmbAccessPointEntryPoints', {
     extend          : 'Ext.field.ComboBox',
-    alias           : 'widget.cmbMeshEntryPoints',
+    alias           : 'widget.cmbAccessPointEntryPoints',
     label      		: 'Connects With',
     queryMode       : 'local',
     emptyText       : 'Select Entry Points',
@@ -19,7 +19,7 @@ Ext.define('RdMobile.view.meshes.cmbMeshEntryPoints', {
                     type    : 'ajax',
                     format  : 'json',
                     batchActions: true, 
-                    url     : '/cake4/rd_cake/meshes/mesh_entry_points.json',
+                    url     : '/cake4/rd_cake/ap-profiles/ap_profile_entry_points.json',
                     reader: {
                         type            : 'json',
                         rootProperty            : 'items',

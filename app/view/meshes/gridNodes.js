@@ -1,7 +1,7 @@
-Ext.define('RdMobile.view.meshes.gridMeshes', {
+Ext.define('RdMobile.view.meshes.gridNodes', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridMeshes',
-    emptyText: 'No MESH Networks Found',
+    xtype   : 'gridNodes',
+    emptyText: 'No Nodes Found',
     config  : {
         compdata: undefined,
     },
@@ -29,10 +29,10 @@ Ext.define('RdMobile.view.meshes.gridMeshes', {
 
         me.setStore(Ext.create(Ext.data.Store,{
         	autoLoad: false,
-            model: 'RdMobile.model.mMesh', //FIXME MODEL 
+            model: 'RdMobile.model.mNodeDetail', //FIXME MODEL 
             proxy: {
                 type        :'ajax',
-                url         : '/cake4/rd_cake/meshes/index.json',
+                url         : '/cake4/rd_cake/node-lists/index.json',
                 pageSize	: 50,
                 batchActions: true,
                 format      : 'json',
@@ -54,7 +54,7 @@ Ext.define('RdMobile.view.meshes.gridMeshes', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntMeshes').down('#lblMeta').setData(meta);
+                	this.up('cntNodes').down('#lblMeta').setData(meta);
                 },
                 scope: this
             },
@@ -63,7 +63,7 @@ Ext.define('RdMobile.view.meshes.gridMeshes', {
         }));
         
         me.setColumns( [{
-                text	: 'Meshes',
+                text	: 'Nodes',
                 xtype	: 'templatecolumn',
                 tpl		: new Ext.XTemplate(
                 	'<div class="grid-tpl-item">',

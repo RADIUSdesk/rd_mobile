@@ -7,6 +7,7 @@ Ext.define('RdMobile.view.devices.frmDeviceEnableDisable', {
     closable: true,
     fullscreen : true,
     padding	: 6,
+    iconCls     : 'x-fa fa-pencil-alt',
     title		: 'Enable / Disable',
     controller  : 'vcDeviceEnableDisable',
     standardSubmit : false,

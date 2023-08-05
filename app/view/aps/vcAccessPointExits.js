@@ -1,21 +1,21 @@
-Ext.define('RdMobile.view.meshes.vcMeshEntries', {
+Ext.define('RdMobile.view.aps.vcAccessPointExits', {
     extend  : 'Ext.app.ViewController',
-    alias   : 'controller.vcMeshEntries',
+    alias   : 'controller.vcAccessPointExits',
     config: {
-        urlDelete   : '/cake4/rd_cake/meshes/mesh-entry-delete.json',
-        urlAdd		: '/cake4/rd_cake/meshes/mesh-entry-add.json',
-        urlView		: '/cake4/rd_cake/meshes/mesh-entry-view.json',
-        urlEdit		: '/cake4/rd_cake/meshes/mesh-entry-edit.json',
+        urlDelete   : '/cake4/rd_cake/ap-profiles/ap-profile-exit-delete.json',
+        urlAdd		: '/cake4/rd_cake/ap-profiles/ap-profile-exit-add.json',
+        urlView		: '/cake4/rd_cake/ap-profiles/ap-profile-exit-view.json',
+        urlEdit		: '/cake4/rd_cake/ap-profiles/ap-profile-exit-edit.json',
         containedIn	: 'cntMainNetworks',
         backTo		: 0,
-        meshId		: undefined
+        apProfileId	: undefined
     },
     control: {
-    	'cntMeshEntries' : {
+    	'cntAccessPointExits' : {
     		show	: 'show',
     		hide	: 'hide'
     	},
-    	'gridMeshEntries': {
+    	'gridAccessPointExits': {
             select: 'onGridChildTap'
         },
         '#btnBack' : {
@@ -46,19 +46,19 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     back : function(btn){
         var me = this;
         var c = btn.up(me.getContainedIn());
-        var m = c.down('cntMeshes');       
+        var m = c.down('cntApProfiles');       
         c.setActiveItem(m);
-        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> MESH Networks');
+        me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-cubes fa-1x"></i> AP Profiles');
     }, 
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridMeshEntries').getStore().reload(); 
+    	me.getView().down('gridAccessPointExits').getStore().reload(); 
   
     },
-    updateEntries : function(info){
+    updateExits : function(info){
     	var me = this;
-    	me.setMeshId(info.mesh_id);
-    	me.getView().down('gridMeshEntries').getStore().getProxy().setExtraParam('mesh_id',info.mesh_id);
+    	me.setApProfileId(info.ap_profile_id);
+    	me.getView().down('gridAccessPointExits').getStore().getProxy().setExtraParam('ap_profile_id',info.ap_profile_id);
     	me.reload();    
     },
     delete  : function(btn){
@@ -84,22 +84,36 @@ Ext.define('RdMobile.view.meshes.vcMeshEntries', {
     },
     add : function(){
     	var me = this;
-        var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'meshId': me.getMeshId(),'submitUrl' : me.getUrlAdd()});
-        w.show(); 
+    	var w = Ext.widget('frmWifiExitPointAdd',{
+    		grid		: me.getView().down('gridAccessPointExits'),
+    		action		: 'add',					
+    		apProfileId : me.getApProfileId(),
+    		mode		: 'ap',		//Will determine the url called for available 'connect_with' list (from MESH or APdesk)
+    		submitUrl 	: me.getUrlAdd()
+    	});
+        w.show();
     },
     edit : function(){
     	var me = this;
     	me.getView().down('#asMenu').hide();
-        var entry_id  = me.sel.get('id');
+        var exit_id  = me.sel.get('id');
         Ext.Ajax.request({
 			url		: me.getUrlView(),
 			method	: 'get',
-		  	params	: {entry_id : entry_id},
+		  	params	: {exit_id : exit_id},
 		  	success: function(response) {
 		  		var jsonData	= Ext.JSON.decode(response.responseText);
         		if(jsonData.success){
-				    var w = Ext.widget('frmWifiEntryPoint',{grid:me.getView().down('gridMeshEntries'),'submitUrl' : me.getUrlEdit()});
-				    w.setValues(jsonData.data);
+				    var w = Ext.widget('frmWifiExitPointEdit',{
+				    	grid		: me.getView().down('gridAccessPointExits'),
+				    	action		: 'edit',
+				    	exit_type	: jsonData.data.type,
+				    	exit_id		: exit_id,
+				    	apProfileId	: me.getApProfileId(),
+				    	mode		: 'ap',		//Will determine the url called for available 'connect_with' list (from MESH or APdesk)
+				    	submitUrl 	: me.getUrlEdit(),
+				    	values		: jsonData.data //Exit ID will be in here
+				    });
         			w.show();       			        
         		}
 		  	},
