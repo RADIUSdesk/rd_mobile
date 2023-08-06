@@ -1,6 +1,7 @@
 Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
     extend      : 'Ext.Panel',
-    iconCls 	: 'x-fa fa-plus',
+    border		: true,
+    iconCls 	: 'x-fa fa-wifi',
     alias       : 'widget.pnlNodeRadioDetail',
     requires    : [
         'RdMobile.view.meshes.vcNodeRadioDetail'
@@ -16,20 +17,10 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
         	{
 				xtype		: 'togglefield',
 				name        : radio_nr +'_enabled',
+				itemId      : radio_nr +'_enabled',
 				label		: 'Enabled',
 				labelWidth	: '40%',
 				value       : 1,
-			    listeners   : {
-					change  : 'sldrToggleChange'
-				}
-			}
-			/*{
-			    xtype       : 'sldrToggle',
-			    fieldLabel  : 'Enabled',
-			    userCls     : 'sldrDark',
-			    name        : radio_nr +'_enabled',
-			    itemId      : radio_nr +'_enabled',
-			    value       : 1,
 			    listeners   : {
 					change  : 'sldrToggleChange'
 				}
@@ -43,6 +34,7 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
 			    xtype       : 'hiddenfield',
 			    name        : radio_nr +'_band',
 			    itemId      : 'band',
+			    value		: 20, //Default value
 			    listeners   : {
 			        change  : 'onBandChange'
 		        }
@@ -62,35 +54,28 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
 			        {
                         xtype       : 'checkboxgroup',
                         itemId      : 'check_defaults',
-                        fieldLabel  : 'Function As',
-                        columns     : 2,
+                        label  		: 'Function As',
                         vertical    : false,
                         items       : [
                             {
-                                boxLabel  : 'Mesh',
-                                width     : 120,
+                                label  	  : 'Mesh',
                                 name      : radio_nr +'_mesh',
                                 itemId    : 'chkMesh',
-                                margin    : '0 15 0 0',
-                                listeners : {
-                                    change: 'onChkMeshChange' //This selection will have a ripple effect on the availability to select channels
-                                }
+                                labelWidth: 170
                             },
                             {
-                                boxLabel  : 'Access Point',
-                                width     : 120,
-                                name      : radio_nr +'_ap',
-                                margin    : '0 0 0 15'
+                                label  		: 'Access Point',
+                                name      	: radio_nr +'_ap',
+                                itemId      : 'chkAp',
+                                labelWidth  : 'auto'
                             }     
                         ]
                     },
 			        {
 				        xtype       : 'cmbTwoGigChannels',
 				        name        : radio_nr+'_channel_two',
-				        hidden		: true,
-				        disabled	: true,
-				        inclAuto    : true,
-				        width       : w_sec,
+				        hidden		: false,
+				        disabled	: false,
 				        itemId		: 'numRadioTwoChan'
 			        },
 			        {
@@ -98,28 +83,22 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
 				        name        : radio_nr+'_channel_five',
 				        hidden		: true,
 				        disabled	: true,
-				        width       : w_sec,
 				        itemId		: 'numRadioFiveChan'
 			        },
 			        {
 			            xtype       : 'container',
                         layout      : 'hbox',
-                        width       : w_sec+15,
                         items       : [
                             {
                                 xtype       : 'displayfield',
-                                width       : 180,
-                                margin      : '15 0 0 15',
-                                padding     : 0,
-                                fieldLabel  : 'TX Power(dBm)',
-                                value       : 0
+                                width       : 80,
+                                value       : '0(dBm)'
                             },
                             {
 			                    xtype       : 'sliderfield',
                                 name        : radio_nr +'_txpower',
-                                userCls     : 'sldrDark',
                                 itemId      : 'sldrPower',
-                                width       : 150,
+                                flex		: 1,
                                 increment   : 1,
                                 minValue    : 0,
                                 maxValue    : 30,
@@ -131,68 +110,63 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
                     },
                     {
                         xtype       : 'radiogroup',
-                        fieldLabel  : 'Width',
+                        label  		: 'Width',
                         itemId      : 'rgrpWidth',
-                        columns     : 4,
                         vertical    : false,
                         items       : [
                             {
-                                boxLabel  : '20MHz',
+                                label  	  : '20MHz',
                                 name      : radio_nr +'_width',
                                 itemId    : 'radio_width_20',
-                                inputValue: '20',
-                                margin    : '0 0 0 0',
-                                width     : w_rb
+                                value	  : '20',
+								labelWidth: 80
                             }, 
                             {
-                                boxLabel  : '40MHz',
+                                label  	  : '40MHz',
                                 name      : radio_nr +'_width',
                                 itemId    : 'radio_width_40',
-                                inputValue: '40',
-                                margin    : '0 0 0 0',
-                                width     : w_rb
+                                value	  : '40',
+                                labelWidth: 80
                             },
                             { 
-                                boxLabel  : '80MHz',
+                                label     : '80MHz',
                                 name      : radio_nr +'_width',
                                 itemId    : 'radio_width_80',
-                                inputValue: '80',
+                                value	  : '80',
                                 hidden    : true,
-                                margin    : '0 0 0 0',
-                                width     : w_rb
+                                labelWidth: 80
                             },
                             {
-                                boxLabel  : '160MHz',
+                                label     : '160MHz',
                                 name      : radio_nr +'_width',
                                 itemId    : 'radio_width_160',
-                                inputValue: '160',
+                                value	  : '160',
                                 hidden    : true,
-                                margin    : '0 0 0 0',
-                                width     : w_rb
+                                labelWidth: 80
                             }
                         ]
                     },
                     {
                         xtype       : 'checkbox',
-                        boxLabel    : 'Noscan',
+                        label       : 'Noscan',
                         name        : radio_nr +'_noscan',
-                        margin      : '0 0 0 15'
+                        labelWidth  : 'auto'
+
                     },
                     {
                         xtype       : 'checkbox',
-                        boxLabel    : 'Include Beacon Interval',
+                        label       : 'Include Beacon Interval',
                         name        : radio_nr +'_include_beacon_int',
-                        margin      : '0 0 0 15',
+                        labelWidth  : 'auto',
                         listeners   : {
 			                change  : 'OnChkIncludeBeaconIntervalChange'
 		                }
                     },
                     {
 			            xtype       : 'numberfield',
-			            anchor      : '100%',
 			            name        : radio_nr +'_beacon_int',
 			            itemId      : 'nfBeaconInterval',
-			            fieldLabel  : 'Beacon Interval',
+			            label       : 'Beacon Interval',
 			            value       : 100,
 			            hidden      : true,
 			            disabled    : true,
@@ -201,21 +175,20 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
 			        },
 			        {
                         xtype       : 'checkbox',
-                        boxLabel    : 'Include Distance',
+                        label       : 'Include Distance',
                         name        : radio_nr +'_include_distance',
-                        margin      : '0 0 0 15',
+                        labelWidth  : 'auto',
                         listeners   : {
 			                change  : 'OnChkIncludeDistanceChange'
 		                }
                     },
                     {
 			            xtype       : 'numberfield',
-			            anchor      : '100%',
 			            name        : radio_nr +'_distance',
 			            itemId      : 'nfDistance',
 			            hidden      : true,
 			            disabled    : true,
-			            fieldLabel  : 'Distance',
+			            label       : 'Distance',
 			            value       : 300,
 			            maxValue    : 3000,
 			            minValue    : 1
@@ -223,14 +196,11 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
                     {
                         xtype       : 'textareafield',
                         grow        : true,
-                        fieldLabel  : 'HT Capabilities',
-                        name        : radio_nr +'_ht_capab',
-                        allowBlank  : true,
-                        width       : 400,
-                        labelClsExtra: 'lblRd'
+                        label       : 'HT Capabilities',
+                        name        : radio_nr +'_ht_capab'
                     }     
                 ]
-            }*/
+            }
         ]; 
         me.setItems(items);      
         this.callParent(arguments);

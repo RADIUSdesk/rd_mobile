@@ -10,8 +10,10 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
     iconCls : 'x-fa fa-plus',
     title	: 'Add MESH Node',
     root 	: false,
+    action	: 'edit',
     requires	: [
         'RdMobile.view.meshes.vcMeshAddEditNode',
+        'RdMobile.view.components.cmbInternetConnection'
     ],
     controller  : 'vcMeshAddEditNode',
     buttons: {
@@ -22,7 +24,12 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
     initialize: function () {
         const me  = this; 
         
-        var cmb = Ext.create('RdMobile.view.components.cmbMesh',{});       
+        var cmb = Ext.create('RdMobile.view.components.cmbMesh',{});
+        
+        var hide_multiple  = true; 
+        if(me.action == 'add'){
+        	hide_multiple = false;
+        }       
            	          
         var items = [
 			{
@@ -31,7 +38,7 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
                 itemId		: 'chkMultiple',
                 checked     : false,
                 labelWidth  : 'auto',
-                hidden		: true//FIXME Set this programatically
+                hidden		: hide_multiple
             },
 			cmb,
 		    {
@@ -60,6 +67,13 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
 			    //fieldStyle  : 'text-transform:uppercase',			    
 		    },
 		    {
+                xtype       : 'cmbInternetConnection',
+                itemId      : 'cmbInternetConnection',
+                listeners   : {
+		            //change : 'onCmbInternetConnectionChange'
+			    }   			                
+            },
+		    {
 				xtype	: 'label',
 				html	: '<i class="fas fa-cogs"></i> RADIOS',
 				margin	: 0,
@@ -70,21 +84,21 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
                 xtype       : 'pnlNodeRadioDetail',
                 itemId      : 'pnlRadioR0',
                 radio_nr    : 0,
-                hidden      : false,
+                hidden      : true,
                 ui          : 'panel-green'
             },
             {
                 xtype       : 'pnlNodeRadioDetail',
                 itemId      : 'pnlRadioR1',
                 radio_nr    : 1,
-                hidden      : false,
+                hidden      : true,
                 ui          : 'panel-green'
             },
             {
                 xtype       : 'pnlNodeRadioDetail',
                 itemId      : 'pnlRadioR2',
                 radio_nr    : 2,
-                hidden      : false,
+                hidden      : true,
                 ui          : 'panel-green'
             }
 		             

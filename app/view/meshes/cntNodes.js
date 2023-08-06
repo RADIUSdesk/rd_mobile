@@ -90,6 +90,18 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
 					 textAlign  : 'left',
 					 itemId		: 'btnDelete'
 				 },
+				 {
+					 text		: 'Edit',
+					 iconCls	: 'x-fa fa-pen',
+					 textAlign  : 'left',
+					 itemId		: 'btnEdit'
+				 },
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
 				{
 					 text		: 'More Detail',
 					 iconCls	: 'x-fa fa-info-circle',

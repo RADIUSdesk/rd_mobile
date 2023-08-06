@@ -3,7 +3,7 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     alias   : 'controller.vcNodes',
     sel		: null,
     config: {
-        urlDelete           : '/cake4/rd_cake/meshes/delete.json',
+        urlDelete           : '/cake4/rd_cake/meshes/mesh_node_delete.json',
         containedIn			: 'cntMainNetworks',
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
@@ -32,6 +32,9 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
       	},
       	'#txtFilterValue' : {
       		change	: 'txtFilterValueChange'
+      	},
+      	'#btnEdit' : {
+      		tap	: 'edit'
       	},
       	'#btnAdd' : {
       		tap	: 'add'
@@ -121,9 +124,15 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     	});   	
     	me.getAsMenu().hide();
     },
+    edit  : function(btn){
+    	var me = this;	
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridNodes'), node_id: me.sel.get('id'),action: 'edit'});
+        w.show();
+    },
     add : function(){
     	var me = this;
-    	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridNodes')});
+    	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridNodes'),action: 'add'});
         w.show(); 
     },
     onGridChildTap : function(a,sel){

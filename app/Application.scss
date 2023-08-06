@@ -136,3 +136,29 @@ $enable-font-awesome: dynamic(true);
 	color:#027534;
 }
 
+
+@include panel-ui(
+    $ui: 'panel-blue',
+    $header-color: #2e5696,
+    $header-icon-color: #2e5696,
+    $header-background-color: #e0eaf9,
+    $border-color: #e0eaf9,
+    $tool-color: #1b587d,
+    $header-min-height-big: 20px,
+    $header-min-height:10px,
+    $background-color: transparent,  
+    $body-background-color: transparentize(#e0eaf9, 0.75)
+)
+
+@include panel-ui(
+    $ui: 'panel-green',
+    $header-color: #0e3a24,
+    $header-icon-color: #0e3a24,
+    $header-background-color: #e0f9ed,
+    $border-color: #e0f9ed,
+    $tool-color: #174621,
+    $header-min-height-big: 20px,
+    $header-min-height:10px,
+    $background-color: transparent,   
+    $body-background-color: transparentize(#e0f9ed, 0.75)
+)

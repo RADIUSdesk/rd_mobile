@@ -36,11 +36,11 @@ Ext.define('RdMobile.view.meshes.cmbHardwareOptions', {
             '</div>',
         '</tpl>'
     ),
-     displayTpl      : Ext.create('Ext.XTemplate',
+   /*  displayTpl      : Ext.create('Ext.XTemplate',
         '<tpl for=".">',
               '{vendor} - {model}',
         '</tpl>'
-    ),   
+    ),   */
     initialize: function () {
         var me      = this;
         var s       = Ext.create('Ext.data.Store', {

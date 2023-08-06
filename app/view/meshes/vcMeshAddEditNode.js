@@ -2,8 +2,10 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcMeshAddEditNode',
     config: {
-       	urlAdvancedSettingsForModel : '/cake4/rd_cake/meshes/advanced_settings_for_model.json',
-        urlViewNode : '/cake4/rd_cake/meshes/mesh-node-view.json'
+        urlAdd	: '/cake4/rd_cake/meshes/mesh-node-add.json',
+        urlView	: '/cake4/rd_cake/meshes/mesh-node-view.json',
+        urlEdit	: '/cake4/rd_cake/meshes/mesh-node-edit.json',
+        urlAdvancedSettingsForModel : '/cake4/rd_cake/meshes/advanced_settings_for_model.json',
     },
     control: {
     	'cmbHardwareOptions' : {
@@ -17,8 +19,9 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
     		btn.up('formpanel').submit({
                 clientValidation    : true,
                 url                 : me.getUrlAdd(),
-                waitMsg				: 'Add MESH Network',
+                waitMsg				: 'Add MESH Node',
                 success: function(form, result) {
+                	console.log(form.down('#chkMultiple').isChecked);
                 	if(!form.down('#chkMultiple').isChecked){
             	    	form.close();
             	    }
@@ -52,27 +55,30 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
 		 	url     : me.getUrlAdvancedSettingsForModel(), 
             method  : 'GET',
             params  : params,
-		  	success: function(a,b,c) {
-		  		 var w  = me.getView();
-                me.radioCountChange(b.result.data.radio_count);
-                /*
-                var i;
-                var n = b.result.data.radio_count;
-                for (i = 0; i < n; i++) {
-                    if(b.result.data['radio'+i+'_disabled']){
-	                    w.down('#radio'+i+'_enabled').setValue(0,0);
-	                }else{
-	                    w.down('#radio'+i+'_enabled').setValue(1,1);
-	                }    
-                }*/
-                return true;
+		  	success: function(response) {		  	
+		  		var jsonData	= Ext.JSON.decode(response.responseText);
+        		if(jsonData.success){
+				    me.getView().setValues(jsonData.data);
+				    var w  = me.getView();
+		            me.radioCountChange(jsonData.data.radio_count);               
+		            var i;
+		            var n = jsonData.data.radio_count;
+		            for (i = 0; i < n; i++) {
+		                if(jsonData.data['radio'+i+'_disabled']){
+			                w.down('#radio'+i+'_enabled').setValue(false);
+			            }else{
+			                w.down('#radio'+i+'_enabled').setValue(true);
+			            }    
+		            }		            
+		            return true;				       
+		    	}		  		
 		  	},
 		  	failure: function() {
 		    	console.log('in failure');
 		  	}
 		});         
 	},
-	 radioCountChange: function(count){
+	radioCountChange: function(count){
       
         var me 		= this;
         var form    = me.getView();
@@ -80,42 +86,42 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             count = 0;
         }
         
-        form.down('#cmbInternetConnection').setDisabled(false);  
+        //form.down('#cmbInternetConnection').setDisabled(false);  
       
         if(count == 0){     
              form.down('#pnlRadioR0').hide();
-             form.down('#pnlRadioR0').setDisabled(true);
+             form.down('#pnlRadioR0').disable()
              form.down('#pnlRadioR1').hide();
-             form.down('#pnlRadioR1').setDisabled(true);
+             form.down('#pnlRadioR1').disable()
              form.down('#pnlRadioR2').hide();
-             form.down('#pnlRadioR2').setDisabled(true);
+             form.down('#pnlRadioR2').disable()
         }
         
         if(count == 1){
             form.down('#pnlRadioR0').show();
-            form.down('#pnlRadioR0').setDisabled(false);      
+            form.down('#pnlRadioR0').enable()      
             form.down('#pnlRadioR1').hide();
-            form.down('#pnlRadioR1').setDisabled(true);
+            form.down('#pnlRadioR1').disable();
             form.down('#pnlRadioR2').hide();
-            form.down('#pnlRadioR2').setDisabled(true);                 
+            form.down('#pnlRadioR2').disable();                
         }
         
         if(count == 2){
             form.down('#pnlRadioR0').show();
-            form.down('#pnlRadioR0').setDisabled(false); 
+            form.down('#pnlRadioR0').enable(); 
             form.down('#pnlRadioR1').show();
-            form.down('#pnlRadioR1').setDisabled(false); 
+            form.down('#pnlRadioR1').enable(); 
             form.down('#pnlRadioR2').hide();
-            form.down('#pnlRadioR2').setDisabled(true);          
+            form.down('#pnlRadioR2').disable();       
         }
         
         if(count == 3){
             form.down('#pnlRadioR0').show();
-            form.down('#pnlRadioR0').setDisabled(false);
+            form.down('#pnlRadioR0').enable();
             form.down('#pnlRadioR1').show();
-            form.down('#pnlRadioR1').setDisabled(false);
+            form.down('#pnlRadioR1').enable()
             form.down('#pnlRadioR2').show();
-            form.down('#pnlRadioR2').setDisabled(false);      
+            form.down('#pnlRadioR2').enable();     
         }      
     },    
 });
