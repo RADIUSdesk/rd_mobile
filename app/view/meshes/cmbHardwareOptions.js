@@ -12,7 +12,7 @@ Ext.define('RdMobile.view.meshes.cmbHardwareOptions', {
     itemTpl         : Ext.create('Ext.XTemplate',
         '<tpl for=".">',
             '<div  class="x-boundlist-item">',
-             //   '<img src="/cake4/rd_cake/img/hardwares/{photo_file_name}" alt="Hardware Model" style="float:right;width:42px;height:42px;">',
+                '<img src="/cake4/rd_cake/img/hardwares/{photo_file_name}" alt="Hardware Model" style="float:right;width:42px;height:42px;">',
                 '<div>',
 		            '<span style="font-weight:bold;font-size:16px;">{vendor}</span>',
                	    '<span style="font-size: 14px;color: #4d4d4d;">   {model}</span>',

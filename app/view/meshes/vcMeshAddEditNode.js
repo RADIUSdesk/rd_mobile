@@ -35,6 +35,64 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
     		console.log("Form does not validate");
     	}
     },
+    onCmbInternetConnectionChange: function(cmb,value){
+        var me              = this;
+        var form            = cmb.up('formpanel');
+        var cntWbW          = form.down('#cntWbW');
+        var pnlWanStatic    = form.down('#pnlWanStatic');
+        var pnlWanPppoe     = form.down('#pnlWanPppoe');
+        var pnlWifiStatic   = form.down('#pnlWifiStatic');
+        var pnlWifiPppoe    = form.down('#pnlWifiPppoe');
+        var pnlQmi          = form.down('#pnlQmi');
+              
+        if(value == 'wifi'){
+            cntWbW.show();
+            cntWbW.enable(); 
+        }else{
+            cntWbW.hide();
+            cntWbW.disable();    
+        }
+        
+        if(value == 'wan_static'){
+            pnlWanStatic.setHidden(false);
+            pnlWanStatic.setDisabled(false);   
+        }else{
+            pnlWanStatic.setHidden(true);
+            pnlWanStatic.setDisabled(true);
+        }
+
+        if(value== 'wan_pppoe'){
+            pnlWanPppoe.setHidden(false);
+            pnlWanPppoe.setDisabled(false);   
+        }else{
+            pnlWanPppoe.setHidden(true);
+            pnlWanPppoe.setDisabled(true);
+        }
+        
+        if(value == 'wifi_static'){
+            pnlWifiStatic.setHidden(false);
+            pnlWifiStatic.setDisabled(false);   
+        }else{
+            pnlWifiStatic.setHidden(true);
+            pnlWifiStatic.setDisabled(true);
+        } 
+        
+        if(value == 'wifi_pppoe'){
+            pnlWifiPppoe.setHidden(false);
+            pnlWifiPppoe.setDisabled(false);   
+        }else{
+            pnlWifiPppoe.setHidden(true);
+            pnlWifiPppoe.setDisabled(true);
+        }
+        
+	  	if(value == 'qmi'){
+            pnlQmi.setHidden(false);
+            pnlQmi.setDisabled(false);   
+        }else{
+            pnlQmi.setHidden(true);
+            pnlQmi.setDisabled(true);
+        }           
+    },   
     onCmbHardwareOptionsChange: function(cmb,val){
      
 		var me      = this;
@@ -86,7 +144,7 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             count = 0;
         }
         
-        //form.down('#cmbInternetConnection').setDisabled(false);  
+        form.down('#cmbInternetConnection').disable();
       
         if(count == 0){     
              form.down('#pnlRadioR0').hide();
@@ -95,6 +153,11 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
              form.down('#pnlRadioR1').disable()
              form.down('#pnlRadioR2').hide();
              form.down('#pnlRadioR2').disable()
+             
+            //Hide the whole option of selecting wbw
+            form.down('#cmbInternetConnection').setValue('auto_detect');//This should take care of hiding the wbw options
+            form.down('#cmbInternetConnection').disable();          
+             
         }
         
         if(count == 1){
@@ -103,7 +166,31 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             form.down('#pnlRadioR1').hide();
             form.down('#pnlRadioR1').disable();
             form.down('#pnlRadioR2').hide();
-            form.down('#pnlRadioR2').disable();                
+            form.down('#pnlRadioR2').disable();
+            
+            form.down('#wbw_radio_1').disable();
+            form.down('#wbw_radio_1').hide(); 
+            form.down('#wbw_radio_2').disable();
+            form.down('#wbw_radio_2').hide(); 
+            
+            form.down('#wifi_static_radio_1').disable();
+            form.down('#wifi_static_radio_1').hide(); 
+            form.down('#wifi_static_radio_2').disable();
+            form.down('#wifi_static_radio_2').hide(); 
+            
+            form.down('#wifi_pppoe_radio_1').disable();
+            form.down('#wifi_pppoe_radio_1').hide(); 
+            form.down('#wifi_pppoe_radio_2').disable()
+            form.down('#wifi_pppoe_radio_2').hide(); 
+            
+            //Only one option thus hide it 
+            form.down('#wifi_static_radio_0').setValue(true);  
+            form.down('#wifi_pppoe_radio_0').setValue(true);     
+            form.down('#rgrpWifiPppoeRadio').hide();
+            form.down('#rgrpWifiStaticRadio').hide();       
+            form.down('#wbw_radio_0').setValue(true);       
+            form.down('#rgrpWbWradio').hide();    
+                                     
         }
         
         if(count == 2){
@@ -112,7 +199,26 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             form.down('#pnlRadioR1').show();
             form.down('#pnlRadioR1').enable(); 
             form.down('#pnlRadioR2').hide();
-            form.down('#pnlRadioR2').disable();       
+            form.down('#pnlRadioR2').disable(); 
+            
+             form.down('#wbw_radio_1').enable();
+            form.down('#wbw_radio_1').show(); 
+            form.down('#wbw_radio_2').disable();
+            form.down('#wbw_radio_2').hide();
+            
+            form.down('#wifi_static_radio_1').enable();
+            form.down('#wifi_static_radio_1').show(); 
+            form.down('#wifi_static_radio_2').disable();
+            form.down('#wifi_static_radio_2').hide();
+            
+            form.down('#wifi_pppoe_radio_1').enable();
+            form.down('#wifi_pppoe_radio_1').show(); 
+            form.down('#wifi_pppoe_radio_2').disable();
+            form.down('#wifi_pppoe_radio_2').hide();
+            
+            form.down('#rgrpWbWradio').show();
+            form.down('#rgrpWifiPppoeRadio').show();
+            form.down('#rgrpWifiStaticRadio').show();            
         }
         
         if(count == 3){
@@ -121,7 +227,27 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             form.down('#pnlRadioR1').show();
             form.down('#pnlRadioR1').enable()
             form.down('#pnlRadioR2').show();
-            form.down('#pnlRadioR2').enable();     
+            form.down('#pnlRadioR2').enable();
+            
+            form.down('#wbw_radio_1').enable();
+            form.down('#wbw_radio_1').show(); 
+            form.down('#wbw_radio_2').enable();
+            form.down('#wbw_radio_2').show();
+            
+            form.down('#wifi_static_radio_1').enable();
+            form.down('#wifi_static_radio_1').show(); 
+            form.down('#wifi_static_radio_2').enable();
+            form.down('#wifi_static_radio_2').show();
+            
+            form.down('#wifi_pppoe_radio_1').enable();
+            form.down('#wifi_pppoe_radio_1').show(); 
+            form.down('#wifi_pppoe_radio_2').enable();
+            form.down('#wifi_pppoe_radio_2').show();
+            
+            form.down('#rgrpWbWradio').show();
+            form.down('#rgrpWifiPppoeRadio').show();
+            form.down('#rgrpWifiStaticRadio').show();      
+                 
         }      
     },    
 });
