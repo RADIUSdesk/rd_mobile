@@ -147,7 +147,8 @@ $enable-font-awesome: dynamic(true);
     $header-min-height-big: 20px,
     $header-min-height:10px,
     $background-color: transparent,  
-    $body-background-color: transparentize(#e0eaf9, 0.75)
+    $body-background-color:  #666699,
+    $border-color: #2e5696
 )
 
 @include panel-ui(
@@ -160,5 +161,6 @@ $enable-font-awesome: dynamic(true);
     $header-min-height-big: 20px,
     $header-min-height:10px,
     $background-color: transparent,   
-    $body-background-color: transparentize(#e0f9ed, 0.75)
+    $body-background-color: #1c805e,
+    $border-color: #0e3a24
 )

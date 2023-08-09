@@ -92,7 +92,40 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             pnlQmi.setHidden(true);
             pnlQmi.setDisabled(true);
         }           
-    },   
+    }, 
+    onCmbEncryptionOptionsChangeWbw : function(cmb,value){
+        var me      = this;
+        var form    = cmb.up('formpanel');
+        if(value == 'none'){
+            form.down('#wbw_key').hide();
+            form.down('#wbw_key').disable(); 
+        }else{
+            form.down('#wbw_key').show();
+            form.down('#wbw_key').enable();  
+        }
+    },
+    onCmbEncryptionOptionsChangeStatic : function(cmb,value){
+        var me      = this;
+        var form    = cmb.up('formpanel');
+        if(value == 'none'){
+            form.down('#wifi_static_key').hide();
+            form.down('#wifi_static_key').disable();  
+        }else{
+            form.down('#wifi_static_key').show();
+            form.down('#wifi_static_key').enable();  
+        }
+    },
+    onCmbEncryptionOptionsChangePppoe : function(cmb,value){
+        var me      = this;
+        var form    = cmb.up('formpanel');
+        if(value == 'none'){
+            form.down('#wifi_pppoe_key').hide();
+            form.down('#wifi_pppoe_key').disable();  
+        }else{
+            form.down('#wifi_pppoe_key').show();
+            form.down('#wifi_pppoe_key').enable();  
+        }
+    },  
     onCmbHardwareOptionsChange: function(cmb,val){
      
 		var me      = this;
@@ -136,6 +169,25 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
 		  	}
 		});         
 	},
+	loadBasicSettings: function(form){
+        var me      = this;         
+        if(me.getView().action == 'edit'){ //Only Edit needs to load data       
+		    	Ext.Ajax.request({
+			 	url     : me.getUrlView(), 
+		        method  : 'GET',
+		        params  : {'node_id': me.getView().node_id},
+			  	success: function(response) {		  	
+			  		var jsonData	= Ext.JSON.decode(response.responseText);
+		    		if(jsonData.success){
+						 me.getView().setValues(jsonData.data);       
+					}		  		
+			  	},
+			  	failure: function() {
+					console.log('in failure');
+			  	}
+			});             
+        }  
+    },
 	radioCountChange: function(count){
       
         var me 		= this;
@@ -144,7 +196,7 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             count = 0;
         }
         
-        form.down('#cmbInternetConnection').disable();
+        form.down('#cmbInternetConnection').enable();
       
         if(count == 0){     
              form.down('#pnlRadioR0').hide();
@@ -249,5 +301,32 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
             form.down('#rgrpWifiStaticRadio').show();      
                  
         }      
-    },    
+    },
+    onCmbQmiOptionsChange: function(cmb,value){
+        var me      = this;
+        var form    = cmb.up('formpanel');
+        if(value == 'none'){
+            form.down('#qmi_username').hide();
+            form.down('#qmi_username').disable(); 
+            form.down('#qmi_password').hide();
+            form.down('#qmi_password').disable();  
+        }else{
+            form.down('#qmi_username').show();
+            form.down('#qmi_username').enable();  
+            form.down('#qmi_password').show();
+            form.down('#qmi_password').enable();
+        }
+    },
+    chkEnableSchedulesChange : function(chk,value){
+		var me 		= this;
+		var form	= chk.up('formpanel');
+		var cnt	    = form.down('#cntSchedule');
+		if(value){
+		    cnt.show();
+            cnt.enable(); 
+		}else{
+			cnt.hide();
+            cnt.disable(); 
+		}
+	}    
 });

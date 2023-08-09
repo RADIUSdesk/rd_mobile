@@ -50,7 +50,7 @@ Ext.define('RdMobile.view.components.cmbMesh', {
                     totalProperty   : 'totalCount' //Required for dynamic paging
                 }
             },
-            autoLoad    : false
+            autoLoad    : true
         });
         me.setStore(s);
         this.callParent(arguments);
