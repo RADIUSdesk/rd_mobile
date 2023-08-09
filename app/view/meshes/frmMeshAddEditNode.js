@@ -11,6 +11,7 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
     title	: 'Add MESH Node',
     root 	: false,
     action	: 'edit',
+    node_id	: 0, //Default for add
     requires	: [
         'RdMobile.view.meshes.vcMeshAddEditNode',
         'RdMobile.view.components.cmbInternetConnection'
@@ -57,6 +58,13 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
                 labelWidth  : 'auto',
                 hidden		: hide_multiple
             },
+            {
+			    itemId      : 'node_id',
+			    xtype       : 'textfield',
+			    name        : 'id',
+			    hidden      : true,
+			    value       : me.node_id
+		    },
 			cmb,
 		    {
 		        xtype       : 'textfield',
@@ -68,7 +76,8 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
 		    {
 		        xtype       : 'textfield',
 		        label  		: 'Description',
-		        name        : 'description'
+		        name        : 'description',
+		        value		: ''
 	        },
 	        {
 	        	xtype       : 'cmbHardwareOptions'  

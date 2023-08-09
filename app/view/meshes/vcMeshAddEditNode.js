@@ -13,16 +13,21 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
     	}
     },
     onSubmit : function(btn){   
-    	var me 		= this;
-    	var store 	= me.getView().grid.getStore();  	
+    	var me 		= this;  	
+    	var url		= me.getUrlAdd();
+    	var store 	= me.getView().grid.getStore();    	
+    	if(me.getView().action == 'edit'){
+    		url = me.getUrlEdit();
+    	}
+    	    	  	    	 	
     	if(btn.up('formpanel').validate()){    	
     		btn.up('formpanel').submit({
                 clientValidation    : true,
-                url                 : me.getUrlAdd(),
+                url                 : url,
                 waitMsg				: 'Add MESH Node',
                 success: function(form, result) {
-                	console.log(form.down('#chkMultiple').isChecked);
-                	if(!form.down('#chkMultiple').isChecked){
+                	console.log(form.down('#chkMultiple').isChecked());
+                	if(!form.down('#chkMultiple').isChecked()){
             	    	form.close();
             	    }
             	    store.reload();        
@@ -328,5 +333,22 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
 			cnt.hide();
             cnt.disable(); 
 		}
-	}    
+	},
+	onDisabledchange : function(container,disabled){
+    	var me = this;
+    	var fields = Ext.ComponentQuery.query('field',container);
+    	if(disabled){ 	 		
+    		Ext.Array.forEach(fields,function(a,b){  		
+    			if((a.getRequired())&&(!a.isHidden)){
+    				a.disable();
+    			}		
+    		},this);  	
+    	}else{
+    		Ext.Array.forEach(fields,function(a,b){  		
+    			if((a.getRequired())&&(!a.isHidden)){
+    				a.enable();
+    			}		
+    		},this);   	
+    	}
+    }   
 });

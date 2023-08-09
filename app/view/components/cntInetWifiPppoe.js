@@ -6,6 +6,9 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
     style   : 'background:rgb(46, 95, 115);',
     padding	: 10,
     margin	: 10,
+    listeners       : {
+        disabledchange : 'onDisabledchange'
+    },
     items   :  [
         {
             label  		: 'SSID',
@@ -15,7 +18,8 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
             errorTarget : 'under',
             regex       : /^[\w\-\s]+$/,
             regexText   : "Only words allowed", //FIXME
-            xtype       : 'textfield'
+            xtype       : 'textfield',
+            disabled	: true
         }, 
         { 
             xtype       : 'cmbEncryptionOptionsSimple',
@@ -67,7 +71,8 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
             label  		: 'Username',
             name        : 'wifi_pppoe_username',
            	required	: true,
-            errorTarget : 'under'
+            errorTarget : 'under',
+            disabled	: true
         },
         {
             xtype       : 'passwordfield',
@@ -75,24 +80,28 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
             name      	: 'wifi_pppoe_password',
             label     	: 'Password',
             required	: true,
-            errorTarget : 'under'
+            errorTarget : 'under',
+            disabled	: true
         }, 
         {
             xtype       : 'textfield',
             label  		: 'DNS Primary',
-            name        : 'wifi_pppoe_dns_1'
+            name        : 'wifi_pppoe_dns_1',
+            value		: ''
             //vtype       : 'IPAddress'//FIXME
         },
         {
             xtype       : 'textfield',
             label  		: 'DNS Secondary',
             name        : 'wifi_pppoe_dns_2',
+            value		: ''
             //vtype       : 'IPAddress'//FIXME
         },
         {
 	        xtype       : 'textfield',
 	        label  		: 'My Own MAC',
 	        name        : 'wifi_pppoe_mac',
+	        value		: ''
 	        ////vtype       : 'MacAddress',
 	        ////fieldStyle  : 'text-transform:uppercase'
         },
@@ -100,6 +109,7 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
 	        xtype       : 'textfield',
 	        label  		: 'MTU',
 	        name        : 'wifi_pppoe_mtu',
+	        value		: ''
 	        ////vtype       : 'Numeric',
         }       
     ]

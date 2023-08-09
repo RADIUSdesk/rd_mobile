@@ -20,7 +20,8 @@ Ext.define('RdMobile.view.components.cntInetQmi', {
             name        : 'qmi_username',
             itemId      : 'qmi_username',
             hidden      : true,
-            disabled    : true
+            disabled    : true,
+            value		: ''
         },
         {
             xtype       : 'textfield',
@@ -28,17 +29,20 @@ Ext.define('RdMobile.view.components.cntInetQmi', {
             name        : 'qmi_password',
             itemId      : 'qmi_password',
             hidden      : true,
-            disabled    : true
+            disabled    : true,
+            value		: ''
         },
         {
             xtype       : 'textfield',
             label  		: 'APN',
-            name        : 'qmi_apn'
+            name        : 'qmi_apn',
+            value		: ''
         }, 
         {
             xtype       : 'textfield',
             label  		: 'Pincode',
-            name        : 'qmi_pincode'
+            name        : 'qmi_pincode',
+            value		: ''
         }
     ]
 });

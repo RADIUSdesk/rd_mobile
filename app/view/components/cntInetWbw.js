@@ -6,6 +6,9 @@ Ext.define('RdMobile.view.components.cntInetWbw', {
     style   : 'background:rgb(46, 95, 115);',
     padding	: 10,
     margin	: 10,
+    listeners       : {
+        disabledchange : 'onDisabledchange'
+    },
     items   : [
         {
             label  		: 'SSID',
@@ -16,7 +19,8 @@ Ext.define('RdMobile.view.components.cntInetWbw', {
             //regexText   : "Only words allowed",
             //emptyText   : 'Specify a value to continue', //FIXME Add check
             xtype       : 'textfield',
-            errorTarget : 'under'
+            errorTarget : 'under',
+            disabled	: true
         }, 
         { 
             xtype       : 'cmbEncryptionOptionsSimple',
@@ -33,7 +37,8 @@ Ext.define('RdMobile.view.components.cntInetWbw', {
             minLength   : 8,//FIXME Add min check
             hidden      : true,
             disabled    : true,
-            errorTarget: 'under'
+            errorTarget: 'under',
+            disabled	: true
         },
         {
             xtype       : 'radiogroup',

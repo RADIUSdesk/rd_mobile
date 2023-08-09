@@ -197,7 +197,8 @@ Ext.define('RdMobile.view.meshes.pnlNodeRadioDetail', {
                         xtype       : 'textareafield',
                         grow        : true,
                         label       : 'HT Capabilities',
-                        name        : radio_nr +'_ht_capab'
+                        name        : radio_nr +'_ht_capab',
+                        value		: ''
                     }     
                 ]
             }
