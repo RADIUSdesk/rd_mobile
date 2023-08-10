@@ -63,6 +63,10 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         	layout	: 'fit'
         },
         {
+            xtype	: 'cntAps',
+            layout	: 'fit'
+         },
+        {
         	xtype	: 'cntUnknownNodes',
         	layout	: 'fit'
         }
