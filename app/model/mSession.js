@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 //https://www.freecodecamp.org/news/javascript-es6-promises-for-beginners-resolve-reject-and-chaining-explained/
 Ext.define('RdMobile.model.mSession', {
     extend: 'Ext.data.Model',

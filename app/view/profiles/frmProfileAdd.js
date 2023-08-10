@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 Ext.define('RdMobile.view.profiles.frmProfileAdd', {
     extend  : 'Ext.form.Panel',
     xtype   : 'frmProfileAdd',

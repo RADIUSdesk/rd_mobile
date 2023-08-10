@@ -1,0 +1,55 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: RADIUSdesk
+Upstream-Contact: Dirk van der Walt <dirkvanderwalt@gmail.com>
+Source: https://www.radiusdesk.com
+
+Files: build/production/RdMobile/resources/*
+Copyright: 2017 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC-BY-4.0
+
+Files: resources/*
+Copyright: 2017 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC-BY-4.0
+
+Files: build/production/RdMobile/*
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: GPL-3.0-or-later
+
+Files: .gitignore
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: README.md
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: Readme.md
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: app.json
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: bootstrap.css
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: bootstrap.json
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: bootstrap.jsonp
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: build.xml
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+Files: workspace.json
+Copyright: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+License: CC0-1.0
+
+
+

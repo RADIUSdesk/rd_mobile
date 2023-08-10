@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 self.addEventListener('install', function(event) {
   console.log('[Service Worker] Installing Service Worker ...', event);
   event.waitUntil(
