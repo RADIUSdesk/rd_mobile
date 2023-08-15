@@ -66,7 +66,7 @@ Ext.define('RdMobile.view.meshes.pnlMeshDetail', {
         	'<tpl if="gateway==\'none\'">',
         		'<div class="grid-tpl-item" style="margin:10px;">',
         	'<tpl else>',
-        		'<div class="grid-tpl-item" style="margin:10px;background:#e1f0df;">',
+        		'<div class="grid-tpl-item" style="margin:10px;background:#b5d1f9;">',
         	'</tpl>',         
 	            '<div class="item-main" >',
 	            	'{name}',
