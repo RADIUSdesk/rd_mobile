@@ -195,10 +195,21 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     		a.setValue('choose_one');   		
     	}, 1000);			    
     },
-    cmbViewChange : function(a,b){
-    	var me = this;
-    	console.log(b);
-    	me.getAsMenu().hide();   
-    
+    cmbViewChange : function(a,value){
+    	var me 	= this; 
+    	var b 	= a.getValue();	
+    	if(b == 'view_entries'){
+    		var containedIn = a.up(me.getContainedIn());
+    		var cnt = containedIn.down('cntMeshViewEntriesGraph');
+			containedIn.setActiveItem(cnt);
+			var cntRG 	= containedIn.getActiveItem();
+			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> SSID <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
+    	}
+    	
+    	setTimeout(function(){
+    		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
+    		a.setValue('choose_one');   		
+    	}, 1000);	      
     }
 });

@@ -51,6 +51,9 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         	layout	: 'fit'
         },
         {
+        	xtype	: 'cntMeshViewEntriesGraph'
+        },
+        {
         	xtype	: 'cntApProfiles',
         	layout	: 'fit'
         },

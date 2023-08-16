@@ -143,6 +143,7 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 					}		
 				},				
 				{
+					multiSelect: false,					
 					xtype	: 'combobox',
 					label	: 'View',
 					queryMode: 'local',
@@ -156,28 +157,16 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 							name: 'Choose One'
 						},
 						{
-							id	: 'general',
-							name: 'General'
+							id	: 'view_entries',
+							name: 'SSID <-> Device'
 						},
 						{
-							id	: 'entry_points',
-							name: 'Entry Points'
+							id	: 'view_nodes',
+							name: 'Node <-> Device'
 						},
 						{
-							id	: 'mesh_settings',
-							name: 'Mesh Settings'
-						},
-						{
-							id	: 'exit_points',
-							name: 'Exit Points'
-						},
-						{
-							id	: 'node_settings',
-							name: 'Node Settings'
-						},
-						{
-							id	: 'nodes',
-							name: 'Nodes'
+							id	: 'view_node_node',
+							name: 'Node <-> Node'
 						}					
 					]
 				},
