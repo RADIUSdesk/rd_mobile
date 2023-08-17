@@ -9,7 +9,8 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
         containedIn		: 'cntMainNetworks',
         backTo			: 0,
         meshId			: undefined,
-        koos			: undefined,
+        meshName		: '',
+        span			: 'day', //can be hour / day /week
         mac             : false,
         urlUsageForSsid : '/cake4/rd_cake/wifi-charts/usage-for-ssid.json',
         urlEditAlias    : '/cake4/rd_cake/wifi-charts/edit-mac-alias.json',
@@ -26,7 +27,13 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
       	},
       	'#btnReload' : {
       		tap		: 'reload'
-      	}
+      	},
+      	'#btnDate' : {
+      		tap		: 'date'
+      	},
+      	'#rgrpSpan' : {
+      		change 	: 'spanChange'
+      	},
     },
     show	: function(){
     	var me = this;
@@ -43,25 +50,29 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
     	var me = this;
     	var mesh_id = info.mesh_id;
     	me.setMeshId(mesh_id);
-    	//me.reload();
+    	me.setMeshName(info.mesh_name);
+    	me.getView().down('cmbMeshViewSsids').getStore().getProxy().setExtraParam('mesh_id',mesh_id);
+    	me.getView().down('cmbMeshViewSsids').getStore().reload();
+    	me.reload();
     },
     reload	: function(btn){
     	var me = this;
     	
     	var dd      = Ext.getApplication().getDashboardData();
         var tz_id   = dd.user.timezone_id; 
+        
 		var	t 		= 'mesh_entries';
-		var span 	= 'week';
-		var ssid_id = false;
-        var node_id = false;	
+		var ssid_id = -1;
+        var node_id = false; 
+              
+        me.getView().down('#pnlTopTen').setMasked(true);
 
-        var mesh_id = me.getMeshId();
         Ext.Ajax.request({
             url: me.getUrlUsageForSsid(),
             params: {
                 type        : t,
-                span        : span,
-                mesh_id     : mesh_id,
+                span        : me.getSpan(),
+                mesh_id     : me.getMeshId(),
                 timezone_id : tz_id,
                 mesh_entry_id : ssid_id,
                 node_id     : node_id,
@@ -69,6 +80,7 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
             },
             method: 'GET',
             success: function(response){
+            	me.getView().down('#pnlTopTen').setMasked(false);
                 var jsonData = Ext.JSON.decode(response.responseText);                
                 if(jsonData.success){    
                     me.paintDataUsage(jsonData.data);
@@ -83,20 +95,16 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
     showPie	: function(btn){
     	var me = this;
     	var a = me.getView().down('#plrTopTen');
-    	me.getView().down('#toolPie').hide();
-    	me.getView().down('#toolTable').show();
-    	me.getView().down('#toolBar').show();
     	me.getView().down('#pnlTopTen').setActiveItem(a);
     },
     showBar	: function(btn){
     	var me = this;
+    	var a = me.getView().down('#crtTopTen');
+    	me.getView().down('#pnlTopTen').setActiveItem(a);
     },
     showTable : function(btn){
     	var me = this;
     	var a = me.getView().down('#gridTopTen');
-    	me.getView().down('#toolPie').show();
-    	me.getView().down('#toolTable').hide();
-    	me.getView().down('#toolBar').show();
     	me.getView().down('#pnlTopTen').setActiveItem(a);  
     },
     paintDataUsage: function(data){
@@ -107,11 +115,13 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
         data.totals.data_out    = Ext.ux.bytesToHuman(data.totals.data_out);
         data.totals.data_total  = Ext.ux.bytesToHuman(data.totals.data_total);
         
-        total.setData(data.totals);
-        
+        total.setData(data.totals);     
        	me.getView().down('#gridTopTen').getStore().setData(data.top_ten);                
         me.getView().down('#plrTopTen').getStore().setData(data.top_ten);
+        me.getView().down('#crtTopTen').getStore().setData(data.graph.items); 
         
+        me.updateInfo();
+               
         /*
              
         if(data.node_data !== undefined){   
@@ -169,4 +179,25 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
             me.getView().down('#pnlInfo').setData(data.device_info)
         }*/
     },
+    date	: function(tbn){
+    	var me  = this;
+    	me.getView().down('#asDate').show();
+    },
+    spanChange	: function(a,value){
+    	var me = this;
+    	me.setSpan(value);
+        me.reload(); 	
+    },
+   	updateInfo	: function(){
+    	var me        = this;
+    	var span 	  = me.getView().down('#rgrpSpan').getChecked().getValue();
+    	me.getView().down('#lblInfo').setData({
+    		mesh_name   : me.getMeshName(),
+    		span		: span.toUpperCase()
+    	});   
+    },
+    asClose : function(){
+    	var me = this
+    	me.getView().down('#asDate').hide();
+    }
 });

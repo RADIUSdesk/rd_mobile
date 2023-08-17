@@ -8,7 +8,8 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
     controller  : 'vcMeshViewEntriesGraph',
     layout	: 'fit',
     requires	: [
-        'RdMobile.view.meshes.vcMeshViewEntriesGraph'
+        'RdMobile.view.meshes.vcMeshViewEntriesGraph',
+        'RdMobile.view.meshes.cmbMeshViewSsids'
     ],
 	items   : [
         {
@@ -21,11 +22,25 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 						html: '|'
 					},
 					{ ui: 'confirm', iconCls: 'x-fa fa-redo',	itemId : 'btnReload' },
-					{ ui: 'normal',  iconCls: 'x-fa fa-calendar', 	itemId : 'btnDate' },
+					{ ui: 'normal',  iconCls: 'x-fa fa-calendar', 	itemId : 'btnDate' },					
 					{
 						xtype	: 'label',
 						itemId	: 'lblInfo',
-						tpl	    : '<div style="color:#3e3f40;text-align: center;font-size:small">{day}<div style="font-size: xx-small;">{span}</div><div style="font-size: xx-small;">{timezone}</div></div>',
+						padding	: 5,
+						tpl	    : new Ext.XTemplate(
+							'<div class="two-columns-grid">',
+								'<div class="item-lbl" style="font-size: x-small;padding:0px;">Mesh : </div>',
+								'<div class="item-value" style="font-size: x-small;padding:0px;">{mesh_name}</div>',
+							'</div>',
+							'<div class="two-columns-grid">',
+								'<div class="item-lbl" style="font-size: x-small;padding:0px;">SSID : </div>',
+								'<div class="item-value" style="font-size: x-small;padding:0px;">{ssid}</div>',
+							'</div>',
+							'<div class="two-columns-grid">',
+								'<div class="item-lbl" style="font-size: x-small;padding:0px;">Span : </div>',
+								'<div class="item-value" style="font-size: x-small;padding:0px;">{span}</div>',
+							'</div>'
+						),
 						data	: {}
 					},
 					{ xtype: 'spacer'},
@@ -34,15 +49,15 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 						itemId	: 'lblMeta',
 						tpl		: new Ext.XTemplate(
 							'<div class="two-columns-grid">',
-								'<div class="item-lbl" style="font-size: x-small;padding:0px;">IN :</div>',
+								'<div class="item-lbl" style="font-size: x-small;padding:0px;">IN : </div>',
 								'<div class="item-value" style="font-size: x-small;padding:0px;">{data_in}</div>',
 							'</div>',
 							'<div class="two-columns-grid">',
-								'<div class="item-lbl" style="font-size: x-small;padding:0px;">OUT :</div>',
+								'<div class="item-lbl" style="font-size: x-small;padding:0px;">OUT : </div>',
 								'<div class="item-value" style="font-size: x-small;padding:0px;">{data_out}</div>',
 							'</div>',
 							'<div class="two-columns-grid">',
-								'<div class="item-lbl" style="font-size: x-small;padding:0px;">TOTAL :</div>',
+								'<div class="item-lbl" style="font-size: x-small;padding:0px;">TOTAL : </div>',
 								'<div class="item-value" style="font-size: x-small;padding:0px;">{data_total}</div>',
 							'</div>'
 						),
@@ -79,15 +94,51 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
             ]
         });
            
-    var columns = [{
-        text: 'Alias / MAC',
-        dataIndex: 'name',
-        flex: 1
-    }, {
-        text: 'Data',
-        dataIndex: 'data',
-        width: 100
-    }];
+    var columns = [
+		{ 
+        	text		: 'Alias / MAC Address',
+        	dataIndex	: 'name',
+        	flex		: 1,
+        	hidden		: false,
+        	xtype       : 'templatecolumn',
+        	cell		: {
+				encodeHtml : false
+			},
+			tpl      	: new Ext.XTemplate(
+			    '<tpl if="cloud_flag & block_flag">',
+			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-ban"></i></span>',
+			   	'<tpl elseif="cloud_flag & firewall_flag">',
+			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-fire"></i></span> {fw_profile}</span>',
+			    '<tpl elseif="cloud_flag & limit_flag">',
+			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-tachometer-alt"></i> </span>',
+			    '<tpl elseif="block_flag">',
+			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-ban"></i></span>',
+			  	'<tpl elseif="firewall_flag">',
+			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-fire"></i> {fw_profile}</span>',
+			    '<tpl elseif="limit_flag">',
+			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-tachometer-alt"></i> </span>',
+			    '<tpl else>',
+			        '<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
+			    '</tpl>'
+			)   
+        },
+		{ 
+			text		: 'Data Total',
+			dataIndex	: 'data_total',
+			cell		: {
+				cls		    : 'gridMain'
+			},
+			renderer: function(value){
+		    	return Ext.ux.bytesToHuman(value)              
+		  	} 
+	   	}    
+    ];
      
     var grid = Ext.create('Ext.grid.Grid', {        
         store: s,    
@@ -95,6 +146,8 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
         itemId	: 'gridTopTen',
         active	: true       
     });
+    
+    var store_bar    = Ext.create(Ext.data.Store,{model: 'RdMobile.model.mUserStat'});
                
  	me.setItems(      
 	    { 
@@ -102,6 +155,10 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 	    	title   : 'Top Ten Devices',
 	    	itemId	: 'pnlTopTen',
 	    	ui		: 'panel-blue',
+	    	masked: {
+				xtype	: 'loadmask',
+				message	: 'Loading....'
+			},
 	    	layout: {
 				type        : 'card',
 				pack        : 'start',
@@ -114,8 +171,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 	    		{
 				   xtype	: 'polar',
 				   itemId	: 'plrTopTen',
-				   layout 	: 'fit',
-				   hidden	: true,			
+				   layout 	: 'fit',		
 				   interactions: ['rotate', 'itemhighlight'],
 				   store	: s_nodes,
 				   series	: {
@@ -136,13 +192,50 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
                             }
                         } 
                     }
+		 		},
+		 		{
+		 			xtype	: 'cartesian',
+		 			itemId	: 'crtTopTen',
+		 			store	: store_bar,
+		 			axes: [
+				        {
+				            type        : 'numeric',
+				            position    : 'left',
+				            adjustByMajorUnit: true,
+				            grid        : true,
+				            fields      : ['data_in', 'data_out'],
+				            renderer    : function(axis, label, layoutContext) {
+				                return Ext.ux.bytesToHuman(label);
+				            },
+				            minimum: 0
+				        }, {
+				            type        : 'category',
+				            position    : 'bottom',
+				            grid        : false,
+				            fields      : ['time_unit']
+				        }
+				    ],
+				   	series: [
+				        {
+				            type    : 'bar',
+				            title   : [ 'Data In', 'Data out' ],
+				            xField  : 'time_unit',
+				            yField  : ['data_in', 'data_out'],
+				            stacked : true,
+				            style   : {
+				                opacity: 0.80
+				            },
+				            highlight: {
+				                fillStyle: 'yellow'
+				            }
+				        }
+				    ]		 		
 		 		}		    		
 	    	],
 	    	tools: [
 	    	{
 				iconCls : 'x-fa fa-table',
 				handler	: 'showTable',
-				hidden	: true,
 				itemId	: 'toolTable' 
 			}, 
 	    	{
@@ -155,7 +248,38 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 				handler	: 'showBar',
 				itemId	: 'toolBar'
 			}]
-		});    
+		});
+		
+		
+		var asDate 	= Ext.create({
+			xtype	: 'actionsheet',
+			itemId	: 'asDate',
+			centered: false,
+			title: 'DATE',
+			tools: [
+			{
+				type: 'close',
+				handler: 'asClose'
+			}],
+			items: [
+				 	{
+						xtype: 'radiogroup',
+						vertical: false,
+						itemId	: 'rgrpSpan',
+						height	: 100,
+						items: [
+							{ label: 'Now', 	name: 's', value: 'hour', checked: true },
+							{ label: '24 Hours',name: 's', value: 'day'},
+							{ label: '7 Days', 	name: 's', value: 'week' }
+						]
+					},
+					{
+						xtype	: 'cmbMeshViewSsids'
+					}				     
+				 ]
+		 	});	 	
+		me.add(asDate);
+		    
         
    		var menu = Ext.create({
 			xtype	: 'actionsheet',
