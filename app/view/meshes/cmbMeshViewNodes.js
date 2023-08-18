@@ -1,15 +1,11 @@
-// SPDX-FileCopyrightText: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
-//
-// SPDX-License-Identifier: GPL-3.0-or-later
-
-Ext.define('RdMobile.view.meshes.cmbMeshViewSsids', {
+Ext.define('RdMobile.view.meshes.cmbMeshViewNodes', {
     extend          : 'Ext.field.ComboBox',
-    alias           : 'widget.cmbMeshViewSsids',
-    label      		: 'SSID',
+    alias           : 'widget.cmbMeshViewNodes',
+    label      		: 'Node',
     valueField      : 'id',
     displayField    : 'name',
     value           : -1,
-    initialize: function (){  
+    initialize		: function (){
         var me      = this;
         var s       = Ext.create('Ext.data.Store', {
             fields: [
@@ -17,10 +13,9 @@ Ext.define('RdMobile.view.meshes.cmbMeshViewSsids', {
                 {name: 'name',  type: 'string'}
             ],
             proxy: {
-                    type            : 'ajax',
-                    format          : 'json',
-                    batchActions    : true,
-                    url     : '/cake4/rd_cake/meshes/mesh-ssids-view.json',
+                    type  	: 'ajax',
+                    format	: 'json',
+                    url     : '/cake4/rd_cake/meshes/mesh-nodes-view.json',
                     reader: {
                         type            : 'json',
                         rootProperty    : 'items',

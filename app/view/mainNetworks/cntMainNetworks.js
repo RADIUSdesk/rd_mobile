@@ -15,7 +15,7 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
 		pack        : 'start',
 		align       : 'stretch',
 		animation   : 'slide',
-		deferredRender: true
+		deferredRender: false
 	},
     items: [
         {
@@ -52,6 +52,12 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         },
         {
         	xtype	: 'cntMeshViewEntriesGraph'
+        },
+        {
+        	xtype	: 'cntMeshViewNodesGraph'
+        },
+        {
+        	xtype	: 'cntMeshViewNodeNodes'
         },
         {
         	xtype	: 'cntApProfiles',

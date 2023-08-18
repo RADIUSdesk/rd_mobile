@@ -17,7 +17,8 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	'cntMeshes' : {
     		show	: 'show',
     		hide	: 'hide',
-    		initialize : 'initCnt'    		
+    		initialize : 'initCnt',
+    		painted	: 'isPainted'    		
     	},
         'gridMeshes': {
             select: 'onGridChildTap'
@@ -207,9 +208,31 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
         	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> SSID <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
     	}
     	
+    	if(b == 'view_nodes'){
+    		var containedIn = a.up(me.getContainedIn());
+    		var cnt = containedIn.down('cntMeshViewNodesGraph');
+			containedIn.setActiveItem(cnt);
+			var cntRG 	= containedIn.getActiveItem();
+			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> Node <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
+    	}
+    	
+    	if(b == 'view_node_node'){
+    		var containedIn = a.up(me.getContainedIn());
+    		var cnt = containedIn.down('cntMeshViewNodeNodes');
+			containedIn.setActiveItem(cnt);
+			var cntRG 	= containedIn.getActiveItem();
+			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> Node <i class="fa fa-exchange-alt fa-1x"></i> Node'); 
+    	}
+    	
     	setTimeout(function(){
     		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);	      
+    },
+    isPainted	: function(cnt){
+    	var me = this;
+    	console.log("Is Painted Pappie"); 
     }
 });

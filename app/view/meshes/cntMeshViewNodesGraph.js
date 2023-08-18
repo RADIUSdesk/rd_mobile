@@ -2,14 +2,14 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
+Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
     extend  : 'Ext.Container',
-    xtype   : 'cntMeshViewEntriesGraph',
-    controller  : 'vcMeshViewEntriesGraph',
+    xtype   : 'cntMeshViewNodesGraph',
+    controller  : 'vcMeshViewNodesGraph',
     layout	: 'fit',
     requires	: [
-        'RdMobile.view.meshes.vcMeshViewEntriesGraph',
-        'RdMobile.view.meshes.cmbMeshViewSsids'
+        'RdMobile.view.meshes.vcMeshViewNodesGraph',
+        'RdMobile.view.meshes.cmbMeshViewNodes'
     ],
 	items   : [
         {
@@ -29,7 +29,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 						padding	: 5,
 						tpl	    : new Ext.XTemplate(
 							'<div style="color:#3e3f40;text-align: center;font-size:small">{mesh_name}',
-								'<div style="font-size: x-small;">{ssid}</div>',
+								'<div style="font-size: x-small;">{node}</div>',
 								'<div style="font-size: x-small;">{span}</div>',
 							'</div>'
 						),
@@ -85,7 +85,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
                 {name: 'data_total',    type: 'int'}
             ]
         });
-           
+                  
     var columns = [
 		{ 
         	text		: 'Alias / MAC Address',
@@ -165,7 +165,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 				   itemId	: 'plrTopTen',
 				   layout 	: 'fit',		
 				   interactions: ['rotate', 'itemhighlight'],
-				   store	: s_nodes,
+				   store	: s,
 				   series	: {
                        type         : 'pie',                       
                        highlight    : true,
@@ -222,24 +222,51 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 				            }
 				        }
 				    ]		 		
+		 		},
+		 		{
+				   xtype	: 'polar',
+				   itemId	: 'plrNodes',
+				   layout 	: 'fit',		
+				   interactions: ['rotate', 'itemhighlight'],
+				   store	: s_nodes,
+				   series	: {
+                       type         : 'pie',                       
+                       highlight    : true,
+                       angleField   : 'data_total',
+                       label        : {
+                           field    : 'name',
+                           display  : 'rotate'
+                       },
+                       donut        : 10,
+                       tooltip : {
+                            trackMouse: true,
+                            renderer: function (tooltip, record, item) {
+                                tooltip.setHtml(
+                                    "<h2>"+record.get('name')+"</h2><h3>"+Ext.ux.bytesToHuman(record.get('data_total'))+"</h3>"                           
+                                );
+                            }
+                        } 
+                    }
 		 		}		    		
 	    	],
 	    	tools: [
-	    	{
-				iconCls : 'x-fa fa-table',
-				handler	: 'showTable',
-				itemId	: 'toolTable' 
-			}, 
-	    	{
-				iconCls : 'x-fa fa-chart-pie',
-				handler	: 'showPie',
-				itemId	: 'toolPie'
-			}, 
-			{
-				iconCls : 'x-fa fa-chart-bar',
-				handler	: 'showBar',
-				itemId	: 'toolBar'
-			}]
+				{
+					iconCls : 'x-fa fa-table',
+					handler	: 'showTable'
+				}, 
+				{
+					iconCls : 'x-fa fa-chart-pie',
+					handler	: 'showPie'
+				}, 
+				{
+					iconCls : 'x-fa fa-chart-bar',
+					handler	: 'showBar'
+				},
+				{
+					iconCls : 'x-fa fa-balance-scale',
+					handler	: 'showNodesPie'
+				}
+			]
 		});
 		
 		
@@ -260,13 +287,13 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 						itemId	: 'rgrpSpan',
 						height	: 100,
 						items: [
-							{ label: 'Now', 	name: 's_e', value: 'hour', checked: true },
-							{ label: '24 Hours',name: 's_e', value: 'day'},
-							{ label: '7 Days', 	name: 's_e', value: 'week' }
+							{ label: 'Now', 	name: 's_n', value: 'hour', checked: true },
+							{ label: '24 Hours',name: 's_n', value: 'day'},
+							{ label: '7 Days', 	name: 's_n', value: 'week' }
 						]
 					},
 					{
-						xtype	: 'cmbMeshViewSsids'
+						xtype	: 'cmbMeshViewNodes'
 					}				     
 				 ]
 		 	});	 	
