@@ -130,6 +130,28 @@ $enable-font-awesome: dynamic(true);
     font-size:16px;
 }
 
+.grpInfo {
+    color:grey;
+    font-size:smaller;
+    font-style:italic;
+    font-weight:lighter;
+}
+
+.grpNever {
+    color: #1383bd;
+    font-size:larger;  
+}
+
+.grpUp {
+    color: green;
+    font-size:larger;  
+}
+
+.grpDown {
+    color: red;
+    font-size:larger; 
+}
+
 
 /*==== END Template Column Related ==== */
 

@@ -14,8 +14,45 @@ Ext.define('RdMobile.view.meshes.gridMeshViewNodeNodes', {
         'RdMobile.view.components.rdCustomProgressBar'
     ],
     grouped: true,
-    groupFooter: {
-        xtype: 'gridsummaryrow'
+    collapsible: {
+	     footer: false  // show footers when collapsed
+	},
+   	groupHeader: {
+     	tpl: [
+            '<span class="{children:this.formatColor}">{name}</span><span class="grpInfo"> {children:this.getLastContact}</span>',
+            {
+                formatColor: function(children) {
+                    var fc = children[0];
+                    var state = fc.get('state');
+                    if(state == 'never'){
+                        return 'grpNever';
+                    }
+                    if(state == 'down'){
+                        return 'grpDown';
+                    }
+                    if(state == 'up'){
+                        return 'grpUp';
+                    }
+                }
+            },
+            {
+                getLastContact: function(children) {
+                    var fc = children[0];
+                    var c = fc.get('l_contact_human');
+                    if(c == null){
+                        return '(never)';
+                    }
+                    return c;
+                }
+            }
+        ]
+ 	},
+	groupFooter: {
+        xtype: 'gridsummaryrow',
+        cls: 'summary-row',
+        collapsible: {
+		     footer: false  // show footers when collapsed
+		}
     },
     itemConfig: {
         viewModel: true
@@ -36,8 +73,11 @@ Ext.define('RdMobile.view.meshes.gridMeshViewNodeNodes', {
 		    { 
 				text		: 'Nearby Nodes',
 				dataIndex	: 'peer_name',
-				groupHeaderTpl: '{columnName}: {value:htmlEncode}',
-				flex	: 1
+				flex		: 1,
+				summaryRenderer: function (a,b,c) {
+					var value = b.records.length
+				    return Ext.String.format('({0} peer{1})', value, value !== 1 ? 's' : '');
+				}
 		   	},
 		   	{
 		        text		: 'Signal Avg',
@@ -64,6 +104,8 @@ Ext.define('RdMobile.view.meshes.gridMeshViewNodeNodes', {
 		   	{
 		        text		: 'Latest Signal',
 				flex		: 1,
+				dataIndex   : 'signal_bar',
+				summaryCell : 'numbercell',
 		        cell		: {
 		            xtype: 'widgetcell',
 		            widget: {
@@ -81,6 +123,7 @@ Ext.define('RdMobile.view.meshes.gridMeshViewNodeNodes', {
 		                margin: 5
 		            }
 		        }
+		        
 		    }		   	  
 	   	]);	
 		this.callParent();    

@@ -10,7 +10,7 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
         backTo		: 0,
         meshId		: undefined,
         meshName	: '',
-        span		: 'hour', //can be hour / day /week
+        span		: 'week', //can be hour / day /week
         urlNodeNode	: '/cake4/rd_cake/mesh-reports/view_node_nodes.json'
     },
     control: {
