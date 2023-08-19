@@ -10,7 +10,8 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
         backTo		: 0,
         meshId		: undefined,
         meshName	: '',
-        span		: 'week', //can be hour / day /week
+        span		: 'hour', //can be hour / day /week
+        urlNodeNode	: '/cake4/rd_cake/mesh-reports/view_node_nodes.json'
     },
     control: {
     	'cntMeshViewNodeNodes' : {
@@ -21,6 +22,12 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
       	},
       	'#btnReload' : {
       		tap		: 'reload'
+      	},
+      	'#btnDate' : {
+      		tap		: 'date'
+      	},
+      	'#rgrpSpan' : {
+      		change 	: 'spanChange'
       	}
     },
     show	: function(){
@@ -38,14 +45,52 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
     }, 
     reload	: function(btn){
     	var me = this;
-    	//me.getView().down('gridMeshViewNodeNodes').getStore().getProxy().setExtraParam('mesh_id',me.getMeshId());
-    	//me.getView().down('gridMeshViewNodeNodes').getStore().getProxy().setExtraParam('timespan',me.getSpan());
-    	//me.getView().down('gridMeshViewNodeNodes').getStore().reload(); 
+    	me.getView().down('gridMeshViewNodeNodes').setMasked(true);
+        Ext.Ajax.request({
+            url: me.getUrlNodeNode(),
+            params: {
+                timespan  	: me.getSpan(),
+                mesh_id     : me.getMeshId()
+            },
+            method: 'GET',
+            success: function(response){
+            	me.getView().down('gridMeshViewNodeNodes').setMasked(false);
+                var jsonData = Ext.JSON.decode(response.responseText);                
+                if(jsonData.success){    
+                    me.getView().down('gridMeshViewNodeNodes').gridStore.loadData(jsonData.items)
+                    me.updateInfo();                
+                }else{
+
+                  
+                }
+            }
+        }); 
     },
     doUpdateId : function(info){
     	var me = this;
     	me.setMeshId(info.mesh_id);
     	me.setMeshName(info.mesh_name);   	
     	me.reload();
+    },
+    date	: function(tbn){
+    	var me  = this;
+    	me.getView().down('#asDate').show();
+    },
+    spanChange	: function(a,value){
+    	var me = this;
+    	me.setSpan(value);
+        me.reload(); 	
+    },
+    updateInfo	: function(){
+    	var me 		= this;
+    	var span  	= me.getSpan();  	
+    	me.getView().down('#lblInfo').setData({
+    		mesh_name   : me.getMeshName(),
+    		span		: span.toUpperCase()
+    	});   
+    },
+    asClose : function(){
+    	var me = this
+    	me.getView().down('#asDate').hide();
     }
 });

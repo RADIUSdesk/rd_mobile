@@ -83,13 +83,22 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 	 	});
 	 	
 	 	me.add(filter);
+	 	
+	 	var btnDel = {
+	 		xtype 		: 'button',
+	 		text		: 'Delete',
+			iconCls		: 'x-fa fa-trash',
+			textAlign  	: 'left',
+			itemId		: 'btnDelete',
+			handler		: 'delete'	 	
+	 	};
                    
         var menu = Ext.create({
-		 xtype	: 'actionsheet',
-		 itemId	: 'asMenu',
-		 centered: false,
-		 title: 'MENU',
-			 items: [
+			xtype	: 'actionsheet',
+			itemId	: 'asMenu',
+			centered: false,
+			title: 'MENU',
+			items: [
 				 {
 					xtype	: 'combobox',
 					label	: 'Edit',
@@ -135,7 +144,7 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 					 iconCls	: 'x-fa fa-trash',
 					 textAlign  : 'left',
 					 itemId		: 'btnDelete'
-				 },		
+				 },	
 				{
 					xtype	: 'label',
 					style	: {
@@ -177,9 +186,9 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 					 itemId		: 'btnDetail'
 				}
 			 ]
-	 	});
-	 	
+	 	});	 		 	
 	 	me.add(menu);
+	 		 	
 	 	var fab = Ext.create({
 			xtype: "button",
 			ui: 'round',

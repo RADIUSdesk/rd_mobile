@@ -34,10 +34,10 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         		}
         	]
         },
-        {
+       /* {
             xtype	: 'cntMeshes',
             layout	: 'fit'
-         },
+         },*/
          {
             xtype	: 'cntMeshEntries',
         	layout	: 'fit'

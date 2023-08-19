@@ -237,8 +237,8 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
                            field    : 'name',
                            display  : 'rotate'
                        },
-                       donut        : 10,
-                       tooltip : {
+                       donut  	: 10,
+                       tooltip 	: {
                             trackMouse: true,
                             renderer: function (tooltip, record, item) {
                                 tooltip.setHtml(

@@ -7,18 +7,17 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     alias   : 'controller.vcMeshes',
     sel		: null,
     config: {
-        urlDelete           : '/cake4/rd_cake/meshes/delete.json',
-        containedIn			: 'cntMainNetworks',
-        appTitle			: 'RADIUSdesk',
-        sortDesc			: true,
-        asMenu				: false	
+        urlDelete  	: '/cake4/rd_cake/meshes/delete.json',
+        containedIn	: 'cntMainNetworks',
+        appTitle	: 'RADIUSdesk',
+        sortDesc	: true,
+        asMenu		: false	
     },
     control: {
     	'cntMeshes' : {
     		show	: 'show',
     		hide	: 'hide',
-    		initialize : 'initCnt',
-    		painted	: 'isPainted'    		
+    		initialize : 'initCnt'  		
     	},
         'gridMeshes': {
             select: 'onGridChildTap'
@@ -41,22 +40,27 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
       	'#btnAdd' : {
       		tap	: 'add'
       	},
-      	'#btnDelete' : {
+      	'#btnDelete' : { //**
       		tap	: 'delete'
       	},
-      	'#btnDetail' : {
+      	'#btnDetail' : { //**
       		tap	: 'detail'
       	},
-      	'#cmbEdit' : {
+      	'#cmbEdit' : { //**
       		select: 'cmbEditChange'
       	},
-      	'#cmbView' : {
+      	'#cmbView' : { //**
       		select: 'cmbViewChange'
       	}        	
     },
     initCnt	: function(){
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
+    	//FIXME NOTE We have to manually add the event bindings for items in the ActionSheet when we add the parent container on the fly (//**)
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
+    	me.getAsMenu().down('#cmbEdit').on('select', 	this.cmbEditChange, this);
+    	me.getAsMenu().down('#cmbView').on('select', 	this.cmbViewChange, this);
     },
     show	: function(){
     	var me = this;
@@ -139,8 +143,9 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     },
     onGridChildTap : function(a,sel){
     	var me 	= this;
-   		me.sel = sel;
-    	me.getAsMenu().show();	    	  	 
+   		me.sel = sel;			
+    	me.getAsMenu().show();	
+    	   	  	 
     },
     detail	: function(){
     	var me = this;
@@ -156,7 +161,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     		w.show();
     	}
     	if(b == 'entry_points'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshEntries');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
@@ -166,10 +171,9 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	if(b == 'mesh_settings'){
     		var w = Ext.widget('frmMeshEditMeshSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id') });
     		w.show();
-    	}
-    	
+    	}  	
     	if(b == 'exit_points'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshExits');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
@@ -181,18 +185,8 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     		var w = Ext.widget('frmMeshEditNodeSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id')});
     		w.show();
     	}
-    	/*
-    	if(b == 'nodes'){
-    		var containedIn = a.up(me.getContainedIn());
-    		var cnt = containedIn.down('cntMeshEditEntries');
-			containedIn.setActiveItem(cnt);
-			var cntRG 	= containedIn.getActiveItem();
-			//cntRG.getController().updateGraph({type: 'permanent',backTo : me.getCntPermanentUsers(),username:me.sel.get('username')});
-			//var ts 			= me.truncString(me.sel.get('username'),10,'...');
-        	//me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-user fa-1x"></i> <i class="fa fa-chart-bar fa-1x"></i> '+ts); 
-    	}*/
     	setTimeout(function(){
-    		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
+    		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);			    
     },
@@ -200,7 +194,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	var me 	= this; 
     	var b 	= a.getValue();	
     	if(b == 'view_entries'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshViewEntriesGraph');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
@@ -209,7 +203,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	}
     	
     	if(b == 'view_nodes'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshViewNodesGraph');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
@@ -218,7 +212,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	}
     	
     	if(b == 'view_node_node'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshViewNodeNodes');
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
@@ -227,12 +221,8 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	}
     	
     	setTimeout(function(){
-    		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
+    		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);	      
-    },
-    isPainted	: function(cnt){
-    	var me = this;
-    	console.log("Is Painted Pappie"); 
     }
 });
