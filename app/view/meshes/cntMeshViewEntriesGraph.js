@@ -9,7 +9,8 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
     layout	: 'fit',
     requires	: [
         'RdMobile.view.meshes.vcMeshViewEntriesGraph',
-        'RdMobile.view.meshes.cmbMeshViewSsids'
+        'RdMobile.view.meshes.cmbMeshViewSsids',
+        'RdMobile.view.components.frmWifiMacAlias'
     ],
 	items   : [
         {
@@ -61,8 +62,6 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
     scrollable : true,
 	initialize: function (){      
         var me      = this; 
-        var m       = 5;
-        var p       = 5;   
         var s       = Ext.create('Ext.data.Store', {
             fields  :[ 
                 {name: 'id',            type: 'int'},
@@ -136,7 +135,10 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
         store: s,    
         columns: columns,
         itemId	: 'gridTopTen',
-        active	: true       
+        active	: true,
+        selectable: {
+			mode: 'single'
+		}       
     });
     
     var store_bar    = Ext.create(Ext.data.Store,{model: 'RdMobile.model.mUserStat'});
@@ -280,11 +282,47 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 			title: 'MENU',
 			 items: [
 				 {
-					 text		: 'Create Alias',
+					 text		: 'Manage Alias',
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
 					 itemId		: 'btnAlias'
-				 }
+				 },
+				 {
+					 text		: 'Apply Firewall',
+					 iconCls	: 'x-fa fa-fire',
+					 textAlign  : 'left',
+					 itemId		: 'btnFire'
+				 },
+				 {
+					 text		: 'Limit Speed',
+					 iconCls	: 'x-fa fa-tachometer-alt',
+					 textAlign  : 'left',
+					 itemId		: 'btnSpeed'
+				 },
+				 {
+					 text		: 'Block Device',
+					 iconCls	: 'x-fa fa-ban',
+					 textAlign  : 'left',
+					 itemId		: 'btnBlock'
+				 },
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				{
+					 text		: 'Connection Info',
+					 iconCls	: 'x-fa fa-wifi',
+					 textAlign  : 'left',
+					 itemId		: 'btnInfo'
+				 },
+				 {
+					 text		: 'Usage Graph',
+					 iconCls	: 'x-fa fa-chart-bar',
+					 textAlign  : 'left',
+					 itemId		: 'btnUsage'
+				 }	
 			 ]
 		});     	
 	 	me.add(menu);	 	

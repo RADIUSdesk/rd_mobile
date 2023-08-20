@@ -16,11 +16,13 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
         urlEditAlias    : '/cake4/rd_cake/wifi-charts/edit-mac-alias.json',
         urlEditLimit    : '/cake4/rd_cake/wifi-charts/edit-mac-limit.json',
         UrlEditBlock	: '/cake4/rd_cake/wifi-charts/edit-mac-block.json',
-        UrlEditFirewall	: '/cake4/rd_cake/wifi-charts/edit-mac-firewall.json'
+        UrlEditFirewall	: '/cake4/rd_cake/wifi-charts/edit-mac-firewall.json',
+        asMenu		    : false	
     },
     control: {
     	'cntMeshViewEntriesGraph' : {
-    		show	: 'show'
+    		show	: 'show',
+    		initialize : 'initCnt' 
     	},
         '#btnBack' : {
       		tap		: 'back'
@@ -36,7 +38,32 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
       	},
       	'cmbMeshViewSsids' : {
             change: 'onChangeSsids'
+        },
+        '#gridTopTen': {
+            select: 'onGridChildTap'
+        },
+        '#btnAlias' : {
+        	tab	: 'doAlias'//**
+        },
+        '#btnFire' : {
+        	tab	: 'firewall'//**
+        },
+        '#btnSpeed' : {
+        	tab	: 'limit'//**
+        },
+        '#btnBlock' : {
+        	tab	: 'block'//**
         }
+    },
+    initCnt	: function(){
+    	var me = this;  	
+    	me.setAsMenu(me.getView().down('#asMenu'));
+    	//FIXME NOTE We have to manually add the event bindings for items in the ActionSheet when we add the parent container on the fly (//**)
+    	me.getAsMenu().down('#btnAlias').on('tap', 	this.doAlias, this);//**
+    	me.getAsMenu().down('#btnFire' ).on('tap', 	this.firewall, this);//**
+    	me.getAsMenu().down('#btnSpeed' ).on('tap', this.firewall, this);//**
+    	me.getAsMenu().down('#btnBlock' ).on('tap', this.block, this);//**
+
     },
     show	: function(){
     	var me = this;   	
@@ -211,5 +238,34 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
     onChangeSsids: function(cmb){
         var me = this;
         me.reload();
+    },
+    onGridChildTap : function(a,sel){
+    	var me 	= this;
+   		me.sel = sel;			
+    	me.getAsMenu().show();   	   	  	 
+    },
+    doAlias : function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	w.show();
+    },
+    firewall : function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	w.show();
+    },
+    limit	: function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	w.show();
+    },
+    block	: function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	w.show();
     }
 });
