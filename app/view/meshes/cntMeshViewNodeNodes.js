@@ -10,6 +10,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodeNodes', {
     requires	: [
         'RdMobile.view.meshes.vcMeshViewNodeNodes',
         'RdMobile.view.meshes.gridMeshViewNodeNodes',
+        'RdMobile.view.meshes.pnlMeshViewNodeNodesDetail'
     ],
 	items   : [
         {
@@ -69,6 +70,22 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodeNodes', {
 				 ]
 		 	});	 	
 		me.add(asDate);
+		
+		var menu = Ext.create({
+			xtype	: 'actionsheet',
+			itemId	: 'asMenu',
+			centered: false,
+			title: 'MENU',
+			items: [
+				{
+					 text		: 'More Detail',
+					 iconCls	: 'x-fa fa-info-circle',
+					 textAlign  : 'left',
+					 itemId		: 'btnDetail'
+				}
+			 ]
+	 	});	 		 	
+	 	me.add(menu);
         
 	 	this.callParent(arguments);
   	}

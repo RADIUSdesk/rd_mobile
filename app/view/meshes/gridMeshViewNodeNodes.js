@@ -14,8 +14,8 @@ Ext.define('RdMobile.view.meshes.gridMeshViewNodeNodes', {
         'RdMobile.view.components.rdCustomProgressBar'
     ],
     grouped: true,
-    collapsible: {
-	     footer: false  // show footers when collapsed
+    selectable: {
+		mode: 'single'
 	},
    	groupHeader: {
      	tpl: [
@@ -49,7 +49,6 @@ Ext.define('RdMobile.view.meshes.gridMeshViewNodeNodes', {
  	},
 	groupFooter: {
         xtype: 'gridsummaryrow',
-        cls: 'summary-row',
         collapsible: {
 		     footer: false  // show footers when collapsed
 		}

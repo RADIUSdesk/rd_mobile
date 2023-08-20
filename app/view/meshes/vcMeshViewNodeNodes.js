@@ -10,12 +10,14 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
         backTo		: 0,
         meshId		: undefined,
         meshName	: '',
-        span		: 'week', //can be hour / day /week
-        urlNodeNode	: '/cake4/rd_cake/mesh-reports/view_node_nodes.json'
+        span		: 'hour', //can be hour / day /week
+        urlNodeNode	: '/cake4/rd_cake/mesh-reports/view_node_nodes.json',
+        asMenu		: false	
     },
     control: {
     	'cntMeshViewNodeNodes' : {
-    		show	: 'show'
+    		show	: 'show',
+    		initialize : 'initCnt' 
     	},
         '#btnBack' : {
       		tap		: 'back'
@@ -28,7 +30,19 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
       	},
       	'#rgrpSpan' : {
       		change 	: 'spanChange'
+      	},
+      	'gridMeshViewNodeNodes': {
+            select: 'onGridChildTap'
+        },
+        '#btnDetail' : { //**
+      		tap	: 'detail'
       	}
+    },
+    initCnt	: function(){
+    	var me = this;  	
+    	me.setAsMenu(me.getView().down('#asMenu'));
+    	//FIXME NOTE We have to manually add the event bindings for items in the ActionSheet when we add the parent container on the fly (//**)
+
     },
     show	: function(){
     	var me = this;   	
@@ -92,5 +106,16 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
     asClose : function(){
     	var me = this
     	me.getView().down('#asDate').hide();
-    }
+    },
+    onGridChildTap : function(a,sel){
+    	var me 	= this;
+   		me.sel = sel;			
+    	me.getAsMenu().show();   	   	  	 
+    },
+    detail	: function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('pnlMeshViewNodeNodesDetail',{peer_name : me.sel.get('peer_name'), r: me.sel });
+    	w.show();
+    },
 });
