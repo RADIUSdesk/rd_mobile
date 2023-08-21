@@ -5,17 +5,10 @@
 Ext.define('RdMobile.view.components.cmbFirewallProfile', {
     extend          : 'Ext.field.ComboBox',
     alias           : 'widget.cmbFirewallProfile',
-    fieldLabel      : 'Firewall Profile',
-    labelSeparator  : '',
-    forceSelection  : true,
-    queryMode       : 'local',
+    label      		: 'Firewall Profile',
     valueField      : 'id',
     displayField    : 'name',
-    typeAhead       : true,
-    allowBlank      : false,
     name            : 'firewall_profile_id',
-    mode            : 'remote',
-    pageSize        : 0, // The value of the number is ignore -- it is essentially coerced to a boolean, and if true, the paging toolbar is displayed.
     include_all_option : true, 
     initialize   	: function() {
         var me= this;

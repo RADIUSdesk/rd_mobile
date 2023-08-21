@@ -2,23 +2,23 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-Ext.define('RdMobile.view.components.frmWifiMacAlias', {
+Ext.define('RdMobile.view.components.frmWifiMacFirewall', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmWifiMacAlias',
+    xtype   : 'frmWifiMacFirewall',
     floated	: true,
     modal	: true,
     centered: true,
     closable: true,
     fullscreen : true,
     padding	: 6,
-    iconCls : 'x-fa fa-pen',
-    title	: 'Manage MAC Alias',
+    iconCls : 'x-fa fa-fire',
+    title	: 'Apply Firewall Profile',
     root 	: false,
     requires	: [
         'RdMobile.view.components.vcWifiMac',
     ],
     controller  : 'vcWifiMac',
-    action		: 'alias', // can be alias, firewall, limit or block (various forms with same controller)
+    action		: 'firewall', // can be alias, firewall, limit or block (various forms with same controller)
     buttons: {
         submit: {
             handler: 'onSubmit'
@@ -50,22 +50,40 @@ Ext.define('RdMobile.view.components.frmWifiMacAlias', {
                 name        : 'mac',
                 hidden		: true,
                 value       : d.mac,
-            },         
-            {
-            	xtype       : 'textfield',
-                name        : 'alias',
-                label  		: 'Alias',
-                value       : d.alias,
-                required	: true,
-				errorTarget : 'under'
             },
             {
-                xtype       : 'checkbox',      
-                label       : 'Remove Alias',
-                name        : 'remove_alias',
-                checked     : false
-            }
-                     
+            	xtype       : 'textfield',
+                name        : 'mesh_id',
+                hidden		: true,
+                value       : me.mesh_id,
+            },
+             {
+            	xtype       : 'textfield',
+                name        : 'ap_id',
+                hidden		: true,
+                value       : me.ap_id,
+            }, 
+			{
+				xtype		: 'radiogroup',
+				columns		: 2,
+				label  		: 'Scope',
+				vertical	: false,
+				items		: [
+					{ label: 'Cloud Wide', name: 'scope', value: 'cloud_wide' },
+					{ label: 'Mesh Only',  name: 'scope', value: 'network_only', checked: true}
+				]
+			},
+			{
+            	xtype		: 'cmbFirewallProfile',
+            	include_all_option : false,
+            	required	: true,
+				errorTarget: 'under'                        	
+            },
+            {
+                xtype    : 'checkbox',      
+                label    : 'Remove Firewall',
+                name     : 'remove_firewall'
+            }                  
 		];	
 		me.setItems(items);
 		     

@@ -10,7 +10,10 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
     requires	: [
         'RdMobile.view.meshes.vcMeshViewEntriesGraph',
         'RdMobile.view.meshes.cmbMeshViewSsids',
-        'RdMobile.view.components.frmWifiMacAlias'
+        'RdMobile.view.components.frmWifiMacAlias',
+        'RdMobile.view.components.frmWifiMacFirewall',
+        'RdMobile.view.components.frmWifiMacLimit',
+        'RdMobile.view.components.frmWifiMacBlock'
     ],
 	items   : [
         {
@@ -101,7 +104,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewEntriesGraph', {
 			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-ban"></i></span>',
 			   	'<tpl elseif="cloud_flag & firewall_flag">',
 			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
-			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-fire"></i></span> {fw_profile}</span>',
+			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-fire"></i> {fw_profile}</span>',
 			    '<tpl elseif="cloud_flag & limit_flag">',
 			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
 			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-tachometer-alt"></i> </span>',

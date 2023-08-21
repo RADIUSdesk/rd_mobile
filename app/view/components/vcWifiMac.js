@@ -7,9 +7,9 @@ Ext.define('RdMobile.view.components.vcWifiMac', {
     alias   : 'controller.vcWifiMac',
     config: {
         urlAlias  	: '/cake4/rd_cake/wifi-charts/edit-mac-alias.json',
-        urlFirewall : '/cake4/rd_cake/wifi-charts/edit-mac-alias.json',
-        urlLimit 	: '/cake4/rd_cake/wifi-charts/edit-mac-alias.json',
-        urlBlock 	: '/cake4/rd_cake/wifi-charts/edit-mac-alias.json',
+        urlFirewall : '/cake4/rd_cake/wifi-charts/edit-mac-firewall.json',
+        urlLimit 	: '/cake4/rd_cake/wifi-charts/edit-mac-limit.json',
+        urlBlock 	: '/cake4/rd_cake/wifi-charts/edit-mac-block.json',
     },
     init    : function() {
         var me = this;
@@ -17,8 +17,24 @@ Ext.define('RdMobile.view.components.vcWifiMac', {
    	onSubmit : function(btn){   
     	var me 		= this;
     	var url		= '';
+    	params		= {};
     	if(me.getView().action == 'alias'){
     		url = me.getUrlAlias();
+    	}
+    	
+    	if(me.getView().action == 'firewall'){
+    		var mac = me.getView.mac;
+    		url = me.getUrlFirewall();
+    	}
+    	
+    	if(me.getView().action == 'limit'){
+    		var mac = me.getView.mac;
+    		url = me.getUrlLimit();
+    	}
+    	
+    	if(me.getView().action == 'block'){
+    		var mac = me.getView.mac;
+    		url = me.getUrlBlock();
     	}
     			
     	if(btn.up('formpanel').validate()){    	

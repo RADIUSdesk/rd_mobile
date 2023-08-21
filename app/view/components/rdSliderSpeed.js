@@ -40,7 +40,9 @@ Ext.define('RdMobile.view.components.rdSliderSpeed', {
 		        value       : 1,
 				maxValue    : me.maxValue,
 				minValue    : me.minValue,
+				clearable	: false,
 		        width 		: 70,
+		        margin		: '0 0 0 10',
 		        listeners   : {
 					change  : 'nrAmountChange'
 				}
@@ -50,7 +52,7 @@ Ext.define('RdMobile.view.components.rdSliderSpeed', {
                 queryMode   : 'local',
                 displayField: 'name',
                 valueField  : 'id',
-                width       : 100,
+                width       : 80,
                 name        : me.sliderName+'_unit',
                 value       : 'mbps', //Default Mbps
                  store: [

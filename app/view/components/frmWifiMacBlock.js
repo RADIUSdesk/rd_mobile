@@ -2,23 +2,23 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-Ext.define('RdMobile.view.components.frmWifiMacAlias', {
+Ext.define('RdMobile.view.components.frmWifiMacBlock', {
     extend  : 'Ext.form.Panel',
-    xtype   : 'frmWifiMacAlias',
+    xtype   : 'frmWifiMacBlock',
     floated	: true,
     modal	: true,
     centered: true,
     closable: true,
     fullscreen : true,
     padding	: 6,
-    iconCls : 'x-fa fa-pen',
-    title	: 'Manage MAC Alias',
+    iconCls : 'x-fa fa-ban',
+    title	: 'Apply Block',
     root 	: false,
     requires	: [
         'RdMobile.view.components.vcWifiMac',
     ],
     controller  : 'vcWifiMac',
-    action		: 'alias', // can be alias, firewall, limit or block (various forms with same controller)
+    action		: 'block', // can be alias, firewall, limit or block (various forms with same controller)
     buttons: {
         submit: {
             handler: 'onSubmit'
@@ -50,24 +50,38 @@ Ext.define('RdMobile.view.components.frmWifiMacAlias', {
                 name        : 'mac',
                 hidden		: true,
                 value       : d.mac,
-            },         
-            {
+            }, 
+             {
             	xtype       : 'textfield',
-                name        : 'alias',
-                label  		: 'Alias',
-                value       : d.alias,
-                required	: true,
-				errorTarget : 'under'
+                name        : 'mesh_id',
+                hidden		: true,
+                value       : me.mesh_id,
             },
+             {
+            	xtype       : 'textfield',
+                name        : 'ap_id',
+                hidden		: true,
+                value       : me.ap_id,
+            },
+			{
+				xtype		: 'radiogroup',
+				columns		: 2,
+				label  		: 'Scope',
+				vertical	: false,
+				items		: [
+					{ label: 'Cloud Wide', name: 'scope', value: 'cloud_wide' },
+					{ label: 'Mesh Only',  name: 'scope', value: 'network_only', checked: true}
+				]
+			},
             {
-                xtype       : 'checkbox',      
-                label       : 'Remove Alias',
-                name        : 'remove_alias',
-                checked     : false
-            }
-                     
+                xtype   : 'checkbox',      
+                label   : 'Remove Block',
+				name   	: 'remove_block',
+            }                           
 		];	
 		me.setItems(items);
+		
+		
 		     
  	}
 });

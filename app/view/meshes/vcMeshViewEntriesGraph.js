@@ -61,7 +61,7 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
     	//FIXME NOTE We have to manually add the event bindings for items in the ActionSheet when we add the parent container on the fly (//**)
     	me.getAsMenu().down('#btnAlias').on('tap', 	this.doAlias, this);//**
     	me.getAsMenu().down('#btnFire' ).on('tap', 	this.firewall, this);//**
-    	me.getAsMenu().down('#btnSpeed' ).on('tap', this.firewall, this);//**
+    	me.getAsMenu().down('#btnSpeed' ).on('tap', this.limit, this);//**
     	me.getAsMenu().down('#btnBlock' ).on('tap', this.block, this);//**
 
     },
@@ -253,19 +253,19 @@ Ext.define('RdMobile.view.meshes.vcMeshViewEntriesGraph', {
     firewall : function(){
     	var me = this;
     	me.getAsMenu().hide();
-    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	var w = Ext.widget('frmWifiMacFirewall',{mac : me.sel.get('mac'), r: me.sel, ctrl : me, mesh_id : me.getMeshId() });
     	w.show();
     },
     limit	: function(){
     	var me = this;
     	me.getAsMenu().hide();
-    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	var w = Ext.widget('frmWifiMacLimit',{mac : me.sel.get('mac'), r: me.sel, ctrl : me, mesh_id : me.getMeshId() });
     	w.show();
     },
     block	: function(){
     	var me = this;
     	me.getAsMenu().hide();
-    	var w = Ext.widget('frmWifiMacAlias',{mac : me.sel.get('mac'), r: me.sel, ctrl : me });
+    	var w = Ext.widget('frmWifiMacBlock',{mac : me.sel.get('mac'), r: me.sel, ctrl : me, mesh_id : me.getMeshId() });
     	w.show();
     }
 });
