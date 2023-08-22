@@ -199,7 +199,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
-        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> SSID <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('SSID <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
     	}
     	
     	if(b == 'view_nodes'){
@@ -208,7 +208,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
-        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> Node <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('Node <i class="fa fa-exchange-alt fa-1x"></i> Device'); 
     	}
     	
     	if(b == 'view_node_node'){
@@ -217,7 +217,7 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
-        	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-eye fa-1x"></i> Node <i class="fa fa-exchange-alt fa-1x"></i> Node'); 
+        	me.getView().up('pnlMain').down('#lblMain').setHtml('Node <i class="fa fa-exchange-alt fa-1x"></i> Node'); 
     	}
     	
     	setTimeout(function(){

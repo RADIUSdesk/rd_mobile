@@ -127,7 +127,6 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
         me.showView('cntLogin');
     },     
     showMain: function() {
-    	console.log("Gooi LoginMMM");
         this.showView('pnlMain');
     },
     terminateSession: function() {
@@ -183,9 +182,12 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
 		me.onLogout();
 	},
 	onCloudChange	: function(cmb,value){
-    	var me = this;
-    	me.setCloudId(value);
-    	Ext.Viewport.hideMenu('left');  
+    	var me = this;   	
+    	setTimeout(function(){
+    		me.setCloudId(value);
+    		Ext.Viewport.hideMenu('left');
+    		Ext.toast('Switched To Different Cloud', 5000);  		
+    	}, 1000); 
     },
     setCloudId	: function(cloud_id){
     	var me 			= this;

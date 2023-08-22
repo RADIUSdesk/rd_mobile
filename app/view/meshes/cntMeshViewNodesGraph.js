@@ -9,7 +9,13 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
     layout	: 'fit',
     requires	: [
         'RdMobile.view.meshes.vcMeshViewNodesGraph',
-        'RdMobile.view.meshes.cmbMeshViewNodes'
+        'RdMobile.view.meshes.cmbMeshViewNodes',
+        'RdMobile.view.components.frmWifiMacAlias',
+        'RdMobile.view.components.frmWifiMacFirewall',
+        'RdMobile.view.components.frmWifiMacLimit',
+        'RdMobile.view.components.frmWifiMacBlock',
+        'RdMobile.view.components.pnlWifiMacConnectInfo',
+        'RdMobile.view.components.pnlWifiMacUsageGraph'
     ],
 	items   : [
         {
@@ -105,7 +111,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
 			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-fire"></i></span> {fw_profile}</span>',
 			    '<tpl elseif="cloud_flag & limit_flag">',
 			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
-			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-tachometer-alt"></i> </span>',
+			    	'  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-cloud"></i>  <i class="fa fa-tachometer-alt"></i> (<i class="fa fa-arrow-circle-down"></i> {bw_down} / <i class="fa fa-arrow-circle-up"></i> {bw_up} )</span>',
 			    '<tpl elseif="block_flag">',
 			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
 			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-ban"></i></span>',
@@ -114,7 +120,7 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
 			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-fire"></i> {fw_profile}</span>',
 			    '<tpl elseif="limit_flag">',
 			    	'<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
-			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-tachometer-alt"></i> </span>',
+			        '  <span style="font-size:110%;color:#cc6600;"><i class="fa fa-tachometer-alt"></i> (<i class="fa fa-arrow-circle-down"></i> {bw_down} / <i class="fa fa-arrow-circle-up"></i> {bw_up} )</span>',
 			    '<tpl else>',
 			        '<tpl if="alias">{alias}<tpl else>{mac}</tpl>',
 			    '</tpl>'
@@ -136,7 +142,10 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
         store: s,    
         columns: columns,
         itemId	: 'gridTopTen',
-        active	: true       
+        active	: true,
+        selectable: {
+			mode: 'single'
+		}        
     });
     
     var store_bar    = Ext.create(Ext.data.Store,{model: 'RdMobile.model.mUserStat'});
@@ -300,21 +309,58 @@ Ext.define('RdMobile.view.meshes.cntMeshViewNodesGraph', {
 		me.add(asDate);
 		    
         
-   		var menu = Ext.create({
+   			var menu = Ext.create({
 			xtype	: 'actionsheet',
 			itemId	: 'asMenu',
 			centered: false,
 			title: 'MENU',
 			 items: [
 				 {
-					 text		: 'Create Alias',
+					 text		: 'Manage Alias',
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
 					 itemId		: 'btnAlias'
-				 }
+				 },
+				 {
+					 text		: 'Apply Firewall',
+					 iconCls	: 'x-fa fa-fire',
+					 textAlign  : 'left',
+					 itemId		: 'btnFire'
+				 },
+				 {
+					 text		: 'Limit Speed',
+					 iconCls	: 'x-fa fa-tachometer-alt',
+					 textAlign  : 'left',
+					 itemId		: 'btnSpeed'
+				 },
+				 {
+					 text		: 'Block Device',
+					 iconCls	: 'x-fa fa-ban',
+					 textAlign  : 'left',
+					 itemId		: 'btnBlock'
+				 },
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				{
+					 text		: 'Connection Info',
+					 iconCls	: 'x-fa fa-wifi',
+					 textAlign  : 'left',
+					 itemId		: 'btnInfo'
+				 },
+				 {
+					 text		: 'Usage Graph',
+					 iconCls	: 'x-fa fa-chart-bar',
+					 textAlign  : 'left',
+					 itemId		: 'btnUsage'
+				 }	
 			 ]
 		});     	
 	 	me.add(menu);	 	
+	 		
 	 	this.callParent(arguments);
   	}
 });

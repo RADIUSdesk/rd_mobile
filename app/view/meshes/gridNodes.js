@@ -70,12 +70,14 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
                 text	: 'Nodes',
                 xtype	: 'templatecolumn',
                 tpl		: new Ext.XTemplate(
-                	'<tpl if="gateway==\'yes\'">',
-                		'<div class="grid-tpl-item" style="background:#b5d1f9;">',
-                	'<tpl else>',
-                		'<div class="grid-tpl-item">',
-                	'</tpl>',	
-			            '<div class="item-main">',
+                	
+		            	'<tpl if="gateway==\'yes\'">',
+		            		'<div class="grid-tpl-item" style="border:1px solid #0c3b99;">',
+		            			'<div class="item-main" style="color:#0c3b99;">', //#0c3b99; border:1px solid #a3aeb8;
+		            	'<tpl else>',
+		            		'<div class="grid-tpl-item" style="">',
+		            			'<div class="item-main" style="color:#727478;font-style:italic;">',
+		            	'</tpl>',			            
 			            	'{name}',
 			            '</div>',
                     	'<div class="two-columns-grid">',
