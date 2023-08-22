@@ -33,51 +33,6 @@ Ext.define('RdMobile.view.mainNetworks.cntMainNetworks', {
         			height	: 300	
         		}
         	]
-        },
-       /* {
-            xtype	: 'cntMeshes',
-            layout	: 'fit'
-         },*/
-         {
-            xtype	: 'cntMeshEntries',
-        	layout	: 'fit'
-        },
-        {
-            xtype	: 'cntMeshExits',
-        	layout	: 'fit'
-        },
-        {
-            xtype	: 'cntNodes',
-        	layout	: 'fit'
-        },
-        {
-        	xtype	: 'cntMeshViewEntriesGraph'
-        },
-        {
-        	xtype	: 'cntMeshViewNodesGraph'
-        },
-        {
-        	xtype	: 'cntMeshViewNodeNodes'
-        },
-        {
-        	xtype	: 'cntApProfiles',
-        	layout	: 'fit'
-        },
-        {
-            xtype	: 'cntAccessPointEntries',
-        	layout	: 'fit'
-        },
-        {
-            xtype	: 'cntAccessPointExits',
-        	layout	: 'fit'
-        },
-        {
-            xtype	: 'cntAps',
-            layout	: 'fit'
-         },
-        {
-        	xtype	: 'cntUnknownNodes',
-        	layout	: 'fit'
         }
     ]
 });

@@ -163,6 +163,13 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	if(b == 'entry_points'){
     		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshEntries');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntMeshEntries',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().updateEntries({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
@@ -175,6 +182,13 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	if(b == 'exit_points'){
     		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshExits');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntMeshExits',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().updateExits({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
@@ -196,6 +210,13 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	if(b == 'view_entries'){
     		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshViewEntriesGraph');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntMeshViewEntriesGraph',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
@@ -205,6 +226,13 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	if(b == 'view_nodes'){
     		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshViewNodesGraph');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntMeshViewNodesGraph',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
@@ -214,6 +242,13 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     	if(b == 'view_node_node'){
     		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntMeshViewNodeNodes');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntMeshViewNodeNodes',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().doUpdateId({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});

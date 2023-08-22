@@ -8,7 +8,8 @@ Ext.define('RdMobile.view.unknownNodes.cntUnknownNodes', {
     controller  : 'vcUnknownNodes',
     requires	: [
         'RdMobile.view.unknownNodes.vcUnknownNodes',
-        'RdMobile.view.unknownNodes.gridUnknownNodes'
+        'RdMobile.view.unknownNodes.gridUnknownNodes',
+        'RdMobile.view.meshes.frmMeshAddEditNode'
     ],
 	items   : [
         {
@@ -28,18 +29,7 @@ Ext.define('RdMobile.view.unknownNodes.cntUnknownNodes', {
 				},
 				{
 					xtype	: 'label',
-					itemId	: 'lblMeta',
-					tpl		: new Ext.XTemplate(
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">AP Profiles :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{ap_profiles_total} ({ap_profiles_up} ONLINE)</div>',
-						'</div>',
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">APs :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{aps_total} ({aps_up} ONLINE)</div>',
-						'</div>',
-					),
-					data	: {}
+					itemId	: 'lblMeta'
 				}
 	    	]
         },
@@ -87,7 +77,19 @@ Ext.define('RdMobile.view.unknownNodes.cntUnknownNodes', {
 		 itemId	: 'asMenu',
 		 centered: false,
 		 title: 'MENU',
-			 items: [				
+			 items: [
+			 	{
+					 text		: 'Add To Mesh',
+					 iconCls	: 'x-fa fa-code-branch',
+					 textAlign  : 'left',
+					 itemId		: 'btnNodeAdd'
+				},
+				{
+					 text		: 'Add To AP Profile',
+					 iconCls	: 'x-fa fa-cube',
+					 textAlign  : 'left',
+					 itemId		: 'btnApAdd'
+				},				
 				{
 					 text		: 'Delete',
 					 iconCls	: 'x-fa fa-trash',

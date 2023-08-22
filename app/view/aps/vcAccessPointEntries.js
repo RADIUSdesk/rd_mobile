@@ -12,12 +12,14 @@ Ext.define('RdMobile.view.aps.vcAccessPointEntries', {
         urlEdit		: '/cake4/rd_cake/ap-profiles/ap-profile-entry-edit.json',
         containedIn	: 'cntMainNetworks',
         backTo		: 0,
-        apProfileId		: undefined
+        apProfileId		: undefined,
+        asMenu		: false
     },
     control: {
     	'cntAccessPointEntries' : {
     		show	: 'show',
-    		hide	: 'hide'
+    		hide	: 'hide',
+    		initialize : 'initCnt' 
     	},
     	'gridAccessPointEntries': {
             select: 'onGridChildTap'
@@ -37,6 +39,12 @@ Ext.define('RdMobile.view.aps.vcAccessPointEntries', {
       	'#btnEdit' : {
       		tap	: 'edit'
       	}
+    },
+    initCnt	: function(){
+    	var me = this;  	
+    	me.setAsMenu(me.getView().down('#asMenu'));
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	me.getAsMenu().down('#btnEdit').on('tap', 		this.edit, this);
     },
     show	: function(){
     	var me = this;
@@ -75,16 +83,16 @@ Ext.define('RdMobile.view.aps.vcAccessPointEntries', {
 				    jsonData: [{'id': me.sel.get('id')}],
 				    success: function(batch,options){
 				        me.reload(); //Reload from server
-				        me.getView().down('#asMenu').hide();
+				        me.getAsMenu().hide();
 				    },                                    
 				    failure: function(batch,options){
 				        me.reload(); //Reload from server
-				        me.getView().down('#asMenu').hide();
+				        me.getAsMenu().hide();
 				    }
 				});		
     		}    	
     	});   	
-    	me.getView().down('#asMenu').hide();
+    	me.getAsMenu().hide();
     },
     add : function(){
     	var me = this;
@@ -94,7 +102,7 @@ Ext.define('RdMobile.view.aps.vcAccessPointEntries', {
     },
     edit : function(){
     	var me = this;
-    	me.getView().down('#asMenu').hide();
+    	me.getAsMenu().hide();
         var entry_id  = me.sel.get('id');
         Ext.Ajax.request({
 			url		: me.getUrlView(),
@@ -118,6 +126,6 @@ Ext.define('RdMobile.view.aps.vcAccessPointEntries', {
     onGridChildTap : function(a,sel){
     	var me 	= this;
    		me.sel = sel;
-    	me.getView().down('#asMenu').show();	    	  	 
+    	me.getAsMenu().show();	    	  	 
     }
 });

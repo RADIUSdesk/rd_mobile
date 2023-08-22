@@ -28,18 +28,7 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
 				},
 				{
 					xtype	: 'label',
-					itemId	: 'lblMeta',
-					tpl		: new Ext.XTemplate(
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">MESHES :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{meshes_total} ({meshes_up} ONLINE)</div>',
-						'</div>',
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">NODES :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{nodes_total} ({nodes_up} ONLINE)</div>',
-						'</div>',
-					),
-					data	: {}
+					itemId	: 'lblMeta'
 				}
 	    	]
         },
@@ -99,6 +88,12 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
 					 iconCls	: 'x-fa fa-pen',
 					 textAlign  : 'left',
 					 itemId		: 'btnEdit'
+				 },
+				  {
+					 text		: 'Restart',
+					 iconCls	: 'x-fa fa-power-off',
+					 textAlign  : 'left',
+					 itemId		: 'btnRestart'
 				 },
 				 {
 					xtype	: 'label',

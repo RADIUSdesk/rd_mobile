@@ -58,7 +58,7 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntNodes').down('#lblMeta').setData(meta);
+                	this.up('cntNodes').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">NODES</div></div>');
                 },
                 scope: this
             },
@@ -77,7 +77,10 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
 		            	'<tpl else>',
 		            		'<div class="grid-tpl-item" style="">',
 		            			'<div class="item-main" style="color:#727478;font-style:italic;">',
-		            	'</tpl>',			            
+		            	'</tpl>',
+		            		"<tpl if='reboot_flag == \"1\"'>",
+		            			'<i class="fa fa-power-off" style="color:orange;"></i>  ',
+		            		'</tpl>',			            
 			            	'{name}',
 			            '</div>',
                     	'<div class="two-columns-grid">',

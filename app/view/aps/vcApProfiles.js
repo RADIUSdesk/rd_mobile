@@ -56,6 +56,10 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
     initCnt	: function(){
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
+    	me.getAsMenu().down('#cmbEdit').on('select', 	this.cmbEditChange, this);
+    	me.getAsMenu().down('#cmbView').on('select', 	this.cmbViewChange, this);
     },
     show	: function(){
     	var me = this;
@@ -156,8 +160,15 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
     		w.show();
     	}
     	if(b == 'ssids'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntAccessPointEntries');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntAccessPointEntries',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().updateEntries({ap_profile_name : me.sel.get('name'), ap_profile_id : me.sel.get('id')});
@@ -165,8 +176,15 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
     	}
     	
     	if(b == 'exit_points'){
-    		var containedIn = a.up(me.getContainedIn());
+    		var containedIn = me.getView().up(me.getContainedIn());
     		var cnt = containedIn.down('cntAccessPointExits');
+    		if(!cnt){
+				var cn = Ext.create({
+					xtype	: 'cntAccessPointExits',
+					layout	: 'fit'
+				});
+				cnt = containedIn.add(cn);
+			} 	
 			containedIn.setActiveItem(cnt);
 			var cntRG 	= containedIn.getActiveItem();
 			cntRG.getController().updateExits({ap_profile_name : me.sel.get('name'), ap_profile_id : me.sel.get('id')});
@@ -179,7 +197,7 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
     	}
     	
     	setTimeout(function(){
-    		me.getView().down('#asMenu').hide();  //ON Slow browsers cause double trigger
+    		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);			    
     },

@@ -21,11 +21,11 @@ Ext.define('RdMobile.view.mainNetworks.vcMainNetworks', {
     	var c 	= r.get(col);
 		var cnt = me.getView().down(c.cmp);
 		if(!cnt){
-			var c = Ext.create({
+			var cn = Ext.create({
 				xtype	: c.cmp,
 				layout	: 'fit'
 			});
-			cnt = me.getView().add(c);
+			cnt = me.getView().add(cn);
 		}
 		me.getView().setActiveItem(cnt);
 		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-'+c.fa+' fa-1x"></i> '+c.name);

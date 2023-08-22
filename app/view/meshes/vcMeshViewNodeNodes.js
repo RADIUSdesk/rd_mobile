@@ -42,7 +42,7 @@ Ext.define('RdMobile.view.meshes.vcMeshViewNodeNodes', {
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
     	//FIXME NOTE We have to manually add the event bindings for items in the ActionSheet when we add the parent container on the fly (//**)
-
+    	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);//**
     },
     show	: function(){
     	var me = this;   	

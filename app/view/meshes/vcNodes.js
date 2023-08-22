@@ -8,6 +8,7 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     sel		: null,
     config: {
         urlDelete           : '/cake4/rd_cake/meshes/mesh_node_delete.json',
+        urlRestartNodes		: '/cake4/rd_cake/mesh-reports/restart_nodes.json',
         containedIn			: 'cntMainNetworks',
         appTitle			: 'RADIUSdesk',
         sortDesc			: true,
@@ -53,6 +54,10 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     initCnt	: function(){
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	me.getAsMenu().down('#btnEdit').on('tap', 	    this.edit, this);
+    	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
+    	me.getAsMenu().down('#btnRestart').on('tap', 	this.restart, this);
     },
     show	: function(){
     	var me = this;
@@ -130,7 +135,7 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     },
     edit  : function(btn){
     	var me = this;	
-    	me.getView().down('#asMenu').hide();
+    	me.getAsMenu().hide();
     	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridNodes'), node_id: me.sel.get('id'),action: 'edit'});
         w.show();
     },
@@ -149,5 +154,28 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     	me.getAsMenu().hide();
     	var w = Ext.widget('pnlNodeDetail',{node_name : me.sel.get('name'), r: me.sel });
     	w.show();
+    },
+    restart  : function(btn){
+    	var me = this;
+    	Ext.Msg.confirm("Confirmation", "Are you sure you want to do that?", function(buttonId){    	
+    		if(buttonId == 'yes'){		
+    			var list     = [];
+                Ext.Array.push(list,{'id' : me.sel.get('id')});
+                Ext.Ajax.request({
+                    url: me.getUrlRestartNodes(),
+                    method: 'POST',          
+                    jsonData: {nodes: list, mesh_id: me.sel.get('mesh_id')},
+                    success: function(batch,options){
+                        me.reload(); //Reload from server
+				        me.getAsMenu().hide();
+                    },                                    
+                    failure: function(batch,options){
+                        me.reload(); //Reload from server
+				        me.getAsMenu().hide();
+                    }
+                });
+    		}    	
+    	});   	
+    	me.getAsMenu().hide();
     }
 });

@@ -45,6 +45,11 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
         	me.setIconCls('x-fa fa-pen');
         	me.setTitle('Edit MESH Node');
         }
+        
+        if(me.action == 'attach'){
+        	me.setIconCls('x-fa fa-paperclip');
+        	me.setTitle('Attach MESH Node');
+        }
               
         var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic'});   
         var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe'});         

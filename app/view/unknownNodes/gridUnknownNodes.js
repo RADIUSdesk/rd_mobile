@@ -5,7 +5,7 @@
 Ext.define('RdMobile.view.unknownNodes.gridUnknownNodes', {
     extend  : 'Ext.grid.Grid',
     xtype   : 'gridUnknownNodes',
-    emptyText: 'No Unknown Nodes Found',
+    emptyText: 'No New Arrivals Yet',
     config  : {
         compdata: undefined,
     },
@@ -57,7 +57,7 @@ Ext.define('RdMobile.view.unknownNodes.gridUnknownNodes', {
 		            console.log('Error encountered');
 		        },
 		        metachange : function(store,meta,options) {
-                	this.up('cntUnknownNodes').down('#lblMeta').setData(meta);
+                	this.up('cntUnknownNodes').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">NEW ARRIVALS</div></div>');
                 },
                 scope: this
             },
@@ -66,7 +66,7 @@ Ext.define('RdMobile.view.unknownNodes.gridUnknownNodes', {
         }));
         
         me.setColumns( [{
-                text	: 'Unknown Nodes',
+                text	: 'New Arrivals',
                 xtype	: 'templatecolumn',
                 tpl		: new Ext.XTemplate(
                 	'<div class="grid-tpl-item">',

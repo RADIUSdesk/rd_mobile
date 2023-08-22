@@ -18,7 +18,7 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
     },
     onSubmit : function(btn){   
     	var me 		= this;  	
-    	var url		= me.getUrlAdd();
+    	var url		= me.getUrlAdd(); //for add and attach
     	var store 	= me.getView().grid.getStore();    	
     	if(me.getView().action == 'edit'){
     		url = me.getUrlEdit();

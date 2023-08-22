@@ -151,5 +151,5 @@ Ext.define('RdMobile.view.meshes.vcNodeRadioDetail', {
             i.hide();
             i.disable();
         }  
-    }  
+    }
 });

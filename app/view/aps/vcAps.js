@@ -53,6 +53,8 @@ Ext.define('RdMobile.view.aps.vcAps', {
     initCnt	: function(){
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
     },
     show	: function(){
     	var me = this;
@@ -130,7 +132,7 @@ Ext.define('RdMobile.view.aps.vcAps', {
     },
     edit  : function(btn){
     	var me = this;	
-    	me.getView().down('#asMenu').hide();
+    	me.getAsMenu().hide();
     	var w = Ext.widget('frmApProfileAddEditAp',{grid:me.getView().down('gridAps'), ap_id: me.sel.get('id'),action: 'edit'});
         w.show();
     },

@@ -12,12 +12,14 @@ Ext.define('RdMobile.view.aps.vcAccessPointExits', {
         urlEdit		: '/cake4/rd_cake/ap-profiles/ap-profile-exit-edit.json',
         containedIn	: 'cntMainNetworks',
         backTo		: 0,
-        apProfileId	: undefined
+        apProfileId	: undefined,
+        asMenu		: false
     },
     control: {
     	'cntAccessPointExits' : {
     		show	: 'show',
-    		hide	: 'hide'
+    		hide	: 'hide',
+    		initialize : 'initCnt'
     	},
     	'gridAccessPointExits': {
             select: 'onGridChildTap'
@@ -37,6 +39,13 @@ Ext.define('RdMobile.view.aps.vcAccessPointExits', {
       	'#btnEdit' : {
       		tap	: 'edit'
       	}
+    },
+    initCnt	: function(){
+    	var me = this;  	
+    	me.setAsMenu(me.getView().down('#asMenu'));
+    	//FIXME NOTE We have to manually add the event bindings for items in the ActionSheet when we add the parent container on the fly (//**)
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	me.getAsMenu().down('#btnEdit').on('tap', 		this.edit, this);
     },
     show	: function(){
     	var me = this;
@@ -75,16 +84,16 @@ Ext.define('RdMobile.view.aps.vcAccessPointExits', {
 				    jsonData: [{'id': me.sel.get('id')}],
 				    success: function(batch,options){
 				        me.reload(); //Reload from server
-				        me.getView().down('#asMenu').hide();
+				        me.getAsMenu().hide();
 				    },                                    
 				    failure: function(batch,options){
 				        me.reload(); //Reload from server
-				        me.getView().down('#asMenu').hide();
+				        me.getAsMenu().hide();
 				    }
 				});		
     		}    	
     	});   	
-    	me.getView().down('#asMenu').hide();
+    	me.getAsMenu().hide();
     },
     add : function(){
     	var me = this;
@@ -99,7 +108,7 @@ Ext.define('RdMobile.view.aps.vcAccessPointExits', {
     },
     edit : function(){
     	var me = this;
-    	me.getView().down('#asMenu').hide();
+    	me.getAsMenu().hide();
         var exit_id  = me.sel.get('id');
         Ext.Ajax.request({
 			url		: me.getUrlView(),
@@ -129,6 +138,6 @@ Ext.define('RdMobile.view.aps.vcAccessPointExits', {
     onGridChildTap : function(a,sel){
     	var me 	= this;
    		me.sel = sel;
-    	me.getView().down('#asMenu').show();	    	  	 
+    	me.getAsMenu().show();	    	  	 
     }
 });
