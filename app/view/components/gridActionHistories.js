@@ -2,16 +2,11 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-Ext.define('RdMobile.view.aps.gridAps', {
+Ext.define('RdMobile.view.components.gridActionHistories', {
     extend  : 'Ext.grid.Grid',
-    xtype   : 'gridAps',
-    emptyText: 'No APs Found',
-    config  : {
-        compdata: undefined,
-    },
-    requires: [
-        'Ext.grid.plugin.PagingToolbar'
-    ],
+    xtype   : 'gridActionHistories',
+    emptyText: 'No Items Found',
+
     hideHeaders: true,
     rowLines: true,
     trackMouseOver: false,
@@ -57,9 +52,6 @@ Ext.define('RdMobile.view.aps.gridAps', {
 		            var jsonData = response.responseJson;
 		            console.log('Error encountered');
 		        },
-		        metachange : function(store,meta,options) {
-                	this.up('cntAps').down('#lblMeta').setHtml('<div style="color:#3e3f40;text-align: center;">'+meta.total+'<div style="font-size: xx-small;">APs</div></div>');
-                },
                 scope: this
             },
             remoteFilter: true,

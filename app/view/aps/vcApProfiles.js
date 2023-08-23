@@ -43,23 +43,15 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
       	'#btnDelete' : {
       		tap	: 'delete'
       	},
-      	'#btnDetail' : {
-      		tap	: 'detail'
-      	},
       	'#cmbEdit' : {
       		select: 'cmbEditChange'
-      	},
-      	'#cmbView' : {
-      		select: 'cmbViewChange'
-      	}        	
+      	}       	
     },
     initCnt	: function(){
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
     	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
-    	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
     	me.getAsMenu().down('#cmbEdit').on('select', 	this.cmbEditChange, this);
-    	me.getAsMenu().down('#cmbView').on('select', 	this.cmbViewChange, this);
     },
     show	: function(){
     	var me = this;

@@ -8,7 +8,9 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
     controller  : 'vcNodes',
     requires	: [
         'RdMobile.view.meshes.vcNodes',
-        'RdMobile.view.meshes.gridNodes'
+        'RdMobile.view.meshes.gridNodes',
+        'RdMobile.view.components.frmHardwareAddAction',
+        'RdMobile.view.components.cntActionHistories'
     ],
 	items   : [
         {
@@ -89,11 +91,29 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
 					 textAlign  : 'left',
 					 itemId		: 'btnEdit'
 				 },
-				  {
+				 {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				 {
 					 text		: 'Restart',
 					 iconCls	: 'x-fa fa-power-off',
 					 textAlign  : 'left',
 					 itemId		: 'btnRestart'
+				 },
+				 {
+					 text		: 'Execute',
+					 iconCls	: 'x-fa fa-wrench',
+					 textAlign  : 'left',
+					 itemId		: 'btnExecute'
+				 },
+				  {
+					 text		: 'Execute History',
+					 iconCls	: 'x-fa fa-clock',
+					 textAlign  : 'left',
+					 itemId		: 'btnHistory'
 				 },
 				 {
 					xtype	: 'label',

@@ -58,6 +58,8 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     	me.getAsMenu().down('#btnEdit').on('tap', 	    this.edit, this);
     	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
     	me.getAsMenu().down('#btnRestart').on('tap', 	this.restart, this);
+    	me.getAsMenu().down('#btnExecute').on('tap', 	this.execute, this);
+    	me.getAsMenu().down('#btnHistory').on('tap', 	this.history, this);
     },
     show	: function(){
     	var me = this;
@@ -177,5 +179,27 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     		}    	
     	});   	
     	me.getAsMenu().hide();
+    },
+    execute	: function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmHardwareAddAction',{grid:me.getView().down('gridNodes'), node_id: me.sel.get('id'), hw_type: 'node'});
+        w.show();
+    },
+    history : function(){
+    	var me = this;
+    	var containedIn = me.getView().up(me.getContainedIn());
+    	var cnt = containedIn.down('cntActionHistories');
+		if(!cnt){
+			var cn = Ext.create({
+				xtype	: 'cntActionHistories',
+				layout	: 'fit'
+			});
+			cnt = containedIn.add(cn);
+		} 	
+		containedIn.setActiveItem(cnt);
+		var cntRG 	= containedIn.getActiveItem();
+		//cntRG.getController().doUpdateId({ap_name : me.sel.get('name'), ap_id : me.sel.get('id')});
+    	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-clock fa-1x"></i> Action History');        
     }
 });

@@ -8,7 +8,9 @@ Ext.define('RdMobile.view.aps.cntAps', {
     controller  : 'vcAps',
     requires	: [
         'RdMobile.view.aps.vcAps',
-        'RdMobile.view.aps.gridAps'
+        'RdMobile.view.aps.gridAps',
+        'RdMobile.view.aps.cntApViewSsidsGraph',
+        'RdMobile.view.aps.frmApProfileAddEditAp'
     ],
 	items   : [
         {
@@ -28,18 +30,7 @@ Ext.define('RdMobile.view.aps.cntAps', {
 				},
 				{
 					xtype	: 'label',
-					itemId	: 'lblMeta',
-					tpl		: new Ext.XTemplate(
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">MESHES :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{meshes_total} ({meshes_up} ONLINE)</div>',
-						'</div>',
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl" style="font-size: x-small;padding:0px;">NODES :</div>',
-							'<div class="item-value" style="font-size: x-small;padding:0px;">{nodes_total} ({nodes_up} ONLINE)</div>',
-						'</div>',
-					),
-					data	: {}
+					itemId	: 'lblMeta'
 				}
 	    	]
         },
@@ -100,11 +91,41 @@ Ext.define('RdMobile.view.aps.cntAps', {
 					 textAlign  : 'left',
 					 itemId		: 'btnEdit'
 				 },
+				  {
+					xtype	: 'label',
+					style	: {
+		   				'border-bottom' : '1px solid #667078'
+					}		
+				},
+				{
+					 text		: 'Restart',
+					 iconCls	: 'x-fa fa-power-off',
+					 textAlign  : 'left',
+					 itemId		: 'btnRestart'
+				 },
+				 {
+					 text		: 'Execute',
+					 iconCls	: 'x-fa fa-wrench',
+					 textAlign  : 'left',
+					 itemId		: 'btnExecute'
+				 },
+				  {
+					 text		: 'Execute History',
+					 iconCls	: 'x-fa fa-clock',
+					 textAlign  : 'left',
+					 itemId		: 'btnHistory'
+				 },
 				 {
 					xtype	: 'label',
 					style	: {
 		   				'border-bottom' : '1px solid #667078'
 					}		
+				},
+				{
+					 text		: 'SSID <-> Device',
+					 iconCls	: 'x-fa fa-search',
+					 textAlign  : 'left',
+					 itemId		: 'btnSsidDevice'
 				},
 				{
 					 text		: 'More Detail',

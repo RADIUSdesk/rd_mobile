@@ -7,11 +7,12 @@ Ext.define('RdMobile.view.aps.vcAps', {
     alias   : 'controller.vcAps',
     sel		: null,
     config: {
-        urlDelete           : '/cake4/rd_cake/aps/ap_profile_ap_delete.json',
-        containedIn			: 'cntMainNetworks',
-        appTitle			: 'RADIUSdesk',
-        sortDesc			: true,
-        asMenu				: false	
+        urlDelete    	: '/cake4/rd_cake/aps/ap_profile_ap_delete.json',
+        urlRestartAps   : '/cake4/rd_cake/ap-actions/restart_aps.json',
+        containedIn		: 'cntMainNetworks',
+        appTitle		: 'RADIUSdesk',
+        sortDesc		: true,
+        asMenu			: false	
     },
     control: {
     	'cntAps' : {
@@ -54,7 +55,14 @@ Ext.define('RdMobile.view.aps.vcAps', {
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
     	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
+    	
+    	me.getAsMenu().down('#btnRestart').on('tap', 	this.restart, this);
+    	me.getAsMenu().down('#btnExecute').on('tap', 	this.execute, this);
+    	me.getAsMenu().down('#btnHistory').on('tap', 	this.history, this);
+    	
+    	me.getAsMenu().down('#btnSsidDevice').on('tap', this.ssidDevice, this);
     	me.getAsMenu().down('#btnDetail').on('tap', 	this.detail, this);
+    	
     },
     show	: function(){
     	var me = this;
@@ -151,5 +159,66 @@ Ext.define('RdMobile.view.aps.vcAps', {
     	me.getAsMenu().hide();
     	var w = Ext.widget('pnlApDetail',{ap_name : me.sel.get('name'), r: me.sel });
     	w.show();
+    },
+    ssidDevice	: function(){
+    	var me = this;
+    	var containedIn = me.getView().up(me.getContainedIn());
+    	var cnt = containedIn.down('cntApViewSsidsGraph');
+		if(!cnt){
+			var cn = Ext.create({
+				xtype	: 'cntApViewSsidsGraph',
+				layout	: 'fit'
+			});
+			cnt = containedIn.add(cn);
+		} 	
+		containedIn.setActiveItem(cnt);
+		var cntRG 	= containedIn.getActiveItem();
+		cntRG.getController().doUpdateId({ap_name : me.sel.get('name'), ap_id : me.sel.get('id')});
+    	me.getView().up('pnlMain').down('#lblMain').setHtml('SSID <i class="fa fa-exchange-alt fa-1x"></i> Device');     
+    },
+    restart  : function(btn){
+    	var me = this;
+    	Ext.Msg.confirm("Confirmation", "Are you sure you want to do that?", function(buttonId){    	
+    		if(buttonId == 'yes'){		
+    			var list     = [];
+                Ext.Array.push(list,{'id' : me.sel.get('id')});
+                Ext.Ajax.request({
+                    url: me.getUrlRestartAps(),
+                    method: 'POST',          
+                    jsonData: {aps: list},
+                    success: function(batch,options){
+                        me.reload(); //Reload from server
+				        me.getAsMenu().hide();
+                    },                                    
+                    failure: function(batch,options){
+                        me.reload(); //Reload from server
+				        me.getAsMenu().hide();
+                    }
+                });
+    		}    	
+    	});   	
+    	me.getAsMenu().hide();
+    },
+    execute	: function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmHardwareAddAction',{grid:me.getView().down('gridAps'), ap_id: me.sel.get('id'), hw_type: 'ap'});
+        w.show();
+    },
+    history : function(){
+    	var me = this;
+    	var containedIn = me.getView().up(me.getContainedIn());
+    	var cnt = containedIn.down('cntActionHistories');
+		if(!cnt){
+			var cn = Ext.create({
+				xtype	: 'cntActionHistories',
+				layout	: 'fit'
+			});
+			cnt = containedIn.add(cn);
+		} 	
+		containedIn.setActiveItem(cnt);
+		var cntRG 	= containedIn.getActiveItem();
+		//cntRG.getController().doUpdateId({ap_name : me.sel.get('name'), ap_id : me.sel.get('id')});
+    	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-clock fa-1x"></i> Action History');        
     }
 });

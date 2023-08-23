@@ -131,38 +131,7 @@ Ext.define('RdMobile.view.aps.cntApProfiles', {
 					 iconCls	: 'x-fa fa-trash',
 					 textAlign  : 'left',
 					 itemId		: 'btnDelete'
-				 },		
-				{
-					xtype	: 'label',
-					style	: {
-		   				'border-bottom' : '1px solid #667078'
-					}		
-				},				
-				{
-					xtype	: 'combobox',
-					label	: 'View',
-					queryMode: 'local',
-					displayField: 'name',
-					valueField: 'id',
-					value	: 'choose_one',
-					itemId	: 'cmbView',
-					store: [ 
-						{
-							id	: 'choose_one',
-							name: 'Choose One'
-						},
-						{
-							id	: 'general',
-							name: 'General'
-						}				
-					]
-				},
-				{
-					 text		: 'More Detail',
-					 iconCls	: 'x-fa fa-info-circle',
-					 textAlign  : 'left',
-					 itemId		: 'btnDetail'
-				}
+				 }
 			 ]
 	 	});
 	 	
