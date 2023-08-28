@@ -80,7 +80,12 @@ Ext.define('RdMobile.view.aps.vcAps', {
     },
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridAps').getStore().reload();    	  
+    	var store 	= me.getView().down('gridAps').getStore();
+    	store.filter([{'property':'name','value':'jdksljsdklj','operator':'like'}]); //We do this hack to clear the grid in order to update the screen 
+    	setTimeout(function(){
+    		store.clearFilter(); 	
+    	}, 50);
+    		  
     },
     sort	: function(btn){
     	var me 		= this;
@@ -148,6 +153,11 @@ Ext.define('RdMobile.view.aps.vcAps', {
     	var me = this;
     	var w = Ext.widget('frmApProfileAddEditAp',{grid:me.getView().down('gridAps'),action: 'add'});
         w.show(); 
+    },
+    onWidgetcellTap: function(a,sel){
+    	var me 	= this;
+    	me.sel = sel;
+    	me.getAsMenu().show();	  
     },
     onGridChildTap : function(a,sel){
     	var me 	= this;

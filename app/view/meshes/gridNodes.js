@@ -10,7 +10,8 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
         compdata: undefined,
     },
     requires: [
-        'Ext.grid.plugin.PagingToolbar'
+        'Ext.grid.plugin.PagingToolbar',
+        'RdMobile.view.meshes.cntViewNodeHardware'
     ],
     hideHeaders: true,
     rowLines: true,
@@ -24,10 +25,12 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
         gridpagingtoolbar: true
     },
     selectable: {
-		//rows: true,
-		mode: 'single',
-		//columns: false
+		mode: 'single'
 	},
+	itemConfig: {
+        viewModel: true
+    },
+    rowViewModel: true,
     initialize: function () {
         const me = this;
 
@@ -66,7 +69,39 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
             remoteSort: true
         }));
         
-        me.setColumns( [{
+        me.setColumns([
+    		{
+				flex		: 1,
+		        cell		: {
+		            xtype: 'widgetcell',
+		            listeners: {
+						click: {
+							element: 'element', //bind to the underlying el property on the panel
+							fn: function(a,b,c){ 
+								const record = this.component.getRecord();
+								this.component.up('cntNodes').getController().onGridChildTap(this.component,record);
+		     				}
+		     			}						
+					},
+		            widget: {
+                        xtype: 'cntViewNodeHardware',
+                        listeners: {
+							painted  : function(a,b,c){
+								const record = a.up('widgetcell').getRecord();
+                                a.down('#cntInfo').setData(record.getData());
+                                a.down('#sklBar').setValues(record.get('dayuptimehist'));
+                                a.down('#sklPie').setValues(record.get('uptimhistpct'));
+							}
+						},
+						bind: {
+                            n: '{record.name}'                        
+                        }
+                    }
+		        }	       
+		    }
+    	]);
+        
+       /* me.setColumns( [{
                 text	: 'Nodes',
                 xtype	: 'templatecolumn',
                 tpl		: new Ext.XTemplate(
@@ -109,7 +144,7 @@ Ext.define('RdMobile.view.meshes.gridNodes', {
 					encodeHtml: false
 				},
                 flex: 1
-            }]);
+            }]);*/
 		this.callParent();
 		//console.log(this._record)      
     }

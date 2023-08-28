@@ -10,7 +10,8 @@ Ext.define('RdMobile.view.aps.gridAps', {
         compdata: undefined,
     },
     requires: [
-        'Ext.grid.plugin.PagingToolbar'
+        'Ext.grid.plugin.PagingToolbar',
+        'RdMobile.view.aps.cntViewHardware'
     ],
     hideHeaders: true,
     rowLines: true,
@@ -24,21 +25,23 @@ Ext.define('RdMobile.view.aps.gridAps', {
         gridpagingtoolbar: true
     },
     selectable: {
-		//rows: true,
-		mode: 'single',
-		//columns: false
+		mode: 'single'
 	},
+	itemConfig: {
+        viewModel: true
+    },
+    rowViewModel: true,
     initialize: function () {
         const me = this;
 
         me.setStore(Ext.create(Ext.data.Store,{
         	autoLoad: false,
+        	clearOnPageLoad:true,
             model: 'RdMobile.model.mApList', //FIXME MODEL 
             proxy: {
                 type        :'ajax',
                 url         : '/cake4/rd_cake/aps/index.json',
                 pageSize	: 50,
-                batchActions: true,
                 format      : 'json',
                 reader: {
 			        type: 'json',
@@ -65,45 +68,39 @@ Ext.define('RdMobile.view.aps.gridAps', {
             remoteFilter: true,
             remoteSort: true
         }));
-        
-        me.setColumns( [{
-                text	: 'APs',
-                xtype	: 'templatecolumn',
-                tpl		: new Ext.XTemplate(
-                	'<div class="grid-tpl-item">',
-			            '<div class="item-main">',
-			            	"<tpl if='reboot_flag == \"1\"'>",
-		            			'<i class="fa fa-power-off" style="color:orange;"></i>  ',
-		            		'</tpl>',	
-			            	'{name}',
-			            '</div>',
-			            '<div class="two-columns-grid">',
-							'<div class="item-lbl"><i class="fa fa-cubes fa-1x"></i> AP Profile :</div>',					
-							'<div class="item-value">{ap_profile}</div>',
-						'</div>',
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl"><i class="fa fa-cogs fa-1x"></i> Config Fetched :</div>',
-							'<tpl if="[Ext.ux.isRecent(config_fetched_human)]==\'green\'">',
-								'<div class="item-value clr-green">{config_fetched_human}</div>',
-							'<tpl else>',
-								'<div class="item-value clr-grey-dark">{config_fetched_human}</div>',
-							'</tpl>',						
-						'</div>',
-						'<div class="two-columns-grid">',
-							'<div class="item-lbl"><i class="fa fa-heartbeat fa-1x"></i> Heartbeat :</div>',
-							'<tpl if="[Ext.ux.isRecent(last_contact_human)]==\'green\'">',
-								'<div class="item-value clr-green">{last_contact_human}</div>',
-							'<tpl else>',
-								'<div class="item-value clr-orange">{last_contact_human}</div>',
-							'</tpl>',
-						'</div>',					
-                    '</div>',
-                ),
-                cell: {
-					encodeHtml: false
-				},
-                flex: 1
-            }]);
+               
+    	me.setColumns([
+    		{
+				flex		: 1,
+		        cell		: {
+		            xtype: 'widgetcell',
+		            listeners: {
+						click: {
+							element: 'element', //bind to the underlying el property on the panel
+							fn: function(a,b,c){ 
+								const record = this.component.getRecord();
+								this.component.up('cntAps').getController().onGridChildTap(this.component,record);
+		     				}
+		     			}						
+					},
+		            widget: {
+                        xtype: 'cntViewHardware',
+                        listeners: {
+							painted  : function(a,b,c){
+								const record = a.up('widgetcell').getRecord();
+                                a.down('#cntInfo').setData(record.getData());
+                                a.down('#sklBar').setValues(record.get('dayuptimehist'));
+                                a.down('#sklPie').setValues(record.get('uptimhistpct'));
+							}
+						},
+						bind: {
+                            n: '{record.name}'                        
+                        }
+                    }
+		        }	       
+		    }
+    	]);
+            
 		this.callParent();
 		//console.log(this._record)      
     }

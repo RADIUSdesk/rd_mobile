@@ -77,7 +77,11 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     },
     reload	: function(btn){
     	var me = this;
-    	me.getView().down('gridNodes').getStore().reload();    	  
+    	var store 	= me.getView().down('gridNodes').getStore();
+    	store.filter([{'property':'name','value':'jdksljsdklj','operator':'like'}]); //We do this hack to clear the grid in order to update the screen 
+    	setTimeout(function(){
+    		store.clearFilter(); 	
+    	}, 50);    		  
     },
     sort	: function(btn){
     	var me 		= this;
@@ -145,6 +149,11 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     	var me = this;
     	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridNodes'),action: 'add'});
         w.show(); 
+    },
+    onWidgetcellTap: function(a,sel){
+    	var me 	= this;
+    	me.sel = sel;
+    	me.getAsMenu().show();	  
     },
     onGridChildTap : function(a,sel){
     	var me 	= this;
