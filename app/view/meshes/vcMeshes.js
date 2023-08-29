@@ -199,6 +199,11 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
     		var w = Ext.widget('frmMeshEditNodeSettings',{mesh_name : me.sel.get('name'),meshId : me.sel.get('id')});
     		w.show();
     	}
+    	
+    	if(b == 'nodes'){
+    		me.showNodes();	
+    	}
+    	
     	setTimeout(function(){
     		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
@@ -255,9 +260,29 @@ Ext.define('RdMobile.view.meshes.vcMeshes', {
         	me.getView().up('pnlMain').down('#lblMain').setHtml('Node <i class="fa fa-exchange-alt fa-1x"></i> Node'); 
     	}
     	
+    	if(b == 'nodes'){
+    		me.showNodes();	
+    	}
+    	
     	setTimeout(function(){
     		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);	      
-    }
+    },
+    showNodes : function(){
+    	var me = this;
+    	var containedIn = me.getView().up(me.getContainedIn());
+		var cnt = containedIn.down('cntNodes');
+		if(!cnt){
+			var cn = Ext.create({
+				xtype	: 'cntNodes',
+				layout	: 'fit'
+			});
+			cnt = containedIn.add(cn);
+		}
+		containedIn.setActiveItem(cnt);
+		var cntRG 	= containedIn.getActiveItem();
+		cntRG.getController().nodesForMesh({mesh_name : me.sel.get('name'), mesh_id : me.sel.get('id')});
+		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-code-branch fa-1x"></i> MESH Nodes');    
+    } 
 });

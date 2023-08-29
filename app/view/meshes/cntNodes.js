@@ -10,7 +10,8 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
         'RdMobile.view.meshes.vcNodes',
         'RdMobile.view.meshes.gridNodes',
         'RdMobile.view.components.frmHardwareAddAction',
-        'RdMobile.view.components.cntActionHistories'
+        'RdMobile.view.components.cntActionHistories',
+        'RdMobile.view.meshes.pnlNodeDetail'
     ],
 	items   : [
         {
@@ -51,15 +52,22 @@ Ext.define('RdMobile.view.meshes.cntNodes', {
 				{
 					xtype	: 'combobox',
 					label	: 'Filter On',
-					queryMode: 'local',
 					displayField: 'name',
 					valueField: 'id',
-					value	: 'name',
+					value	: 'mesh',
 					itemId	: 'cmbFilterOn',
 					store: [ 
 						{
+							id	: 'mesh',
+							name: 'Mesh'
+						},
+						{
 							id	: 'name',
 							name: 'Name'
+						},
+						{
+							id	: 'mac',
+							name: 'MAC Address'
 						}
 					]
 				},

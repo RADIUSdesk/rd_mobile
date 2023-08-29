@@ -78,9 +78,11 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     reload	: function(btn){
     	var me = this;
     	var store 	= me.getView().down('gridNodes').getStore();
-    	store.filter([{'property':'name','value':'jdksljsdklj','operator':'like'}]); //We do this hack to clear the grid in order to update the screen 
+    	store.getProxy().setExtraParam('zero_flag',true);
+    	store.reload();
     	setTimeout(function(){
-    		store.clearFilter(); 	
+    		store.getProxy().setExtraParam('zero_flag',false);
+    		store.reload(); 	
     	}, 50);    		  
     },
     sort	: function(btn){
@@ -105,6 +107,11 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     	var me  = this;
     	me.getView().down('#asFilter').show();
     },
+    nodesForMesh : function(info){
+    	var me = this;
+    	me.getView().down('#cmbFilterOn').setValue('mesh');
+    	me.getView().down('#txtFilterValue').setValue(info.mesh_name);   
+    },
     txtFilterValueChange : function(txt,new_value){
     	var me 		= this;
     	var store 	= me.getView().down('gridNodes').getStore();
@@ -113,10 +120,15 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
     	if(new_value == ''){
     		store.clearFilter();
     		btn.setBadgeText('');
+    		setTimeout(function(){
+				me.reload();	
+			}, 50);		
     	}else{
     		store.filter([{'property':cmb.getValue(),'value':new_value,'operator':'like'}]);
     		btn.setBadgeText('+');
+    		me.reload();
     	}
+    	
     },
     delete  : function(btn){
     	var me = this;
@@ -208,7 +220,8 @@ Ext.define('RdMobile.view.meshes.vcNodes', {
 		} 	
 		containedIn.setActiveItem(cnt);
 		var cntRG 	= containedIn.getActiveItem();
-		//cntRG.getController().doUpdateId({ap_name : me.sel.get('name'), ap_id : me.sel.get('id')});
-    	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-clock fa-1x"></i> Action History');        
+		cntRG.getController().setHardwareId({node_name : me.sel.get('name'), node_id : me.sel.get('id'),'hw_type': 'node'});
+    	me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-clock fa-1x"></i> Action History');
+    	me.getAsMenu().hide();       
     }
 });

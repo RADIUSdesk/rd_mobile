@@ -10,7 +10,8 @@ Ext.define('RdMobile.view.aps.cntAps', {
         'RdMobile.view.aps.vcAps',
         'RdMobile.view.aps.gridAps',
         'RdMobile.view.aps.cntApViewSsidsGraph',
-        'RdMobile.view.aps.frmApProfileAddEditAp'
+        'RdMobile.view.aps.frmApProfileAddEditAp',
+        'RdMobile.view.aps.pnlApDetail'
     ],
 	items   : [
         {
@@ -54,12 +55,20 @@ Ext.define('RdMobile.view.aps.cntAps', {
 					queryMode: 'local',
 					displayField: 'name',
 					valueField: 'id',
-					value	: 'name',
+					value	: 'ap_profile',
 					itemId	: 'cmbFilterOn',
 					store: [ 
 						{
+							id	: 'ap_profile',
+							name: 'AP Profile'
+						},
+						{
 							id	: 'name',
 							name: 'Name'
+						},
+						{
+							id	: 'mac',
+							name: 'MAC Address'
 						}
 					]
 				},

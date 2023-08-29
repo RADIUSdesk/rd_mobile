@@ -176,6 +176,10 @@ Ext.define('RdMobile.view.meshes.cntMeshes', {
 						{
 							id	: 'view_node_node',
 							name: 'Node <-> Node'
+						},
+						{
+							id	: 'nodes',
+							name: 'Nodes'
 						}					
 					]
 				},

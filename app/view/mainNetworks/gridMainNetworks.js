@@ -40,7 +40,7 @@ Ext.define('RdMobile.view.mainNetworks.gridMainNetworks', {
 		        {
 		        	'id'	: 2,
 		            0	: {'name':'New Arrivals', 	'cmp' 	: 'cntUnknownNodes',	'fa': 'car'},
-		            1	: {'name':'Limited Devices','cmp' 	: 'cntAps',			'fa': 'traffic-light'}
+		            1	: {'name':'Limited Devices','cmp' 	: 'cntBans',			'fa': 'traffic-light'}
 		        }
             ]
         }));

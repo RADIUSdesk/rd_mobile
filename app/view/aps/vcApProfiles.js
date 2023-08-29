@@ -188,15 +188,29 @@ Ext.define('RdMobile.view.aps.vcApProfiles', {
     		w.show();
     	}
     	
+    	if(b == 'aps'){
+    		me.showAps();
+    	}
+    	
     	setTimeout(function(){
     		me.getAsMenu().hide();  //ON Slow browsers cause double trigger
     		a.setValue('choose_one');   		
     	}, 1000);			    
     },
-    cmbViewChange : function(a,b){
+    showAps : function(){
     	var me = this;
-    	console.log(b);
-    	me.getAsMenu().hide();   
-    
-    }
+    	var containedIn = me.getView().up(me.getContainedIn());
+		var cnt = containedIn.down('cntAps');
+		if(!cnt){
+			var cn = Ext.create({
+				xtype	: 'cntAps',
+				layout	: 'fit'
+			});
+			cnt = containedIn.add(cn);
+		}
+		containedIn.setActiveItem(cnt);
+		var cntRG 	= containedIn.getActiveItem();
+		cntRG.getController().apsForProfile({ap_profile_name : me.sel.get('name'), ap_profile_id : me.sel.get('id')});
+		me.getView().up('pnlMain').down('#lblMain').setHtml('<i class="fa fa-sitemap fa-1x"></i> <i class="fa fa-cube fa-1x"></i> APs');    
+    } 
 });
