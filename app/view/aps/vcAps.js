@@ -86,7 +86,7 @@ Ext.define('RdMobile.view.aps.vcAps', {
     	setTimeout(function(){
     		store.getProxy().setExtraParam('zero_flag',false);
     		store.reload(); 	
-    	}, 50);    		  
+    	}, 250);    		  
     },
     sort	: function(btn){
     	var me 		= this;

@@ -91,7 +91,8 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
 		        value		: ''
 	        },
 	        {
-	        	xtype       : 'cmbApHardwareOptions'  
+	        	xtype       : 'cmbApHardwareOptions',
+	        	width		: '100%',  
 		    },
 	        {
 			    xtype       : 'textfield',

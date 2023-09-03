@@ -11,6 +11,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
     requires	: [
         'RdMobile.view.mainRadius.cntMainRadius',
         'RdMobile.view.mainNetworks.cntMainNetworks',
+        'RdMobile.view.mainOthers.cntMainOthers',
         'RdMobile.view.components.cmbCloud',
         'Ext.tab.Panel'
     ],
@@ -51,11 +52,7 @@ Ext.define('RdMobile.view.main.pnlMain', {
             xtype           : 'tabpanel',
             tabBarPosition	: 'bottom',
             itemId			: 'tpMain',
-          	items: [                               
-            /*    {
-                    title	: 'HOME',
-                    itemId	: 'home'
-                },*/
+          	items: [
                 {
                 	title	: 'RADIUS',
                 	xtype	: 'cntMainRadius',
@@ -65,19 +62,11 @@ Ext.define('RdMobile.view.main.pnlMain', {
                 	title	: 'NETWORKS',
                 	xtype	: 'cntMainNetworks',
                 	itemId	: 'mainNetworks'              
-                },               
+                },
                 {
-                    title	: 'OTHER',
-                    items    : [                	
-                    	{
-							xtype	: 'label',
-							html	: '<i class="fas fa-heartbeat"></i> In the works....',
-							margin	: 0,
-							padding : 5,
-							cls		: 'form-section'	
-						}
-                    ],
-                    itemId	: 'other'
+                	title	: 'OTHER',
+                	xtype	: 'cntMainOthers',
+                	itemId	: 'mainOthers'              
                 }
             ],
             flex    : 1
