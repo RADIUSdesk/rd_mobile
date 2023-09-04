@@ -15,7 +15,7 @@ Ext.define('RdMobile.view.components.cmbMesh', {
     mode            : 'remote',
     required		: true,
 	errorTarget		: 'under',
-	floatedPicker   : {
+/*	floatedPicker   : {
         xtype: 'boundlist',
         infinite: true,
         // BoundListNavigationModel binds to input field
@@ -37,7 +37,7 @@ Ext.define('RdMobile.view.components.cmbMesh', {
         axisLock: true,
         hideAnimation: null,
         variableHeights: true
-    },
+    },*/
     initialize		: function () {
         var me= this;
         var s = Ext.create('Ext.data.Store', {

@@ -82,13 +82,19 @@ Ext.define('RdMobile.view.main.pnlMain', {
      	
      	var dd = Ext.getApplication().getDashboardData();
         if(dd.user){
-        	if(dd.user.cloud_id){
-        		cloud = {
-        			xtype 	: 'cmbCloud',
-        			value 	: dd.user.cloud_id,
-        			itemId	: 'cmbMainCloud'
-        		}      	
-        	}
+        
+        	if(dd.user.cloud_count == 0){
+            	console.log("No Clouds - Start Up the Wizard");
+        	}else{
+        
+		    	if(dd.user.cloud_id){
+		    		cloud = {
+		    			xtype 	: 'cmbCloud',
+		    			value 	: dd.user.cloud_id,
+		    			itemId	: 'cmbMainCloud'
+		    		}      	
+		    	}
+		    }
      	}
      	
        	var menu = Ext.create({

@@ -6,7 +6,10 @@ Ext.define('RdMobile.view.main.vcMain', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcMain',
     control: {
-         '#tpMain': {
+    	'pnlMain' : {
+    		painted : 'onMainPainted'
+    	},
+       	'#tpMain': {
             beforeactiveitemchange: 'onTpMainChange'
         },
         '#btnMenu': {
@@ -47,6 +50,14 @@ Ext.define('RdMobile.view.main.vcMain', {
     onBtnMenuTap 	: function(){
     	var me = this;
     	Ext.Viewport.showMenu('left');   	
+    },
+    onMainPainted : function(){
+    	var me = this;
+    	console.log("Main Painted");
+    	var dd = Ext.getApplication().getDashboardData();
+    	if(dd.user.cloud_count == 0){
+        	var w = Ext.widget('frmWizard',{});
+    		w.show();
+    	}  
     }
-
 });

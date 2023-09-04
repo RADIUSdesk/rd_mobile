@@ -5,7 +5,7 @@
 Ext.define('RdMobile.view.meshes.cmbHardwareOptions', {
     extend          : 'Ext.field.ComboBox',
     alias           : 'widget.cmbHardwareOptions',
-    label      		: 'Hardware_model',
+    label      		: 'Hardware Model',
     valueField      : 'id',
     displayField    : 'name',
     itemId          : 'hardware',
