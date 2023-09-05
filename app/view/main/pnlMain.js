@@ -15,70 +15,19 @@ Ext.define('RdMobile.view.main.pnlMain', {
         'RdMobile.view.components.cmbCloud',
         'Ext.tab.Panel'
     ],
-    items       : [
-        {
-		    xtype 	: 'toolbar',
-		    docked	: 'top',
-		    items	: [
-		    	{
-				    xtype: 'image',
-				    src: 'resources/images/logo.png',
-				    height: 32,
-    				width: 32
-				},
-				{
-                    xtype: 'spacer'
-                },			    
-			    {
-					xtype	: 'label',
-					itemId	: 'lblMain',
-					html	: 'RADIUSdesk',
-					style	: {
-		   				'color'			: '#005691',
-		   				'letter-spacing': '4px'
-					}	
-				},
-				{
-                    xtype: 'spacer'
-                },
-				{ 
-					ui		: 'normal',
-					itemId	: 'btnMenu', 
-					iconCls	: 'x-fa fa-align-justify' 
-				},
-		    ]
-	    },
-        {
-            xtype           : 'tabpanel',
-            tabBarPosition	: 'bottom',
-            itemId			: 'tpMain',
-          	items: [
-                {
-                	title	: 'RADIUS',
-                	xtype	: 'cntMainRadius',
-                	itemId	: 'mainRadius'              
-                },
-                {
-                	title	: 'NETWORKS',
-                	xtype	: 'cntMainNetworks',
-                	itemId	: 'mainNetworks'              
-                },
-                {
-                	title	: 'OTHER',
-                	xtype	: 'cntMainOthers',
-                	itemId	: 'mainOthers'              
-                }
-            ],
-            flex    : 1
-        }
-    ],
+    
     initialize: function () {
      	const me = this;
-     	
-     	var cloud = {
-				 	xtype		: 'cmbCloud',
-				 	itemId		: 'cmbMainCloud'
-				 };
+     		
+ 		var cloud = {
+		 	xtype		: 'cmbCloud',
+		 	itemId		: 'cmbMainCloud'
+		 };
+		 
+		 var cloud_data = {
+			cloud_name	:'Select Cloud',
+			warn_flag	: true
+		};
      	
      	var dd = Ext.getApplication().getDashboardData();
         if(dd.user){
@@ -92,10 +41,95 @@ Ext.define('RdMobile.view.main.pnlMain', {
 		    			xtype 	: 'cmbCloud',
 		    			value 	: dd.user.cloud_id,
 		    			itemId	: 'cmbMainCloud'
+		    		}
+		    		
+		    		cloud_data = {
+		    			cloud_name 	: dd.user.cloud_name,
+		    			warn_flag	: false
 		    		}      	
 		    	}
 		    }
      	}
+     	
+     	
+     	me.setItems([
+		    {
+				xtype 	: 'toolbar',
+				docked	: 'top',
+				items	: [
+					{
+						xtype	: 'container',
+						layout	: 'vbox',
+						items	: [
+							{
+								xtype	: 'image',
+								src		: 'resources/images/logo.png',
+								height	: 32,
+								width	: 32
+							},
+							{
+								xtype	: 'label',
+								itemId	: 'lblCloud',
+								width	: 50,
+								tpl		:new Ext.XTemplate(
+									'<tpl if="warn_flag">',
+										'<span class="clr-red" style="font-size:x-small;"><i class="fa fa-exclamation-circle" style="color:orange;"></i>  {cloud_name}</span>',	
+									'<tpl else>',
+										'<span class="clr-grey-dark" style="font-size:x-small;"><i class="fa fa-cloud" style="color:#0677c7;"></i>   {cloud_name}</span>',		
+									'</tpl>'							
+								),
+								data	: cloud_data
+							}		
+						]					
+					},
+					{
+		                xtype: 'spacer'
+		            },			    
+					{
+						xtype	: 'label',
+						itemId	: 'lblMain',
+						html	: 'RADIUSdesk',
+						style	: {
+			   				'color'			: '#005691',
+			   				'letter-spacing': '4px'
+						}	
+					},
+					{
+		                xtype: 'spacer'
+		            },
+					{ 
+						ui		: 'normal',
+						itemId	: 'btnMenu', 
+						iconCls	: 'x-fa fa-align-justify' 
+					},
+				]
+			},
+		    {
+		        xtype           : 'tabpanel',
+		        tabBarPosition	: 'bottom',
+		        itemId			: 'tpMain',
+		      	items: [
+		            {
+		            	title	: 'RADIUS',
+		            	xtype	: 'cntMainRadius',
+		            	itemId	: 'mainRadius'              
+		            },
+		            {
+		            	title	: 'NETWORKS',
+		            	xtype	: 'cntMainNetworks',
+		            	itemId	: 'mainNetworks'              
+		            },
+		            {
+		            	title	: 'OTHER',
+		            	xtype	: 'cntMainOthers',
+		            	itemId	: 'mainOthers'              
+		            }
+		        ],
+		        flex    : 1
+		    }
+		]);
+     	
+     
      	
        	var menu = Ext.create({
 		 xtype: 'actionsheet',

@@ -186,7 +186,25 @@ Ext.define('RdMobile.view.viewport.vcViewport', {
     	setTimeout(function(){
     		me.setCloudId(value);
     		Ext.Viewport.hideMenu('left');
-    		Ext.toast('Switched To Different Cloud', 5000);  		
+    		Ext.toast({
+				message		: 'Switched To Different Cloud',
+				alignment	: 'tc-tc',
+				timeout		: 2000
+			}); 
+    		
+    		var record  = cmb.getSelection();
+    		var cloud_name = 'Unknown';
+		    if(record != null){
+		        cloud_name =record.get('name');
+		    }   		
+    		var l = Ext.ComponentQuery.query('#lblCloud');
+        	var lbl = l[0];
+        	
+        	lbl.setData({
+        		cloud_name 	: cloud_name,
+		    	warn_flag	: false      	
+        	})		
+    		 		
     	}, 1000); 
     },
     setCloudId	: function(cloud_id){

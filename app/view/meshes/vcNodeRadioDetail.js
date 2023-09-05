@@ -5,6 +5,9 @@
 Ext.define('RdMobile.view.meshes.vcNodeRadioDetail', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcNodeRadioDetail',
+    config: {
+        isMesh	: false
+    },
     control: {
     	'#chkMesh' : {
     		change : 'onChkMeshChange'
@@ -41,17 +44,16 @@ Ext.define('RdMobile.view.meshes.vcNodeRadioDetail', {
 		if(value =='5g'){
 		    pnl.setUi('panel-blue');
 		}	 
-    },     
+    },  
     onModeChange: function(mode){
         var me      = this;   
         var pnl     = mode.up('panel');//fs   
         var n_t		= pnl.down('#numRadioTwoChan');
 		var n_v		= pnl.down('#numRadioFiveChan');
-		var mesh    = pnl.down('#chkMesh');
+	////	var mesh    = pnl.down('#chkMesh'); //NOTE We are not using this but we set a contriller wide variable when the mesh is active ...This always tuned out 'active' 
 		var band    = pnl.down('#band');
-		var title   = "2.4GHz-N";
-		
-		if(mesh.getValue()){ //Hide channel selection if there is a mesh interface
+		var title   = "2.4GHz-N";		
+		if(me.getIsMesh()){ //Hide channel selection if there is a mesh interface
 		    n_t.hide();
 		    n_t.disable();
 		    n_v.hide();
@@ -106,9 +108,15 @@ Ext.define('RdMobile.view.meshes.vcNodeRadioDetail', {
         var n_t		= pnl.down('#numRadioTwoChan');
 		var n_v		= pnl.down('#numRadioFiveChan');
 		var band    = pnl.down('#band');
+					
 		if(value == 'on'){ //FIXME there seems to be a bug causing a false trigger with the value set to 'on' before it is shown
 			return;
 		}
+		
+		if(value){
+			me.setIsMesh(true);
+		}
+		
 		if(value){ //Hide channel selection if there is a mesh interface
 		    n_t.hide();
 		    n_t.disable();
