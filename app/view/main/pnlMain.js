@@ -58,42 +58,47 @@ Ext.define('RdMobile.view.main.pnlMain', {
 				docked	: 'top',
 				items	: [
 					{
-						xtype	: 'container',
-						layout	: 'vbox',
-						items	: [
-							{
-								xtype	: 'image',
-								src		: 'resources/images/logo.png',
-								height	: 32,
-								width	: 32
-							},
-							{
-								xtype	: 'label',
-								itemId	: 'lblCloud',
-								width	: 50,
-								tpl		:new Ext.XTemplate(
-									'<tpl if="warn_flag">',
-										'<span class="clr-red" style="font-size:x-small;"><i class="fa fa-exclamation-circle" style="color:orange;"></i>  {cloud_name}</span>',	
-									'<tpl else>',
-										'<span class="clr-grey-dark" style="font-size:x-small;"><i class="fa fa-cloud" style="color:#0677c7;"></i>   {cloud_name}</span>',		
-									'</tpl>'							
-								),
-								data	: cloud_data
-							}		
-						]					
+						xtype	: 'image',
+						src		: 'resources/images/logo.png',
+						height	: 32,
+						width	: 32
 					},
 					{
 		                xtype: 'spacer'
-		            },			    
-					{
-						xtype	: 'label',
-						itemId	: 'lblMain',
-						html	: 'RADIUSdesk',
-						style	: {
-			   				'color'			: '#005691',
-			   				'letter-spacing': '4px'
-						}	
-					},
+		            },
+		            {
+		            	xtype	: 'container',
+		            	layout	: 'vbox',
+		            	items	: [
+		            		{
+								xtype	: 'label',
+								itemId	: 'lblMain',
+								html	: 'RADIUSdesk',
+								style	: {
+					   				'color'			: '#005691',
+					   				'letter-spacing': '4px',
+					   				'text-align'	: 'center'
+								}	
+							},
+		            		{
+								xtype	: 'label',
+								itemId	: 'lblCloud',
+								style	: {
+					   				'letter-spacing': '2px',
+					   				'text-align'	: 'center',
+					   				'padding-top'	: '4px'
+								},
+								tpl		:new Ext.XTemplate(
+									'<tpl if="warn_flag">',
+										'<div class="clr-red" style="font-size:x-small;"><i class="fa fa-exclamation-circle" style="color:orange;"></i>  {cloud_name}  <i class="fa fa-exclamation-circle" style="color:orange;"></i></div>',	
+									'<tpl else>',
+										'<div class="clr-grey-dark" style="font-size:x-small;"><i class="fa fa-cloud"></i>   {cloud_name}  <i class="fa fa-cloud"></i></div>',		
+									'</tpl>'							
+								),
+								data	: cloud_data
+							}		            	
+		            	]		            
+		            },					
 					{
 		                xtype: 'spacer'
 		            },
