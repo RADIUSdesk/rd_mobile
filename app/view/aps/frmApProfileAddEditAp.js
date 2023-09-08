@@ -15,12 +15,13 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
     title	: 'Add AP',
     root 	: false,
     action	: 'edit',
-    node_id	: 0, //Default for add
+    ap_id	: 0, //Default for add
     requires	: [
         'RdMobile.view.aps.vcApProfileAddEditAp',
         'RdMobile.view.components.cmbInternetConnection',
         'RdMobile.view.components.cmbApProfile',
-        'RdMobile.view.aps.cmbApHardwareOptions'
+        'RdMobile.view.aps.cmbApHardwareOptions',
+        'RdMobile.view.aps.pnlApRadioDetail'
     ],
     controller  : 'vcApProfileAddEditAp',
     buttons: {
@@ -70,11 +71,11 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
                 hidden		: hide_multiple
             },
             {
-			    itemId      : 'node_id',
+			    itemId      : 'ap_id',
 			    xtype       : 'textfield',
 			    name        : 'id',
 			    hidden      : true,
-			    value       : me.node_id
+			    value       : me.ap_id
 		    },
 			cmb,
 		    {
@@ -125,7 +126,7 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
 				cls		: 'form-section'	
 			},
 		    {
-                xtype       : 'pnlNodeRadioDetail',
+                xtype       : 'pnlApRadioDetail',
                 itemId      : 'pnlRadioR0',
                 padding		: 10,
                 margin		: 10,
@@ -134,7 +135,7 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
                 ui          : 'panel-green'
             },
             {
-                xtype       : 'pnlNodeRadioDetail',
+                xtype       : 'pnlApRadioDetail',
                 itemId      : 'pnlRadioR1',
                 padding		: 10,
                 margin		: 10,
@@ -143,7 +144,7 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
                 ui          : 'panel-green'
             },
             {
-                xtype       : 'pnlNodeRadioDetail',
+                xtype       : 'pnlApRadioDetail',
                 itemId      : 'pnlRadioR2',
                 padding		: 10,
                 margin		: 10,

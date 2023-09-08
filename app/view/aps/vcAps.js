@@ -7,7 +7,7 @@ Ext.define('RdMobile.view.aps.vcAps', {
     alias   : 'controller.vcAps',
     sel		: null,
     config: {
-        urlDelete    	: '/cake4/rd_cake/aps/ap_profile_ap_delete.json',
+        urlDelete    	: '/cake4/rd_cake/ap-profiles/ap_profile_ap_delete.json',
         urlRestartAps   : '/cake4/rd_cake/ap-actions/restart_aps.json',
         containedIn		: 'cntMainNetworks',
         appTitle		: 'RADIUSdesk',
@@ -55,7 +55,7 @@ Ext.define('RdMobile.view.aps.vcAps', {
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
     	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
-    	
+    	me.getAsMenu().down('#btnEdit').on('tap', 	    this.edit, this);
     	me.getAsMenu().down('#btnRestart').on('tap', 	this.restart, this);
     	me.getAsMenu().down('#btnExecute').on('tap', 	this.execute, this);
     	me.getAsMenu().down('#btnHistory').on('tap', 	this.history, this);

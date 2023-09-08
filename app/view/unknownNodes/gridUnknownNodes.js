@@ -66,7 +66,6 @@ Ext.define('RdMobile.view.unknownNodes.gridUnknownNodes', {
         }));
         
         me.setColumns( [{
-                text	: 'New Arrivals',
                 xtype	: 'templatecolumn',
                 tpl		: new Ext.XTemplate(
                 	'<div class="grid-tpl-item">',

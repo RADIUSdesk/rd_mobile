@@ -6,10 +6,11 @@ Ext.define('RdMobile.view.aps.vcApProfileAddEditAp', {
     extend  : 'Ext.app.ViewController',
     alias   : 'controller.vcApProfileAddEditAp',
     config: {
-        urlAdd	: '/cake4/rd_cake/ap-profiles/ap-add.json',
-        urlView	: '/cake4/rd_cake/ap-profiles/ap-view.json',
-        urlEdit	: '/cake4/rd_cake/ap-profiles/ap-edit.json',
-        urlAdvancedSettingsForModel : '/cake4/rd_cake/ap-profiles/advanced_settings_for_model.json',
+    
+    	urlAdd        : '/cake4/rd_cake/ap-profiles/ap_profile_ap_add.json',
+        urlView       : '/cake4/rd_cake/ap-profiles/ap_profile_ap_view.json',
+        urlEdit       : '/cake4/rd_cake/ap-profiles/ap_profile_ap_edit.json',
+        urlAdvancedSettingsForModel : '/cake4/rd_cake/ap-profiles/advanced_settings_for_model.json'
     },
     control: {
     	'cmbApHardwareOptions' : {
@@ -145,10 +146,10 @@ Ext.define('RdMobile.view.aps.vcApProfileAddEditAp', {
             r_count =record.get('radios');
         }
         
-        if(form.nodeId == 0){
+        if(form.ap_id == 0){
             var params  = {model:val};
         }else{
-            var params  = {model:val,node_id:form.nodeId};
+            var params  = {model:val,ap_id:form.ap_id};
         }  
         //Load the advanced settings for this hardware...       
          Ext.Ajax.request({
@@ -184,7 +185,7 @@ Ext.define('RdMobile.view.aps.vcApProfileAddEditAp', {
 		    	Ext.Ajax.request({
 			 	url     : me.getUrlView(), 
 		        method  : 'GET',
-		        params  : {'node_id': me.getView().node_id},
+		        params  : {'ap_id': me.getView().ap_id},
 			  	success: function(response) {		  	
 			  		var jsonData	= Ext.JSON.decode(response.responseText);
 		    		if(jsonData.success){

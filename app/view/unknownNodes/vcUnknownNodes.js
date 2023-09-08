@@ -45,6 +45,7 @@ Ext.define('RdMobile.view.unknownNodes.vcUnknownNodes', {
     	me.setAsMenu(me.getView().down('#asMenu'));
     	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);
     	me.getAsMenu().down('#btnNodeAdd').on('tap', 	this.nodeAdd, this);
+    	me.getAsMenu().down('#btnApAdd').on('tap', 		this.apAdd, this);
     },
     show	: function(){
     	var me = this;
@@ -125,6 +126,12 @@ Ext.define('RdMobile.view.unknownNodes.vcUnknownNodes', {
     	var me = this;
     	me.getAsMenu().hide();
     	var w = Ext.widget('frmMeshAddEditNode',{grid:me.getView().down('gridUnknownNodes'),action: 'attach', mac : me.sel.get('mac')});
+        w.show(); 
+    },
+    apAdd : function(){
+    	var me = this;
+    	me.getAsMenu().hide();
+    	var w = Ext.widget('frmApProfileAddEditAp',{grid:me.getView().down('gridUnknownNodes'),action: 'attach', mac : me.sel.get('mac')});
         w.show(); 
     }
 });
