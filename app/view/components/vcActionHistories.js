@@ -44,7 +44,8 @@ Ext.define('RdMobile.view.components.vcActionHistories', {
     initCnt	: function(){
     	var me = this;  	
     	me.setAsMenu(me.getView().down('#asMenu'));
-    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this);    	
+    	me.getAsMenu().down('#btnDelete').on('tap', 	this.delete, this); 
+    	me.getAsMenu().down('#btnViewReply').on('tap', 	this.viewReply, this);    	
     },
     show	: function(){
     	var me = this;
@@ -89,9 +90,24 @@ Ext.define('RdMobile.view.components.vcActionHistories', {
     	});   	
     	me.getAsMenu().hide();
     },
+    viewReply   : function(btn){
+    	var me 			= this;
+    	var reply_html 	= me.sel.get('reply_html');
+    	var w 			= Ext.widget('pnlActionReply',{ reply_html: reply_html});
+        w.show();
+        me.getAsMenu().hide(); 
+    },
     onGridChildTap : function(a,sel){
-    	var me 	= this;
-   		me.sel = sel;
+    	var me 		= this;
+   		me.sel 		= sel;
+   		var action 	= sel.get('action');
+   		var status 	= sel.get('status');
+   		
+   		if((action == 'execute_and_reply')&&(status == 'replied')){  		
+   			me.getAsMenu().down('#btnViewReply').show();   		
+   		}else{
+   			me.getAsMenu().down('#btnViewReply').hide(); 
+   		}   		
     	me.getAsMenu().show();	    	  	 
     },
     add	: function(){

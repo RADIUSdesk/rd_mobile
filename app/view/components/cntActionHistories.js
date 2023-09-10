@@ -8,7 +8,8 @@ Ext.define('RdMobile.view.components.cntActionHistories', {
     controller  : 'vcActionHistories',
     requires	: [
         'RdMobile.view.components.vcActionHistories',
-        'RdMobile.view.components.gridActionHistories'
+        'RdMobile.view.components.gridActionHistories',
+        'RdMobile.view.components.pnlActionReply'
     ],
 	items   : [
         {
@@ -48,6 +49,13 @@ Ext.define('RdMobile.view.components.cntActionHistories', {
 					 iconCls	: 'x-fa fa-trash',
 					 textAlign  : 'left',
 					 itemId		: 'btnDelete'
+				 },
+				 {
+					 text		: 'View Reply',
+					 iconCls	: 'x-fa fa-comment',
+					 textAlign  : 'left',
+					 hidden		: true,
+					 itemId		: 'btnViewReply'
 				 }
 			 ]
 	 	});
