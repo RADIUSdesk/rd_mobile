@@ -155,7 +155,9 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                name        : 'nat_ipaddr',
 		                required	: true,
 						errorTarget : 'under',                  
-		                //vtype       : 'IPAddress',
+		                validators	: {
+								type: 'ipaddress'
+						},
 		                value       : '10.222.100.1'
 		            },
 		            {
@@ -165,7 +167,9 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                name        : 'nat_netmask',
 		               	required	: true,
 						errorTarget : 'under',
-		                //vtype       : 'IPAddress',
+		                validators	: {
+								type: 'ipaddress'
+						},
 		                value       : '255.255.255.0'
 		            },
 		            {
@@ -218,8 +222,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                name        : 'nat_dns_1',
 		                required	: false,
 						errorTarget : 'under',
-						value		: ''
-		                //vtype       : 'IPAddress'
+						value		: '',
+		                validators	: {
+								type: 'ipaddress'
+						}
 		            },
 		            {
 		                itemId      : 'txtDns2',
@@ -229,8 +235,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                name        : 'nat_dns_2',
 		                required	: false,
 						errorTarget : 'under',
-						value		: ''
-		                //vtype       : 'IPAddress'
+						value		: '',
+		                validators	: {
+								type: 'ipaddress'
+						}
 		            }
 		     	]}	
       		]
@@ -501,8 +509,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                    name        : 'ipaddr',
 		                    required	: true,
 							errorTarget : 'under',
-							disabled	: true                 
-				            //vtype       : 'IPAddress'
+							disabled	: true,
+							validators	: {
+								type: 'ipaddress'
+							}
 		                },
 		                {
 				            itemId      : 'txtNetmask',
@@ -511,8 +521,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 				            name        : 'netmask',
 				           	required	: true,
 							errorTarget : 'under',
-							disabled	: true  
-				            //vtype       : 'IPAddress'
+							disabled	: true,  
+				            validators	: {
+								type: 'ipaddress'
+							}
 				        },		            
 		                {
 		                    itemId      : 'txtGateway',
@@ -521,8 +533,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                    name        : 'gateway',
 		                    required	: true,
 							errorTarget : 'under',
-							disabled	: true  
-				            //vtype       : 'IPAddress'
+							disabled	: true, 
+				            validators	: {
+								type: 'ipaddress'
+							}
 		                },	             
 				      	{
 		                    itemId      : 'txtDns1Tagged',
@@ -531,8 +545,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                    name        : 'dns_1',
 		                    required	: false,
 							errorTarget : 'under',
-							value		: ''
-		                   // vtype       : 'IPAddress'
+							value		: '',
+		                   	validators	: {
+								type: 'ipaddress'
+							}
 		                },
 		                {
 		                    itemId      : 'txtDns2Tagged',
@@ -541,8 +557,10 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
 		                    name        : 'dns_2',
 		                    required	: false,
 							errorTarget : 'under',
-							value		: ''
-		                    //vtype       : 'IPAddress'
+							value		: '',
+		                    validators	: {
+								type: 'ipaddress'
+							}
 		                }  
 				 	]
 				 }	

@@ -7,7 +7,6 @@ Ext.define('RdMobile.view.components.cntInetWifiStatic', {
     alias   : 'widget.cntInetWifiStatic',
     hidden  : true,
     disabled: true,
-    style   : 'background:rgb(46, 95, 115);',
     padding	: 10,
     margin	: 10,
     listeners       : {
@@ -20,9 +19,11 @@ Ext.define('RdMobile.view.components.cntInetWifiStatic', {
             maxLength   : 31,
             required	: true,
             errorTarget : 'under',
-            //regex       : /^[\w\-\s]+$/,
-            //regexText   : "Only words allowed",
-            //emptyText   : 'Specify a value to continue',
+            validators	: {
+			   	type		: 'format',
+        		message		: 'Only words allowed',
+        		matcher		: /^[\w\-\s]+$/
+			},
             xtype       : 'textfield',
             disabled	: true
         }, 
@@ -78,7 +79,9 @@ Ext.define('RdMobile.view.components.cntInetWifiStatic', {
             required	: true,
             errorTarget : 'under',
             disabled	: true,
-           //vtype       : 'IPAddress' //FIXME
+            validators	: {
+				type: 'ipaddress'
+			}
         },
         {
             xtype       : 'textfield',
@@ -87,7 +90,9 @@ Ext.define('RdMobile.view.components.cntInetWifiStatic', {
             required	: true,
             errorTarget : 'under',
             disabled	: true,
-            //vtype       : 'IPAddress' //FIXME
+            validators	: {
+				type: 'ipaddress'
+			}
         },
         {
             xtype       : 'textfield',
@@ -96,21 +101,29 @@ Ext.define('RdMobile.view.components.cntInetWifiStatic', {
             required	: true,
             errorTarget : 'under',
             disabled	: true,
-            //vtype       : 'IPAddress' //FIXME
+            validators	: {
+				type: 'ipaddress'
+			}
         },
         {
             xtype       : 'textfield',
             label  		: 'DNS Primary',
             name        : 'wifi_static_dns_1',
-            value		: ''
-            //vtype       : 'IPAddress' //FIXME
+            value		: '',
+            validators	: {
+				type: 'ipaddress'
+			},
+			errorTarget : 'under'
         },
         {
             xtype       : 'textfield',
             label  		: 'DNS Secondary',
             name        : 'wifi_static_dns_2',
-            value		: ''
-            //vtype       : 'IPAddress' //FIXME
+            value		: '',
+            validators	: {
+				type: 'ipaddress'
+			},
+			errorTarget : 'under'
         }
     ]
 });

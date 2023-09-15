@@ -343,16 +343,21 @@ Ext.define('RdMobile.view.meshes.vcMeshAddEditNode', {
     	var fields = Ext.ComponentQuery.query('field',container);
     	if(disabled){ 	 		
     		Ext.Array.forEach(fields,function(a,b){  		
-    			if((a.getRequired())&&(!a.isHidden)){
+    			if((a.getRequired())&&(!a.isHidden())){
     				a.disable();
     			}		
     		},this);  	
     	}else{
     		Ext.Array.forEach(fields,function(a,b){  		
-    			if((a.getRequired())&&(!a.isHidden)){
+    			if((a.getRequired())&&(!a.isHidden())){
     				a.enable();
     			}		
     		},this);   	
     	}
-    }   
+    },
+    onTxtMacChange : function(txt){
+    	var me = this;
+    	console.log(txt.getValue());
+    	txt.setValue(txt.getValue().toUpperCase());  
+    } 
 });

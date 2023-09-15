@@ -7,7 +7,6 @@ Ext.define('RdMobile.view.components.cntInetWbw', {
     alias   : 'widget.cntInetWbw',
     hidden  : true,
     disabled: true,
-    style   : 'background:rgb(46, 95, 115);',
     padding	: 10,
     margin	: 10,
     listeners       : {

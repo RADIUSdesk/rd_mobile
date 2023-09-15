@@ -340,20 +340,27 @@ Ext.define('RdMobile.view.aps.vcApProfileAddEditAp', {
 		}
 	},
 	onDisabledchange : function(container,disabled){
-    	var me = this;
+    	var me = this;   	
     	var fields = Ext.ComponentQuery.query('field',container);
+    	console.log(fields);
     	if(disabled){ 	 		
-    		Ext.Array.forEach(fields,function(a,b){  		
-    			if((a.getRequired())&&(!a.isHidden)){
+    		Ext.Array.forEach(fields,function(a,b){ 	
+    			if((a.getRequired())&&(!a.isHidden())){
+    			
     				a.disable();
     			}		
     		},this);  	
     	}else{
-    		Ext.Array.forEach(fields,function(a,b){  		
-    			if((a.getRequired())&&(!a.isHidden)){
+    		Ext.Array.forEach(fields,function(a,b){ 	
+    			if((a.getRequired())&&(!a.isHidden())){
     				a.enable();
     			}		
     		},this);   	
     	}
-    }   
+    },
+    onTxtMacChange : function(txt){
+    	var me = this;
+    	console.log(txt.getValue());
+    	txt.setValue(txt.getValue().toUpperCase());  
+    }    
 });

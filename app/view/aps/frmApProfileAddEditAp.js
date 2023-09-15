@@ -36,7 +36,7 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
         const me  = this; 
         var p = 10;
         var m = 10;
-        var bg = 'background:rgb(46, 95, 115);';     
+        var bg = 'background:rgb(204,211,213);';    
         var cmb = Ext.create('RdMobile.view.components.cmbApProfile',{});
         
         var hide_multiple  = true; 
@@ -54,12 +54,12 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
         	me.setTitle('Attach AP');
         }
               
-        var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic'});   
-        var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe'});         
-        var pnlWifiStatic 	= Ext.create('RdMobile.view.components.cntInetWifiStatic',{itemId  : 'pnlWifiStatic'});       
-        var pnlWifiPppoe 	= Ext.create('RdMobile.view.components.cntInetWifiPppoe',{itemId  : 'pnlWifiPppoe'});        
-        var cntWbW 			= Ext.create('RdMobile.view.components.cntInetWbw',{itemId  : 'cntWbW'});
-        var pnlQmi			= Ext.create('RdMobile.view.components.cntInetQmi',{itemId  : 'pnlQmi'});
+        var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic',style:bg});   
+        var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe',style:bg});         
+        var pnlWifiStatic 	= Ext.create('RdMobile.view.components.cntInetWifiStatic',{itemId  : 'pnlWifiStatic',style:bg});       
+        var pnlWifiPppoe 	= Ext.create('RdMobile.view.components.cntInetWifiPppoe',{itemId  : 'pnlWifiPppoe',style:bg});        
+        var cntWbW 			= Ext.create('RdMobile.view.components.cntInetWbw',{itemId  : 'cntWbW',style:bg});
+        var pnlQmi			= Ext.create('RdMobile.view.components.cntInetQmi',{itemId  : 'pnlQmi',style:bg});
                    	          
         var items = [
 			{
@@ -101,9 +101,15 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
 			    name        : "mac",
 			    required	: true,
 				errorTarget: 'under',
-				value       : me.mac
-			    //vtype       : 'MacAddress',
-			    //fieldStyle  : 'text-transform:uppercase',			    
+				value       : me.mac,
+				validators	: {
+				    type	: 'format',
+            		message	: 'Example: 01-23-45-67-89-AB',
+            		matcher	: /^([a-fA-F0-9]{2}-){5}[a-fA-F0-9]{2}$/
+				},
+				listeners   : {
+		            focusleave : 'onTxtMacChange'
+			    }	    
 		    },
 		    {
                 xtype       : 'cmbInternetConnection',

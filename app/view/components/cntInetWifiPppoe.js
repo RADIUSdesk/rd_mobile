@@ -7,7 +7,6 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
     alias   : 'widget.cntInetWifiPppoe',
     hidden  : true,
     disabled: true,
-    style   : 'background:rgb(46, 95, 115);',
     padding	: 10,
     margin	: 10,
     listeners       : {
@@ -91,30 +90,42 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
             xtype       : 'textfield',
             label  		: 'DNS Primary',
             name        : 'wifi_pppoe_dns_1',
-            value		: ''
-            //vtype       : 'IPAddress'//FIXME
+            value		: '',
+            validators	: {
+				type: 'ipaddress'
+			},
+			errorTarget : 'under'
         },
         {
             xtype       : 'textfield',
             label  		: 'DNS Secondary',
             name        : 'wifi_pppoe_dns_2',
-            value		: ''
-            //vtype       : 'IPAddress'//FIXME
+            value		: '',
+            validators	: {
+				type: 'ipaddress'
+			},
+			errorTarget : 'under'
         },
         {
 	        xtype       : 'textfield',
 	        label  		: 'My Own MAC',
 	        name        : 'wifi_pppoe_mac',
-	        value		: ''
-	        ////vtype       : 'MacAddress',
-	        ////fieldStyle  : 'text-transform:uppercase'
+	        value		: '',
+	        validators	: {
+			    type	: 'format',
+        		message	: 'Example: 01-23-45-67-89-AB',
+        		matcher	: /^([a-fA-F0-9]{2}-){5}[a-fA-F0-9]{2}$/
+			}
         },
         {
 	        xtype       : 'textfield',
 	        label  		: 'MTU',
 	        name        : 'wifi_pppoe_mtu',
-	        value		: ''
-	        ////vtype       : 'Numeric',
+	        value		: '',
+	        validators	: {
+				type: 'number'
+			},
+			errorTarget : 'under'
         }       
     ]
 });
