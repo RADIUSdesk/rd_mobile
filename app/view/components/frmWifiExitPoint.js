@@ -6,7 +6,8 @@ Ext.define('RdMobile.view.components.frmWifiExitPoint', {
     extend  : 'Ext.form.Panel',
     xtype   : 'frmWifiExitPoint',
     requires	: [
-        'RdMobile.view.components.vcWifiExitPoint'
+        'RdMobile.view.components.vcWifiExitPoint',
+        'Ext.data.validator.IPAddress'
     ],
     controller  : 'vcWifiExitPoint',
     action		: 'edit',

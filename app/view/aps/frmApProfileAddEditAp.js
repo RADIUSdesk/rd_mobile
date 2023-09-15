@@ -21,7 +21,8 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
         'RdMobile.view.components.cmbInternetConnection',
         'RdMobile.view.components.cmbApProfile',
         'RdMobile.view.aps.cmbApHardwareOptions',
-        'RdMobile.view.aps.pnlApRadioDetail'
+        'RdMobile.view.aps.pnlApRadioDetail',
+        'Ext.data.validator.Format'
     ],
     controller  : 'vcApProfileAddEditAp',
     buttons: {
@@ -54,12 +55,12 @@ Ext.define('RdMobile.view.aps.frmApProfileAddEditAp', {
         	me.setTitle('Attach AP');
         }
               
-        var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic',style:bg});   
-        var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe',style:bg});         
-        var pnlWifiStatic 	= Ext.create('RdMobile.view.components.cntInetWifiStatic',{itemId  : 'pnlWifiStatic',style:bg});       
-        var pnlWifiPppoe 	= Ext.create('RdMobile.view.components.cntInetWifiPppoe',{itemId  : 'pnlWifiPppoe',style:bg});        
-        var cntWbW 			= Ext.create('RdMobile.view.components.cntInetWbw',{itemId  : 'cntWbW',style:bg});
-        var pnlQmi			= Ext.create('RdMobile.view.components.cntInetQmi',{itemId  : 'pnlQmi',style:bg});
+        var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic'});   
+        var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe'});         
+        var pnlWifiStatic 	= Ext.create('RdMobile.view.components.cntInetWifiStatic',{itemId  : 'pnlWifiStatic'});       
+        var pnlWifiPppoe 	= Ext.create('RdMobile.view.components.cntInetWifiPppoe',{itemId  : 'pnlWifiPppoe'});        
+        var cntWbW 			= Ext.create('RdMobile.view.components.cntInetWbw',{itemId  : 'cntWbW'});
+        var pnlQmi			= Ext.create('RdMobile.view.components.cntInetQmi',{itemId  : 'pnlQmi'});
                    	          
         var items = [
 			{

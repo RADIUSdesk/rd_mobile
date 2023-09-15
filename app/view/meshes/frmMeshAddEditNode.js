@@ -18,7 +18,8 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
     node_id	: 0, //Default for add
     requires	: [
         'RdMobile.view.meshes.vcMeshAddEditNode',
-        'RdMobile.view.components.cmbInternetConnection'
+        'RdMobile.view.components.cmbInternetConnection',
+        'Ext.data.validator.Format'
     ],
     controller  : 'vcMeshAddEditNode',
     buttons: {
@@ -51,12 +52,12 @@ Ext.define('RdMobile.view.meshes.frmMeshAddEditNode', {
         	me.setTitle('Attach MESH Node');
         }
               
-        var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic',style:bg});   
-        var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe',style:bg});         
-        var pnlWifiStatic 	= Ext.create('RdMobile.view.components.cntInetWifiStatic',{itemId  : 'pnlWifiStatic',style:bg});       
-        var pnlWifiPppoe 	= Ext.create('RdMobile.view.components.cntInetWifiPppoe',{itemId  : 'pnlWifiPppoe',style:bg});        
-        var cntWbW 			= Ext.create('RdMobile.view.components.cntInetWbw',{itemId  : 'cntWbW',style:bg});
-        var pnlQmi			= Ext.create('RdMobile.view.components.cntInetQmi',{itemId  : 'pnlQmi',style:bg});
+        var pnlWanStatic 	= Ext.create('RdMobile.view.components.cntInetWanStatic',{itemId  : 'pnlWanStatic'});   
+        var pnlWanPppoe 	= Ext.create('RdMobile.view.components.cntInetWanPppoe',{itemId  : 'pnlWanPppoe'});         
+        var pnlWifiStatic 	= Ext.create('RdMobile.view.components.cntInetWifiStatic',{itemId  : 'pnlWifiStatic'});       
+        var pnlWifiPppoe 	= Ext.create('RdMobile.view.components.cntInetWifiPppoe',{itemId  : 'pnlWifiPppoe'});        
+        var cntWbW 			= Ext.create('RdMobile.view.components.cntInetWbw',{itemId  : 'cntWbW'});
+        var pnlQmi			= Ext.create('RdMobile.view.components.cntInetQmi',{itemId  : 'pnlQmi'});
                    	          
         var items = [
 			{

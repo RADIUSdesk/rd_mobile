@@ -9,6 +9,10 @@ Ext.define('RdMobile.view.components.cntInetWanPppoe', {
     disabled: true,
     padding	: 10,
     margin	: 10,
+    requires	: [
+        'Ext.data.validator.IPAddress',
+        'Ext.data.validator.Format'
+    ],
     listeners       : {
         disabledchange : 'onDisabledchange'
     },
@@ -66,7 +70,11 @@ Ext.define('RdMobile.view.components.cntInetWanPppoe', {
 	        xtype       : 'textfield',
 	        label  		: 'MTU',
 	        name        : 'wan_pppoe_mtu',
-	        value		: ''
+	        value		: '',
+	        validators	: {
+				type: 'number'
+			},
+			errorTarget : 'under'
         }       
     ]
 });

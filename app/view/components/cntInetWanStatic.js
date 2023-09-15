@@ -9,6 +9,9 @@ Ext.define('RdMobile.view.components.cntInetWanStatic', {
     disabled: true,
     padding	: 10,
     margin	: 10,
+    requires	: [
+        'Ext.data.validator.IPAddress'
+    ],
     listeners       : {
         disabledchange : 'onDisabledchange'
     },

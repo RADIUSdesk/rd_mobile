@@ -12,6 +12,10 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
     listeners       : {
         disabledchange : 'onDisabledchange'
     },
+	requires	: [
+        'Ext.data.validator.IPAddress',
+        'Ext.data.validator.Format'
+    ],
     items   :  [
         {
             label  		: 'SSID',
@@ -19,8 +23,11 @@ Ext.define('RdMobile.view.components.cntInetWifiPppoe', {
             maxLength   : 31,
             required	: true,
             errorTarget : 'under',
-            regex       : /^[\w\-\s]+$/,
-            regexText   : "Only words allowed", //FIXME
+            validators	: {
+			   	type		: 'format',
+        		message		: 'Only words allowed',
+        		matcher		: /^[\w\-\s]+$/
+			},
             xtype       : 'textfield',
             disabled	: true
         }, 

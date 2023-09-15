@@ -12,6 +12,10 @@ Ext.define('RdMobile.view.components.cntInetWifiStatic', {
     listeners       : {
         disabledchange : 'onDisabledchange'
     },
+    requires	: [
+        'Ext.data.validator.IPAddress',
+        'Ext.data.validator.Format'
+    ],
     items   : [
         {
             label  		: 'SSID',
