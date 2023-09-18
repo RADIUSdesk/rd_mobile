@@ -29,10 +29,18 @@ Ext.define('RdMobile.view.components.frmWifiEntryPoint', {
         
         var hide_apply_to_all = false;
         
-        if(me.apProfileId){
-        
+        if(me.apProfileId){        
         	hide_apply_to_all = true;
         }
+        
+         
+        var store_ft = Ext.create('Ext.data.Store', {
+            fields: ['id', 'Name'],
+            data : [
+                {"id": 0, "name": 'FT Over The Air'},
+                {"id": 1, "name": 'FT Over DS'}
+            ]
+        });
         
            	          
         var items = [
@@ -143,7 +151,15 @@ Ext.define('RdMobile.view.components.frmWifiEntryPoint', {
                 label  		: 'Key',
                 name        : 'special_key',
                 itemId      : 'key',
-                minLength   : 8,
+                validators	: {
+					type: 'method',
+					fn	: function(val) {
+                    	if(val.length < 8){
+                    		return 'Minimum of 8 characters';
+                    	}
+                    	return true;
+					}
+				},
                 required	: true,
                 errorTarget : 'under',
                 hidden      : true,
@@ -215,12 +231,107 @@ Ext.define('RdMobile.view.components.frmWifiEntryPoint', {
                 label  		: 'Default Key',
                 name        : 'default_key',
                 itemId      : 'default_key',
-                minLength   : 8,
+                validators	: {
+					type: 'method',
+					fn	: function(val) {
+                    	if(val.length < 8){
+                    		return 'Minimum of 8 characters';
+                    	}
+                    	return true;
+					}
+				},
                 required	: true,
 				errorTarget : 'under',
                 hidden      : true,
                 disabled    : true
-            }      
+            },
+            {
+                xtype       : 'checkbox',      
+                label  		: 'Hotspot 2.0',
+                name        : 'hotspot2_enable',
+                checked     : false,
+                itemId      : 'chkHotspot2',
+                labelWidth  : 'auto',
+                hidden      : true,
+                disabled    : true
+            },
+            {
+		        xtype       : 'checkbox',      
+		        label    	: '802.11r Fast Transition',
+		        name        : 'ieee802r',
+		        itemId		: 'chkFastRoaming',
+		        labelWidth  : 'auto',
+		        hidden		: true,
+		        disabled	: true
+		    },
+		    {	
+		    	xtype		: 'container',
+		    	style  		: 'background: #e0ebeb',
+		    	hidden		: true,
+		    	disabled	: true,
+		    	itemId		: 'pnlFastRoaming',
+		    	items		: [
+		    		{
+						xtype       : 'combobox',
+						label  		: 'FT Protocol',
+						store       : store_ft,
+						queryMode   : 'local',
+						name        : 'ft_over_ds',
+						displayField: 'name',
+						valueField  : 'id',
+						value       : 0//Default
+					},
+					{
+                        xtype       : 'textfield',
+                        label  		: 'Mobility Domain',
+                        name        : 'mobility_domain',
+                        itemId      : 'txtMobilityDomain',
+                        maxLength   : 4,
+                        errorTarget : 'under',
+                        validators	: {
+							type: 'method',
+							fn	: function(val) {
+								if(val == ''){
+		                    		return true; //allow empty
+		                    	}
+		                    	if(val.length < 4){
+		                    		return '4-character hexadecimal ID Please';
+		                    	}
+		                    	if((/^([a-fA-F0-9]){4}$/).test(val)){
+		                    		return true;
+								}else{
+									return '4-character hexadecimal ID Please';
+								}
+							}
+						}
+                    },
+					{
+                        xtype       : 'checkbox',      
+                        label    	: 'Generate NAS ID',
+                        name        : 'ft_auto_nasid',
+                        value		: 'true',
+                        checked     : true,
+                        itemId      : 'chkFtNasid',
+                        labelWidth  : 'auto'
+                    },
+                    {
+                        xtype       : 'textfield',
+                        fieldLabel  : 'NAS ID',
+                        name        : 'ft_nasid',
+                        itemId      : 'txtFtNasid',
+                        required  	: true,                        
+                        hidden		: true,
+                        disabled	: true
+                    },									
+                    {
+						xtype       : 'checkbox',      
+						label    	: 'Generate PMK Locally',
+						name        : 'ft_pskgenerate_local',
+						checked		: true,
+						labelWidth  : 'auto'
+					}
+				]
+			}						      
 		];	
 		me.setItems(items);        
  	}
