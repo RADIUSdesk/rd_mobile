@@ -50,6 +50,9 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
       	'#btnEditPersonal' : {
       		tap	: 'editPersonal'
       	},
+      	'#btnEmail' : {
+      		tap	: 'email'
+      	},
       	'#btnPassword' : {
       		tap	: 'password'
       	},
@@ -184,6 +187,12 @@ Ext.define('RdMobile.view.permanentUsers.vcPermanentUsers', {
     	var me = this;
     	me.getView().down('#asMenu').hide();
     	var w = Ext.widget('frmRadiusClient',{grid:me.getView().down('gridPermanentUsers'), user_id: me.sel.get('id'),user_name : me.sel.get('username'), user_type : 'permanent' });
+    	w.show();    	
+    },
+    email	: function(){
+    	var me = this;
+    	me.getView().down('#asMenu').hide();
+    	var w = Ext.widget('frmPermanentUserEmail',{grid:me.getView().down('gridPermanentUsers'), userId: me.sel.get('id'),username : me.sel.get('username'),email: me.sel.get('email') });
     	w.show();    	
     },
     detail	: function(){

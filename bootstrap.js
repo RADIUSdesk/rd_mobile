@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Dirk van der Walt <dirkvanderwalt@gmail.com>
-//
-// SPDX-License-Identifier: GPL-3.0-or-later
-
 var Ext = Ext || {};
 Ext.manifest = Ext.manifest || "bootstrap.json";
 // @tag core

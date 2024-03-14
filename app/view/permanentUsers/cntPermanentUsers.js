@@ -116,6 +116,12 @@ Ext.define('RdMobile.view.permanentUsers.cntPermanentUsers', {
 					}		
 				},
 				{
+					 text		: 'e-mail Credentials',
+					 iconCls	: 'x-fa fa-envelope',
+					 textAlign  : 'left',
+					 itemId		: 'btnEmail'
+				 },
+				{
 					 text		: 'Change Password',
 					 iconCls	: 'x-fa fa-lock',
 					 textAlign  : 'left',
